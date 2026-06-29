@@ -1,0 +1,373 @@
+---
+name: "Brand Visual Composition - Movistar"
+key: brand-visual-composition-movistar
+description: "Reglas de composicion visual: grid (1/16), jerarquia tipografica Y-based, composicion de precios, matriz WCAG de contraste, Do's/Don'ts de color por fondo, reglas de layout, logotipo y fotografia. Skill obligatoria para el Visual Designer."
+version: 2.0.0
+owner: superreal
+status: active
+source: "091022_Movistar_Refresh_Guidelines.pptx (197 slides) + 2025_Movistar_Toolkit_OnePage.pdf + Brand Guardian v4 RAG"
+depends_on:
+  - brand-visual-guidelines-movistar
+---
+
+# Brand Visual Composition - Movistar
+
+Skill dedicada al Visual Designer. Define todas las reglas de composición visual que no son valores puros (esos están en `brand-visual-guidelines-movistar`). Aquí están las reglas de USO: cuándo, cómo y dónde aplicar cada elemento.
+
+> Origen: 091022_Movistar_Refresh_Guidelines.pptx (brand book oficial, 197 slides) + 2025_Movistar_Toolkit_OnePage.pdf + Brand Guardian v4 RAG. Valores HEX/RGB de referencia estan en `brand-visual-guidelines-movistar`; este archivo los cita pero no los redefine.
+
+---
+
+## 1. Logotipo: la M
+
+### 1.1. Regla fundamental
+La M es el elemento más reconocible. Siempre luce su Azul Movistar (#0066FF). Este color es transversal e innegociable.
+
+### 1.2. Versiones de color (orden de prioridad)
+
+| Prioridad | M | Fondo | Notas |
+|-----------|---|-------|-------|
+| 1 (default) | Azul Movistar #0066FF | Blanco Movistar #FFFAF5 | Uso prioritario |
+| 2 | Blanco Movistar #FFFAF5 | Azul Movistar #0066FF | Inversión permitida |
+| 3 | Azul Movistar #0066FF | Colores secundarios claros | #d3eeff, #cef7bf, #ffe99c, #ffc5a8 |
+| 4 (excepcional) | Azul Movistar #0066FF | Negro Movistar #262423 | Solo uso excepcional |
+
+**Sobre fondos fotograficos:** M en Azul Movistar si hay legibilidad. Si no, M en Blanco solo cuando el fondo tenga tono similar al azul. Nunca M blanca sobre fondos claros o neutros.
+
+### 1.2b. Como escribir "Movistar"
+En titulares o textos donde Movistar actue como nombre de producto, se escribe con M mayuscula. No se permite "movistar" en minusculas en estos contextos. Esto refuerza el reconocimiento de marca sin necesidad del logotipo.
+
+### 1.3. Tamano minimo
+- Impresión: 10 mm
+- Digital: 20 px
+- En formatos digitales, la M nunca será inferior a 60 px
+
+### 1.4. Área de protección
+Se construye un cuadrado tomando como referencia el ancho de la propia M. Ningún elemento gráfico o tipográfico puede invadir ese espacio.
+
+### 1.5. Lockups
+- **Horizontal:** uso puntual y excepcional (patrocinios, photocalls, merchandising).
+- **Vertical:** para formatos cuadrados o estrechos.
+- En ambos: la M se reduce un 30%, se forma un cuadrado con ella, y ese cuadrado define la distancia mínima entre M y "Movistar".
+
+---
+
+## 2. Tipografía: Movistar Sans
+
+### 2.1. Familia y pesos
+Tipografía variable con 5 pesos estáticos + itálicas oblicuas. Formatos: .ttf, .otf, .woff, .woff2. Licencia exclusiva, internacional y perpetua.
+
+| Peso | Uso principal |
+|------|---------------|
+| Extrabold | Titulares de 1-2 palabras con máximo impacto |
+| Bold | H1 estándar, CTAs, precios |
+| Medium | H2 (subtítulos), datos adicionales de precio |
+| Regular | Bodycopy, legal |
+| Light | Uso decorativo excepcional |
+
+### 2.2. Itálicas
+Solo para resaltar palabras o conceptos clave y términos en otros idiomas. No como estilo general.
+
+### 2.3. Morfología
+Los caracteres toman inspiración directa de la M. Curvas, terminales y detalles mantienen coherencia visual con la identidad.
+
+---
+
+## 3. Reglas de color por fondo (Do's / Don'ts)
+
+### 3.1. Sobre fondo Azul Movistar (#0066FF)
+
+**Do's:**
+- Título y subtítulo en Blanco Movistar
+- Contenedor destacado en cualquier color secundario claro
+- Texto de color solo si no aparece un tercer color en la composición
+
+**Don'ts:**
+- Negro Movistar en textos (no asegura legibilidad)
+- Contenedor destacado en Blanco Movistar (falta contraste)
+- Destacar palabra del título con color
+- Contenedores en colores secundarios oscuros
+
+### 3.2. Sobre fondo Blanco Movistar (#FFFAF5)
+
+**Do's:**
+- Título en Negro Movistar (cercano, neutro)
+- Título en Azul Movistar (más impacto y vinculación)
+- Título en color secundario oscuro (composiciones expresivas)
+- Destacar una palabra del título: Negro + palabra en Azul Movistar
+- Contenedor destacado en cualquier color secundario claro
+- Si título usa color secundario oscuro, contenedor en su versión clara (misma gama)
+
+**Don'ts:**
+- Subtítulo en Azul Movistar (legibilidad)
+- Colores secundarios claros en título (legibilidad)
+- Azul Movistar en contenedor destacado (compite con logotipo)
+- Colores secundarios oscuros en contenedores
+- Contenedor + palabra destacada a la vez (elegir uno)
+
+### 3.3. Sobre fondo Negro Movistar (#262423)
+
+**Do's:**
+- Título y subtítulo en Blanco Movistar
+- Color secundario claro en título (expresividad)
+- Contenedor destacado en cualquier secundario claro
+
+**Don'ts:**
+- Azul Movistar en textos (legibilidad)
+- Destacar palabra del título
+- Colores secundarios oscuros en contenedor
+
+### 3.4. Sobre fondos secundarios claros
+
+**Do's:**
+- Título en Negro Movistar
+- Título en Azul Movistar (impacto + vinculación)
+- Título en secundario oscuro de la misma gama que el fondo
+- Destacar palabra en Azul Movistar
+- Contenedor en Blanco Movistar o secundario claro
+
+**Don'ts:**
+- Secundario oscuro de gama diferente al fondo
+- Secundarios claros en título (legibilidad)
+- Azul Movistar en contenedor (compite con logo)
+- Contenedor + palabra destacada a la vez
+- Mezclar dos colores secundarios distintos en una pieza
+
+### 3.5. Proporción de uso de colores
+1. 40% Azul Movistar
+2. 30% Blanco Movistar
+3. 10% Negro Movistar
+4. 20% Colores secundarios (repartidos ~5% cada uno)
+
+### 3.6. Best practices generales
+- Fondos: priorizar Azul y Blanco Movistar
+- M: siempre en Azul Movistar; evitar fondos que impidan su color principal
+- Título/subtítulo: priorizar Negro Movistar; se puede destacar en Azul
+- Destacados: secundarios para jerarquizar; máximo un secundario por pieza
+- Botones y precios: Azul Movistar refuerza reconocimiento
+
+---
+
+## 4. Matriz de contraste WCAG
+
+### 4.1. Niveles
+- **AAA:** contraste minimo 7:1. Completamente accesible.
+- **AA:** contraste minimo 4.5:1. Accesible para textos >16pt, iconos, grafismos.
+- **A:** contraste minimo 3:1. Accesible para textos >24pt, iconos, grafismos.
+
+### 4.2. Matriz completa
+
+| Elemento (hex) | Fondo Azul #0066FF | Fondo Negro #262423 | Fondo Blanco #FFFAF5 | Fondo Azul claro #d3eeff | Fondo Verde claro #cef7bf | Fondo Amarillo claro #ffe99c | Fondo Coral claro #ffc5a8 |
+|---|---|---|---|---|---|---|---|
+| #0066FF | -- | A | AA | A | A | A | A |
+| #262423 | A | -- | AAA | AAA | AAA | AAA | AAA |
+| #FFFAF5 | AA | AAA | -- | Prohibido | Prohibido | Prohibido | Prohibido |
+| #d3eeff | A | AAA | Prohibido | -- | Prohibido | Prohibido | Prohibido |
+| #cef7bf | A | AAA | Prohibido | Prohibido | -- | Prohibido | Prohibido |
+| #ffe99c | A | AAA | Prohibido | Prohibido | Prohibido | -- | Prohibido |
+| #ffc5a8 | A | AAA | Prohibido | Prohibido | Prohibido | Prohibido | -- |
+
+**Regla para el Visual Designer:** Prohibido = no usar. A = solo textos >24pt o iconos. AA = textos >16pt. AAA = cualquier tamaño.
+
+### 4.3. Colores semánticos (UI)
+
+| Rol | Regular | Hover |
+|-----|---------|-------|
+| Acento (acciones principales) | #0066FF | #005EEB |
+| Positivo (confirmaciones) | #048239 | #036D30 |
+| Alerta (avisos) | #926C00 | #745600 |
+| Negativo (errores) | #C10000 | #AD0000 |
+
+---
+
+## 5. Grid y sistema de firma
+
+### 5.1. Cálculo del grid
+1. Tomar el lado más corto del formato
+2. Dividir entre 16 (si el lado corto < 200px, dividir entre 8)
+3. El resultado es X (margen de seguridad)
+4. Tamaño estándar de la M = 3X
+5. En Gran Valla: M = 6X
+
+### 5.2. Formatos digitales
+- Lado corto < 300px: margen = 15px
+- Lado corto >= 300px: margen = 25px
+- M nunca inferior a 60px
+
+### 5.3. Posición de la M
+1. Prioritaria: esquina superior derecha
+2. Alternativa: esquina inferior derecha
+3. Excepcional: esquina superior izquierda
+
+### 5.4. Layouts disponibles
+
+El sistema va desde la fluidez (layouts a sangre) hasta composiciones con elementos conectados. Cada tipo tiene su proposito:
+
+| Tipo | Descripcion | Cuando usarlo |
+|------|-------------|---------------|
+| **Fondo completo** | Color plano o imagen a sangre, sin contenedores | Piezas de alto impacto (LOVE), OOH, portadas |
+| **Faldones** | Franja de color/imagen como base para texto | Banners, cabeceras con fotografia parcial |
+| **Contenedor** | Bloque independiente que agrupa informacion | Piezas con mucho contenido, productos |
+| **Contenedor conectado** | Forma flexible con vertices redondeados que juega con elementos externos (M, titular) | Comunicaciones digitales, display, social. Es el layout mas versatil y diferencial |
+
+### 5.5. Contenedor conectado (detalle)
+
+El contenedor conectado es el recurso de layout mas caracteristico de la nueva identidad. Reglas:
+
+- **Vertices redondeados:** 8px en digital, 1/6 del margen en print. Misma proporcion que en contenedores de resalte.
+- **Juego compositivo:** el contenedor siempre interactua con elementos externos (M o titular). Puede ajustarse al logotipo, al titulo, o a ambos.
+- **Distancia minima:** 1 modulo X entre el contenedor y cualquier otro elemento.
+- **Uso prioritario:** contenedor ajustado a la M o al titulo (crea legibilidad optima).
+- **Uso excepcional:** contenedor no ajustado a ningun elemento (solo cuando el formato lo exige).
+- **Prohibido:** contenedores que no aprovechen el espacio del formato o donde la M no cumpla el sistema de firma.
+- **Color en contenedores:** se puede usar un color secundario para jerarquizar contenido. Utilizar siempre color en los contenedores conectados para asegurar legibilidad de M y textos.
+
+### 5.6. Tipos de titulo
+
+| Tipo | Descripcion | Proporcion |
+|------|-------------|-----------|
+| **Titulo basico** | Tamano pautado en referencia al formato | Segun escala Y (seccion 6) |
+| **Super titulo** | Solo 1-2 palabras, ajustado a los margenes laterales | Escala hasta ocupar el ancho disponible |
+
+El super titulo se reserva para comunicaciones de maximo impacto donde el mensaje es una o dos palabras ("Conecta", "Descubre").
+
+---
+
+## 6. Jerarquia tipografica (sistema Y)
+
+### 6.1. Definición de Y
+Y = altura de la mayúscula del título principal (H1).
+
+### 6.2. Escalas proporcionales
+
+| Nivel | Fuente | Tamaño relativo | Tracking | Interlineado |
+|-------|--------|-----------------|----------|-------------|
+| H1 | Movistar Sans Bold (Extrabold si 1-2 palabras) | Y | -15 | 0.9 x tamaño |
+| H2 | Movistar Sans Medium | 0.45Y | 0 | 1 x tamaño |
+| CTA | Movistar Sans Bold | -- | 20 | -- (1 línea max) |
+| Bodycopy | Movistar Sans Regular | 0.30Y | 10 | 1.2 x tamaño |
+| Legal | Movistar Sans Regular (<=14pt) | 0.15Y | 20 | 1.3 x tamaño |
+
+### 6.3. Reglas de posición
+- Título separado de la M: 2 módulos (recomendado), 1 módulo (mínimo)
+- Si M en esquina inferior derecha, título va en esquina superior izquierda
+- Prohibido: título en margen superior cuando M está en ese mismo margen
+- Título y subtítulo siempre conectados visualmente
+
+### 6.4. Contenido complementario
+- Legal siempre en el extremo inferior del layout
+- Distancia legal-bodycopy: minimo 1 módulo, máximo 5 módulos
+- Bodycopy separado del subtítulo: minimo 2 módulos
+- Legal ajustado a márgenes laterales del formato
+
+### 6.5. Espaciado entre niveles (resumen)
+- H1 a H2: ~0.45Y
+- H2 a precio: ~1.75Y
+- Precio a bodycopy: ~0.30Y
+- Bodycopy a legal: ~0.15Y
+
+### 6.6. Cómo destacar contenido
+- Aplicar jerarquías tipográficas
+- Cambio de color en título principal
+- Contenedor para dato específico (aplicable a subtítulo o bodycopy, solo 1 palabra o 1 línea)
+- Máximo 1 contenedor por comunicación
+- Vértices redondeados (misma proporción que contenedores conectados)
+
+### 6.7. Dimensiones del contenedor de resalte
+- Z = altura del texto del subtítulo
+- Altura del contenedor = 2Z
+- Padding lateral = ~0.5Z
+- Separación vertical del texto adyacente = ~0.25Z
+
+---
+
+## 7. Composición de precios
+
+### 7.1. Cuándo aplicar
+- Precio secundario: se escribe como texto dentro del subtítulo (no requiere composición especial)
+- Precio protagonista: sigue las normas de esta sección
+
+### 7.2. Precio entero (sin decimales)
+
+| Elemento | Fuente | Tracking | Proporción |
+|----------|--------|----------|-----------|
+| Número entero | Movistar Sans Bold | -20 | Y |
+| Moneda (€) | Movistar Sans Bold | -20 | 0.66Y |
+| Tiempo (/mes) | Movistar Sans Medium | -10 | 0.2Y |
+
+Padding: izquierda del número ~0.15Y, debajo de moneda ~0.13Y, debajo de tiempo ~0.2Y.
+
+### 7.3. Precio con decimales
+
+| Elemento | Fuente | Tracking | Proporción |
+|----------|--------|----------|-----------|
+| Número entero | Movistar Sans Bold | -20 | Y |
+| Decimales (.95) | Movistar Sans Bold | -20 | 0.5Y |
+| Datos adicionales | Movistar Sans Medium | 0 | 0.15Y |
+| Moneda (€) | Movistar Sans Bold | -20 | 0.4Y |
+| Tiempo (/mes) | Movistar Sans Medium | -10 | 0.1Y |
+
+### 7.4. Precio promocional con precio anterior tachado
+
+| Elemento | Fuente | Tracking | Proporción |
+|----------|--------|----------|-----------|
+| Número promo | Movistar Sans Bold | -20 | Y |
+| Decimales promo | Movistar Sans Bold | -20 | 0.5Y |
+| Datos adicionales | Movistar Sans Medium | 0 | 0.15Y |
+| Moneda promo | Movistar Sans Bold | -20 | 0.4Y |
+| Tiempo promo | Movistar Sans Medium | -10 | 0.1Y |
+| Número anterior (tachado) | Movistar Sans Bold | -20 | 0.4Y |
+| Decimales anterior (tachado) | Movistar Sans Bold | -20 | 0.2Y |
+| Moneda anterior (tachado) | Movistar Sans Bold | -10 | 0.15Y |
+| Tiempo anterior (tachado) | Movistar Sans Medium | -10 | 0.05Y |
+
+Espacio entre precio nuevo y tachado: ~0.05Y.
+
+---
+
+## 8. Usos incorrectos generales (prohibiciones absolutas)
+
+Estas reglas se aplican a TODA pieza, sin excepcion:
+
+1. **No usar colores secundarios oscuros como fondo.** Los fondos validos son: Azul Movistar, Blanco Movistar, Negro Movistar (excepcional), y secundarios claros.
+2. **No producir piezas sin Azul Movistar.** El azul debe estar presente en toda comunicacion (como fondo, como M, como acento, o como color de texto).
+3. **No usar dos colores en contenedores.** Un solo color por contenedor.
+4. **No usar mas de un color secundario por pieza.** Si usas verde claro, no puedes usar coral claro en la misma pieza.
+5. **No combinar contenedor destacado + palabra destacada.** Elegir uno de los dos recursos, nunca ambos.
+6. **Todos los contenedores tienen vertices redondeados.** 8px en digital, 1/6 del margen en print. Sin excepciones.
+
+---
+
+## 9. Estilo fotografico
+
+### 9.1. Principios
+- **Representación local:** conexiones emocionales con estilos de vida e identidad cultural
+- **Sentido de comunidad:** historias donde la conexión con personas pone tu vida primero
+- **Accesibilidad generacional:** representación amplia de edades
+- **Cotidianidad aspiracional:** momentos cotidianos estilizados
+
+### 9.2. Aspectos tecnicos
+- **Calidez:** balance de blancos tendente al ámbar. Tonos naturales y cálidos sin exceso de naranja/amarillo en pieles. Dos recursos: filtro calidez (Photoshop) o filtro luz sol (ajustar opacidad).
+- **Azul natural:** integrar #0066FF en dirección de arte, diseño de set y estilismo. Si es en postproducción, respetar luces y sombras, evitar saturación excesiva.
+- **Acabado real:** grano fotográfico y desenfoques de profundidad de campo (sutiles). Encuadres humanos, desenfadados, menos "perfectos".
+- **Colores secundarios en foto:** pueden ser protagonistas en piezas con entornos controlados de marca.
+
+---
+
+## Como usa el Visual Designer esta skill
+
+1. **Antes de empezar:** cargar esta skill + `brand-visual-guidelines-movistar` + `brand-typography-movistar` + `brand-assets-movistar`
+2. **Grid:** calcular X para el formato (seccion 5), posicionar M, establecer margenes
+3. **Layout:** elegir tipo de layout (seccion 5.4): fondo completo, faldones, contenedor o contenedor conectado
+4. **Jerarquia:** calcular Y a partir del H1, derivar todos los tamanos proporcionalmente (seccion 6)
+5. **Color:** consultar Do's/Don'ts de la seccion 3 + prohibiciones absolutas de la seccion 8
+6. **Precios:** si la pieza tiene precio protagonista, aplicar composicion de la seccion 7
+7. **Logo:** verificar version de color correcta segun prioridad (seccion 1.2). Incrustar SVG de `brand-assets-movistar`
+8. **Tipografia:** incrustar @font-face de `brand-typography-movistar`. Usar solo pesos oficiales (300-800)
+9. **Fotografia:** si hay imagen, verificar principios de la seccion 9. Si no hay imagen real, usar placeholder con `data-prompt`
+
+## Mantenimiento
+
+- Cualquier cambio requiere validación del equipo de Comunicación Movistar.
+- Cambios mayores incrementan `version`.
+- Si se detecta discrepancia con el brand book (091022_Movistar_Refresh_Guidelines.pptx), se sincroniza y documenta.
