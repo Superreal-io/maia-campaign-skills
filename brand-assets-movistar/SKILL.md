@@ -3,7 +3,7 @@ name: Brand Assets Movistar
 key: brand-assets-movistar
 description: Logos oficiales de Movistar en SVG (base64) para incrustar directamente en mockups HTML. Incluye lockup horizontal, icono M y wordmark en versiones nuevo (oscuro) y clasico (azul), positivo y negativo.
 version: 1.0.0
-owner: visual-designer
+owner: art-director
 status: active
 source: Kit oficial AF_Movistar_Logo entregado por Movistar (septiembre 2025)
 ---

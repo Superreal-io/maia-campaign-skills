@@ -1,8 +1,8 @@
 ---
 name: Channel Playbook -- Web
 key: channel-playbook-web
-description: Playbook operativo del canal Web (movistar.es, landings de campana, area privada). Principios de claridad, estructura, conversion y confianza.
-version: 1.0.0
+description: Playbook operativo del canal Web (movistar.es, landings de campana, area privada). Principios de claridad, estructura, conversion, confianza. Reglas de validacion automatica y referentes.
+version: 2.0.0
 owner: client
 status: active
 channel: web
@@ -15,7 +15,9 @@ Cargado por los Agentes B, C y D cuando web es uno de los canales activos.
 
 La web no es un folleto digital. Es el lugar donde el cliente toma decisiones. Todo lo que aparece en pantalla debe reducir friccion, no anadirla.
 
-Principio rector: "Menos saturacion. Mas claridad. Mas confianza. Mas contratacion."
+Principio Maestro: **"Claridad es conversion."** Un precio claro convierte mas que un precio maquillado. Una condicion explicada convierte mas que una condicion escondida. Una pagina con un foco convierte mas que una pagina con cinco ofertas compitiendo. Este principio tiene precedencia sobre cualquier peticion de anadir mas contenido, mas banners o mas CTAs a una pagina.
+
+El modelo que este documento reemplaza es: "Cuanto mas contenido pongamos, mas posibilidades de que el usuario encuentre algo que le interese." El modelo que este documento instaura es: "Menos saturacion. Mas claridad. Mas confianza. Mas contratacion."
 
 ---
 
@@ -109,7 +111,55 @@ Regla de coherencia: si el CTA del email dice "Descubre tu ventaja", la landing 
 
 ---
 
-## 8. Checklist rapido para agentes
+## 8. Principios de tono y diseno
+
+P08. **La web habla con transparencia.** Movistar web no esconde condiciones, no maquilla precios, no entierra la letra pequena. Si una condicion es importante para la decision del cliente, debe estar visible donde se toma esa decision, no tres scrolls mas abajo.
+
+Tono prohibido: asteriscos sin resolver, disclaimers que contradicen la oferta del hero, condiciones que solo aparecen en el ultimo paso del checkout, precios "desde" sin contexto real.
+
+Tono correcto: precio real visible, condiciones junto a la oferta, transparencia como argumento de venta.
+
+P09. **Cada scroll debe aportar valor.** Si un bloque no mueve al usuario un paso mas cerca de la decision, sobra. El scroll infinito sin jerarquia es el equivalente web de la tienda saturada de soportes.
+
+P10. **La landing no es el canal de origen.** El email activa. El banner genera interes. La landing profundiza y cierra. No debe replicar el mensaje del canal de origen: debe continuarlo y resolverlo. Si el hero de la landing es identico al banner que trajo al usuario, la pagina no aporta nada nuevo.
+
+P11. **Ventaja Personal en web debe sentirse como area VIP, no como banner mas.** En area privada, Ventaja Personal debe personalizar la experiencia: catalogo adaptado, ofertas relevantes al perfil, tono de reconocimiento. En landing publica, Ventaja Personal puede usarse como gancho ("Tienes una ventaja esperandote"), pero debe resolverse al logarse, no con un descuento generico.
+
+---
+
+## 9. Reglas de validacion automatica
+
+| ID | Regla | Tipo |
+|---|---|---|
+| W01 | La pagina no tiene mision unica identificable | RECHAZO |
+| W02 | El hero no comunica valor claro en los primeros tres segundos | RECHAZO |
+| W03 | Hay mas de un CTA principal visible en el mismo viewport | CORRECCION |
+| W04 | El precio requiere asteriscos o letra pequena para entenderse | CORRECCION |
+| W05 | Las condiciones comerciales no estan visibles junto a la oferta | CORRECCION |
+| W06 | Hay saturacion de ofertas o banners compitiendo en la misma pagina | RECHAZO |
+| W07 | Ventaja Personal aparece como banner generico en area privada | CORRECCION |
+| W08 | La landing replica el mensaje del canal de origen sin aportar profundidad | CORRECCION |
+| W09 | La experiencia mobile es una adaptacion de desktop, no un diseno propio | ALERTA |
+| W10 | Las FAQs contienen marketing disfrazado en vez de respuestas reales | CORRECCION |
+| W11 | El CTA usa texto ambiguo ("Saber mas") en vez de accion concreta ("Contratar") | CORRECCION |
+| W12 | La pagina mezcla misiones (conversion + gestion + fidelizacion en la misma landing) | RECHAZO |
+
+Tipos: RECHAZO = la pieza no puede aprobarse. CORRECCION = debe modificarse antes de aprobacion. ALERTA = requiere justificacion editorial explicita.
+
+---
+
+## 10. Referentes de calibracion
+
+| Referente | Atributo principal aplicable |
+|---|---|
+| Apple.com | Hero con un solo mensaje. Precio claro. Flujo de compra sin friccion. |
+| Revolut | Transparencia radical en condiciones. Landing de producto = una idea, un CTA. |
+| Stripe | Claridad tecnica traducida a beneficio humano. Documentacion como experiencia. |
+| N26 | Area privada como experiencia premium. Personalizacion sin presion comercial. |
+
+---
+
+## 11. Checklist rapido para agentes
 
 Antes de validar cualquier pieza web:
 
@@ -123,11 +173,13 @@ Antes de validar cualquier pieza web:
 - [ ] Las condiciones estan visibles, no escondidas.
 - [ ] No hay saturacion de ofertas ni banners compitiendo.
 - [ ] Las FAQs responden objeciones reales del cliente.
+- [ ] La landing aporta profundidad, no repite el canal de origen.
+- [ ] La pieza cumple las reglas de validacion automatica (W01-W12).
 
 ---
 
 ## Como usan los agentes este playbook
 
-- **Mix Media Planner (Estrategia):** lo carga si web esta en `canales_posibles`. Define si web es destino de trafico de otros canales (caso habitual) o canal con trafico organico propio. Asigna la mision de cada pagina.
-- **Creative Strategist (Builder):** lo carga para escribir la estructura de copy de la landing por secciones. Respeta la regla de un CTA y un foco. No repite el copy de la pieza de origen.
-- **Visual Designer (Design):** genera mockups de landing (responsive desktop + mobile) con secciones y jerarquia clara. El mockup es conceptual; la version final pasa por el design system de movistar.es.
+- **Planner (Estrategia):** lo carga si web esta en `rol_canales` del brief. Define si web es destino de trafico de otros canales (caso habitual) o canal con trafico organico propio. Asigna la mision de cada pagina.
+- **Copywriter (Builder):** lo carga para escribir la estructura de copy de la landing por secciones. Respeta la regla de un CTA y un foco. No repite el copy de la pieza de origen.
+- **Art Director (Design):** genera mockups de landing (responsive desktop + mobile) con secciones y jerarquia clara. El mockup es conceptual; la version final pasa por el design system de movistar.es.

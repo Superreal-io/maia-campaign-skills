@@ -9,7 +9,7 @@ status: active
 
 # Rol General de Medios Movistar
 
-Cargada por el Planner/Mix Media Planner y el Campaign Manager. Define la funcion de cada tipo de medio en el ecosistema Movistar.
+Cargada por el Planner/Planner y el Marketing Manager. Define la funcion de cada tipo de medio en el ecosistema Movistar.
 
 ---
 
@@ -87,4 +87,4 @@ Si un canal se usa para un rol que no le corresponde (ej. masivos para performan
 ## Como lo usa cada agente
 
 - **Planner/B**: clasifica cada canal del briefing en un tipo y verifica que el rol propuesto es coherente.
-- **Campaign Manager**: en Cierre, audita que la arquitectura de canales respeta los roles. Si todos los canales hacen lo mismo, no hay arquitectura.
+- **Marketing Manager**: en Cierre, audita que la arquitectura de canales respeta los roles. Si todos los canales hacen lo mismo, no hay arquitectura.

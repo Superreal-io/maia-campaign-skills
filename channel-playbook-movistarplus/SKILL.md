@@ -1,8 +1,8 @@
 ---
 name: Channel Playbook -- Movistar+
 key: channel-playbook-movistarplus
-description: Playbook del canal Movistar+ como CRM audiovisual. Principios por formato (banner, preroll, First Impression, lineal), roles, riesgos, presion comercial.
-version: 1.0.0
+description: Playbook del canal Movistar+ como CRM audiovisual premium. Rol estrategico, principios editoriales, specs por formato con ejemplos, jerarquia de formatos, reglas de validacion automatica.
+version: 2.0.0
 owner: client
 status: active
 channel: movistarplus
@@ -10,27 +10,41 @@ channel: movistarplus
 
 # Channel Playbook -- Movistar+
 
-Cargado por los Agentes B, C, D y Campaign Manager cuando Movistar+ es uno de los canales activos.
+Cargado por los Agentes B, C, D y Marketing Manager cuando Movistar+ es uno de los canales activos.
 
 Movistar+ funciona como CRM audiovisual y medio propio de alto valor. No debe tratarse como simple inventario publicitario. Es un canal donde el cliente esta en modo ocio, descanso o familia. Cualquier comunicacion que ignore ese contexto destruye valor de marca.
 
----
-
-## 1. Principios clave
-
-Estos siete principios aplican a todos los formatos de Movistar+. Los agentes deben validar cada pieza contra esta lista antes de aprobarla.
-
-1. **La atencion se gana, no se ocupa.** No hay derecho automatico a interrumpir. Cada impacto debe justificarse con valor real para el cliente.
-2. **Contexto de consumo: ocio, descanso, familia.** El cliente no esta comprando ni gestionando. Esta disfrutando. Respeta ese momento.
-3. **Intrusividad proporcional al valor.** Cuanto mas intrusivo sea el formato, mas valor debe aportar el mensaje. Un preroll exige mas relevancia que un banner.
-4. **Segmentacion relevante, no vigilante.** El cliente debe sentir que se le conoce, no que se le vigila. La personalizacion tiene que parecer util, no invasiva.
-5. **Audiovisual significa emocion.** Este canal es imagen, sonido y movimiento. No es un soporte para texto largo ni fichas de producto.
-6. **Frecuencia como experiencia.** La repeticion excesiva degrada la marca mas rapido aqui que en cualquier otro canal. La frecuencia es parte de la experiencia, no solo una metrica de alcance.
-7. **Contexto antes que volumen.** Un mensaje bien colocado en el momento correcto vale mas que diez impactos sin contexto.
+Principio Maestro: **"La atencion del cliente en Movistar+ se gana, no se ocupa."** Movistar+ no debe convertirse en un tablon comercial ni en una extension audiovisual del email, Meta o tienda. Tiene que hacer algo distinto: reforzar valor percibido, activar beneficios relevantes y hacer que ser cliente Movistar se sienta mejor.
 
 ---
 
-## 2. Banner en interfaz
+## 1. Rol estrategico
+
+Movistar+ debe servir para cuatro cosas:
+
+1. **Reforzar valor de cliente.** Hacer tangible que ser cliente Movistar tiene ventajas: mejor entretenimiento, ventajas personales, acceso a contenidos, tecnologia, seguridad, dispositivos o experiencias. No es solo venta. Es recordatorio de valor.
+2. **Activar oportunidades segmentadas.** Impactar a clientes concretos con mensajes relevantes segun perfil, momento, producto contratado, consumo o probabilidad de cambio. Segmentar no significa impactar mas. Significa impactar mejor.
+3. **Construir propuesta diferencial.** Movistar+ puede demostrar que Movistar no es solo fibra, movil o precio. Es un ecosistema: conectividad, entretenimiento, ventajas, dispositivos, seguridad y atencion. Puede hacer sentir el tamano de Movistar como plataforma de vida digital.
+4. **Convertir sin romper la experiencia.** Puede vender, si. Pero debe vender desde el contexto, la relevancia y la elegancia. El objetivo no es meter presion comercial indiscriminada, sino generar una reaccion natural: "Esto tiene sentido para mi ahora."
+
+---
+
+## 2. Principios editoriales
+
+Estos principios aplican a todos los formatos de Movistar+. Los agentes deben validar cada pieza contra esta lista antes de aprobarla.
+
+1. **Un impacto = una mision.** Cada pieza debe tener una unica funcion: inspirar (hacer desear), recordar valor (hacer apreciar), activar (hacer actuar) o convertir (llevar a contratacion). Una misma pieza no debe intentar todas a la vez.
+2. **El momento de ocio se respeta.** El cliente esta entrando a ver contenido. No esta entrando a comprar. Cuanto mas interrumpes, mas valor debes aportar. Un banner puede ser mas tactico. Un preroll debe estar muy justificado. Una First Impression debe reservarse para mensajes realmente importantes.
+3. **La segmentacion debe sentirse relevante, no vigilante.** Correcto: "Tienes una ventaja exclusiva para disfrutar mas de tu tecnologia." Incorrecto: "Como sabemos que ves mucho futbol por la noche..."
+4. **Audiovisual significa emocion, no mas texto.** No se trata de poner un banner de CRM en pantalla grande. Se trata de hacer piezas que parezcan parte de una experiencia premium. Regla: si la pieza se entiende igual como JPG estatico, no esta aprovechando Movistar+.
+5. **Una idea, una frase, una accion.** Especialmente en formatos de alto impacto. La pieza debe poder responder en tres segundos: que me estas diciendo, por que me importa, que hago ahora.
+6. **Movistar+ no debe abaratar Movistar.** Prohibido abusar de: "Oferta exclusiva", "Solo hoy", precios gigantes, multiproducto sin jerarquia, creatividades tipo retailer, spots demasiado gritones, banners que parezcan programatica barata.
+7. **La frecuencia es parte de la marca.** Un impacto demasiado repetido no vende mas: irrita mas. No todo cliente impactable merece ser impactado. Debe haber limites claros por formato, cliente y ventana temporal.
+8. **Contexto antes que volumen.** Movistar+ permite algo muy valioso: impactar cerca del contenido. Futbol cerca de partidos. Ficcion cerca de series. Dispositivos cerca de grandes momentos de consumo en casa. Seguridad cerca de contenidos familiares. Ventaja Personal como territorio transversal. El contexto hace que el impacto parezca natural. El volumen hace que parezca presion.
+
+---
+
+## 3. Banner en interfaz
 
 ### Rol
 Orientar, recordar y activar sin interrumpir. El banner convive con la experiencia de navegacion del cliente. Debe sentirse como parte de la plataforma, no como un cuerpo extrano.
@@ -41,6 +55,19 @@ Orientar, recordar y activar sin interrumpir. El banner convive con la experienc
 - Recordatorios segmentados de campanas activas.
 - Upgrade suave (sin presion).
 - Acceso a catalogo personalizado.
+- Mensajes de "ser cliente tiene ventajas".
+
+### No usar para
+- Meter demasiados claims.
+- Replicar un email entero.
+- Comunicar condiciones complejas.
+- Promociones genericas sin segmentacion.
+- Grids de producto.
+
+### Regla operativa
+1 titular + 1 beneficio + 1 CTA.
+
+Ejemplo: "Juan Luis, tienes 300 euros de Ventaja Personal / Para elegir la tecnologia que encaja contigo. / Ver mi catalogo"
 
 ### Riesgo principal
 Convertir la interfaz en un tablon comercial. Si el cliente percibe la home como escaparate de ofertas en lugar de plataforma de contenido, se ha cruzado la linea.
@@ -50,16 +77,30 @@ Baja. El banner debe integrarse visualmente con la interfaz. Frecuencia controla
 
 ---
 
-## 3. Preroll
+## 4. Preroll antes de contenido on demand
 
 ### Rol
-Activar con intencion alta antes de contenido on demand. El preroll tiene atencion garantizada pero contexto fragil: el cliente ha elegido ver algo concreto y esta esperando.
+Activar con intencion alta sin romper el disfrute. Es uno de los formatos mas valiosos, pero tambien de los mas sensibles. El cliente ha elegido ver algo. La marca aparece justo antes. Hay que ser muy cuidadoso.
 
 ### Adecuado para
-- Mensajes de muy alta relevancia para el perfil del cliente.
-- Campanas conectadas con el contenido que se va a ver.
-- Beneficios de alto valor percibido.
-- Lanzamientos premium (futbol, ficcion, dispositivos) cuando el contexto lo justifica.
+- Mensajes muy relevantes para el cliente.
+- Campanas con fuerte vinculo al contenido.
+- Futbol, ficcion, grandes estrenos, dispositivos ligados al hogar.
+- Beneficios personalizados.
+- Lanzamientos premium.
+- Ofertas con alta probabilidad de conversion.
+
+### No usar para
+- Promociones genericas.
+- Frecuencia alta.
+- Mensajes largos.
+- Campanas de bajo valor.
+- Recordatorios repetitivos.
+
+### Regla operativa
+Corto, elegante y con valor inmediato. Duracion recomendada: 6-10 segundos. Maximo: 15 segundos cuando el mensaje lo justifique.
+
+Ejemplo: "Este Mundial se vive mejor en casa. Y por ser cliente Movistar, tienes 300 euros de Ventaja Personal para prepararlo."
 
 ### Riesgo principal
 Interrumpir un momento elegido. Usar preroll para campanas tacticas menores o con frecuencia excesiva destruye la experiencia y genera rechazo activo hacia la marca.
@@ -69,16 +110,30 @@ Media-alta en relevancia, baja en frecuencia. Cada preroll debe superar un umbra
 
 ---
 
-## 4. First Impression
+## 5. First Impression al encender el desco
 
 ### Rol
-Abrir la experiencia Movistar+ con un mensaje de maximo valor. Es el primer contacto del cliente al encender la plataforma. Tiene la maxima visibilidad y la maxima responsabilidad.
+Abrir la experiencia con un mensaje de maximo valor. Es el formato mas delicado. Es la "puerta de entrada" a Movistar+. No puede usarse como inventario tactico normal.
 
 ### Adecuado para
-- Grandes campanas estrategicas de marca.
-- Mensajes excepcionales (lanzamientos, hitos, momentos de marca).
-- Beneficios de gran relevancia para la base de clientes.
-- Lanzamientos de alto impacto (producto estrella, evento deportivo mayor).
+- Grandes campanas de marca.
+- Lanzamientos estrategicos.
+- Mensajes de alto valor para el cliente.
+- Beneficios muy personalizados.
+- Comunicaciones excepcionales.
+- Campanas donde Movistar quiera dar un impacto fuerte.
+
+### No usar para
+- Promos menores.
+- Recordatorios comerciales.
+- Mensajes de precio.
+- Campanas con poca relevancia.
+- Saturacion de frecuencia.
+
+### Regla operativa
+Debe parecer una bienvenida, no una interrupcion.
+
+Ejemplo: "Bienvenido a Movistar+. Hoy tienes una ventaja personal esperandote."
 
 ### Riesgo principal
 Usarlo como inventario tactico. Si Movistar+ abre con presion comercial de bajo nivel, el cliente asocia la plataforma con publicidad, no con contenido. Degradar la First Impression es degradar toda la percepcion de M+.
@@ -88,7 +143,7 @@ Muy baja en frecuencia, muy alta en calidad. Reservar para un maximo de una o do
 
 ---
 
-## 5. Publicidad lineal
+## 6. Publicidad lineal
 
 ### Rol
 Amplificar consideracion y reforzar territorios de marca. Es el formato mas cercano a la publicidad tradicional dentro de M+. Funciona para mensajes amplios, emocionales y de construccion de marca.
@@ -108,7 +163,19 @@ Media. Frecuencia coherente con el plan de medios general. Evitar saturacion de 
 
 ---
 
-## 6. Riesgos transversales
+## 7. Jerarquia recomendada de formatos
+
+| Formato | Valor | Riesgo | Uso recomendado |
+|---|---|---|---|
+| First Impression | Muy alto | Muy alto | Mensajes estrategicos y excepcionales |
+| Preroll | Muy alto | Alto | Activacion segmentada con alta relevancia |
+| Banner interfaz | Alto | Medio | CRM visual recurrente y personalizado |
+| Spot lineal | Medio/alto | Medio | Consideracion, territorio y recuerdo |
+| Overlay / formatos intrusivos | Variable | Muy alto | Solo con justificacion excepcional |
+
+---
+
+## 8. Riesgos transversales
 
 Estos riesgos aplican a todos los formatos y deben revisarse en cada activacion:
 
@@ -120,7 +187,28 @@ Estos riesgos aplican a todos los formatos y deben revisarse en cada activacion:
 
 ---
 
-## 7. Checklist rapido para agentes
+## 9. Reglas de validacion automatica
+
+| ID | Regla | Tipo |
+|---|---|---|
+| M+01 | La pieza tiene mas de una idea principal | RECHAZO |
+| M+02 | El formato intrusivo no justifica valor claro para el cliente | RECHAZO |
+| M+03 | La pieza replica un email o banner digital sin adaptacion audiovisual | CORRECCION |
+| M+04 | Hay mas de un CTA principal | RECHAZO |
+| M+05 | El mensaje usa urgencia artificial sin motivo real | CORRECCION |
+| M+06 | El precio domina sobre el beneficio | CORRECCION |
+| M+07 | La segmentacion se expresa de forma invasiva o demasiado explicita | RECHAZO |
+| M+08 | El preroll supera 15 segundos sin justificacion editorial | ALERTA |
+| M+09 | La First Impression se usa para una campana tactica menor | RECHAZO |
+| M+10 | El banner contiene mas de un titular, un beneficio y un CTA | CORRECCION |
+| M+11 | La pieza no respeta frecuencia maxima por cliente | RECHAZO |
+| M+12 | El mensaje no conecta con ningun territorio estrategico Movistar | ALERTA |
+
+Tipos: RECHAZO = la pieza no puede aprobarse. CORRECCION = debe modificarse antes de aprobacion. ALERTA = requiere justificacion editorial explicita.
+
+---
+
+## 10. Checklist rapido para agentes
 
 Antes de activar cualquier pieza en Movistar+, verificar:
 
@@ -133,12 +221,16 @@ Antes de activar cualquier pieza en Movistar+, verificar:
 - [ ] El tono es coherente con un entorno de descanso y entretenimiento.
 - [ ] La pieza funciona como parte de la plataforma, no como un elemento ajeno pegado encima.
 - [ ] Si el mensaje no supera este checklist, se descarta o se redirige a otro canal.
+- [ ] El banner no contiene mas de 1 titular + 1 beneficio + 1 CTA.
+- [ ] El preroll no supera 15 segundos sin justificacion.
+- [ ] La First Impression no se usa para campanas tacticas menores.
+- [ ] La pieza cumple las reglas de validacion automatica (M+01-M+12).
 
 ---
 
 ## Como usan los agentes este playbook
 
-- **Campaign Manager**: valida que M+ se use como canal estrategico, no como inventario residual. Revisa presion acumulada.
-- **Mix Media Planner**: decide si M+ aporta valor real al mix y selecciona el formato adecuado segun el nivel del mensaje.
-- **Creative Strategist**: adapta tono y narrativa al contexto audiovisual y emocional. Asegura que el mensaje no sea texto plano en formato video.
-- **Visual Designer**: produce las piezas respetando las restricciones de cada formato y la integracion visual con la plataforma.
+- **Marketing Manager**: valida que M+ se use como canal estrategico, no como inventario residual. Revisa presion acumulada.
+- **Planner**: decide si M+ aporta valor real al mix y selecciona el formato adecuado segun el nivel del mensaje.
+- **Copywriter**: adapta tono y narrativa al contexto audiovisual y emocional. Asegura que el mensaje no sea texto plano en formato video.
+- **Art Director**: produce las piezas respetando las restricciones de cada formato y la integracion visual con la plataforma.

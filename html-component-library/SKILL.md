@@ -15,7 +15,7 @@ source: 250917_Movistar_PlantillaPPT.pptx (27 layouts) + 091022_Movistar_Refresh
 
 # HTML Component Library - Movistar
 
-Esta libreria proporciona los componentes HTML que D (Visual Designer) utiliza para construir mockups de campana. Los patrones estan basados en los layouts oficiales de Movistar (plantilla PPT de 27 layouts, Brand Book y Toolkit). El resultado no es produccion final, pero es lo suficientemente cercano para que el CMO y el equipo de Comunicacion puedan revisar y aprobar.
+Esta libreria proporciona los componentes HTML que D (Art Director) utiliza para construir mockups de campana. Los patrones estan basados en los layouts oficiales de Movistar (plantilla PPT de 27 layouts, Brand Book y Toolkit). El resultado no es produccion final, pero es lo suficientemente cercano para que el CMO y el equipo de Comunicacion puedan revisar y aprobar.
 
 > **Importante:** esta libreria NO define colores, tipografias ni assets propios. Consume valores de `brand-visual-guidelines-movistar`, `brand-typography-movistar` y `brand-assets-movistar`. Si necesitas un valor que no esta en los tokens, no lo inventes: dejalo como TODO y flaggealo.
 

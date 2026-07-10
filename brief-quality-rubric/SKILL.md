@@ -1,7 +1,7 @@
 ---
 name: Brief Quality Rubric
 key: brief-quality-rubric
-description: Los 14 criterios oficiales contra los que el Brief Maker evalua cualquier documento de input. Scoring ponderado (max 21 pts). Fuente oficial Movistar.
+description: Los 14 criterios oficiales contra los que el Briefing evalua cualquier documento de input. Scoring ponderado (max 21 pts). Fuente oficial Movistar.
 version: 2.0.0
 owner: briefing-maker
 status: active
@@ -12,7 +12,7 @@ source: Direccion de Publicidad, Marca y Patrocinios -- documento "criterios.md"
 
 Principio rector: "Comunicacion edita mejor cuando recibe intencion, no solo informacion."
 
-Cuando el Brief Maker recibe un documento del area (Producto, Comercializacion, Dispositivos, etc.), evalua el contenido contra estos 14 criterios. Ordenados por importancia.
+Cuando el Briefing recibe un documento del area (Producto, Comercializacion, Dispositivos, etc.), evalua el contenido contra estos 14 criterios. Ordenados por importancia.
 
 ## Scoring
 
@@ -130,7 +130,7 @@ Hay tiempo para revisar antes de producir? Quien aprueba?
 
 | Score | Estado | Accion |
 |---|---|---|
-| 18-21 | APROBADO | Puede pasar al Mix Media Planner |
+| 18-21 | APROBADO | Puede pasar al Planner |
 | 13-17 | CON GAPS | Completar pendientes antes de producir |
 | 8-12 | INCOMPLETO | Requiere sesion con el area |
 | 0-7 | RECHAZADO | Es materia prima. Reiniciar con formulario completo |
@@ -160,22 +160,22 @@ Criterios parciales = 50% de la puntuacion.
 
 ## Mapeo criterio a campo del schema
 
-Cada criterio alimenta uno o mas campos de `golden-briefing-schema`. Esta tabla permite al Brief Maker saber que campo del Brief rellenar (o marcar como gap) a partir de cada evaluacion.
+Cada criterio alimenta uno o mas campos de `golden-briefing-schema`. Esta tabla permite al Briefing saber que campo del Brief rellenar (o marcar como gap) a partir de cada evaluacion.
 
-| Criterio | Campo(s) del schema |
+| Criterio | Campo(s) del schema v2 |
 |---|---|
-| C01. Estrategia antes que catalogo | `objetivo_comunicacion`, `contexto_negocio` |
-| C02. Priorizacion clara de objetivos | `objetivo_comunicacion` (statement priorizado), `decisiones_pendientes` |
-| C03. Un "por que" potente | `contexto_negocio` (el "por que ahora") |
-| C04. Insights de cliente | `contexto_negocio` (insights), `riesgos` |
-| C05. Audiencia bien definida | `publicos` |
-| C06. Accion esperada clara | `accion_esperada` |
-| C07. Jerarquia de mensajes | `mensaje_principal`, `productos_prioritarios` (prioridad) |
-| C08. Condiciones comerciales simplificadas | `productos_prioritarios`, `restricciones_mandatorios` |
-| C09. Criterio de exito compartido | `criterios_exito` |
-| C10. Tension real que resolver | `mensaje_principal` (la tension informa el mensaje) |
-| C11. Contexto de canal | `canales_posibles` |
-| C12. Aprendizajes anteriores | `contexto_negocio` (aprendizajes), `riesgos` |
+| C01. Estrategia antes que catalogo | `foco`, `lectura_ejecutiva` |
+| C02. Priorizacion clara de objetivos | `foco` (statement priorizado), `jerarquia_territorios`, `decisiones_pendientes` |
+| C03. Un "por que" potente | `lectura_ejecutiva.puntos` (el "por que ahora") |
+| C04. Insights de cliente | `lectura_ejecutiva.puntos` (insights), `riesgos` |
+| C05. Audiencia bien definida | `audiencia_mecanica` |
+| C06. Accion esperada clara | `primer_paso`, `recomendacion_publicidad` |
+| C07. Jerarquia de mensajes | `lectura_ejecutiva.mensaje_paraguas`, `jerarquia_territorios` |
+| C08. Condiciones comerciales simplificadas | `corrientes_demanda[].territorios`, `restricciones_mandatorios` |
+| C09. Criterio de exito compartido | `corrientes_demanda[].validacion` |
+| C10. Tension real que resolver | `lectura_ejecutiva.mensaje_paraguas` (la tension informa el mensaje) |
+| C11. Contexto de canal | `rol_canales` |
+| C12. Aprendizajes anteriores | `lectura_ejecutiva.puntos` (aprendizajes), `riesgos` |
 | C13. Decisiones tomadas | `decisiones_pendientes` (lo resuelto vs. lo abierto) |
 | C14. Disponibilidad para iterar | `fechas` (hitos de iteracion) |
 
@@ -187,7 +187,7 @@ Cuando un criterio esta AUSENTE o PARCIAL, el campo correspondiente del schema s
 
 ### Evaluacion
 
-El Brief Maker produce, para cada criterio, una entrada en el campo `rubric_evaluation` del Golden Briefing:
+El Briefing produce, para cada criterio, una entrada en el campo `rubric_evaluation` del Golden Briefing:
 
 ```json
 {
@@ -210,11 +210,11 @@ De todos los criterios marcados como PENDIENTE, seleccionar **maximo 5** ordenad
 Prioridad de seleccion:
 1. Criterios criticos (C01-C07) marcados como AUSENTE: siempre van.
 2. Criterios criticos marcados como PARCIAL: casi siempre van.
-3. Criterios importantes (C08-C14) con impacto directo en el output del Mix Media Planner o Creative Strategist: van si caben.
+3. Criterios importantes (C08-C14) con impacto directo en el output del Planner o Copywriter: van si caben.
 
 ### Regla de paso
 
-Brief con score >= 18 puede pasar directamente al Mix Media Planner.
+Brief con score >= 18 puede pasar directamente al Planner.
 Brief con score < 18 requiere completar pendientes (formulario al area o sesion directa).
 El humano puede decidir avanzar con riesgo si el score esta entre 13-17 y los gaps no son bloqueantes.
 

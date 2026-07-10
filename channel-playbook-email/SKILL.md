@@ -1,8 +1,8 @@
 ---
 name: "Channel Playbook -- Email / CRM"
 key: channel-playbook-email
-description: Playbook operativo del canal CRM con email como canal principal de ejecucion. Principios de relacion personalizada, estructura de mensaje, roles, riesgos y reglas para agentes.
-version: 1.0.0
+description: Playbook operativo del canal CRM con email como canal principal de ejecucion. Principios editoriales, visuales y comerciales. Reglas de validacion automatica, tipos de email y referentes.
+version: 2.0.0
 owner: client
 status: active
 channel: email
@@ -13,6 +13,10 @@ channel: email
 Cargado por los Agentes B, C y (parcialmente) D cuando email es uno de los canales activos.
 
 CRM es un canal de relacion personalizada, no un contenedor de inputs comerciales. Email es el canal principal de ejecucion del CRM. Todo lo que sale por email debe respetar los principios de este playbook.
+
+Principio Maestro: **"Editar tambien es vender."** En comunicacion premium, la confianza viene de la claridad. Y la claridad exige renunciar. Cada elemento que se anade a un email sin una razon editorial explicita es un elemento que compite por atencion y la destruye. Este principio tiene precedencia sobre todos los demas.
+
+El modelo que este documento reemplaza es: "Cuantos mas inputs comerciales metamos, mas posibilidades de conversion." El modelo que este documento instaura es: "Mas claridad, mas deseo, mas comprension, mejor conversion."
 
 ---
 
@@ -45,6 +49,20 @@ Estos diez principios son la base de evaluacion de cualquier pieza de email. Age
 8. **Beneficios Movistar cierran confianza.** Son cierre de argumento, no extras acumulados. No listar beneficios como relleno.
 9. **La claridad vende.** Lenguaje directo, sin rodeos, sin jerga innecesaria.
 10. **Editar tambien es vender.** Quitar contenido es una decision comercial tan importante como agregarlo.
+
+### Limite de productos por email
+
+| Elemento | Limite maximo |
+|---|---|
+| Ideas principales | 1 |
+| Argumentos de soporte | 2-3 |
+| CTAs principales | 1 |
+| Productos destacados (hero o bloque principal) | 3 |
+| Categoria secundaria opcional | 1 |
+| SKUs totales en el email | 6 |
+| Grid de productos como protagonista | PROHIBIDO |
+
+El grid de productos solo puede aparecer en la parte inferior del email, en formato comprimido, como zona de exploracion secundaria para el usuario que ya ha decidido actuar. Nunca como argumento de venta.
 
 ---
 
@@ -145,7 +163,117 @@ Dos mecanismos que aparecen frecuentemente en campanas Movistar y requieren trat
 
 ---
 
-## 8. Checklist rapido para agentes
+## 8. Principios de tono
+
+P04. **Hablar como una marca premium cercana.** Movistar no es un folleto, no es un retailer, no es una promotora de descuentos.
+
+Tono prohibido: urgencia artificial ("Solo hasta el domingo!"), ruido promocional ("SUPER OFERTA", "PRECIO INCREIBLE"), saturacion de claims en un mismo modulo, mayusculas como recurso de enfasis.
+
+Tono correcto: confianza, claridad, acompanamiento, seguridad, disfrute.
+
+P05. **La tecnologia es un facilitador, no el protagonista.** La gente no compra OLED, FTTR ni WiFi 7. La gente compra vivir mejor, disfrutar mas, evitar problemas, sentirse tranquila. Regla de validacion: antes de incluir una especificacion tecnica, pregunta si puede sustituirse por el beneficio que produce. Si la respuesta es si, sustituyela.
+
+P06. **Ventaja Personal debe sentirse como reconocimiento, no como simple descuento.** El descuento es el mecanismo que permite hacer tangible la ventaja, pero no debe sustituirla como idea principal. Si el copy puede firmarlo cualquier retailer cambiando el logo, la pieza esta mal planteada. MAIA no debe corregir automaticamente el uso de la palabra "descuento". Debe corregirlo cuando el descuento sustituya a Ventaja Personal como idea dominante o cuando la pieza comunique solo precio sin reconocimiento al cliente.
+
+---
+
+## 9. Principios de diseno
+
+P07. **Disenar para escaneo, no para lectura.** En movil, los emails comerciales no se leen: se escanean. El ojo busca: titulares, bloques, imagenes, CTAs.
+
+| Elemento | Direccion |
+|---|---|
+| Aire y espacio en blanco | Aumentar |
+| Numero de modulos | Reducir |
+| Cajas y contenedores | Reducir |
+| Jerarquia visual | Reforzar |
+| Texto corrido en modulos comerciales | Eliminar |
+
+P08. **Jerarquia visual radical.** Cada email debe tener un elemento visualmente dominante y uno solo. El resto debe subordinarse de forma visible. Problema habitual: cuando todo pesa igual, nada pesa.
+
+P09. **El grid destruye percepcion premium.** El grid de producto en posicion central o prominente abarata la percepcion de marca, convierte premium en retail masivo y destruye la narrativa del email.
+
+| Posicion del grid | Permitido |
+|---|---|
+| Hero o zona principal | PROHIBIDO |
+| Zona media del email | PROHIBIDO |
+| Zona inferior, formato comprimido | Permitido |
+
+Referencia: Apple, Nike, Revolut. Ninguno usa grid como protagonista en comunicaciones de marca.
+
+P10. **El blanco y el espacio vacio venden.** Especialmente en segmentos premium y en dispositivos de gama alta. Priorizar: bloques amplios con respiracion, composiciones limpias, fotografia emocional (lifestyle, no producto aislado sobre fondo blanco), tipografia con peso y escala. Eliminar: "tarjetitas" de producto en filas de 2, modulos con borde y fondo de color que compiten entre si, banners secundarios que replican el mensaje del hero.
+
+---
+
+## 10. Principios comerciales
+
+P11. **El CTA debe ser unico.**
+
+| Elemento | Limite |
+|---|---|
+| CTAs principales distintos por email | 1 |
+| Repeticiones del mismo CTA | Maximo 2-3 veces a lo largo del email |
+| CTAs secundarios de exploracion | 1 opcional, solo en zona inferior |
+
+PROHIBIDO en el mismo email: "Ver catalogo", "Descubrir", "Comprar", "Ver dispositivos", "Swap", "Ir a la oferta". Cada CTA distinto divide la atencion y destruye la conversion.
+
+P12. **Swap es facilitador, no protagonista.** No argumentar en el hero. Aparecer como respuesta a la objecion implicita ("y si luego quiero cambiarlo?"). Generar peace of mind, no excitacion. Tono correcto: "No te preocupes por quedarte atras. Con Swap, estrenas cada dos anos el ultimo modelo. Nosotros nos ocupamos."
+
+P13. **Los beneficios Movistar son cierre de confianza, no extras.** Seguro movil, Cloud, instalacion, atencion personalizada. Posicion correcta en el email: zona de cierre, despues de la propuesta de valor principal. Tono correcto: "Por eso hacerlo con Movistar es distinto." No: "Ademas, tambien incluye..."
+
+---
+
+## 11. Reglas de validacion automatica
+
+Estas reglas pueden operarse como checks automaticos en MAIA al evaluar o generar una pieza CRM:
+
+| ID | Regla | Tipo |
+|---|---|---|
+| R01 | El email tiene mas de 1 CTA principal distinto | RECHAZO |
+| R02 | El email tiene mas de 6 SKUs en total | ALERTA |
+| R03 | El grid aparece en la mitad superior del email | RECHAZO |
+| R04 | El hero no contiene propuesta de valor explicita | RECHAZO |
+| R05 | El hero no contiene CTA visible | RECHAZO |
+| R06 | El descuento sustituye a Ventaja Personal como idea dominante | CORRECCION |
+| R07 | El copy del hero supera 25 palabras | ALERTA |
+| R08 | El email contiene especificaciones tecnicas sin traduccion a beneficio | ALERTA |
+| R09 | Swap aparece como protagonista del hero | CORRECCION |
+| R10 | El email contiene urgencia artificial sin criterio editorial | ALERTA |
+| R11 | Los beneficios Movistar aparecen en la zona superior o media del email | CORRECCION |
+| R12 | El email contiene mas de 3 modulos con fondo de color distinto | ALERTA |
+
+Tipos: RECHAZO = la pieza no puede aprobarse. CORRECCION = debe modificarse antes de aprobacion. ALERTA = requiere justificacion editorial explicita.
+
+---
+
+## 12. Arquitectura de tipos de email
+
+Cada tipo tiene su propia logica editorial. Antes de producir una pieza, MAIA debe identificar a que tipo pertenece. Un email que mezcla logicas de dos tipos debe ser rechazado o redisenado.
+
+| Tipo | Objetivo | Logica dominante | Productos | CTAs |
+|---|---|---|---|---|
+| Email de marca | Posicionamiento, fidelizacion | Emocion + territorio | 0-1 | 1 (suave) |
+| Email de oferta singular | Conversion de producto concreto | Propuesta de valor + urgencia legitima | 1 | 1 (directo) |
+| Email de catalogo curado | Exploracion de gama | Curaduria + seleccion | 3-6 | 1 principal + 1 exploracion |
+| Email de beneficio personal | Retencion + reconocimiento | Exclusividad + personalizacion | 1-3 | 1 |
+| Email transaccional | Confirmacion, informacion | Claridad + confianza | 0 | Contextual |
+
+---
+
+## 13. Referentes de calibracion
+
+Benchmarks de percepcion visual y tonal. No son modelos a copiar, sino calibradores de nivel.
+
+| Referente | Atributo principal aplicable |
+|---|---|
+| Apple | Espacio, jerarquia, curaduria de producto |
+| Nike | Emocion como protagonista, tecnologia como facilitador |
+| Revolut | Claridad de propuesta, tono cercano sin concesiones |
+| Deutsche Telekom | Coherencia de sistema en CRM a escala |
+
+---
+
+## 14. Checklist rapido para agentes
 
 Antes de dar por buena una pieza de email, validar:
 
@@ -159,6 +287,11 @@ Antes de dar por buena una pieza de email, validar:
 - [ ] No hay mas de un mensaje comercial competiendo?
 - [ ] El tono es directo, claro, sin jerga?
 - [ ] Se ha editado lo que sobra?
+- [ ] No hay grid de productos en la mitad superior?
+- [ ] El hero no supera 25 palabras de copy?
+- [ ] No hay mas de 3 modulos con fondo de color distinto?
+- [ ] Se ha identificado el tipo de email (marca, oferta, catalogo, beneficio, transaccional)?
+- [ ] La pieza cumple las reglas de validacion automatica (R01-R12)?
 
 Si alguna respuesta es "no", la pieza necesita revision.
 
@@ -166,6 +299,6 @@ Si alguna respuesta es "no", la pieza necesita revision.
 
 ## Como usan los agentes este playbook
 
-- **Mix Media Planner (Estrategia):** lo carga si email esta en `canales_posibles`. Usa las funciones (seccion 1) para definir el rol del email en la campana y los principios (seccion 2) para evaluar si el mensaje propuesto es viable por este canal.
-- **Creative Strategist (Builder):** lo carga para escribir copies que cumplan la estructura (seccion 3), validar contra anti-patrones (seccion 5) y aplicar el checklist (seccion 8) antes de entregar.
-- **Visual Designer (Design):** lo carga para asegurar que el hero manda, que el CTA es unico y visible, y que la pieza no se convierte en folleto visual.
+- **Planner (Estrategia):** lo carga si email esta en `rol_canales` del brief. Usa las funciones (seccion 1) para definir el rol del email en la campana y los principios (seccion 2) para evaluar si el mensaje propuesto es viable por este canal.
+- **Copywriter (Builder):** lo carga para escribir copies que cumplan la estructura (seccion 3), validar contra anti-patrones (seccion 5) y aplicar el checklist (seccion 8) antes de entregar.
+- **Art Director (Design):** lo carga para asegurar que el hero manda, que el CTA es unico y visible, y que la pieza no se convierte en folleto visual.

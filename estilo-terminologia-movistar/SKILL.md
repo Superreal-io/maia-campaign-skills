@@ -10,7 +10,7 @@ source: Maia System Prompt (sección H) - validado por Comunicación Movistar
 
 # Estilo y Terminología - Movistar
 
-Skill compartida. Los Agentes C y D la cargan obligatoriamente antes de producir copies o HTML. El Mix Media Planner la consulta si necesita verificar terminología en su estrategia.
+Skill compartida. Los Agentes C y D la cargan obligatoriamente antes de producir copies o HTML. El Planner la consulta si necesita verificar terminología en su estrategia.
 
 > Origen: extraído del system prompt productivo de Maia (sección H). Cualquier discrepancia con otras fuentes se resuelve a favor de este archivo.
 
@@ -170,7 +170,7 @@ Palabras formadas por las iniciales de una denominación compleja. Ej: CMT, IT, 
 
 ---
 
-## Checklist rápido para el Creative Strategist
+## Checklist rápido para el Copywriter
 
 Antes de entregar copies finales, verificar:
 
@@ -187,9 +187,9 @@ Antes de entregar copies finales, verificar:
 
 ## Cómo usan los agentes esta skill
 
-- **Creative Strategist:** Carga obligatoria. Verifica copies contra checklist (sección 10 de esta skill) antes de entregar. Cada pieza que incumple una regla se marca como flag.
-- **Visual Designer:** Carga obligatoria. Verifica que el HTML respeta grafías de producto, formatos de precio y reglas de puntuación en el copy maquetado.
-- **Mix Media Planner:** Consulta opcional cuando su estrategia incluye claims con precios, velocidades o nombres de producto.
+- **Copywriter:** Carga obligatoria. Verifica copies contra checklist (sección 10 de esta skill) antes de entregar. Cada pieza que incumple una regla se marca como flag.
+- **Art Director:** Carga obligatoria. Verifica que el HTML respeta grafías de producto, formatos de precio y reglas de puntuación en el copy maquetado.
+- **Planner:** Consulta opcional cuando su estrategia incluye claims con precios, velocidades o nombres de producto.
 
 ## Mantenimiento
 

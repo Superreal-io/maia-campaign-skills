@@ -1,7 +1,7 @@
 ---
 name: "Brand Visual Composition - Movistar"
 key: brand-visual-composition-movistar
-description: "Reglas de composicion visual: grid (1/16), jerarquia tipografica Y-based, composicion de precios, matriz WCAG de contraste, Do's/Don'ts de color por fondo, reglas de layout, logotipo y fotografia. Skill obligatoria para el Visual Designer."
+description: "Reglas de composicion visual: grid (1/16), jerarquia tipografica Y-based, composicion de precios, matriz WCAG de contraste, Do's/Don'ts de color por fondo, reglas de layout, logotipo y fotografia. Skill obligatoria para el Art Director."
 version: 2.0.0
 owner: superreal
 status: active
@@ -12,7 +12,7 @@ depends_on:
 
 # Brand Visual Composition - Movistar
 
-Skill dedicada al Visual Designer. Define todas las reglas de composición visual que no son valores puros (esos están en `brand-visual-guidelines-movistar`). Aquí están las reglas de USO: cuándo, cómo y dónde aplicar cada elemento.
+Skill dedicada al Art Director. Define todas las reglas de composición visual que no son valores puros (esos están en `brand-visual-guidelines-movistar`). Aquí están las reglas de USO: cuándo, cómo y dónde aplicar cada elemento.
 
 > Origen: 091022_Movistar_Refresh_Guidelines.pptx (brand book oficial, 197 slides) + 2025_Movistar_Toolkit_OnePage.pdf + Brand Guardian v4 RAG. Valores HEX/RGB de referencia estan en `brand-visual-guidelines-movistar`; este archivo los cita pero no los redefine.
 
@@ -167,7 +167,7 @@ Los caracteres toman inspiración directa de la M. Curvas, terminales y detalles
 | #ffe99c | A | AAA | Prohibido | Prohibido | Prohibido | -- | Prohibido |
 | #ffc5a8 | A | AAA | Prohibido | Prohibido | Prohibido | Prohibido | -- |
 
-**Regla para el Visual Designer:** Prohibido = no usar. A = solo textos >24pt o iconos. AA = textos >16pt. AAA = cualquier tamaño.
+**Regla para el Art Director:** Prohibido = no usar. A = solo textos >24pt o iconos. AA = textos >16pt. AAA = cualquier tamaño.
 
 ### 4.3. Colores semánticos (UI)
 
@@ -354,7 +354,7 @@ Estas reglas se aplican a TODA pieza, sin excepcion:
 
 ---
 
-## Como usa el Visual Designer esta skill
+## Como usa el Art Director esta skill
 
 1. **Antes de empezar:** cargar esta skill + `brand-visual-guidelines-movistar` + `brand-typography-movistar` + `brand-assets-movistar`
 2. **Grid:** calcular X para el formato (seccion 5), posicionar M, establecer margenes

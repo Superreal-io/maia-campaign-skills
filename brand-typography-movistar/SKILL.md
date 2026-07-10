@@ -1,12 +1,12 @@
 ---
 name: Brand Typography - Movistar Sans
 key: brand-typography-movistar
-description: Tipografia oficial Movistar Sans en formato variable font (woff2, base64). Incluye @font-face listo para copiar, jerarquia tipografica oficial y reglas de uso. OBLIGATORIA para todo HTML que produzca el Visual Designer.
+description: Tipografia oficial Movistar Sans en formato variable font (woff2, base64). Incluye @font-face listo para copiar, jerarquia tipografica oficial y reglas de uso. OBLIGATORIA para todo HTML que produzca el Art Director.
 version: 1.0.0
 owner: superreal
 status: active
 source: Tipografia_MovistarSans.zip (proporcionado por Movistar) + 250917_Movistar_PlantillaPPT.pptx
-loaded_by: D (Visual Designer)
+loaded_by: D (Art Director)
 ---
 
 # Brand Typography - Movistar Sans

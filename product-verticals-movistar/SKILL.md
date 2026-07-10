@@ -296,18 +296,18 @@ Try&Pay.
 
 ## Cómo usan los agentes esta skill
 
-### Mix Media Planner (Estrategia de Medios)
+### Planner (Estrategia de Medios)
 - Consulta el módulo vertical correspondiente al producto del brief
 - Usa las palancas creativas (genérica/estacional/puntual/personalizada) para informar la cadencia
 - Verifica que la estrategia por canal respeta los mandatories del vertical
 
-### Creative Strategist (Campaign Builder)
+### Copywriter (Campaign Builder)
 - Carga OBLIGATORIAMENTE el módulo vertical del producto antes de escribir copies
 - Usa las emociones y el tono específico del vertical como guía creativa
 - Los copies deben ser coherentes con el beneficio tonal descrito
 - Verifica mandatories del vertical (especialmente REGLA APPLE en Dispositivos)
 
-### Campaign Manager
+### Marketing Manager
 - En Cierre, verifica que los copies son coherentes con el módulo vertical correcto
 - Flag si se detecta un copy de Ficción con tono de Conectividad o viceversa
 

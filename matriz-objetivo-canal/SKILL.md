@@ -9,7 +9,7 @@ status: active
 
 # Matriz Objetivo x Canal Movistar
 
-Cargada por el Planner/Mix Media Planner y el Campaign Manager. Referencia estructurada para decidir que canales activar segun el objetivo de la campana.
+Cargada por el Planner/Planner y el Marketing Manager. Referencia estructurada para decidir que canales activar segun el objetivo de la campana.
 
 Estas matrices son punto de partida. El Planner puede ajustarlas si el briefing lo justifica, pero debe documentar la desviacion.
 
@@ -117,4 +117,4 @@ Estas matrices son punto de partida. El Planner puede ajustarlas si el briefing 
 ## Como usar estas matrices
 
 1. **Planner/B**: identifica el objetivo principal del briefing, consulta la matriz correspondiente. Si el briefing pide canales que la matriz marca como "no recomendado", flaggea la discrepancia.
-2. **Campaign Manager**: en Cierre, verifica que la arquitectura de canales es coherente con el objetivo. Si una campana de notoriedad tiene CRM como canal principal sin justificacion, es un flag.
+2. **Marketing Manager**: en Cierre, verifica que la arquitectura de canales es coherente con el objetivo. Si una campana de notoriedad tiene CRM como canal principal sin justificacion, es un flag.

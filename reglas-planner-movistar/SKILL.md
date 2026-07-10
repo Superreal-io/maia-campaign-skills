@@ -9,7 +9,7 @@ status: active
 
 # Reglas Transversales del Planner
 
-Cargada por el Planner/Mix Media Planner. El Campaign Manager la usa en Cierre para auditar que las reglas se han respetado.
+Cargada por el Planner/Planner. El Marketing Manager la usa en Cierre para auditar que las reglas se han respetado.
 
 Cada regla tiene un ID, una descripcion y la accion que el Planner debe tomar. Si una regla se activa, el Planner lo registra en su output como flag con el ID correspondiente.
 
@@ -47,7 +47,7 @@ Cada regla tiene un ID, una descripcion y la accion que el Planner debe tomar. S
 1. El Planner pasa este checklist despues de diagnosticar el briefing y antes de cerrar su output.
 2. Para cada regla activada, incluye un flag en su JSON: `{"regla": "P03", "descripcion": "Canal X no tiene rol diferencial", "accion_tomada": "Eliminado de la arquitectura"}`.
 3. Las reglas no activadas no se mencionan (no rellenar con "OK" -- solo las que aplican).
-4. El Campaign Manager verifica en Cierre que las reglas evidentes se han aplicado. Si el briefing pedia "todos los medios" y el Planner no activo P20, es un flag del Campaign Manager.
+4. El Marketing Manager verifica en Cierre que las reglas evidentes se han aplicado. Si el briefing pedia "todos los medios" y el Planner no activo P20, es un flag del Marketing Manager.
 
 ---
 
@@ -64,12 +64,12 @@ Cuando el briefing incluye mas de 10 territorios, el Planner agrupa en bloques a
 
 Orden recomendado dentro de cada bloque: paraguas > comerciales > entretenimiento > conectividad.
 
-El Campaign Manager verifica en Cierre que la priorizacion es coherente con el briefing y que no se ha omitido un territorio P1.
+El Marketing Manager verifica en Cierre que la priorizacion es coherente con el briefing y que no se ha omitido un territorio P1.
 
 ---
 
 ## Criterio de severidad
 
-- **Bloqueante**: P01 (objetivos multiples sin jerarquizar), P02 (sin idea dominante), P05 (intrusivo para tactico menor). Si no se resuelven, el Creative Strategist no puede trabajar con coherencia.
+- **Bloqueante**: P01 (objetivos multiples sin jerarquizar), P02 (sin idea dominante), P05 (intrusivo para tactico menor). Si no se resuelven, el Copywriter no puede trabajar con coherencia.
 - **Alta**: P03, P04, P06, P09, P10, P11, P17. Degradan calidad pero el flujo puede continuar con flag.
 - **Media**: el resto. Son mejoras de precision que el Planner propone y el humano decide.

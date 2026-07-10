@@ -1,8 +1,8 @@
 ---
 name: Channel Playbook -- Tienda
 key: channel-playbook-tienda
-description: Playbook operativo del canal Tienda fisica Movistar. Funcion, principios, soportes, rol, anti-patrones, coordinacion con personal.
-version: 1.0.0
+description: Playbook operativo del canal Tienda fisica Movistar. Principios estrategicos, visuales, de tono y por soporte. Reglas de validacion automatica y coherencia con CRM.
+version: 2.0.0
 owner: client
 status: active
 channel: tienda
@@ -13,6 +13,10 @@ channel: tienda
 Cargado por los Agentes B, C y D cuando tienda es uno de los canales activos.
 
 La tienda es un espacio de decision asistida. No es un folleto fisico. Todo soporte, copy y dinamica debe partir de esa premisa.
+
+Principio Maestro: **"La tienda debe bajar la ansiedad tecnologica."** La mayoria de retailers tecnologicos generan ruido, complejidad, presion y demasiadas opciones. Movistar debe posicionarse como el lugar donde la tecnologia se entiende facil. Esto conecta con los atributos de marca: peace of mind, confianza, premium cercano, tecnologia que cuida. Cualquier pieza que aumente la ansiedad del cliente en lugar de reducirla viola este principio, independientemente de su rendimiento comercial inmediato.
+
+El modelo que este documento reemplaza es: "Cada superficie disponible es una oportunidad promocional." El modelo que este documento instaura es: "Vender desde la claridad, no desde el grito."
 
 ---
 
@@ -79,9 +83,9 @@ Regla transversal: todo lo que funciona en tienda tiene una cosa en comun -- mue
 
 ## 4. Rol de cada agente en tienda
 
-- **Mix Media Planner**: define que funcion cumple tienda en el mix (cierre, refuerzo, explicacion). Asigna mision a cada soporte segun los principios.
-- **Creative Strategist**: propone copies concretos para cada soporte respetando la regla de tres segundos. Redacta guion-resumen para vendedores cuando la campana lo requiera.
-- **Visual Designer**: genera mockups conceptuales de soportes (composiciones SVG o HTML/CSS). NO produce arte final -- la produccion pasa por estudio de diseno con sistema de marca. Flaggea esto explicitamente.
+- **Planner**: define que funcion cumple tienda en el mix (cierre, refuerzo, explicacion). Asigna mision a cada soporte segun los principios.
+- **Copywriter**: propone copies concretos para cada soporte respetando la regla de tres segundos. Redacta guion-resumen para vendedores cuando la campana lo requiera.
+- **Art Director**: genera mockups conceptuales de soportes (composiciones SVG o HTML/CSS). NO produce arte final -- la produccion pasa por estudio de diseno con sistema de marca. Flaggea esto explicitamente.
 
 ---
 
@@ -113,7 +117,7 @@ Si un brief o una propuesta cae en alguno de estos patrones, el agente debe sena
 
 ## 7. Coordinacion con personal de tienda
 
-- Toda campana en tienda debe incluir un **guion-resumen** para el equipo de venta (responsabilidad del Creative Strategist).
+- Toda campana en tienda debe incluir un **guion-resumen** para el equipo de venta (responsabilidad del Copywriter).
 - El guion contiene: claim principal, tres argumentos clave, una respuesta a la objecion mas probable.
 - La carteleria abre la conversacion; el vendedor la cierra. No al reves.
 - Si el material requiere explicacion adicional para que el cliente lo entienda, el material esta mal. Redisenar.
@@ -121,7 +125,106 @@ Si un brief o una propuesta cae en alguno de estos patrones, el agente debe sena
 
 ---
 
-## 8. Checklist rapido para agentes
+## 8. Principios de tono
+
+P04. **La tienda habla con calma.** Una marca premium transmite seguridad, control y claridad. No ansiedad comercial.
+
+Tono prohibido: "ULTIMA OPORTUNIDAD", "SOLO HOY", "MEGA OFERTA", exceso de rojos como recurso de urgencia, precios en tipografia gigante como elemento dominante, lenguaje agresivo de retail de volumen.
+
+Tono correcto: humano, directo, seguro, elegante.
+
+P05. **Hablar de beneficios humanos, no de especificaciones.** El cliente no entra a tienda pensando en OLED, FTTR ni WiFi 7. Piensa en ver mejor el futbol, en que no falle el WiFi, en un movil que dure. Regla de validacion: antes de incluir una especificacion tecnica en cualquier soporte, pregunta si puede sustituirse por el beneficio que produce.
+
+P06. **Movistar es curador tecnologico, no hipermercado.** La sensacion que debe transmitir la tienda es "Movistar ha seleccionado esto para mi", no "aqui tienes 40 cajas". La diferencia no es de cantidad de producto: es de como se presenta, ordena y explica.
+
+---
+
+## 9. Principios por soporte (detalle extendido)
+
+P11. **Pantallas interiores hero.** Mision: inspirar y generar deseo. No son catalogos animados. Son territorios emocionales. Su contenido no debe ser producto: debe ser vida con producto. Regla operativa: maximo 2 frames de contenido por secuencia. El primero genera deseo. El segundo conecta ese deseo con la oferta.
+
+Ejemplo aplicado (contexto Mundial):
+
+| Frame | Contenido |
+|---|---|
+| Frame 1 | Visual: familia/amigos viendo el partido. Texto: "Este Mundial se vive a lo grande." |
+| Frame 2 | "Y tienes hasta 300 euros de Ventaja Personal para prepararlo." |
+
+P12. **Pantallas dinamicas explicativas.** Mision: simplificar conceptos complejos. En el caso de Ventaja Personal, la pantalla debe ordenar dos niveles: (1) el territorio: reconocimiento al cliente Movistar; (2) el mecanismo: descuento aplicable. Ventaja Personal debe liderar la explicacion. El descuento aparece como forma concreta de materializar esa ventaja, no como claim aislado.
+
+| Elemento | Limite maximo |
+|---|---|
+| Ideas por pantalla | 1 |
+| Palabras clave visibles | 10-12 |
+| Animaciones conceptuales | 1 |
+
+Ejemplo: Frame 1: "Tu Ventaja Personal." Frame 2: "300 euros en forma de descuento para elegir tecnologia." Frame 3: "Solo por ser cliente Movistar." Fin. Sin frames adicionales.
+
+P13. **Caballetes.** Mision: interrumpir y activar conversacion. No explicar todo. El caballete ideal genera curiosidad, no certeza. Su funcion no es informar: es provocar una pregunta que el comercial puede responder.
+
+PROHIBIDO: Precio + cuota + logo + specs + condiciones + promo + QR + financiacion.
+
+CORRECTO: "Muchos clientes Movistar ya tienen una TV mejor pagando menos de lo que imaginaban." + "Preguntanos por tu Ventaja Personal."
+
+P14. **Carteleria de producto.** Mision: ayudar a decidir. Cada cartel debe mostrar exactamente: 1 beneficio principal, 1 elemento emocional, 1 simplificacion economica. No fichas tecnicas ni listas de especificaciones.
+
+PROHIBIDO: "120Hz / OLED evo / HDR10 / IA procesada / Dolby Atmos..."
+
+CORRECTO: "Veras cada partido como si estuvieras alli." + subcopy: "LG OLED 65 compatible con tu Ventaja Personal."
+
+P15. **Zona de precios.** El pricing debe existir. Pero premium no es esconder el precio. Es no convertir el precio en el unico protagonista del soporte. El precio es el cierre de una propuesta de valor, no su apertura. Regla: el precio nunca debe ser el elemento tipograficamente dominante de un soporte.
+
+---
+
+## 10. Reglas de validacion automatica
+
+| ID | Regla | Tipo |
+|---|---|---|
+| T01 | El soporte no tiene mision unica identificable (P02) | RECHAZO |
+| T02 | El soporte necesita mas de 3 segundos para entenderse (P07) | RECHAZO |
+| T03 | El soporte contiene urgencia artificial ("solo hoy", "ultima oportunidad") | CORRECCION |
+| T04 | El precio es el elemento tipograficamente dominante del soporte | CORRECCION |
+| T05 | El soporte contiene mas de 1 frase dominante, imagen dominante o CTA dominante | RECHAZO |
+| T06 | Una pantalla contiene mas de 1 idea por frame | CORRECCION |
+| T07 | Un caballete contiene precio, cuota y especificaciones simultaneamente | RECHAZO |
+| T08 | La carteleria de producto muestra especificaciones sin traduccion a beneficio | CORRECCION |
+| T09 | Una pantalla hero contiene mas de 2 frames de contenido | ALERTA |
+| T10 | El soporte contiene lenguaje de retail de volumen ("mega oferta", "super precio") | RECHAZO |
+| T11 | El soporte no tiene respiracion visual suficiente entre elementos | ALERTA |
+| T12 | Una pantalla dinamica supera 12 palabras clave visibles por frame | CORRECCION |
+
+Tipos: RECHAZO = la pieza no puede aprobarse. CORRECCION = debe modificarse antes de aprobacion. ALERTA = requiere justificacion editorial explicita.
+
+---
+
+## 11. Coherencia con el sistema CRM
+
+La comunicacion en tienda no opera de forma aislada. El cliente que recibe un email de Movistar y entra a tienda debe percibir el mismo sistema.
+
+| Elemento | Principio |
+|---|---|
+| Territorio emocional | El mismo claim activo en CRM debe ser reconocible en tienda |
+| Tono de Ventaja Personal | Ventaja Personal lidera como territorio de reconocimiento. "Descuento" puede usarse como mecanismo aclaratorio, nunca como claim principal |
+| Posicion de Swap | Facilitador y removedor de friccion, nunca protagonista, ni en tienda ni en email |
+| Urgencia | El mismo criterio editorial aplica en ambos canales |
+| Jerarquia de mensajes | Lo que es secundario en CRM no puede ser protagonista en tienda |
+
+Cualquier pieza de tienda que contradiga el sistema activo en CRM debe ser escalada para revision.
+
+---
+
+## 12. Referentes de calibracion
+
+| Referente | Atributo principal aplicable |
+|---|---|
+| Apple Store | Espacio vacio como argumento de venta. Producto curado, no catalogo expuesto. |
+| Nespresso | Tienda como experiencia de marca, no punto de transaccion. |
+| Bang & Olufsen | Tecnologia premium comunicada desde el deseo, nunca desde la especificacion. |
+| Fnac (zona premium) | Como coexistir volumen y curaduria sin sacrificar percepcion de marca. |
+
+---
+
+## 13. Checklist rapido para agentes
 
 Antes de validar cualquier pieza de tienda, verificar:
 
@@ -135,9 +238,9 @@ Antes de validar cualquier pieza de tienda, verificar:
 - [ ] La pieza invita a hablar con el vendedor, no intenta resolver sola.
 - [ ] No hay anti-patrones de la seccion 5 presentes.
 - [ ] El tono es calmo, directo, sin tecnicismos sin traducir.
-
----
-
-## Referencia de ejemplos
-
-<!-- TODO: pendiente de que el equipo de Comunicacion proporcione ejemplos curados de materiales de tienda. -->
+- [ ] Las pantallas hero no superan 2 frames de contenido.
+- [ ] Las pantallas dinamicas no superan 12 palabras clave por frame.
+- [ ] Los caballetes no contienen precio + cuota + specs simultaneamente.
+- [ ] Ventaja Personal lidera como territorio, no como descuento generico.
+- [ ] La pieza cumple las reglas de validacion automatica (T01-T12).
+- [ ] Hay coherencia con el sistema activo en CRM (seccion 11).

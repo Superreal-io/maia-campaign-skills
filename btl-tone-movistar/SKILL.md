@@ -13,7 +13,7 @@ depends_on:
 
 # Tono BTL y Guardrails Operativos - Movistar
 
-Skill compartida. Mix Media Planner y Creative Strategist la cargan para campanas BTL (email, SMS, banners descodificador, push). Complementa `brand-voice-movistar` (tono general) con las particularidades del canal directo al cliente.
+Skill compartida. Planner y Copywriter la cargan para campanas BTL (email, SMS, banners descodificador, push). Complementa `brand-voice-movistar` (tono general) con las particularidades del canal directo al cliente.
 
 El tono BTL se construye SOBRE el tono general de Movistar, no lo reemplaza. Primero aplican las reglas de `brand-voice-movistar`; luego las de esta skill.
 
@@ -86,7 +86,7 @@ Reglas de negocio duras que el sistema debe verificar. No son sugerencias.
 
 ### 3.1. Acuerdo Apple (BLOQUEANTE)
 **Regla:** Clientes Apple NUNCA reciben promos de dispositivos de competencia.
-**Aplicacion:** El Creative Strategist debe verificar el segmento del publico objetivo antes de escribir copies de Dispositivos. Si el brief incluye publico Apple, las piezas de dispositivos Android/Samsung/etc. NO se generan para ese segmento.
+**Aplicacion:** El Copywriter debe verificar el segmento del publico objetivo antes de escribir copies de Dispositivos. Si el brief incluye publico Apple, las piezas de dispositivos Android/Samsung/etc. NO se generan para ese segmento.
 **Si se incumple:** Flag bloqueante. La pieza no se entrega.
 
 ### 3.2. Partners
@@ -106,18 +106,18 @@ Reglas de negocio duras que el sistema debe verificar. No son sugerencias.
 
 ## Como usan los agentes esta skill
 
-### Mix Media Planner
+### Planner
 - Determina la tipologia BTL (comercial desarrollo / comercial captacion / fidelizacion) para cada canal
-- La tipologia influye en el tono que el Creative Strategist debe usar
+- La tipologia influye en el tono que el Copywriter debe usar
 - Si el brief mezcla captacion y desarrollo en el mismo canal, lo marca como flag
 
-### Creative Strategist
+### Copywriter
 - Carga OBLIGATORIAMENTE esta skill para campanas BTL
 - Aplica el tono de la tipologia correspondiente (seccion 1)
 - Selecciona sesgos de behavioral economics adecuados (seccion 2)
 - Verifica guardrails (seccion 3) antes de entregar, especialmente el acuerdo Apple
 
-### Campaign Manager
+### Marketing Manager
 - En Cierre, verifica que la tipologia BTL es coherente con el brief
 - Verifica que no hay incumplimiento del acuerdo Apple
 

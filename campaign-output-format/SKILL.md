@@ -3,21 +3,22 @@ name: Campaign Output Format
 key: campaign-output-format
 description: Schema canónico de los artefactos que producen los Agentes B y C -- Estrategia por Canal (B) y Estrategia Creativa (C). Define formato, validación y trazabilidad al Golden Briefing.
 version: 2.0.0
+owner: system
 status: active
 ---
 
 # Campaign Output Format
 
-Este skill define dos artefactos:
+Este skill define dos artefactos principales y los outputs visuales asociados:
 
-1. **Estrategia por Canal** (`media_strategy.json`) -- output del Mix Media Planner. Acompanado de `media_strategy_v<N>.docx` (narrativo visual) y `media_strategy_v<N>.html` (mapa de canales).
-2. **Estrategia Creativa** (`campaign_strategy.json`) -- output del Creative Strategist. Acompanado de `campaign_strategy_v<N>.docx` (narrativo visual) y `campaign_strategy_v<N>.html` (mapa de territorios creativos).
+1. **Estrategia por Canal** (`media_strategy.json`) -- output del Planner. Acompanado de `media_strategy_v<N>.docx` (narrativo visual) y 8 one-pagers HTML: `calendario_<subcorriente>_v<N>.html` y `brief_canales_<subcorriente>_v<N>.html` para cada sub-corriente (Growth, Value, Dispositivos), mas 2 globales: `calendario_canales_global_v<N>.html` y `carga_soporte_global_v<N>.html`.
+2. **Estrategia Creativa** (`campaign_strategy.json`) -- output del Copywriter. Acompanado de `campaign_strategy_v<N>.docx` (narrativo visual) y `campaign_strategy_v<N>.html` (mapa de territorios creativos). Las campanas se agrupan por sub-corriente (Growth, Value, Dispositivos).
 
-Ambos JSON-parseables, versionados, trazables al Golden Briefing del que dependen.
+Todos los JSON-parseables, versionados, trazables al Golden Briefing del que dependen.
 
 ---
 
-## 1. Estrategia por Canal -- output del Mix Media Planner
+## 1. Estrategia por Canal -- output del Planner
 
 ```yaml
 media_strategy:
@@ -42,7 +43,7 @@ media_strategy:
       por_que_importa: "string (consecuencia si no se actua)"
       recomendacion: "string (accion concreta)"
 
-  # Resumen ejecutivo (para humano de Comunicacion / Campaign Manager)
+  # Resumen ejecutivo (para humano de Comunicacion / Marketing Manager)
   executive_summary:
     sintesis: "string (3-5 frases)"
     foco_recomendado: "string (1 frase)"
@@ -118,7 +119,7 @@ media_strategy:
     - channel: "display"
       # ... mismo schema ...
 
-  # Handoff a Creative Strategist (bloque obligatorio)
+  # Handoff a Copywriter (bloque obligatorio)
   handoff_to_c:
     objetivo_principal: "string (1 frase -- objetivo real diagnosticado)"
     fase_funnel: "upper|mid|lower|loyalty|service"
@@ -164,23 +165,43 @@ media_strategy:
 
   # Trazabilidad
   linked_outputs:
-    campaign_strategy: "path/al/campaign_strategy.json"      # rellenado por Creative Strategist
+    campaign_strategy: "path/al/campaign_strategy.json"      # rellenado por Copywriter
 ```
 
 ### Validación de la Estrategia por Canal
 
 1. `brief_id` y `golden_briefing_version` referencian un Brief existente y aprobado.
-2. `executive_summary.canales_activos` ⊆ `brief.canales_posibles`.
+2. `executive_summary.canales_activos` ⊆ canales listados en `brief.rol_canales`.
 3. Cada canal en `channels` tiene un playbook cargado correspondiente.
-4. Cada `mensaje_a_priorizar` existe en `brief.mensaje_principal` o `brief.mensaje_principal.alternativas`.
-5. Cada `check_principios[].pasa: true` puede ser auditado por el Campaign Manager cargando `principios-comunicacion-movistar`.
+4. Cada `mensaje_a_priorizar` es coherente con `brief.lectura_ejecutiva.mensaje_paraguas` y los territorios del brief.
+5. Cada `check_principios[].pasa: true` puede ser auditado por el Marketing Manager cargando los `channel-playbook-*` correspondientes.
 6. Si una skill referenciada tiene `status: skeleton-pending-content`, el check correspondiente DEBE ser `no_evaluable`, nunca `true`. Los agentes no validan contra contenido que no existe.
 7. El `check_principios_resumen.pct_evaluable` debe aparecer en el resumen ejecutivo de la entrega. Si es inferior al 50%, se flaggea como riesgo.
-8. Si hay `ajustes_propuestos_al_brief` bloqueantes, se registran como flag de severidad alta para revisión del Campaign Manager en el gate post-C (ver política de gates del Campaign Manager).
+8. Si hay `ajustes_propuestos_al_brief` bloqueantes, se registran como flag de severidad alta para revisión del Marketing Manager en el gate post-C (ver política de gates del Marketing Manager).
+
+### Outputs visuales de B (one-pagers por stream)
+
+Ademas del JSON y el .docx, el Planner produce 8 one-pagers HTML (6 por sub-corriente + 2 globales):
+
+**Por sub-corriente** (Growth, Value, Dispositivos):
+
+| Archivo | Contenido |
+|---|---|
+| `calendario_<subcorriente>_v<N>.html` | Gantt semanal: territorios x semanas, barras coloreadas por sub-corriente, chips de medios |
+| `brief_canales_<subcorriente>_v<N>.html` | Matriz: territorios x canales (TV, Exterior, M+, BTL, Digital, Tienda PLV, Tienda Caballete), checks azules con especificacion |
+
+**Globales** (consolidan las 3 sub-corrientes):
+
+| Archivo | Contenido |
+|---|---|
+| `calendario_canales_global_v<N>.html` | Gantt cross-stream + matriz de canales cruzada. Detecta solapes de presion entre sub-corrientes. |
+| `carga_soporte_global_v<N>.html` | Heatmap semanal de carga por canal. Detecta picos criticos y sugiere redistribucion. |
+
+Versionado: comparten version con el JSON y el .docx. Paleta: identidad Movistar (#0066FF, #262423, #6F7176, #F5F7FA, #FFFFFF) + colores de sub-corriente (verde #00C48C Dispositivos, azul #0066FF Growth, morado #8B5CF6 Value). Tipografia: system-ui.
 
 ---
 
-## 2. Estrategia Creativa -- output del Creative Strategist
+## 2. Estrategia Creativa -- output del Copywriter
 
 ```yaml
 campaign_strategy:
@@ -218,10 +239,11 @@ campaign_strategy:
           justificacion: "string"
     fase_funnel: "upper|mid|lower|loyalty|service"   # heredada de B
 
-  # ── Nivel 2: Campanas por territorio ──
-  campaigns:
+  # ── Nivel 2: Campanas por sub-corriente y territorio ──
+  campaigns:                                       # agrupadas por sub_corriente
     - id: "uuid"
-      slug: "string-corto-para-rutas"          # ej. "apple-swap-junio-26"
+      sub_corriente: "growth|value|dispositivos"   # obligatorio
+      slug: "string-corto-para-rutas"              # ej. "apple-swap-junio-26"
       nombre: "string (descriptivo)"
       canales: ["email", "display"]            # uno o varios coherentes
       audiencia:
@@ -326,6 +348,41 @@ campaign_strategy:
           descripcion: "string"
           accion_sugerida: "string"
       
+      # ── Copy Prototype por canal (OBLIGATORIO) ──
+      copy_prototype:
+        - canal: "string"
+          formato: "string (ej. email hero, banner 728x90, cartel A3)"
+          bloques:                              # lista ordenada de arriba a abajo
+            - orden: 1
+              tipo: "logo|hero_image|titular|subtitulo|body|cta|legal|badge|precio|footer"
+              contenido: "string (copy final asignado o descripcion si es imagen)"
+              peso_visual: "string (ej. 40% del espacio, dominante, secundario)"
+          notas_para_d: "string (indicaciones concretas para Art Director)"
+
+      # ── Scoring CRM por pieza (OBLIGATORIO) ──
+      scoring_crm:
+        - pieza: "string (id unico de la pieza)"
+          canal: "string"
+          territorio: "string"
+          score: 84                             # 0-100
+          base_60:
+            idea_dominante: 5                   # 0-6 cada uno
+            tres_segundos: 6
+            hero_manda: 5
+            curaduria: 6
+            cta_unico: 6
+            ventaja_personal_reconocimiento: 4
+            swap_facilita: 6
+            beneficios_confianza: 5
+            claridad: 6
+            edicion: 5
+          modulacion_40:
+            coherencia_concepto: 8              # 0-10 cada uno
+            especificidad_canal: 7
+            gestion_riesgo: 8
+            personalizacion: 7
+          tema_a_vigilar: "string (1 frase -- el mayor riesgo de esta pieza)"
+
       # ── Nivel 3: Profundidad por pieza clave ──
       piezas_clave:
         - canal: "string"
@@ -339,6 +396,7 @@ campaign_strategy:
           variante_comercial: "string|null"
           cuando_usar_cada_una: "string|null"
           razonamiento_creativo: "string (2-3 frases)"
+          racional: "string (3 frases max -- por que este territorio, concepto, canal, audiencia, momento)"
 
   # Aprobacion
   approval:
@@ -372,15 +430,25 @@ campaign_strategy:
 11. Cada `copies[].variantes[]` tiene `hipotesis` y `por_que_funciona` no vacios. No se acepta variante sin justificacion.
 12. Cada campana tiene `formatos_recomendados` con al menos un formato por canal activo.
 13. Cada campana tiene `cadencia_ideal` con al menos una entrada.
-14. Si `check_principios[].pasa_global: false` en alguna campana, se flaggea como severidad alta para el Campaign Manager.
+14. Si `check_principios[].pasa_global: false` en alguna campana, se flaggea como severidad alta para el Marketing Manager.
 15. Si `check_principios[].pasa_global: "parcial"` (hay checks `no_evaluable`), el resumen ejecutivo debe declarar el porcentaje evaluable.
-16. Si una campana tiene `flags[]` con severidad `alta`, el Campaign Manager decide si bloquea o acepta el riesgo.
+16. Si una campana tiene `flags[]` con severidad `alta`, el Marketing Manager decide si bloquea o acepta el riesgo.
 17. `formal_rules_check` presente en cada campana con al menos un canal verificado.
+
+**Copy Prototype y Scoring CRM:**
+
+18. Cada campana tiene al menos 1 entrada en `copy_prototype` por canal activo.
+19. Cada `copy_prototype[]` tiene al menos 3 bloques ordenados y `notas_para_d` no vacio.
+20. Cada campana tiene al menos 1 entrada en `scoring_crm` por pieza principal.
+21. Cada `scoring_crm[].score` es la suma de `base_60` (10 campos x 0-6) + `modulacion_40` (4 campos x 0-10). La suma debe coincidir con `score`.
+22. Cada `scoring_crm[].tema_a_vigilar` no esta vacio.
+23. Si `scoring_crm[].score < 70`, debe existir un flag correspondiente con severidad media.
+24. Cada campana tiene `sub_corriente` con valor `growth`, `value` o `dispositivos`. Debe haber al menos 1 campana por cada sub-corriente presente en el output del Planner.
 
 **Profundidad por pieza (Nivel 3):**
 
-18. Cada campana tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal).
-19. Cada `piezas_clave[]` tiene `razonamiento_creativo` no vacio.
+25. Cada campana tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal).
+26. Cada `piezas_clave[]` tiene `razonamiento_creativo` y `racional` no vacios.
 
 ---
 
