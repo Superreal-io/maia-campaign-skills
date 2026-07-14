@@ -12,7 +12,7 @@ status: active
 Este skill define dos artefactos principales y los outputs visuales asociados:
 
 1. **Estrategia por Canal** (`media_strategy.json`) -- output del Planner. Acompanado de `media_strategy_v<N>.docx` (narrativo visual) y 8 one-pagers HTML: `calendario_<subcorriente>_v<N>.html` y `brief_canales_<subcorriente>_v<N>.html` para cada sub-corriente (Growth, Value, Dispositivos), mas 2 globales: `calendario_canales_global_v<N>.html` y `carga_soporte_global_v<N>.html`.
-2. **Estrategia Creativa** (`campaign_strategy.json`) -- output del Creative Copywriter. Acompanado de `campaign_strategy_v<N>.docx` (narrativo visual) y `campaign_strategy_v<N>.html` (mapa de territorios creativos). Las campanas se agrupan por sub-corriente (Growth, Value, Dispositivos).
+2. **Estrategia Creativa** (`campaign_creative-strategy.json`) -- output del Creative Copywriter. Acompanado de `campaign_creative-strategy_v<N>.docx` (narrativo visual) y `campaign_creative-strategy_v<N>.html` (mapa de territorios creativos). Las campanas se agrupan por sub-corriente (Growth, Value, Dispositivos).
 
 Todos los JSON-parseables, versionados, trazables al Golden Briefing del que dependen.
 
@@ -165,7 +165,7 @@ media_strategy:
 
   # Trazabilidad
   linked_outputs:
-    campaign_strategy: "path/al/campaign_strategy.json"      # rellenado por Creative Copywriter
+    campaign_creative-strategy: "path/al/campaign_creative-strategy.json"      # rellenado por Creative Copywriter
 ```
 
 ### Validación de la Estrategia por Canal
@@ -204,7 +204,7 @@ Versionado: comparten version con el JSON y el .docx. Paleta: identidad Movistar
 ## 2. Estrategia Creativa -- output del Creative Copywriter
 
 ```yaml
-campaign_strategy:
+campaign_creative-strategy:
   # Identidad
   id: "uuid-v4"
   version: 1
@@ -464,4 +464,4 @@ campaign_strategy:
 
 ## Ejemplos
 
-Ver `demo/dispositivos-mayo-26/outputs/media_strategy.json` y `demo/dispositivos-mayo-26/outputs/campaign_strategy.json` una vez que se pueble el demo.
+Ver `demo/dispositivos-mayo-26/outputs/media_strategy.json` y `demo/dispositivos-mayo-26/outputs/campaign_creative-strategy.json` una vez que se pueble el demo.
