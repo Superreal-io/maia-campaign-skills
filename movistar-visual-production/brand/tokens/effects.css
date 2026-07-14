@@ -1,0 +1,33 @@
+/* Movistar — Radius, shadow & motion tokens.
+ * Radio canónico: 8px (contenedor conectado). Pill (9999px) en CTAs marketing. 6px en inputs.
+ * Sombras mínimas — default = ninguna. Motion: fade + translate pequeño.
+ */
+
+:root {
+  /* ─── Radio ─── */
+  --radius-none: 0px;
+  --radius-xs:   4px;
+  --radius-sm:   6px;   /* inputs, selects */
+  --radius-md:   8px;   /* contenedor conectado — canónico Movistar */
+  --radius-lg:   12px;  /* cards en landing */
+  --radius-xl:   16px;  /* modales, drawers */
+  --radius-full: 9999px;
+
+  /* ─── Sombras (Negro Movistar, baja opacidad — sin color, sin inset) ─── */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 rgba(38, 36, 35, 0.08);
+  --shadow-sm: 0 2px 4px 0 rgba(38, 36, 35, 0.10);
+  --shadow-md: 0 4px 12px 0 rgba(38, 36, 35, 0.12);
+  --shadow-lg: 0 8px 24px 0 rgba(38, 36, 35, 0.14);
+  --shadow-xl: 0 16px 40px 0 rgba(38, 36, 35, 0.16);
+
+  /* ─── Motion ─── */
+  --duration-xs: 80ms;  /* @kind other */
+  --duration-sm: 160ms; /* @kind other */
+  --duration-md: 240ms; /* @kind other */
+  --duration-lg: 480ms; /* @kind other */
+  --duration-xl: 720ms; /* @kind other */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);  /* @kind other */
+  --ease-linear: linear; /* @kind other */
+}

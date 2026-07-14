@@ -1,0 +1,47 @@
+/* Movistar — Color tokens
+ * Azul Movistar #0066FF confirmado por cliente (junio 2026).
+ * Regla de oro: el Azul debe aparecer en toda pieza; fondo prioritario #FFFAF5 (no blanco puro).
+ */
+
+:root {
+  /* ─── Marca ─── */
+  --movistar-blue:   #0066FF;  /* primario — obligatorio en toda pieza */
+  --movistar-white:  #FFFAF5;  /* fondo prioritario — blanco cálido, no puro */
+  --movistar-black:  #262423;  /* texto y elementos premium */
+
+  /* ─── Secundarios (pares claro / oscuro) ─── */
+  --movistar-blue-light:    #D3EEFF;
+  --movistar-green-light:   #CEF7BF;
+  --movistar-yellow-light:  #FFE99C;
+  --movistar-coral-light:   #FFC5A8;
+  --movistar-blue-dark:     #022D67;
+  --movistar-green-dark:    #38552B;
+  --movistar-yellow-dark:   #5E4A09;
+  --movistar-coral-dark:    #62301A;
+
+  /* ─── Semánticos UI ─── */
+  --movistar-primary:        var(--movistar-blue);
+  --movistar-primary-hover:  #005EEB;
+  --movistar-bg:             var(--movistar-white);
+  --movistar-bg-secondary:   #F5F5F5;
+  --movistar-border:         #E5E5E5;
+  --movistar-text:           var(--movistar-black);
+  --movistar-text-secondary: #6F7176;
+  --movistar-text-inverse:   var(--movistar-white);
+  --movistar-cta:            var(--movistar-blue);
+  --movistar-cta-hover:      #005EEB;
+
+  /* ─── Estados ─── */
+  --movistar-success:        #048239;
+  --movistar-success-hover:  #036D30;
+  --movistar-warning:        #926C00;
+  --movistar-warning-hover:  #745600;
+  --movistar-error:          #C10000;
+  --movistar-error-hover:    #AD0000;
+
+  /* Aliases de superficie */
+  --surface-page:   var(--movistar-white);
+  --surface-card:   var(--movistar-white);
+  --surface-muted:  var(--movistar-bg-secondary);
+  --surface-accent: var(--movistar-blue);
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<!-- Plantilla slot-based: feed social 1080x1080. Patron del audit-report:
+     titular arriba, foto 40-60% central, M expresiva visible, oferta abajo.
+     El modelo edita SOLO los textos y el data-prompt; los slots los rellena assemble.py -->
+<style>
+{{FONT_FACE_MIN}}
+{{TOKENS_CSS}}
+
+@page { size: 1080px 1080px; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1080px; overflow: hidden; }
+body {
+  font-family: "Movistar Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #FFFAF5;
+  color: #262423;
+  position: relative;
+}
+.mark {
+  position: absolute; top: 48px; right: 48px;
+  width: 96px; height: auto;
+}
+.headline {
+  position: absolute; top: 72px; left: 68px; right: 200px;
+  font-weight: 800; font-size: 76px; line-height: 1.05;
+  letter-spacing: -0.02em; color: #0066FF;
+}
+.hero {
+  position: absolute; top: 260px; left: 0; right: 0;
+  height: 560px; object-fit: cover; width: 100%;
+}
+.offer {
+  position: absolute; bottom: 60px; left: 68px; right: 68px; height: 120px;
+}
+.offer .name { font-weight: 700; font-size: 44px; }
+.offer .context { font-weight: 400; font-size: 28px; color: #6F7176; margin-top: 8px; }
+.price {
+  position: absolute; right: 0; bottom: 0;
+  font-weight: 800; font-size: 84px; color: #0066FF; line-height: 1;
+}
+.price small { font-size: 36px; font-weight: 700; vertical-align: super; }
+</style>
+</head>
+<body>
+  <h1 class="headline">[TITULAR: sentence case, 2-3 lineas max]</h1>
+  <img class="mark" src="{{LOGO_MARK}}" alt="Movistar">
+  <img class="hero" src="{{IMG:outputs/hero-feed.png}}"
+       data-prompt="[descripcion Magic Prompt de la foto]" alt="">
+  <div class="offer">
+    <div>
+      <div class="name">[Nombre de oferta]</div>
+      <div class="context">[Linea de contexto breve]</div>
+    </div>
+    <div class="price">XX<small>€/mes</small></div>
+  </div>
+</body>
+</html>div>
+  </div>
+</body>
+</html>

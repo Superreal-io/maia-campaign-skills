@@ -1,0 +1,19 @@
+/* Movistar — Spacing, grid & sizing tokens. Base 4px. */
+
+:root {
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 128px;
+
+  --gutter:        24px;  /* gutter de columna */
+  --pad-page:      40px;  /* padding contenedor desktop */
+  --pad-page-mobile: 16px;
+
+  --container-max:   1280px;
+  --container-prose: 680px;
+}

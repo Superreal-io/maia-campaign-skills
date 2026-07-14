@@ -1,0 +1,75 @@
+/* Movistar Sans — webfont declarations.
+ * Variable-font in production; here shipped as discrete weights/styles (woff2).
+ * Oblique styles use the italic files (Movistar Sans "italic" is an oblique).
+ */
+
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Light-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Medium-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Bold-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Extrabold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Movistar Sans";
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../assets/fonts/MovistarSans-Extrabold-Italic.woff2") format("woff2");
+}
