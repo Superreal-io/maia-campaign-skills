@@ -88,8 +88,7 @@ Tipografia exclusiva con licencia. Variable font con eje de peso (wght: 300-800)
 
 Las italicas (oblique 90deg) se reservan para resaltar palabras clave o terminos en otros idiomas.
 
-**Para el @font-face en base64 y la jerarquia tipografica completa, ver `brand-typography-movistar`.**
-Esa skill contiene la variable font embebida lista para copiar en cualquier HTML autocontenido.
+**La tipografia se inyecta con el slot `{{FONT_FACE_MIN}}` de `movistar-visual-production`** (los woff2 viven como archivos en `brand/fonts/` y assemble.py los embebe; nunca se copia base64 a mano).
 
 ### Fallbacks web-safe
 
@@ -154,7 +153,7 @@ Para las reglas completas de uso (prioridades de color, posición, área de prot
   --movistar-cta: var(--movistar-blue);
   --movistar-cta-hover: #005EEB; /* Brand Guardian v4 */
 
-  /* Tipografia (ver brand-typography-movistar para @font-face base64) */
+  /* Tipografia: el @font-face entra por slot {{FONT_FACE_MIN}} (movistar-visual-production) */
   --font-family: "Movistar Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-weight-light: 300;
   --font-weight-regular: 400;
@@ -179,7 +178,7 @@ body {
 }
 
 h1 { font-size: 2.25rem; font-weight: var(--font-weight-extrabold); line-height: 1.15; color: var(--movistar-text); }
-h2 { font-size: 1.75rem; font-weight: var(--font-weight-bold); line-height: 1.2; color: var(--movistar-text); }
+h2 { font-size: 1.75rem; font-weight: var(--font-weight-regular); line-height: 1.2; color: var(--movistar-text); } /* subtitulos en Regular: jerarquia por tamano, no por peso (Refresh Guidelines 2025) */
 h3 { font-size: 1.25rem; font-weight: var(--font-weight-medium); line-height: 1.3; color: var(--movistar-text); }
 p  { font-size: 1rem; font-weight: var(--font-weight-regular); }
 ```
@@ -197,6 +196,6 @@ Regla rápida: Negro sobre Blanco Movistar (AAA) y Blanco sobre Azul Movistar (A
 ## Mantenimiento
 
 - Este archivo es la ÚNICA fuente de tokens visuales del sistema. Ningún otro archivo define colores ni tipografías.
-- Cuando el cliente confirme el HEX canónico del azul (#0065FF vs #0066FF), actualizar aquí.
+- HEX del azul: #0066FF, confirmado por el cliente en junio 2026 y alineado con las Refresh Guidelines 2025. Cerrado.
 - Si se obtiene acceso al design system de Movistar (Figma, tokens JSON), migrar a ese formato y deprecar este archivo.
 - Cambios mayores incrementan `version`.

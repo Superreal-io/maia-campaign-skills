@@ -12,7 +12,7 @@ status: active
 Este skill define dos artefactos principales y los outputs visuales asociados:
 
 1. **Estrategia por Canal** (`media_strategy.json`) -- output del Planner. Acompanado de `media_strategy_v<N>.docx` (narrativo visual) y 8 one-pagers HTML: `calendario_<subcorriente>_v<N>.html` y `brief_canales_<subcorriente>_v<N>.html` para cada sub-corriente (Growth, Value, Dispositivos), mas 2 globales: `calendario_canales_global_v<N>.html` y `carga_soporte_global_v<N>.html`.
-2. **Estrategia Creativa** (`campaign_strategy.json`) -- output del Copywriter. Acompanado de `campaign_strategy_v<N>.docx` (narrativo visual) y `campaign_strategy_v<N>.html` (mapa de territorios creativos). Las campanas se agrupan por sub-corriente (Growth, Value, Dispositivos).
+2. **Estrategia Creativa** (`campaign_strategy.json`) -- output del Creative Copywriter. Acompanado de `campaign_strategy_v<N>.docx` (narrativo visual) y `campaign_strategy_v<N>.html` (mapa de territorios creativos). Las campanas se agrupan por sub-corriente (Growth, Value, Dispositivos).
 
 Todos los JSON-parseables, versionados, trazables al Golden Briefing del que dependen.
 
@@ -43,7 +43,7 @@ media_strategy:
       por_que_importa: "string (consecuencia si no se actua)"
       recomendacion: "string (accion concreta)"
 
-  # Resumen ejecutivo (para humano de Comunicacion / Marketing Manager)
+  # Resumen ejecutivo (para humano de Comunicacion / Campaign Manager)
   executive_summary:
     sintesis: "string (3-5 frases)"
     foco_recomendado: "string (1 frase)"
@@ -119,7 +119,7 @@ media_strategy:
     - channel: "display"
       # ... mismo schema ...
 
-  # Handoff a Copywriter (bloque obligatorio)
+  # Handoff a Creative Copywriter (bloque obligatorio)
   handoff_to_c:
     objetivo_principal: "string (1 frase -- objetivo real diagnosticado)"
     fase_funnel: "upper|mid|lower|loyalty|service"
@@ -165,7 +165,7 @@ media_strategy:
 
   # Trazabilidad
   linked_outputs:
-    campaign_strategy: "path/al/campaign_strategy.json"      # rellenado por Copywriter
+    campaign_strategy: "path/al/campaign_strategy.json"      # rellenado por Creative Copywriter
 ```
 
 ### Validación de la Estrategia por Canal
@@ -174,10 +174,10 @@ media_strategy:
 2. `executive_summary.canales_activos` ⊆ canales listados en `brief.rol_canales`.
 3. Cada canal en `channels` tiene un playbook cargado correspondiente.
 4. Cada `mensaje_a_priorizar` es coherente con `brief.lectura_ejecutiva.mensaje_paraguas` y los territorios del brief.
-5. Cada `check_principios[].pasa: true` puede ser auditado por el Marketing Manager cargando los `channel-playbook-*` correspondientes.
+5. Cada `check_principios[].pasa: true` puede ser auditado por el Campaign Manager cargando los `channel-playbook-*` correspondientes.
 6. Si una skill referenciada tiene `status: skeleton-pending-content`, el check correspondiente DEBE ser `no_evaluable`, nunca `true`. Los agentes no validan contra contenido que no existe.
 7. El `check_principios_resumen.pct_evaluable` debe aparecer en el resumen ejecutivo de la entrega. Si es inferior al 50%, se flaggea como riesgo.
-8. Si hay `ajustes_propuestos_al_brief` bloqueantes, se registran como flag de severidad alta para revisión del Marketing Manager en el gate post-C (ver política de gates del Marketing Manager).
+8. Si hay `ajustes_propuestos_al_brief` bloqueantes, se registran como flag de severidad alta para revisión del Campaign Manager en el gate post-C (ver política de gates del Campaign Manager).
 
 ### Outputs visuales de B (one-pagers por stream)
 
@@ -201,7 +201,7 @@ Versionado: comparten version con el JSON y el .docx. Paleta: identidad Movistar
 
 ---
 
-## 2. Estrategia Creativa -- output del Copywriter
+## 2. Estrategia Creativa -- output del Creative Copywriter
 
 ```yaml
 campaign_strategy:
@@ -430,9 +430,9 @@ campaign_strategy:
 11. Cada `copies[].variantes[]` tiene `hipotesis` y `por_que_funciona` no vacios. No se acepta variante sin justificacion.
 12. Cada campana tiene `formatos_recomendados` con al menos un formato por canal activo.
 13. Cada campana tiene `cadencia_ideal` con al menos una entrada.
-14. Si `check_principios[].pasa_global: false` en alguna campana, se flaggea como severidad alta para el Marketing Manager.
+14. Si `check_principios[].pasa_global: false` en alguna campana, se flaggea como severidad alta para el Campaign Manager.
 15. Si `check_principios[].pasa_global: "parcial"` (hay checks `no_evaluable`), el resumen ejecutivo debe declarar el porcentaje evaluable.
-16. Si una campana tiene `flags[]` con severidad `alta`, el Marketing Manager decide si bloquea o acepta el riesgo.
+16. Si una campana tiene `flags[]` con severidad `alta`, el Campaign Manager decide si bloquea o acepta el riesgo.
 17. `formal_rules_check` presente en cada campana con al menos un canal verificado.
 
 **Copy Prototype y Scoring CRM:**

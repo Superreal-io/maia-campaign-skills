@@ -1,7 +1,7 @@
 ---
 name: Golden Briefing Schema
 key: golden-briefing-schema
-description: Schema canonico del Golden Briefing. Artefacto que el Briefing produce y que los Agentes B, C y D consumen como ground truth. Versionado, JSON-parseable, trazable. Un Golden Briefing por stream.
+description: Schema canonico del Golden Briefing. Artefacto que el Strategist produce y que los Agentes B, C y D consumen como ground truth. Versionado, JSON-parseable, trazable. Un Golden Briefing por stream.
 version: 2.0.0
 owner: agente-a
 status: active
@@ -9,7 +9,7 @@ status: active
 
 # Golden Briefing Schema
 
-El Golden Briefing es el **contrato versionado** entre el Briefing y el resto del workflow. Todos los agentes downstream lo leen. Solo el Briefing lo escribe (y solo tras aprobacion en el gate humano).
+El Golden Briefing es el **contrato versionado** entre el Strategist y el resto del workflow. Todos los agentes downstream lo leen. Solo el Strategist lo escribe (y solo tras aprobacion en el gate humano).
 
 Se produce **un Golden Briefing por stream**. El plan comercial mensual tiene 2 streams (Growth-Value combinado y Dispositivos), por lo que se producen 2 Golden Briefings independientes. Dentro del stream Growth-Value, Growth y Value son sub-corrientes con corrientes de demanda distintas.
 
@@ -158,7 +158,7 @@ brief:
     approved_at: "ISO8601"
     notes: "string"
 
-  # Outputs vinculados (rellenado por el Briefing)
+  # Outputs vinculados (rellenado por el Strategist)
   linked_outputs:
     estrategia_one_pager: "path/al/estrategia_<stream>_v<N>.html"
     formulario_area: "path/al/formulario_area_<stream>_v<N>.docx"

@@ -1,7 +1,7 @@
 ---
 name: Checklist de Validacion MAIA
 key: validacion-maia-checklist
-description: 17 criterios de validacion del sistema MAIA. Los usa el Marketing Manager en Cierre como capa de control de calidad transversal.
+description: 17 criterios de validacion del sistema MAIA. Los usa el Campaign Manager en Cierre como capa de control de calidad transversal.
 version: 2.0.0
 owner: system
 status: active
@@ -9,7 +9,7 @@ status: active
 
 # Checklist de Validacion MAIA
 
-Cargada por el Marketing Manager. Define los 17 criterios de validacion que el Marketing Manager ejecuta en Cierre (post-Art Director) sobre el paquete completo de la campana.
+Cargada por el Campaign Manager. Define los 17 criterios de validacion que el Campaign Manager ejecuta en Cierre (post-Art Director) sobre el paquete completo de la campana.
 
 Esta skill formaliza la "Validacion MAIA": una capa de control transversal que cruza todos los outputs de todos los agentes en un unico paso final.
 
@@ -19,7 +19,7 @@ Esta skill formaliza la "Validacion MAIA": una capa de control transversal que c
 
 ### Cierre (post-Art Director, sobre el paquete completo)
 
-El Marketing Manager evalua el paquete completo (brief + estrategia + estrategia creativa + mockups) contra estos 17 criterios:
+El Campaign Manager evalua el paquete completo (brief + estrategia + estrategia creativa + mockups) contra estos 17 criterios:
 
 | # | Criterio | Que verificar | Fuente |
 |---|---|---|---|
@@ -45,13 +45,13 @@ El Marketing Manager evalua el paquete completo (brief + estrategia + estrategia
 
 ## Como aplicar
 
-1. El Marketing Manager recorre la tabla en orden. Para cada criterio, marca: OK, FLAG (con descripcion), o NO_APLICA.
+1. El Campaign Manager recorre la tabla en orden. Para cada criterio, marca: OK, FLAG (con descripcion), o NO_APLICA.
 2. Los flags se incluyen en el resumen ejecutivo de cierre en el bloque correspondiente ([B1]-[B6]).
-3. Si un criterio requiere cargar una skill que el Marketing Manager no tiene en ese momento, la carga antes de evaluar.
+3. Si un criterio requiere cargar una skill que el Campaign Manager no tiene en ese momento, la carga antes de evaluar.
 4. Un flag en V01-V07 puede ser bloqueante si contradice un principio sin justificacion. V08-V11 son generalmente flags de riesgo (no bloqueantes por si solos).
 
 ---
 
-## Relacion con el self-check del Marketing Manager
+## Relacion con el self-check del Campaign Manager
 
-Esta checklist complementa el self-check que el Marketing Manager ejecuta antes de publicar el resumen ejecutivo. El self-check verifica que el resumen refleja correctamente los datos; esta checklist verifica que los datos son correctos contra los principios del sistema.
+Esta checklist complementa el self-check que el Campaign Manager ejecuta antes de publicar el resumen ejecutivo. El self-check verifica que el resumen refleja correctamente los datos; esta checklist verifica que los datos son correctos contra los principios del sistema.

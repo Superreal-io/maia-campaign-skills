@@ -1,7 +1,7 @@
 ---
 name: Brief Quality Rubric
 key: brief-quality-rubric
-description: Los 14 criterios oficiales contra los que el Briefing evalua cualquier documento de input. Scoring ponderado (max 21 pts). Fuente oficial Movistar.
+description: Los 14 criterios oficiales contra los que el Strategist evalua cualquier documento de input. Scoring ponderado (max 21 pts). Fuente oficial Movistar.
 version: 2.0.0
 owner: briefing-maker
 status: active
@@ -12,7 +12,7 @@ source: Direccion de Publicidad, Marca y Patrocinios -- documento "criterios.md"
 
 Principio rector: "Comunicacion edita mejor cuando recibe intencion, no solo informacion."
 
-Cuando el Briefing recibe un documento del area (Producto, Comercializacion, Dispositivos, etc.), evalua el contenido contra estos 14 criterios. Ordenados por importancia.
+Cuando el Strategist recibe un documento del area (Producto, Comercializacion, Dispositivos, etc.), evalua el contenido contra estos 14 criterios. Ordenados por importancia.
 
 ## Scoring
 
@@ -160,7 +160,7 @@ Criterios parciales = 50% de la puntuacion.
 
 ## Mapeo criterio a campo del schema
 
-Cada criterio alimenta uno o mas campos de `golden-briefing-schema`. Esta tabla permite al Briefing saber que campo del Brief rellenar (o marcar como gap) a partir de cada evaluacion.
+Cada criterio alimenta uno o mas campos de `golden-briefing-schema`. Esta tabla permite al Strategist saber que campo del Brief rellenar (o marcar como gap) a partir de cada evaluacion.
 
 | Criterio | Campo(s) del schema v2 |
 |---|---|
@@ -187,7 +187,7 @@ Cuando un criterio esta AUSENTE o PARCIAL, el campo correspondiente del schema s
 
 ### Evaluacion
 
-El Briefing produce, para cada criterio, una entrada en el campo `rubric_evaluation` del Golden Briefing:
+El Strategist produce, para cada criterio, una entrada en el campo `rubric_evaluation` del Golden Briefing:
 
 ```json
 {
@@ -210,7 +210,7 @@ De todos los criterios marcados como PENDIENTE, seleccionar **maximo 5** ordenad
 Prioridad de seleccion:
 1. Criterios criticos (C01-C07) marcados como AUSENTE: siempre van.
 2. Criterios criticos marcados como PARCIAL: casi siempre van.
-3. Criterios importantes (C08-C14) con impacto directo en el output del Planner o Copywriter: van si caben.
+3. Criterios importantes (C08-C14) con impacto directo en el output del Planner o Creative Copywriter: van si caben.
 
 ### Regla de paso
 

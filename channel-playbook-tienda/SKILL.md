@@ -84,7 +84,7 @@ Regla transversal: todo lo que funciona en tienda tiene una cosa en comun -- mue
 ## 4. Rol de cada agente en tienda
 
 - **Planner**: define que funcion cumple tienda en el mix (cierre, refuerzo, explicacion). Asigna mision a cada soporte segun los principios.
-- **Copywriter**: propone copies concretos para cada soporte respetando la regla de tres segundos. Redacta guion-resumen para vendedores cuando la campana lo requiera.
+- **Creative Copywriter**: propone copies concretos para cada soporte respetando la regla de tres segundos. Redacta guion-resumen para vendedores cuando la campana lo requiera.
 - **Art Director**: genera mockups conceptuales de soportes (composiciones SVG o HTML/CSS). NO produce arte final -- la produccion pasa por estudio de diseno con sistema de marca. Flaggea esto explicitamente.
 
 ---
@@ -117,7 +117,7 @@ Si un brief o una propuesta cae en alguno de estos patrones, el agente debe sena
 
 ## 7. Coordinacion con personal de tienda
 
-- Toda campana en tienda debe incluir un **guion-resumen** para el equipo de venta (responsabilidad del Copywriter).
+- Toda campana en tienda debe incluir un **guion-resumen** para el equipo de venta (responsabilidad del Creative Copywriter).
 - El guion contiene: claim principal, tres argumentos clave, una respuesta a la objecion mas probable.
 - La carteleria abre la conversacion; el vendedor la cierra. No al reves.
 - Si el material requiere explicacion adicional para que el cliente lo entienda, el material esta mal. Redisenar.

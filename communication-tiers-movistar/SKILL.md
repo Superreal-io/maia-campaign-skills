@@ -1,7 +1,7 @@
 ---
 name: Niveles de Comunicación - Movistar
 key: communication-tiers-movistar
-description: Framework LOVE/CHOOSE/BUY que determina la flexibilidad visual y el enfoque creativo de cada campaña. El Planner clasifica la campaña; el Copywriter adapta el territorio creativo; el Art Director ajusta la rigidez del sistema visual.
+description: Framework LOVE/CHOOSE/BUY que determina la flexibilidad visual y el enfoque creativo de cada campaña. El Planner clasifica la campaña; el Creative Copywriter adapta el territorio creativo; el Art Director ajusta la rigidez del sistema visual.
 version: 1.0.0
 owner: superreal
 status: active
@@ -15,7 +15,7 @@ depends_on:
 
 El sistema de marca Movistar se adapta a una pirámide de comunicación con dos polos: **Notoriedad** (rigidez de aplicación) y **Relevancia** (libertad de aplicación). Cada campaña se clasifica en uno de tres niveles que determinan cuánta libertad creativa tiene el equipo.
 
-> Origen: Brand Guardian v4 RAG Movistar, secciones 8 y 9. Esta clasificación es obligatoria: cada campaña DEBE tener un nivel asignado antes de que el Copywriter empiece a idear.
+> Origen: Brand Guardian v4 RAG Movistar, secciones 8 y 9. Esta clasificación es obligatoria: cada campaña DEBE tener un nivel asignado antes de que el Creative Copywriter empiece a idear.
 
 ---
 
@@ -133,13 +133,13 @@ Motivar la compra. Se enfoca en precio y promociones.
 - Si el brief es ambiguo, propone nivel y lo marca como `ajuste_propuesto` para el humano.
 - El nivel se incluye como campo `communication_tier` en el JSON de estrategia.
 
-### Copywriter
+### Creative Copywriter
 - Lee el `communication_tier` de la estrategia del Planner.
 - Adapta el territorio creativo al nivel:
   - LOVE: ideas emocionales, culturales, disruptivas. Sin producto ni precio.
   - CHOOSE: ideas centradas en beneficio del producto. Tono aspiracional.
   - BUY: ideas directas, precio protagonista, CTA claro.
-- Si el Planner no asignó tier, el Copywriter lo infiere del brief y lo documenta como flag.
+- Si el Planner no asignó tier, el Creative Copywriter lo infiere del brief y lo documenta como flag.
 
 ### Art Director (Campaign Design)
 - Lee el `communication_tier` para ajustar la rigidez del sistema visual:
@@ -148,9 +148,9 @@ Motivar la compra. Se enfoca en precio y promociones.
   - BUY: grid estricto, composición de precios según reglas, paleta principal.
 - Si la pieza es BUY y no tiene composición de precios correcta, lo marca como flag.
 
-### Marketing Manager
+### Campaign Manager
 - Verifica en Cierre que el tier asignado es coherente con el brief original.
-- Flag si el Copywriter ha escrito copies BUY para una campaña clasificada LOVE o viceversa.
+- Flag si el Creative Copywriter ha escrito copies BUY para una campaña clasificada LOVE o viceversa.
 
 ---
 

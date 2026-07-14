@@ -11,7 +11,7 @@ source: Guia interna Movistar "Principios Transversales de Orquestacion"
 
 # Channel Playbook -- Transversales de Orquestacion
 
-Cargado por el Marketing Manager y por los agentes B y C cuando la campana activa mas de un canal. Este playbook no sustituye las guias especificas de cada canal, sino que asegura que todas trabajan como parte de una misma experiencia de marca.
+Cargado por el Campaign Manager y por los agentes B y C cuando la campana activa mas de un canal. Este playbook no sustituye las guias especificas de cada canal, sino que asegura que todas trabajan como parte de una misma experiencia de marca.
 
 El modelo que este documento reemplaza es: "Cada canal adapta la campana a su manera." El modelo que este documento instaura es: "Cada canal cumple una funcion distinta dentro de una misma experiencia Movistar."
 
@@ -101,6 +101,6 @@ Tipos: RECHAZO = la pieza no puede aprobarse. CORRECCION = debe modificarse ante
 
 ## Como usan los agentes este playbook
 
-- **Marketing Manager**: lo carga en Cierre para evaluar coherencia cross-canal. Usa el checklist transversal (seccion 2) y las reglas TX01-TX10 como capa de validacion adicional a V01-V17.
+- **Campaign Manager**: lo carga en Cierre para evaluar coherencia cross-canal. Usa el checklist transversal (seccion 2) y las reglas TX01-TX10 como capa de validacion adicional a V01-V17.
 - **Planner**: lo carga cuando la campana tiene mas de un canal activo. Usa P02 (canal lider) y P06 (presion acumulada) para tomar decisiones de mix.
-- **Copywriter**: lo carga para asegurar que la idea dominante se declina por canal sin repetirse mecanicamente (P01, P04). Valida que Ventaja Personal lidera como territorio (P05).
+- **Creative Copywriter**: lo carga para asegurar que la idea dominante se declina por canal sin repetirse mecanicamente (P01, P04). Valida que Ventaja Personal lidera como territorio (P05).

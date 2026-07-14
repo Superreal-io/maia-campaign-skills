@@ -170,7 +170,7 @@ Palabras formadas por las iniciales de una denominación compleja. Ej: CMT, IT, 
 
 ---
 
-## Checklist rápido para el Copywriter
+## Checklist rápido para el Creative Copywriter
 
 Antes de entregar copies finales, verificar:
 
@@ -187,7 +187,7 @@ Antes de entregar copies finales, verificar:
 
 ## Cómo usan los agentes esta skill
 
-- **Copywriter:** Carga obligatoria. Verifica copies contra checklist (sección 10 de esta skill) antes de entregar. Cada pieza que incumple una regla se marca como flag.
+- **Creative Copywriter:** Carga obligatoria. Verifica copies contra checklist (sección 10 de esta skill) antes de entregar. Cada pieza que incumple una regla se marca como flag.
 - **Art Director:** Carga obligatoria. Verifica que el HTML respeta grafías de producto, formatos de precio y reglas de puntuación en el copy maquetado.
 - **Planner:** Consulta opcional cuando su estrategia incluye claims con precios, velocidades o nombres de producto.
 

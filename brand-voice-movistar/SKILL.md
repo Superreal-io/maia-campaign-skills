@@ -181,7 +181,7 @@ Los simbolos (€, h) van de la forma mas sencilla: con espacio y sin puntos. Ex
 
 ## 10. Verificacion de reglas formales
 
-**Regla de activacion:** el Copywriter verifica las 19 reglas formales (seccion 7) sobre cada pieza de comunicacion final destinada a cliente. Cada regla es binaria: cumple o no cumple.
+**Regla de activacion:** el Creative Copywriter verifica las 19 reglas formales (seccion 5, subsecciones 5.1 a 5.19) sobre cada pieza de comunicacion final destinada a cliente. Cada regla es binaria: cumple o no cumple. Esta skill es la fuente unica de las reglas formales; `copywriting-principles-movistar` cubre la tecnica creativa y remite aqui.
 
 **Regla de exclusion:** no se aplica si solo se responden preguntas, se explican conceptos o se esta en fase de brainstorming.
 
@@ -193,9 +193,9 @@ Los simbolos (€, h) van de la forma mas sencilla: con espacio y sin puntos. Ex
 
 ## Cómo usan los agentes esta skill
 
-- **Briefing:** La carga para detectar conflictos entre el input del área y los valores de marca al construir el brief.
+- **Strategist:** La carga para detectar conflictos entre el input del área y los valores de marca al construir el brief.
 - **Planner:** La consulta para verificar que la estrategia por canal refleja el tono y posicionamiento de Movistar.
-- **Copywriter:** La carga obligatoriamente antes de escribir copies. Verifica las 19 reglas formales (seccion 7) sobre cada pieza final. Documenta en `formal_rules_check`.
+- **Creative Copywriter:** La carga obligatoriamente antes de escribir copies. Verifica las 19 reglas formales (seccion 5) sobre cada pieza final. Documenta en `formal_rules_check`.
 - **Art Director:** La consulta para verificar que la jerarquía visual refuerza los valores comunicativos (claridad, cercanía, elegancia).
 
 ## Mantenimiento

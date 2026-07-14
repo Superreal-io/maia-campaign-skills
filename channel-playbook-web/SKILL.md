@@ -181,5 +181,5 @@ Antes de validar cualquier pieza web:
 ## Como usan los agentes este playbook
 
 - **Planner (Estrategia):** lo carga si web esta en `rol_canales` del brief. Define si web es destino de trafico de otros canales (caso habitual) o canal con trafico organico propio. Asigna la mision de cada pagina.
-- **Copywriter (Builder):** lo carga para escribir la estructura de copy de la landing por secciones. Respeta la regla de un CTA y un foco. No repite el copy de la pieza de origen.
+- **Creative Copywriter (Builder):** lo carga para escribir la estructura de copy de la landing por secciones. Respeta la regla de un CTA y un foco. No repite el copy de la pieza de origen.
 - **Art Director (Design):** genera mockups de landing (responsive desktop + mobile) con secciones y jerarquia clara. El mockup es conceptual; la version final pasa por el design system de movistar.es.

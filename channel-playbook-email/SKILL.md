@@ -300,5 +300,5 @@ Si alguna respuesta es "no", la pieza necesita revision.
 ## Como usan los agentes este playbook
 
 - **Planner (Estrategia):** lo carga si email esta en `rol_canales` del brief. Usa las funciones (seccion 1) para definir el rol del email en la campana y los principios (seccion 2) para evaluar si el mensaje propuesto es viable por este canal.
-- **Copywriter (Builder):** lo carga para escribir copies que cumplan la estructura (seccion 3), validar contra anti-patrones (seccion 5) y aplicar el checklist (seccion 8) antes de entregar.
+- **Creative Copywriter (Builder):** lo carga para escribir copies que cumplan la estructura (seccion 3), validar contra anti-patrones (seccion 5) y aplicar el checklist (seccion 8) antes de entregar.
 - **Art Director (Design):** lo carga para asegurar que el hero manda, que el CTA es unico y visible, y que la pieza no se convierte en folleto visual.

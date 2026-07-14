@@ -1,15 +1,14 @@
 ---
 name: HTML Component Library - Movistar
 key: html-component-library
-description: Componentes HTML reutilizables basados en los layouts oficiales de Movistar (PPT template + Brand Book + Toolkit). Consume tokens de brand-visual-guidelines-movistar y tipografia de brand-typography-movistar.
-version: 2.0.0
+description: Componentes HTML reutilizables basados en los layouts oficiales de Movistar (PPT template + Brand Book + Toolkit). Consume tokens de brand-visual-guidelines-movistar y assets (fuentes, logos) via slots de movistar-visual-production.
+version: 2.1.0
 owner: agent-d
 status: active
 depends_on:
   - brand-visual-guidelines-movistar
   - brand-visual-composition-movistar
-  - brand-typography-movistar
-  - brand-assets-movistar
+  - movistar-visual-production
 source: 250917_Movistar_PlantillaPPT.pptx (27 layouts) + 091022_Movistar_Refresh_Guidelines.pptx + 2025_Movistar_Toolkit_OnePage.pdf
 ---
 
@@ -17,15 +16,15 @@ source: 250917_Movistar_PlantillaPPT.pptx (27 layouts) + 091022_Movistar_Refresh
 
 Esta libreria proporciona los componentes HTML que D (Art Director) utiliza para construir mockups de campana. Los patrones estan basados en los layouts oficiales de Movistar (plantilla PPT de 27 layouts, Brand Book y Toolkit). El resultado no es produccion final, pero es lo suficientemente cercano para que el CMO y el equipo de Comunicacion puedan revisar y aprobar.
 
-> **Importante:** esta libreria NO define colores, tipografias ni assets propios. Consume valores de `brand-visual-guidelines-movistar`, `brand-typography-movistar` y `brand-assets-movistar`. Si necesitas un valor que no esta en los tokens, no lo inventes: dejalo como TODO y flaggealo.
+> **Importante:** esta libreria NO define colores, tipografias ni assets propios. Consume tokens de `brand-visual-guidelines-movistar` y assets de `movistar-visual-production` (fuentes, logos, via slots). Si necesitas un valor que no esta en los tokens, no lo inventes: dejalo como TODO y flaggealo.
 
 ### Carga obligatoria en todo HTML
 
-Todo HTML producido por D debe incluir al inicio del `<style>`:
+Todo HTML producido por D usa slots que `movistar-visual-production/scripts/assemble.py` rellena. El modelo NUNCA copia base64 a mano:
 
-1. **`@font-face`** de `brand-typography-movistar` (seccion 3 de ese skill) -- las declaraciones de Movistar Sans con sus pesos.
-2. **CSS variables** de `brand-visual-guidelines-movistar` (seccion 5 de ese skill) -- el bloque `:root { ... }` y `body { ... }` completos.
-3. **Logo SVG** de `brand-assets-movistar` cuando el layout lo requiera -- copiar el data URI del logo M desde ese skill.
+1. **Tipografia**: escribir `{{FONT_FACE_MIN}}` al inicio del `<style>` (o `{{FONT_FACE}}` si se necesitan italicas o pesos 300/500).
+2. **Tokens**: escribir `{{TOKENS_CSS}}` a continuacion y usar las variables `--movistar-*`.
+3. **Logos**: usar los slots `{{LOGO_MARK}}`, `{{LOGO_MARK_INVERSE}}`, `{{LOGO_LOCKUP}}`, `{{LOGO_LOCKUP_INVERSE}}` como valor de `src`.
 
 ### Regla de oro
 
@@ -39,13 +38,11 @@ Los siguientes patrones estan derivados de los 27 layouts oficiales de la planti
 
 ### 2.1. Header de marca (brand bar)
 
-Barra superior con el logo M posicionado a la derecha segun las reglas de grid del brand book. D debe copiar el SVG data URI real del logo M desde `brand-assets-movistar`.
-
-<!-- Insertar SVG del logo M de brand-assets-movistar -->
+Barra superior con el logo M posicionado a la derecha segun las reglas de grid del brand book. El logo entra por slot: `{{LOGO_MARK}}` (fondo claro) o `{{LOGO_MARK_INVERSE}}` (fondo oscuro/azul).
 
 ```html
 <header class="brand-header">
-  <img src="[logo M SVG data URI de brand-assets-movistar]" alt="Movistar" class="brand-logo">
+  <img src="{{LOGO_MARK}}" alt="Movistar" class="brand-logo">
 </header>
 
 <style>
@@ -433,7 +430,7 @@ Footer de marca: logo M, texto legal, links opcionales.
 ```html
 <footer class="brand-footer">
   <div class="footer-content">
-    <img src="[logo M SVG data URI de brand-assets-movistar]" alt="Movistar" class="footer-logo">
+    <img src="{{LOGO_MARK}}" alt="Movistar" class="footer-logo">
     <p class="legal">[Condiciones en movistar.es. Precio con IVA incluido. Consulta disponibilidad.]</p>
   </div>
 </footer>
@@ -710,11 +707,8 @@ Ejemplo de como D ensambla los componentes de las secciones 2-3 en una landing p
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>[Titulo de campana]</title>
 <style>
-  /* 1. @font-face de brand-typography-movistar (seccion 3) -- COPIAR BLOQUE COMPLETO */
-  @font-face {
-    font-family: "Movistar Sans";
-    /* ... pegar aqui el bloque @font-face base64 completo de brand-typography-movistar seccion 3 ... */
-  }
+  /* 1. Tipografia via slot -- assemble.py lo rellena. NUNCA pegar base64 a mano */
+  {{FONT_FACE_MIN}}
 
   /* 2. CSS variables -- COPIAR TAL CUAL de brand-visual-guidelines-movistar seccion 5 */
   :root {
@@ -755,7 +749,7 @@ Ejemplo de como D ensambla los componentes de las secciones 2-3 en una landing p
     line-height: 1.5;
   }
   h1 { font-size: 2.25rem; font-weight: var(--font-weight-extrabold); line-height: 1.15; }
-  h2 { font-size: 1.75rem; font-weight: var(--font-weight-bold); line-height: 1.2; }
+  h2 { font-size: 1.75rem; font-weight: var(--font-weight-regular); line-height: 1.2; } /* subtitulos Regular (Refresh Guidelines 2025) */
   h3 { font-size: 1.25rem; font-weight: var(--font-weight-medium); line-height: 1.3; }
   p  { font-size: 1rem; font-weight: var(--font-weight-regular); }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -764,7 +758,7 @@ Ejemplo de como D ensambla los componentes de las secciones 2-3 en una landing p
 </style>
 </head>
 <body>
-  <!-- Brand header con M (seccion 2.1 -- usar Icono M de brand-assets, POS o NEG segun fondo) -->
+  <!-- Brand header con M (seccion 2.1 -- slot {{LOGO_MARK}} fondo claro / {{LOGO_MARK_INVERSE}} fondo oscuro) -->
   <!-- Hero (conectado 2.2, a sangre 2.3, o texto+imagen 2.4 segun tier) -->
   <!-- Seccion de contenido (2.4, 2.5, 2.10) -->
   <!-- Precio (2.6 si aplica) -->
@@ -813,17 +807,17 @@ Cuando D produce email:
 
 ---
 
-## 6. Composiciones SVG (imagen)
+## 6. Composiciones SVG (solo vector bajo peticion explicita)
 
-Para canales donde el output es imagen (tienda, social, exterior, M+ banners), D produce composiciones SVG con la misma identidad visual que los HTMLs. Estas plantillas son el punto de partida.
+> **Nota v2.1:** por defecto, los canales de imagen (tienda, social, exterior, M+ banners) se producen como **HTML de dimensiones fijas + render a PNG** (ver `movistar-visual-production`, workflow paso 2 y 5). Esta seccion aplica UNICAMENTE cuando se pide un entregable vectorial editable. Los slots ({{FONT_FACE_MIN}}, {{LOGO_*}}) funcionan igual en SVG: assemble.py los rellena.
 
 ### 6.1. Reglas generales de composicion SVG
 
 - **Dimensiones reales del soporte.** El `viewBox` del SVG debe coincidir con las dimensiones del formato final (ej. 1080x1080 para feed Instagram, 800x1200 para caballete tienda).
 - **Grid y jerarquia Y.** Aplicar las mismas reglas de `brand-visual-composition-movistar`: calcular X (lado corto / 16), posicionar logo, calcular Y para jerarquia tipografica.
-- **Tipografia embebida (OBLIGATORIO).** Todo SVG debe incluir un bloque `<defs><style>@font-face { font-family: "Movistar Sans"; src: url("data:font/woff2;base64,...") format("woff2"); }</style></defs>` al inicio, con el base64 completo de `brand-typography-movistar` seccion 3. Ademas, usar `font-family="Movistar Sans, Helvetica Neue, Helvetica, Arial, sans-serif"` en todos los `<text>`. Los atributos `font-weight` deben coincidir con los pesos oficiales: 300 (Light), 400 (Regular), 500 (Medium), 700 (Bold), 800 (ExtraBold). Sin el @font-face embebido, el SVG no renderiza la fuente Movistar Sans.
-- **Colores (paleta cerrada).** Usar SOLO estos HEX: #0066FF, #FFFAF5, #262423, #d3eeff, #cef7bf, #ffe99c, #ffc5a8, #6F7176, #005EEB. Ningun otro HEX esta permitido. NO inventar tonos "navy", "dark blue" ni similares.
-- **Logo.** Usar el SVG del logo M de `brand-assets-movistar` embebido como `<image>` con el base64 de la variante POS o NEG segun el fondo. No usar `<text>` ni `<g>` con comentarios placeholder.
+- **Tipografia embebida (OBLIGATORIO).** Todo SVG debe incluir `<defs><style>{{FONT_FACE_MIN}}</style></defs>` al inicio; assemble.py rellena el slot con el @font-face en base64. NUNCA pegar base64 a mano. Ademas, usar `font-family="Movistar Sans, Helvetica Neue, Helvetica, Arial, sans-serif"` en todos los `<text>`. Los atributos `font-weight` deben coincidir con los pesos oficiales: 300 (Light), 400 (Regular), 500 (Medium), 700 (Bold), 800 (ExtraBold).
+- **Colores (paleta cerrada).** Usar SOLO estos HEX: #0066FF, #FFFAF5, #262423, #d3eeff, #cef7bf, #ffe99c, #ffc5a8, #6F7176, #005EEB. Ningun otro HEX esta permitido en piezas de campana. NO inventar tonos "navy", "dark blue" ni similares. **Unica excepcion:** los colores semanticos de feedback de `brand-visual-composition-movistar` seccion 4 (positivo #048239, alerta #926C00, negativo #C10000 y sus hovers) se permiten SOLO en interfaces funcionales (web logada, formularios, estados de error), nunca como recurso grafico de campana.
+- **Logo.** Usar `<image href="{{LOGO_MARK}}">` (fondo claro) o `<image href="{{LOGO_MARK_INVERSE}}">` (fondo oscuro/azul); assemble.py rellena el data URI. No usar `<text>` ni `<g>` con comentarios placeholder.
 - **Vertices redondeados.** Todos los contenedores deben usar `rx="8"` (8px).
 - **Fotografias.** Marcar con `<rect>` + atributo `data-prompt` describiendo la imagen necesaria. Produccion sustituye el rect por la foto real.
 
@@ -834,10 +828,7 @@ Para canales donde el output es imagen (tienda, social, exterior, M+ banners), D
      font-family="Movistar Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
   <defs>
     <style>
-      @font-face {
-        font-family: "Movistar Sans";
-        src: url("data:font/woff2;base64,...COPIAR BASE64 COMPLETO DE brand-typography-movistar seccion 3...") format("woff2");
-      }
+      {{FONT_FACE_MIN}}
     </style>
   </defs>
 
@@ -869,8 +860,8 @@ Para canales donde el output es imagen (tienda, social, exterior, M+ banners), D
     [CTA]
   </text>
 
-  <!-- Logo M POS (fondo claro): embeber base64 de brand-assets-movistar variante POS -->
-  <image href="data:image/svg+xml;base64,...COPIAR BASE64 DEL ICONO M POS DE brand-assets-movistar..."
+  <!-- Logo M fondo claro: slot rellenado por assemble.py -->
+  <image href="{{LOGO_MARK}}"
          x="720" y="1110" width="60" height="50" aria-label="Movistar"/>
 </svg>
 ```
@@ -882,10 +873,7 @@ Para canales donde el output es imagen (tienda, social, exterior, M+ banners), D
      font-family="Movistar Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
   <defs>
     <style>
-      @font-face {
-        font-family: "Movistar Sans";
-        src: url("data:font/woff2;base64,...COPIAR BASE64 COMPLETO DE brand-typography-movistar seccion 3...") format("woff2");
-      }
+      {{FONT_FACE_MIN}}
     </style>
   </defs>
 
@@ -914,8 +902,8 @@ Para canales donde el output es imagen (tienda, social, exterior, M+ banners), D
     [imagen pendiente -- ver data-prompt]
   </text>
 
-  <!-- Logo M NEG (fondo azul): embeber base64 de brand-assets-movistar variante NEG -->
-  <image href="data:image/svg+xml;base64,...COPIAR BASE64 DEL ICONO M NEG DE brand-assets-movistar..."
+  <!-- Logo M fondo oscuro/azul: slot rellenado por assemble.py -->
+  <image href="{{LOGO_MARK_INVERSE}}"
          x="970" y="990" width="75" height="63" aria-label="Movistar"/>
 </svg>
 ```
@@ -927,10 +915,7 @@ Para canales donde el output es imagen (tienda, social, exterior, M+ banners), D
      font-family="Movistar Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
   <defs>
     <style>
-      @font-face {
-        font-family: "Movistar Sans";
-        src: url("data:font/woff2;base64,...COPIAR BASE64 COMPLETO DE brand-typography-movistar seccion 3...") format("woff2");
-      }
+      {{FONT_FACE_MIN}}
     </style>
   </defs>
 
@@ -962,8 +947,8 @@ Para canales donde el output es imagen (tienda, social, exterior, M+ banners), D
     [CTA]
   </text>
 
-  <!-- Logo M POS (fondo claro): embeber base64 de brand-assets-movistar variante POS -->
-  <image href="data:image/svg+xml;base64,...COPIAR BASE64 DEL ICONO M POS DE brand-assets-movistar..."
+  <!-- Logo M fondo claro: slot rellenado por assemble.py -->
+  <image href="{{LOGO_MARK}}"
          x="1800" y="28" width="90" height="75" aria-label="Movistar"/>
 </svg>
 ```
@@ -1003,7 +988,7 @@ D adapta la plantilla al caso: cambia copies, ajusta proporciones, aplica el tie
 - NO reescribir copies del Estrategia Creativa. Usar los originales, flaggear si no caben.
 - NO crear disenos "creativos" que rompan los patrones de esta skill sin justificarlo en `design_rationale.md`.
 - NO usar `border-radius: 4px`. Siempre 8px en digital (regla del brand book).
-- NO colocar texto con `<text>` como placeholder de logo. Usar SVG de `brand-assets-movistar`.
+- NO colocar texto con `<text>` como placeholder de logo. Usar los slots `{{LOGO_MARK}}` / `{{LOGO_MARK_INVERSE}}`.
 
 ### 7.3. Contenedores: siempre vertices redondeados
 
@@ -1044,8 +1029,7 @@ Cada pieza viene acompanada de un rationale:
 
 - Los tokens visuales viven SOLO en `brand-visual-guidelines-movistar`. Esta libreria los consume, no los define.
 - Las reglas de composicion (grid, jerarquia Y, posicion de logo) viven en `brand-visual-composition-movistar`.
-- La tipografia (@font-face, pesos, escalas) vive en `brand-typography-movistar`.
-- Los assets (logo M SVG, iconos) viven en `brand-assets-movistar`.
+- La tipografia (woff2) y los logos (SVG) viven como archivos en `movistar-visual-production/brand/` y se inyectan via slots con assemble.py.
 - Cuando el design system completo de Movistar este disponible para integracion, sustituir los componentes placeholder por los oficiales.
 - Anadir componentes adicionales solo cuando se usen en al menos 2 campanas diferentes.
 - Cada cambio incrementa `version` del skill.

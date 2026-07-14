@@ -9,7 +9,7 @@ status: active
 
 # Tesis Estrategica de Comunicacion Movistar
 
-Cargada por el Planner/Planner y el Marketing Manager. Define el marco filosofico que ordena toda decision de comunicacion.
+Cargada por el Planner/Planner y el Campaign Manager. Define el marco filosofico que ordena toda decision de comunicacion.
 
 ---
 

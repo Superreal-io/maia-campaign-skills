@@ -9,7 +9,7 @@ status: active
 
 # Journey de Canales Movistar
 
-Cargada por el Planner y el Copywriter. Define como los canales deben encadenarse para construir un journey coherente.
+Cargada por el Planner y el Creative Copywriter. Define como los canales deben encadenarse para construir un journey coherente.
 
 ---
 
@@ -66,5 +66,5 @@ Esto no es un journey: es repeticion. El cliente no avanza, se cansa.
 ## Como lo usa cada agente
 
 - **Planner/B**: propone la secuencia de impactos en su output (paso 8 del proceso). Verifica que no hay repeticion.
-- **Copywriter/C**: al disenar copies por canal, respeta la posicion de cada canal en el journey. El copy de email no es el copy de display.
-- **Marketing Manager**: en Cierre, verifica que hay journey (secuencia logica) y no solo lista de canales.
+- **Creative Copywriter/C**: al disenar copies por canal, respeta la posicion de cada canal en el journey. El copy de email no es el copy de display.
+- **Campaign Manager**: en Cierre, verifica que hay journey (secuencia logica) y no solo lista de canales.

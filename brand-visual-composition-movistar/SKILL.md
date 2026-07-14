@@ -38,9 +38,8 @@ La M es el elemento más reconocible. Siempre luce su Azul Movistar (#0066FF). E
 En titulares o textos donde Movistar actue como nombre de producto, se escribe con M mayuscula. No se permite "movistar" en minusculas en estos contextos. Esto refuerza el reconocimiento de marca sin necesidad del logotipo.
 
 ### 1.3. Tamano minimo
-- Impresión: 10 mm
-- Digital: 20 px
-- En formatos digitales, la M nunca será inferior a 60 px
+- **Minimo oficial de marca** (Refresh Guidelines 2025, slide 21): 10 mm en impresion, 20 px en digital. Por debajo de esto, nunca.
+- **Minimo operativo MAIA para piezas de campana**: 60 px. Es una regla interna de protagonismo de marca (la M como identificador principal), no un limite de la guia oficial. Aplica a los mockups de D; puede bajarse hasta el minimo oficial en formatos muy pequenos (favicon, display reducido) documentandolo en el rationale.
 
 ### 1.4. Área de protección
 Se construye un cuadrado tomando como referencia el ancho de la propia M. Ningún elemento gráfico o tipográfico puede invadir ese espacio.
@@ -59,11 +58,13 @@ Tipografía variable con 5 pesos estáticos + itálicas oblicuas. Formatos: .ttf
 
 | Peso | Uso principal |
 |------|---------------|
-| Extrabold | Titulares de 1-2 palabras con máximo impacto |
-| Bold | H1 estándar, CTAs, precios |
-| Medium | H2 (subtítulos), datos adicionales de precio |
-| Regular | Bodycopy, legal |
+| Extrabold | Titulares (título básico y súper título). Verificado contra Refresh Guidelines 2025, slides 134-138 |
+| Bold | CTAs, precios, destacados puntuales |
+| Medium | Labels, etiquetas, datos adicionales de precio |
+| Regular | Subtítulos, bodycopy, legal |
 | Light | Uso decorativo excepcional |
+
+> Nota de resolución (jul 2026): versiones anteriores de esta skill asignaban Bold al H1 y Medium al H2. Las Refresh Guidelines muestran el título en Extrabold (tanto básico como súper título) y el subtítulo en Regular, con la jerarquía construida por tamaño (sistema Y), no por peso.
 
 ### 2.2. Itálicas
 Solo para resaltar palabras o conceptos clave y términos en otros idiomas. No como estilo general.
@@ -192,7 +193,7 @@ Los caracteres toman inspiración directa de la M. Curvas, terminales y detalles
 ### 5.2. Formatos digitales
 - Lado corto < 300px: margen = 15px
 - Lado corto >= 300px: margen = 25px
-- M nunca inferior a 60px
+- M: minimo operativo MAIA 60px, minimo oficial absoluto 20px (ver seccion 1.3)
 
 ### 5.3. Posición de la M
 1. Prioritaria: esquina superior derecha
@@ -242,8 +243,8 @@ Y = altura de la mayúscula del título principal (H1).
 
 | Nivel | Fuente | Tamaño relativo | Tracking | Interlineado |
 |-------|--------|-----------------|----------|-------------|
-| H1 | Movistar Sans Bold (Extrabold si 1-2 palabras) | Y | -15 | 0.9 x tamaño |
-| H2 | Movistar Sans Medium | 0.45Y | 0 | 1 x tamaño |
+| H1 | Movistar Sans Extrabold | Y | -15 | 0.9 x tamaño |
+| H2 | Movistar Sans Regular | 0.45Y | 0 | 1 x tamaño |
 | CTA | Movistar Sans Bold | -- | 20 | -- (1 línea max) |
 | Bodycopy | Movistar Sans Regular | 0.30Y | 10 | 1.2 x tamaño |
 | Legal | Movistar Sans Regular (<=14pt) | 0.15Y | 20 | 1.3 x tamaño |
@@ -356,15 +357,15 @@ Estas reglas se aplican a TODA pieza, sin excepcion:
 
 ## Como usa el Art Director esta skill
 
-1. **Antes de empezar:** cargar esta skill + `brand-visual-guidelines-movistar` + `brand-typography-movistar` + `brand-assets-movistar`
+1. **Antes de empezar:** cargar esta skill + `brand-visual-guidelines-movistar` + `movistar-visual-production` (assets y scripts)
 2. **Grid:** calcular X para el formato (seccion 5), posicionar M, establecer margenes
 3. **Layout:** elegir tipo de layout (seccion 5.4): fondo completo, faldones, contenedor o contenedor conectado
 4. **Jerarquia:** calcular Y a partir del H1, derivar todos los tamanos proporcionalmente (seccion 6)
 5. **Color:** consultar Do's/Don'ts de la seccion 3 + prohibiciones absolutas de la seccion 8
 6. **Precios:** si la pieza tiene precio protagonista, aplicar composicion de la seccion 7
-7. **Logo:** verificar version de color correcta segun prioridad (seccion 1.2). Incrustar SVG de `brand-assets-movistar`
-8. **Tipografia:** incrustar @font-face de `brand-typography-movistar`. Usar solo pesos oficiales (300-800)
-9. **Fotografia:** si hay imagen, verificar principios de la seccion 9. Si no hay imagen real, usar placeholder con `data-prompt`
+7. **Logo:** verificar version de color correcta segun prioridad (seccion 1.2). Usar los slots `{{LOGO_*}}` de `movistar-visual-production`
+8. **Tipografia:** usar el slot `{{FONT_FACE_MIN}}` de `movistar-visual-production` (assemble.py lo rellena). Solo pesos oficiales (300-800)
+9. **Fotografia:** si hay imagen, verificar principios de la seccion 9. La foto se genera con `generate_image.py` (estilo magic-prompt); placeholder con `data-prompt` solo como fallback flaggeado
 
 ## Mantenimiento
 

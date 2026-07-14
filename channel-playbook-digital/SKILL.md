@@ -16,7 +16,7 @@ Principio Maestro: **"Digital debe acelerar la demanda sin abaratar la marca."**
 
 Tesis estrategica: "Digital no debe ser mas presion. Debe ser mas precision."
 
-Este playbook aplica a todos los agentes (B, C, D y Marketing Manager) cuando trabajan piezas digitales.
+Este playbook aplica a todos los agentes (B, C, D y Campaign Manager) cuando trabajan piezas digitales.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: Principios de Copywriting - Movistar
 key: copywriting-principles-movistar
-description: 9 principios de copywriting creativo, estructura de pieza, guia de inicio y codigo visual. Las reglas formales de identidad verbal estan en brand-voice-movistar. Skill obligatoria para el Copywriter.
+description: 9 principios de copywriting creativo, estructura de pieza, guia de inicio y codigo visual. Las reglas formales de identidad verbal estan en brand-voice-movistar. Skill obligatoria para el Creative Copywriter.
 version: 1.1.0
 owner: superreal
 status: active
@@ -12,7 +12,7 @@ depends_on:
 
 # Principios de Copywriting - Movistar
 
-Skill compartida. El Copywriter la carga obligatoriamente antes de escribir copies finales. Los Agentes A y B la consultan como referencia. Se complementa con `brand-voice-movistar` (identidad, tono, evaluación) y `estilo-terminologia-movistar` (grafías, precios, formatos).
+Skill compartida. El Creative Copywriter la carga obligatoriamente antes de escribir copies finales. Los Agentes A y B la consultan como referencia. Se complementa con `brand-voice-movistar` (identidad, tono, evaluación) y `estilo-terminologia-movistar` (grafías, precios, formatos).
 
 > Origen: Brand Guardian v4 RAG Movistar, secciones 1.2 (Tono de la marca) y 1.3 (Guía de copywriting). Cualquier discrepancia con otras fuentes se resuelve a favor de `brand-voice-movistar` para identidad/tono y a favor de este archivo para técnica de redacción.
 
@@ -109,15 +109,15 @@ Enfocado en cerrar con confianza y cercanía.
 
 Las reglas formales de copy (mayusculas, persona gramatical, tuteo, titulares, emojis, simbolos, terminologia de producto, lenguaje inclusivo, diversidad) estan definidas en `brand-voice-movistar` seccion 5. No se duplican aqui.
 
-El Copywriter carga ambas skills: `brand-voice-movistar` para identidad verbal + evaluacion de tono, y esta skill para tecnica creativa y estructura de pieza.
+El Creative Copywriter carga ambas skills: `brand-voice-movistar` para identidad verbal + evaluacion de tono, y esta skill para tecnica creativa y estructura de pieza.
 
 ---
 
 ## Cómo usan los agentes esta skill
 
-- **Briefing:** Referencia para detectar copies en el input que violen principios formales.
+- **Strategist:** Referencia para detectar copies en el input que violen principios formales.
 - **Planner:** No la usa directamente (no escribe copies).
-- **Copywriter:** La carga OBLIGATORIAMENTE. Aplica los 9 principios creativos al idear territorios y copies. Verifica los 19 principios formales antes de entregar. Si un copy viola un principio, lo reescribe y documenta en `formal_rules_check`.
+- **Creative Copywriter:** La carga OBLIGATORIAMENTE. Aplica los 9 principios creativos al idear territorios y copies. Las 19 reglas formales las verifica contra `brand-voice-movistar` seccion 5 (fuente unica); si un copy viola una regla, lo reescribe y documenta en `formal_rules_check`.
 - **Art Director:** La consulta para verificar que la jerarquía visual respeta el código visual para copy (sección 3).
 
 ## Mantenimiento

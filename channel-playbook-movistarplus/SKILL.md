@@ -10,7 +10,7 @@ channel: movistarplus
 
 # Channel Playbook -- Movistar+
 
-Cargado por los Agentes B, C, D y Marketing Manager cuando Movistar+ es uno de los canales activos.
+Cargado por los Agentes B, C, D y Campaign Manager cuando Movistar+ es uno de los canales activos.
 
 Movistar+ funciona como CRM audiovisual y medio propio de alto valor. No debe tratarse como simple inventario publicitario. Es un canal donde el cliente esta en modo ocio, descanso o familia. Cualquier comunicacion que ignore ese contexto destruye valor de marca.
 
@@ -230,7 +230,7 @@ Antes de activar cualquier pieza en Movistar+, verificar:
 
 ## Como usan los agentes este playbook
 
-- **Marketing Manager**: valida que M+ se use como canal estrategico, no como inventario residual. Revisa presion acumulada.
+- **Campaign Manager**: valida que M+ se use como canal estrategico, no como inventario residual. Revisa presion acumulada.
 - **Planner**: decide si M+ aporta valor real al mix y selecciona el formato adecuado segun el nivel del mensaje.
-- **Copywriter**: adapta tono y narrativa al contexto audiovisual y emocional. Asegura que el mensaje no sea texto plano en formato video.
+- **Creative Copywriter**: adapta tono y narrativa al contexto audiovisual y emocional. Asegura que el mensaje no sea texto plano en formato video.
 - **Art Director**: produce las piezas respetando las restricciones de cada formato y la integracion visual con la plataforma.
