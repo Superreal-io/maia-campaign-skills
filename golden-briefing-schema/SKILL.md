@@ -60,7 +60,7 @@ brief:
     - pregunta: "string"
       depende_de: "string"                  # quien decide (area, comunicacion, director, etc.)
       bloqueante: true|false
-      criterion_id: 0                       # vinculado a la rubrica
+      criterion_id: "C08"                   # SIEMPRE string "CXX", mismo formato que rubric_evaluation. Nunca int.
     - ...
 
   # ── Bloque 2: Corrientes de demanda ──
@@ -218,3 +218,4 @@ Cambios al schema requieren:
 - Incrementar `version` del SKILL.
 - Actualizar `Agentes/01-briefing.md` con el set de campos nuevos.
 - Actualizar todos los Briefs existentes con migracion o marcarlos `legacy`.
+
