@@ -18,7 +18,9 @@ No contiene conocimiento de dominio (eso esta en las skills) ni instrucciones de
 
 ## 1. Que es MAIA Campaign
 
-MAIA Campaign es un sistema multi-agente que transforma briefings de marketing de Movistar en campanas ejecutables con piezas HTML. El sistema opera sobre Paperclip (paperclip.ing) usando claude-sonnet-4 para todos los agentes.
+MAIA Campaign es un sistema multi-agente que transforma briefings de marketing de Movistar en campanas ejecutables con piezas HTML. El sistema opera sobre Paperclip (paperclip.ing) usando claude-sonnet-5 para todos los agentes.
+
+**Identificacion de agentes:** en la instancia Paperclip los agentes se llaman `0. Campaign Manager`, `1. Strategist`, `2. Planner`, `3. Creative Copywriter`, `4. Art Director`. Las letras A/B/C/D que aparecen en este documento y en las skills son alias historicos: A=Strategist(1), B=Planner(2), C=Creative Copywriter(3), D=Art Director(4). Para referencias operativas (handoffs, flags) usa siempre el nombre o el slug, nunca la letra. Los IDs (agentId, companyId) NUNCA se hardcodean: se resuelven en runtime via `$PAPERCLIP_COMPANY_ID` y `GET /api/companies/$PAPERCLIP_COMPANY_ID/agents`.
 
 El cliente es el equipo de Comunicacion de Movistar (Telefonica). El operador es SuperReal.
 
