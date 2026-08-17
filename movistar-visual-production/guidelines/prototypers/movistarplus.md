@@ -15,6 +15,25 @@
 >   `guidelines/magic-prompt.md`: usala tal cual para escribir el prompt de la foto.
 > - **Detalle critico del canal:** CTA en WOW = link con `>`, nunca boton pill. Es la regla
 >   que mas se viola al generar sin referencia.
+>
+> **VALIDADO 17-08-2026** (test A/B real, gpt-image-2, quality medium, videocartela 16:9,
+> refs: videocartela-completa-qr + videocartela-cobranding-disney):
+>
+> - CON refs el modelo clavo la retícula de la videocartela real: pastilla blanca con texto
+>   azul, lockup "Ficción Total 18 €/mes" con el simbolo € correcto, legal "Durante 6 meses
+>   | Sin permanencia", 3 posters a la derecha con sus cajas redondeadas. SIN refs invento
+>   una composicion parecida pero con detalles fuera de sistema (escribio "EUR/mes" literal
+>   en vez de €, footer inventado, pastilla usada como badge de producto).
+> - **Leccion critica: las referencias transfieren tambien el TEXTO.** El prompt del test no
+>   especificaba titular y el modelo copio el titular, los titulos y el legal LITERALES de la
+>   referencia. En produccion el prompt debe llevar SIEMPRE el copy real completo (titular,
+>   nombre de oferta, precio, legal) y los titulos/key art que correspondan a la campana
+>   nueva. Es la "regla de contenido" del INDEX aplicada: lo que no describas, lo heredas.
+> - El modelo genera key art de titulos reales licenciados TAMBIEN sin referencias (invento
+>   posters de peliculas reales por su cuenta): el co-branding del resultado no depende de
+>   las refs, depende del prompt.
+> - Los modulos que el prompt no menciona no aparecen aunque esten en la referencia (QR y
+>   fila de logos de plataformas no salieron): si la pieza los necesita, pidelos en el prompt.
 
 ---
 

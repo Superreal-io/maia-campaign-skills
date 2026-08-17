@@ -13,6 +13,19 @@
 > - **El principio del canal ("bajar la ansiedad tecnologica") y el orden
 >   beneficio-antes-que-precio** aplican tambien al construir el HTML de la pieza,
 >   no solo a la imagen generada.
+>
+> **VALIDADO 17-08-2026** (test real, gpt-image-2, quality medium, 16:9,
+> refs: plv-producto-precio-samsung + plv-producto-precio-iphone):
+>
+> - Clavo el sistema completo: fondo pastel de la ref, titular azul sentence case,
+>   jerarquia "Desde 16 €/mes" con el simbolo correcto, claim de 24 meses y legal de tienda.
+> - **Con "no third-party logos" en el prompt, el dispositivo salio generico sin marca**
+>   aunque las dos referencias eran de Samsung y iPhone. La exclusion funciona: es la via
+>   para piezas de dispositivo sin comprometer trade dress de fabricante.
+> - Transferencia de texto confirmada otra vez: el titular lo heredo literal de la ref
+>   del iPhone porque el prompt no especificaba texto. El copy real SIEMPRE en el prompt.
+> - Defecto menor detectado: escribio "Movistar Swap" separado; el lockup real es
+>   "MovistarSwap" junto. Si la pieza lleva Swap, escribir el lockup exacto en el prompt.
 
 ---
 

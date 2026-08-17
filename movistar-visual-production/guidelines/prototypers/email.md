@@ -17,6 +17,17 @@
 >   construir el HTML.
 > - **Dimensiones:** para un prototipo-imagen completo usa `--size 1280x2560` como maximo
 >   (el generador limita el ratio a 3:1; un email largo no cabe en una sola imagen).
+>
+> **VALIDADO 17-08-2026 (solo el hero)** (test real, gpt-image-2, quality medium,
+> refs: email-multiproducto-3-cards + digital-landing-precio-sobre-foto):
+>
+> - El hero salio fiel a la referencia: collage de 3 fotos con separadores diagonales,
+>   titular navy bold, remate manuscrito cyan con destello, logo Movistar arriba izquierda.
+>   Luz calida y grano natural, sin look CGI.
+> - Limite conocido del canal: las 3 referencias de email del repo son de baja resolucion
+>   (454-508 px). La mejora real es importar los 17 gold standards del Knowledge del GPT
+>   original (1260-1712 px, una familia por tipo de email) a gold-standards/email/.
+>   Hasta entonces, este canal valida heros pero no emails completos como imagen.
 
 ---
 
