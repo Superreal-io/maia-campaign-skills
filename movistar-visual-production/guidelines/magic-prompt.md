@@ -157,3 +157,108 @@ An older woman checks her smartphone in a lived-in living room during early morn
 - ✔ Written in natural language
 - ✔ Outputs the final prompt in English
 - ✔ Useful for a human or AI prompter
+
+---
+---
+
+# Prompts calibrados por canal
+
+Todo lo de arriba es la doctrina general: cómo se escribe un prompt de marca desde cero.
+Esta sección es lo contrario: **prompts que ya se han ejecutado, han dado un resultado
+aprobado y por tanto no hay que reinventar**. Se copian, se les cambia la escena, y se
+ejecutan con las referencias que se indican.
+
+Un prompt entra aquí solo cuando cumple las tres:
+
+1. Se ha ejecutado de verdad y la pieza resultante pasó el QA visual.
+2. Se sabe con qué Gold Standards se ejecutó. Un prompt sin sus referencias no es
+   reproducible: la mitad del resultado venía de las imágenes.
+3. Está escrito con la parte fija separada de la parte variable, de forma que se pueda
+   reutilizar sin reescribirlo.
+
+Los prompts calibrados **ganan** a la doctrina general. Si un prompt calibrado del canal
+contradice una regla de las secciones anteriores, gana el calibrado: es evidencia empírica
+frente a una regla escrita.
+
+---
+
+## Formato de una entrada
+
+Se copia este bloque tal cual. Los seis campos son obligatorios; sin uno cualquiera de
+ellos la entrada no es reutilizable y no vale.
+
+```markdown
+### <CANAL> · <formato> · <modo FOTO|GRAFICO|MIXTO>
+
+- **Aspect / size:** `--aspect 2:3` (o `--size 1024x1536`)
+- **Referencias:**
+  `references/gold-standards/<canal>/<archivo-1>.jpg`
+  `references/gold-standards/<canal>/<archivo-2>.jpg`
+- **Origen:** <de dónde sale: GPT M+ Prototyper, run agosto-26 pieza X, etc.>
+- **Validado:** <fecha> · <quién> · <qué pieza salió y qué QA pasó>
+
+**Prompt base** (lo fijo, no se toca):
+
+​```text
+<4-5 frases. Todo lo que NO cambia entre piezas de este canal: tipo de plano, lente,
+luz, textura, nivel de realismo, integración del dispositivo, acabado editorial.>
+​```
+
+**Variables** (lo que se sustituye en cada pieza):
+
+| Marcador | Qué se pone | Ejemplo real |
+| --- | --- | --- |
+| `{SCENE}` | La escena y qué está pasando | a woman in her sixties on a village terrace at dusk |
+| `{SUBJECT}` | Quién aparece y qué lo hace específico | ... |
+| `{DEVICE_ACTION}` | Cómo se integra el dispositivo en la acción | ... |
+
+**Exclusiones obligatorias de este canal** (van al final del prompt, en positivo cuando
+se pueda; si la referencia tiene columna `Ojo` en el INDEX, su neutralización va aquí):
+
+- <p.ej. "no visible third-party logos or brand marks of any kind on garments, screens or signage">
+- <p.ej. "the brand symbol must sit on a background of clearly different value, never blue on blue">
+
+**Qué falla si se cambia:** <la línea que hay que dejar en paz y por qué. Es el campo más
+útil de todos: evita que el siguiente lo rompa por mejorarlo.>
+```
+
+---
+
+## Cómo se rellena esto
+
+Los prompts que funcionan hoy no están en el repo: están dentro de los GPT personalizados
+por canal (M+ Prototyper, email, display, tienda PLV). Volcarlos es una tarea de
+transcripción, no de invención. El orden:
+
+1. **Coger el prompt tal como está en el GPT.** Sin "mejorarlo". Si funciona, funciona por
+   razones que no siempre son visibles.
+2. **Partirlo en fijo y variable.** Lo que se repite en todas las piezas del canal va al
+   Prompt base; lo que cambia se marca con `{LLAVES}` y se documenta en la tabla.
+3. **Ejecutarlo con `--ref` y las referencias del canal**, y mirar el resultado. Es probable
+   que cambie respecto al GPT: el GPT no tenía las referencias. Si mejora, se anota la fecha
+   de validación. Si empeora, el problema es la elección de referencias, no el prompt:
+   revisa la tabla de `gold-standards/INDEX.md`.
+4. **Rellenar "Qué falla si se cambia"** con lo que se aprendió al ejecutarlo, no con una
+   suposición.
+
+Un canal sin entrada aquí no está prohibido: se genera con la doctrina general. Pero está
+regenerando desde cero cada vez, y eso es exactamente lo que esta sección existe para evitar.
+
+---
+
+## Entradas
+
+> **Actualización 17 de agosto de 2026:** los prompts calibrados de los GPT ya están
+> volcados al repo, pero como documentos completos por canal en `guidelines/prototypers/`
+> (email, movistarplus, tienda-plv, meta), no como entradas troceadas en este formato.
+> Motivo: cada GPT es un sistema completo (familias visuales + composición + paleta +
+> alertas), no un prompt suelto, y trocearlo perdería el contexto que lo hace funcionar.
+>
+> **Regla de precedencia:** en su canal, el prototyper manda sobre la doctrina general de
+> este documento. Este formato de entrada queda para prompts sueltos que se calibren en el
+> futuro para canales sin prototyper (exterior, BTL, display).
+>
+> Pendiente de calibrar: exterior, BTL, display / digital.
+
+<!-- Pega aquí entradas sueltas siguiendo el formato de arriba, solo para canales sin prototyper. -->
+

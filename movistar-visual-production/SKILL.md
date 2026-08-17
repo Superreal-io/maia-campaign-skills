@@ -1,7 +1,7 @@
 ---
 name: movistar-visual-production
 description: Stack de produccion visual del Art Director (D) para piezas Movistar presentables a cliente. Assets de marca como archivos (fuentes, logos, tokens), fotografia real via OpenAI (gpt-image-2), ensamblado programatico por slots, y bucle de verificacion visual con render. Sustituye a visual-01-brand-assets, visual-02-brand-typography y el enfoque base64 de visual-03.
-version: 1.0.0
+version: 1.1.0
 owner: superreal
 status: active
 loaded_by: D (Art Director)
@@ -22,14 +22,22 @@ brand/
 ├── tokens/           colors.css, spacing.css, typography.css, tokens.json
 └── audit-report.md   Composicion por formato destilada de 41 piezas reales. LEER SIEMPRE.
 references/
-├── INDEX.md          Catalogo de piezas reales por formato
-└── pieces/           Las 41 creatividades reales (imagenes que puedes Read)
+├── INDEX.md          Catalogo de las 41 piezas reales por formato. Para MIRAR con Read
+├── pieces/           Las 41 creatividades reales
+└── gold-standards/   Las 34 curadas y normalizadas. Para PASAR al generador con --ref
+    ├── INDEX.md      Que referencia usar segun canal y modo. Rutas listas para copiar
+    └── <canal>/      email, digital, exterior, tienda, movistarplus, marca
 guidelines/
 ├── app-email.md      Plantilla email observada en piezas reales (9 bloques)
 ├── app-ads.md        Geometrias OOH y display con layouts ASCII
 ├── app-web.md        Landing de campana vs web generica
 ├── magic-prompt.md   Como escribir prompts de fotografia de marca
-└── mockup-workflow.md  Cuando y como componer mockups contextuales
+├── mockup-workflow.md  Cuando y como componer mockups contextuales
+└── prototypers/      Prompts calibrados por canal (de los GPT validados por el equipo)
+    ├── email.md          Familias visuales, paleta extendida y jerarquia del email
+    ├── movistarplus.md   WOW vs videocartela, CTA link con >, modos de fondo
+    ├── tienda-plv.md     Cartel A3 / etiqueta / stopper, beneficio antes que precio
+    └── meta.md           Formatos por ratio, sin boton CTA, paleta propia del canal
 templates/
 ├── html/             Plantillas slot-based por formato
 └── mockups/          Entornos + corners.json para el composer
@@ -45,6 +53,11 @@ scripts/
 ### 1. Referencias antes de disenar
 Lee 2-3 piezas reales del formato en `references/pieces/` (usa `references/INDEX.md` para elegirlas) y el bloque del formato en `brand/audit-report.md`. Son ground truth: mas fiables que cualquier regla escrita.
 
+Dos carpetas, dos usos, no las confundas:
+
+- `references/pieces/`: las 41 piezas reales. Se **miran** con Read. No se pasan al generador de imagen: muchas son capturas de navegador, mockups con perspectiva o llevan logos de terceros que el modelo reproduciria.
+- `references/gold-standards/`: las 34 curadas y normalizadas a JPEG q90, lado largo max 1536 px. Son las que se **pasan** con `--ref` en el paso 3.
+
 ### 2. Construir el HTML con slots
 Parte de la plantilla del formato en `templates/html/` si existe; si no, construye HTML de dimensiones fijas siguiendo el patron del audit-report. Reglas duras:
 
@@ -56,11 +69,45 @@ Parte de la plantilla del formato en `templates/html/` si existe; si no, constru
 - Formatos ex-SVG (social, tienda, exterior, M+): produce HTML de dimensiones fijas y entrega el PNG renderizado. Solo produce SVG si piden vector editable.
 
 ### 3. Generar la fotografia
-Por cada `{{IMG:...}}`: escribe el prompt siguiendo `guidelines/magic-prompt.md` (4-5 frases cinematograficas en ingles, realismo editorial, universo Movistar) y ejecuta:
+
+Por cada `{{IMG:...}}`: escribe el prompt siguiendo `guidelines/magic-prompt.md` (4-5 frases cinematograficas en ingles, realismo editorial, universo Movistar) y **pasa 2-3 Gold Standards con `--ref`**.
+
+**Generar sin referencia visual esta prohibido si existe Gold Standard para el canal.** El prompt describe la escena; la referencia transmite lo que el prompt no puede describir: composicion, luz, jerarquia y codigo de marca. Sin referencia el modelo produce stock generico.
+
+**A0. Si el canal tiene prototyper, leelo primero.** `guidelines/prototypers/` tiene el prompt calibrado de email, movistarplus, tienda-plv y meta: familias visuales, composicion por formato, paleta del canal, reglas criticas (CTA link en M+, sin boton en Meta, beneficio antes que precio en tienda) y alertas de validacion. Cada archivo empieza con un bloque de adaptacion que mapea dimensiones a los flags del script. El prototyper manda sobre la doctrina generica de magic-prompt.md en su canal.
+
+**A. Elegir.** `references/gold-standards/INDEX.md` tiene la tabla "Que referencias pasar segun lo que estes generando" con la combinacion resuelta por canal y por modo. Reglas:
+
+- 2 o 3 referencias. Nunca mas (diluyen la senal y se facturan como tokens), nunca cero.
+- Combina por **modo**, no solo por canal: foto de escena con referencias FOTO, fondo grafico con referencias GRAFICO.
+- Movistar+ solo con Movistar+: sus referencias se combinan entre si, nunca con otros canales. Su codigo real es azul con pastilla blanca y keyword azul; el modo oscuro lo pone el key art, no un fondo negro.
+- El co-branding de las referencias es oficial (partners de Movistar): usalas sin miedo. Regla de contenido: si la pieza nueva promociona otros titulos u otros dispositivos, describe el contenido nuevo en el prompt para no arrastrar el de la referencia. Pieza 100% Movistar sin partner: anade exclusion de logos ajenos (referencias sin partner: tienda-plv-etiqueta-sin-ip.jpg y exterior-cartel-tipografico-paleta.jpg).
+- Si la fila del INDEX tiene la columna `Ojo` rellena, ese defecto va al prompt como exclusion explicita. El modelo copia los defectos igual que las virtudes.
+- Si el canal no tiene Gold Standard (BTL, TMKS, D2D, SMS, push, lona, display servido, caballete impreso): genera sin `--ref` y flaggea `sin_gold_standard`. No sustituyas por una referencia de otro canal: una referencia equivocada es peor que ninguna.
+
+**B. Comprobar antes de gastar credito.** Una vez por sesion:
 
 ```bash
-python3 scripts/generate_image.py -p "<prompt>" -o outputs/<slug>-<zona>.png --aspect <ratio>
+python3 scripts/generate_image.py -p "test" -o /tmp/t.png --aspect <ratio> \
+  --ref references/gold-standards/<canal>/<archivo>.jpg \
+  --ref references/gold-standards/<canal>/<archivo>.jpg \
+  --dry-run
 ```
+
+Debe decir `endpoint: .../v1/images/edits`, `encoding: multipart/form-data` y `refs: 2`. Si dice `generations` y `refs: 0`, las referencias no se estan pasando: para y arreglalo antes de generar la tanda.
+
+**C. Generar.**
+
+```bash
+python3 scripts/generate_image.py \
+  -p "<prompt>" -o outputs/<slug>-<zona>.png --aspect <ratio> \
+  --ref references/gold-standards/<canal>/<archivo-1>.jpg \
+  --ref references/gold-standards/<canal>/<archivo-2>.jpg
+```
+
+Las rutas de `--ref` son relativas a `movistar-visual-production/`. Ejecuta el script desde ahi. Si dice `ERROR: referencia no encontrada`, te imprime el cwd actual.
+
+**D. Documentar.** En el design rationale, seccion Fotografia: prompt literal + **Gold Standards usados por nombre de archivo** + por que esos + exclusiones metidas por la columna `Ojo`. Una entrada sin la linea de Gold Standards esta incompleta.
 
 Si la API no esta disponible, usa como stand-in un crop coherente de `references/pieces/` y flaggea `imagen_provisional`.
 
