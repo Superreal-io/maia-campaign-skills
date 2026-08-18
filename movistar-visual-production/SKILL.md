@@ -1,7 +1,7 @@
 ---
 name: movistar-visual-production
 description: Stack de produccion visual del Art Director (D) para piezas Movistar presentables a cliente. Assets de marca como archivos (fuentes, logos, tokens), fotografia real via OpenAI (gpt-image-2), ensamblado programatico por slots, y bucle de verificacion visual con render. Sustituye a visual-01-brand-assets, visual-02-brand-typography y el enfoque base64 de visual-03.
-version: 1.1.0
+version: 1.2.0
 owner: superreal
 status: active
 loaded_by: D (Art Director)
@@ -98,9 +98,15 @@ Debe decir `endpoint: .../v1/images/edits`, `encoding: multipart/form-data` y `r
 
 **C. Generar.**
 
+Reglas del prompt (validadas en produccion 18-08-2026, son la diferencia medida entre pieza buena y pieza mediocre):
+
+- **El prompt describe la pieza, no la referencia.** PROHIBIDO escribir "following the reference", "the template", "the gold standard" o equivalentes dentro del prompt. Escribe el prompt como si la referencia no existiera: que se ve, donde, con que luz, con que jerarquia y con que textos EXACTOS. La referencia entra solo por `--ref`.
+- **Parte del prompt calibrado del canal** si existe en `guidelines/magic-prompt.md` seccion "Entradas" (M+, tienda y email hero ya tienen). Sustituye las variables por el copy real y no toques la parte fija.
+- **`--quality high` para entregables.** `medium` solo para pruebas y dry-runs de calibracion.
+
 ```bash
 python3 scripts/generate_image.py \
-  -p "<prompt>" -o outputs/<slug>-<zona>.png --aspect <ratio> \
+  -p "<prompt>" -o outputs/<slug>-<zona>.png --aspect <ratio> --quality high \
   --ref references/gold-standards/<canal>/<archivo-1>.jpg \
   --ref references/gold-standards/<canal>/<archivo-2>.jpg
 ```

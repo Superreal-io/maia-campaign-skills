@@ -79,6 +79,7 @@ Deliver exactly **one prompt**.
 - Never include video directions unless the user explicitly asks for video.
 - Never use empty descriptors like "beautiful," "epic," or "amazing" without translating them into visible image traits.
 - Never reference specific artist, photographer, or director names inside the prompt.
+- Never mention "the reference", "the template" or "the gold standard" inside the prompt. Describe the piece as if the reference did not exist; reference images enter only via `--ref`. Meta-instructions about the reference measurably degrade output quality.
 - Never write prompts that feel synthetic, generic, or detached from real image-making logic.
 
 ---
@@ -260,5 +261,68 @@ regenerando desde cero cada vez, y eso es exactamente lo que esta sección exist
 >
 > Pendiente de calibrar: exterior, BTL, display / digital.
 
-<!-- Pega aquí entradas sueltas siguiendo el formato de arriba, solo para canales sin prototyper. -->
+### MOVISTAR+ · videocartela / WOW · MIXTO
+
+- **Aspect / size:** `--aspect 16:9` (videocartela) o `--size 1920x640` (WOW)
+- **Referencias:**
+  `references/gold-standards/movistarplus/movistarplus-videocartela-completa-qr.jpg` (dominante)
+  `references/gold-standards/movistarplus/movistarplus-videocartela-cobranding-disney.jpg`
+- **Origen:** test A/B local 17-08-2026
+- **Validado:** 17-08-2026 · board · la pieza con refs clavó pastilla, precio con €, legal y zona de pósters
+
+**Prompt base:**
+
+```text
+A Movistar+ promotional banner for a streaming offer: white bold headline on the left side reading '{TITULAR}' over a Movistar blue background, a white pill-shaped tag with '{NOMBRE_OFERTA}' in blue, a large price reading '{PRECIO} €/mes', a small legal line reading '{LEGAL}', and three vertical movie posters on the right side showing {CONTENIDO_POSTERS}. Clean broadcast-quality layout, sentence case.
+```
+
+**Variables:** `{TITULAR}` copy real · `{NOMBRE_OFERTA}` keyword de la pastilla · `{PRECIO}` importe · `{LEGAL}` línea legal real · `{CONTENIDO_POSTERS}` los títulos reales de la campaña (si no se describen, hereda los de la referencia).
+
+**Exclusiones:** si la pieza no lleva QR, no mencionarlo; si no lleva precio, excluir "price, per-month rate, 'Desde'".
+
+**Qué falla si se cambia:** quitar la descripción de los pósters hace que el modelo copie los títulos de la referencia (Hamnet, Ted Lasso...). Escribir "EUR" en vez de dejar que la referencia imponga "€" no falla, la referencia lo corrige.
+
+### TIENDA · pantalla PLV producto+precio · MIXTO
+
+- **Aspect / size:** `--aspect 16:9` (horizontal) o `--aspect 9:16` (tótem, ref vertical primero)
+- **Referencias:**
+  `references/gold-standards/tienda/tienda-plv-producto-precio-samsung.jpg`
+  `references/gold-standards/tienda/tienda-plv-producto-precio-iphone.jpg`
+- **Origen:** test A/B local 17-08 + piloto Paperclip 18-08
+- **Validado:** 18-08-2026 · board · sistema clavado a la primera, dispositivo genérico pese a refs de marca
+
+**Prompt base:**
+
+```text
+A Movistar in-store digital retail screen for a device offer on a {COLOR_FONDO} flat background: bold blue headline in sentence case at the top reading '{TITULAR}', a generic premium {DISPOSITIVO} in the center, {BLOQUE_OFERTA}, a short claim line reading '{CLAIM}' and small legal text reading '{LEGAL}' at the bottom. Clean flat editorial layout, no third-party logos or brand marks anywhere.
+```
+
+**Variables:** `{COLOR_FONDO}` pale mint / pale yellow según campaña · `{TITULAR}` copy real · `{DISPOSITIVO}` smartphone / foldable / tablet · `{BLOQUE_OFERTA}` "an offer block with 'Desde {X}€/mes' in large black type" o, si la pieza no lleva precio, "no price anywhere" · `{CLAIM}` y `{LEGAL}` copy real.
+
+**Exclusiones:** "no third-party logos" es obligatoria (las refs llevan Samsung/Apple). Si lleva Swap: escribir el lockup exacto "MovistarSwap" (junto).
+
+**Qué falla si se cambia:** quitar "no third-party logos" reproduce el logo de la referencia. Sin titular literal, hereda el de la ref del iPhone.
+
+### EMAIL · hero fotográfico · FOTO
+
+- **Aspect / size:** `--aspect 3:2`
+- **Referencias:**
+  `references/gold-standards/email/email-multiproducto-3-cards.jpg`
+  `references/gold-standards/digital/digital-landing-precio-sobre-foto.jpg`
+- **Origen:** test A/B local 17-08
+- **Validado:** 17-08-2026 · board · collage, titular navy y remate manuscrito fieles al sistema
+
+**Prompt base:**
+
+```text
+A warm lifestyle collage for a telecom email hero: three stitched photos showing {ESCENA_1}, {ESCENA_2} and {ESCENA_3}, with a navy bold headline overlaid reading '{TITULAR}' and a handwritten cyan flourish reading '{REMATE}'. Natural light, editorial realism, subtle grain.
+```
+
+**Variables:** `{ESCENA_1..3}` escenas de la campaña (personas antes que dispositivos, entornos vividos) · `{TITULAR}` copy real · `{REMATE}` remate estacional (o quitar la frase si la campaña no lo lleva).
+
+**Exclusiones:** sin look CGI/HDR, sin piel plástica (ya implícito en "editorial realism, subtle grain").
+
+**Qué falla si se cambia:** describir solo una escena en vez de tres rompe el collage; el collage de 3 es el sistema del hero multiproducto.
+
+<!-- Añade entradas nuevas siguiendo el mismo formato cuando se validen más canales. -->
 
