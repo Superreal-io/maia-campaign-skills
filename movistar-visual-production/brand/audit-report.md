@@ -37,7 +37,7 @@ Estructura de plantilla fija:
 ### Landing web
 Muy parecido al email en jerarquía, pero:
 - Personalización explícita: "Hola Carlos," arriba a la derecha.
-- **Precio destacado** en bloque azul: número XXL en display, "€/mes" pequeño, sub-linea "Precio especial clientes miMovistar" en azul-claro.
+- **Precio destacado** en bloque azul: número XXL en display, "€/mes" pequeño, sub-línea "Precio especial clientes miMovistar" en azul-claro.
 - **Overline** en azul mayúscula tracked ("SER CLIENTE TIENE VENTAJAS").
 - Segmentación por perfil con secciones "CON FÚTBOL" / "SIN FÚTBOL" en cards secundarias (azul-claro + verde-claro).
 - Toggle visual ON/OFF real (no solo decorativo).
