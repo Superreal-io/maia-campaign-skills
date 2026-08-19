@@ -2,7 +2,7 @@
 name: Campaign Output Format
 key: campaign-output-format
 description: Schema canónico de los artefactos que producen los Agentes B y C -- Estrategia por Canal (B) y Estrategia Creativa (C). Define formato, validación y trazabilidad al Golden Briefing.
-version: 2.0.0
+versión: 2.0.0
 owner: system
 status: active
 ---
@@ -11,8 +11,8 @@ status: active
 
 Este skill define dos artefactos principales y los outputs visuales asociados:
 
-1. **Estrategia por Canal** (`media_strategy.json`) -- output del Planner. Acompanado de `media_strategy_v<N>.docx` (narrativo visual) y 8 one-pagers HTML: `calendario_<subcorriente>_v<N>.html` y `brief_canales_<subcorriente>_v<N>.html` para cada sub-corriente (Growth, Value, Dispositivos), mas 2 globales: `calendario_canales_global_v<N>.html` y `carga_soporte_global_v<N>.html`.
-2. **Estrategia Creativa** (`campaign_creative-strategy.json`) -- output del Creative Copywriter. Acompanado de `campaign_creative-strategy_v<N>.docx` (narrativo visual) y `campaign_creative-strategy_v<N>.html` (mapa de territorios creativos). Las campanas se agrupan por sub-corriente (Growth, Value, Dispositivos).
+1. **Estrategia por Canal** (`media_strategy.json`) -- output del Planner. Acompañado de `media_strategy_v<N>.docx` (narrativo visual) y 8 one-pagers HTML: `calendario_<subcorriente>_v<N>.html` y `brief_canales_territorio_<subcorriente>_v<N>.html` para cada sub-corriente (Growth, Value, Dispositivos), más 2 globales: `calendario_canales_global_v<N>.html` y `carga_soporte_global_v<N>.html`.
+2. **Estrategia Creativa** (`campaign_creative-strategy.json`) -- output del Creative Copywriter. Acompañado de `campaign_creative-strategy_v<N>.docx` (narrativo visual) y 1 HTML por sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`): mapa de territorios creativos, copies y flags filtrados por stream. Se generan solo los HTMLs de sub-corrientes que tengan territorios.
 
 Todos los JSON-parseables, versionados, trazables al Golden Briefing del que dependen.
 
@@ -26,30 +26,30 @@ media_strategy:
   id: "uuid-v4"
   version: 1
   brief_id: "uuid-del-brief"                 # FK a brief.id
-  golden_briefing_version: 1                           # FK a brief.version
+  golden_briefing_version: 1                           # FK a brief.versión
   case_id: "string"
   created_by: "agente-b"
   created_at: "ISO8601"
 
-  # Priorizacion de territorios (obligatorio si >10 territorios, opcional si menos)
+  # Priorización de territorios (obligatorio si >10 territorios, opcional si menos)
   priorizacion_territorios:
     - territorio: "string"
       bloque: "P1|P2|apoyo_tactico|revisar"
       justificacion: "string"
 
-  # Comentarios expertos (maximo 3, solo cuando aportan valor real)
+  # Comentarios expertos (máximo 3, solo cuando aportan valor real)
   comentarios_expertos:
-    - observacion: "string (dato concreto detectado)"
+    - observación: "string (dato concreto detectado)"
       por_que_importa: "string (consecuencia si no se actua)"
-      recomendacion: "string (accion concreta)"
+      recomendacion: "string (acción concreta)"
 
-  # Resumen ejecutivo (para humano de Comunicacion / Campaign Manager)
+  # Resumen ejecutivo (para humano de Comunicación / Campaign Manager)
   executive_summary:
     sintesis: "string (3-5 frases)"
     foco_recomendado: "string (1 frase)"
     canales_activos: ["email", "display", "tienda"]
     ajustes_propuestos_al_brief: 
-      - field: "publicos[0].prioridad"
+      - field: "públicos[0].prioridad"
         propuesta: "Subir a prioridad principal"
         razon: "El playbook de Meta indica que este público responde mejor en ese canal y debería ser cabecera"
         bloqueante: false
@@ -61,10 +61,10 @@ media_strategy:
   tabla_territorios_medios:
     - territorio: "string"
       bloque_prioridad: "P1|P2|apoyo_tactico|revisar"
-      rol_estrategico: "string (tier + funcion en 1 linea)"
+      rol_estrategico: "string (tier + función en 1 línea)"
       audiencia_segmento: "string"
       mensaje_principal: "string"
-      crm_btl: "string|null (activacion, cadencia, presion)"
+      crm_btl: "string|null (activación, cadencia, presión)"
       movistar_plus: "string|null"
       digital: "string|null"
       tienda_plv: "string|null"
@@ -84,7 +84,7 @@ media_strategy:
   # Detalle por canal
   channels:
     - channel: "email"
-      origen: "briefing|Recomendacion Planner"   # etiqueta de inferencia
+      origen: "briefing|Recomendación Planner"   # etiqueta de inferencia
       funcion: "string (papel del canal en esta campaña)"
       mensaje_a_priorizar: "string (del Brief)"
       mensaje_descartado: 
@@ -102,13 +102,13 @@ media_strategy:
           que_recibe: "string (subset del mensaje)"
       racional: "string (2-3 frases -- por qué esta recomendación)"
       kpis:
-        - metrica: "string"
+        - métrica: "string"
           target: "string|number"
       check_principios:
         - principio_id: "email-frecuencia"
           pasa: true|false|"no_evaluable"    # no_evaluable cuando la skill está en skeleton
           razon: "string | null"             # obligatorio si pasa: false o no_evaluable
-        - principio_id: "email-cta-unico"
+        - principio_id: "email-cta-único"
           pasa: true|false|"no_evaluable"
           razon: "string | null"
       check_principios_resumen:
@@ -125,8 +125,8 @@ media_strategy:
     fase_funnel: "upper|mid|lower|loyalty|service"
     territorio_principal: "string"
     territorios_secundarios: ["string"]
-    idea_dominante: "string (frase madre que ordena la campana)"
-    audiencia_principal: "string (target + relacion con Movistar)"
+    idea_dominante: "string (frase madre que ordena la campaña)"
+    audiencia_principal: "string (target + relación con Movistar)"
     segmentos_operativos:
       - nombre: "string (ej. Clientes sin 1RTR)"
         tamano_estimado: "string|null (ej. 1,0M)"
@@ -136,7 +136,7 @@ media_strategy:
         presion_recomendada: "baja|media|media-alta|alta"
         presion_justificacion: "string"
     reglas_presion_comercial:
-      - regla: "string (ej. Maximo 2 impactos comerciales por cliente/semana)"
+      - regla: "string (ej. Máximo 2 impactos comerciales por cliente/semana)"
         aplicacion: "string (cuando y como se aplica)"
     canales_principales: ["string"]
     canales_apoyo: ["string"]
@@ -156,7 +156,7 @@ media_strategy:
     recomendaciones_creativas: "string"
     riesgos: ["string"]
 
-  # Aprobacion
+  # Aprobación
   approval:
     status: "draft|pending|approved|superseded"
     approved_by: "human:julian@superreal.io | director"
@@ -181,23 +181,23 @@ media_strategy:
 
 ### Outputs visuales de B (one-pagers por stream)
 
-Ademas del JSON y el .docx, el Planner produce 8 one-pagers HTML (6 por sub-corriente + 2 globales):
+Además del JSON y el .docx, el Planner produce 8 one-pagers HTML (6 por sub-corriente + 2 globales):
 
 **Por sub-corriente** (Growth, Value, Dispositivos):
 
 | Archivo | Contenido |
 |---|---|
 | `calendario_<subcorriente>_v<N>.html` | Gantt semanal: territorios x semanas, barras coloreadas por sub-corriente, chips de medios |
-| `brief_canales_<subcorriente>_v<N>.html` | Matriz: territorios x canales (TV, Exterior, M+, BTL, Digital, Tienda PLV, Tienda Caballete), checks azules con especificacion |
+| `brief_canales_territorio_<subcorriente>_v<N>.html` | Matriz: territorios x canales (TV, Exterior, M+, BTL, Digital, Tienda PLV, Tienda Caballete), checks azules con especificación |
 
 **Globales** (consolidan las 3 sub-corrientes):
 
 | Archivo | Contenido |
 |---|---|
-| `calendario_canales_global_v<N>.html` | Gantt cross-stream + matriz de canales cruzada. Detecta solapes de presion entre sub-corrientes. |
-| `carga_soporte_global_v<N>.html` | Heatmap semanal de carga por canal. Detecta picos criticos y sugiere redistribucion. |
+| `calendario_canales_global_v<N>.html` | Gantt cross-stream + matriz de canales cruzada. Detecta solapes de presión entre sub-corrientes. |
+| `carga_soporte_global_v<N>.html` | Heatmap semanal de carga por canal. Detecta picos criticos y sugiere redistribución. |
 
-Versionado: comparten version con el JSON y el .docx. Paleta: identidad Movistar (#0066FF, #262423, #6F7176, #F5F7FA, #FFFFFF) + colores de sub-corriente (verde #00C48C Dispositivos, azul #0066FF Growth, morado #8B5CF6 Value). Tipografia: system-ui.
+Versionado: comparten versión con el JSON y el .docx. Paleta: identidad Movistar (#0066FF, #262423, #6F7176, #F5F7FA, #FFFFFF) + colores de sub-corriente (verde #00C48C Dispositivos, azul #0066FF Growth, morado #8B5CF6 Value). Tipografia: system-ui.
 
 ---
 
@@ -214,7 +214,7 @@ campaign_creative-strategy:
   created_by: "agente-c"
   created_at: "ISO8601"
 
-  # ── Nivel 1: Marco estrategico (1 por ciclo) ──
+  # ── Nivel 1: Marco estratégico (1 por ciclo) ──
   marco_estrategico:
     tesis_estrategica: "string (idea rectora que conecta todos los territorios)"
     ajuste_rector:                               # null si no hay ajuste
@@ -258,7 +258,7 @@ campaign_creative-strategy:
       
       rol_estrategico_canal:
         - canal: "string"
-          rol: "string (ej. venta directa, consideracion, recordatorio, cierre)"
+          rol: "string (ej. venta directa, consideración, recordatorio, cierre)"
       
       copies:
         - canal: "email"
@@ -275,7 +275,7 @@ campaign_creative-strategy:
               cta_principal: "string"
               por_que_funciona: "string (1-2 frases)"
         - canal: "display"
-          # ... mismo schema con campos especificos del canal ...
+          # ... mismo schema con campos específicos del canal ...
       
       formatos_recomendados:
         - canal: "email"
@@ -286,7 +286,7 @@ campaign_creative-strategy:
           formatos: ["cartel A3", "pantalla digital"]
       
       ideas_visuales:
-        - descripcion: "string (que se ve en la pieza)"
+        - descripción: "string (que se ve en la pieza)"
           referencia_visual: "string|null"
           notas_para_agente_d: "string"
       
@@ -303,14 +303,14 @@ campaign_creative-strategy:
           cta: "string"
       
       kpis:
-        - metrica: "string"
+        - métrica: "string"
           target: "string|number"
           fuente: "string"
       
       check_principios:
         - canal: "email"
           principios_evaluados:
-            - id: "email-cta-unico"
+            - id: "email-cta-único"
               pasa: true|false|"no_evaluable"
               razon: "string | null"
           pasa_global: true|false|"parcial"
@@ -355,13 +355,13 @@ campaign_creative-strategy:
           bloques:                              # lista ordenada de arriba a abajo
             - orden: 1
               tipo: "logo|hero_image|titular|subtitulo|body|cta|legal|badge|precio|footer"
-              contenido: "string (copy final asignado o descripcion si es imagen)"
+              contenido: "string (copy final asignado o descripción si es imagen)"
               peso_visual: "string (ej. 40% del espacio, dominante, secundario)"
           notas_para_d: "string (indicaciones concretas para Art Director)"
 
       # ── Scoring CRM por pieza (OBLIGATORIO) ──
       scoring_crm:
-        - pieza: "string (id unico de la pieza)"
+        - pieza: "string (id único de la pieza)"
           canal: "string"
           territorio: "string"
           score: 84                             # 0-100
@@ -398,7 +398,7 @@ campaign_creative-strategy:
           razonamiento_creativo: "string (2-3 frases)"
           racional: "string (3 frases max -- por que este territorio, concepto, canal, audiencia, momento)"
 
-  # Aprobacion
+  # Aprobación
   approval:
     status: "draft|pending|approved|superseded"
     approved_by: "human:julian@superreal.io | director"
@@ -410,44 +410,44 @@ campaign_creative-strategy:
     html_outputs_dir: "path/al/directorio/de/htmls"
 ```
 
-### Validacion de la Estrategia Creativa
+### Validación de la Estrategia Creativa
 
-**Marco estrategico (Nivel 1):**
+**Marco estratégico (Nivel 1):**
 
 1. `brief_id` y `media_strategy_id` referencian artefactos existentes y aprobados.
 2. `marco_estrategico.tesis_estrategica` no esta vacio.
 3. `marco_estrategico.segmentacion_creativa` cubre todos los segmentos de `media_strategy.handoff_to_c.segmentos_operativos`. No se acepta un segmento omitido sin flag.
-4. `marco_estrategico.reglas_presion_heredadas` es copia literal de `media_strategy.handoff_to_c.reglas_presion_comercial`. Cualquier desviacion debe estar en `desviaciones_propuestas` con justificacion.
-5. `marco_estrategico.calendario_integrado` tiene al menos una entrada por semana del periodo de campana.
+4. `marco_estrategico.reglas_presion_heredadas` es copia literal de `media_strategy.handoff_to_c.reglas_presion_comercial`. Cualquier desviación debe estar en `desviaciones_propuestas` con justificación.
+5. `marco_estrategico.calendario_integrado` tiene al menos una entrada por semana del período de campaña.
 6. `marco_estrategico.fase_funnel` coincide con `media_strategy.handoff_to_c.fase_funnel` salvo flag de ajuste.
 
 **Campanas por territorio (Nivel 2):**
 
-7. Cada `campaigns[].mensaje_principal` es UNO solo. No se acepta una campana con 2+ mensajes principales.
+7. Cada `campaigns[].mensaje_principal` es UNO solo. No se acepta una campaña con 2+ mensajes principales.
 8. Cada `campaigns[].canales` esta dentro de los canales activos en la Estrategia de Medios.
 9. Cada `campaigns[].audiencia.segmento` referencia un segmento existente en `marco_estrategico.segmentacion_creativa`.
 10. Cada `copies[]` tiene `titular` y `cta_principal` no vacios.
-11. Cada `copies[].variantes[]` tiene `hipotesis` y `por_que_funciona` no vacios. No se acepta variante sin justificacion.
-12. Cada campana tiene `formatos_recomendados` con al menos un formato por canal activo.
-13. Cada campana tiene `cadencia_ideal` con al menos una entrada.
-14. Si `check_principios[].pasa_global: false` en alguna campana, se flaggea como severidad alta para el Campaign Manager.
+11. Cada `copies[].variantes[]` tiene `hipotesis` y `por_que_funciona` no vacios. No se acepta variante sin justificación.
+12. Cada campaña tiene `formatos_recomendados` con al menos un formato por canal activo.
+13. Cada campaña tiene `cadencia_ideal` con al menos una entrada.
+14. Si `check_principios[].pasa_global: false` en alguna campaña, se flaggea como severidad alta para el Campaign Manager.
 15. Si `check_principios[].pasa_global: "parcial"` (hay checks `no_evaluable`), el resumen ejecutivo debe declarar el porcentaje evaluable.
-16. Si una campana tiene `flags[]` con severidad `alta`, el Campaign Manager decide si bloquea o acepta el riesgo.
-17. `formal_rules_check` presente en cada campana con al menos un canal verificado.
+16. Si una campaña tiene `flags[]` con severidad `alta`, el Campaign Manager decide si bloquea o acepta el riesgo.
+17. `formal_rules_check` presente en cada campaña con al menos un canal verificado.
 
 **Copy Prototype y Scoring CRM:**
 
-18. Cada campana tiene al menos 1 entrada en `copy_prototype` por canal activo.
+18. Cada campaña tiene al menos 1 entrada en `copy_prototype` por canal activo.
 19. Cada `copy_prototype[]` tiene al menos 3 bloques ordenados y `notas_para_d` no vacio.
-20. Cada campana tiene al menos 1 entrada en `scoring_crm` por pieza principal.
+20. Cada campaña tiene al menos 1 entrada en `scoring_crm` por pieza principal.
 21. Cada `scoring_crm[].score` es la suma de `base_60` (10 campos x 0-6) + `modulacion_40` (4 campos x 0-10). La suma debe coincidir con `score`.
 22. Cada `scoring_crm[].tema_a_vigilar` no esta vacio.
 23. Si `scoring_crm[].score < 70`, debe existir un flag correspondiente con severidad media.
-24. Cada campana tiene `sub_corriente` con valor `growth`, `value` o `dispositivos`. Debe haber al menos 1 campana por cada sub-corriente presente en el output del Planner.
+24. Cada campaña tiene `sub_corriente` con valor `growth`, `value` o `dispositivos`. Debe haber al menos 1 campaña por cada sub-corriente presente en el output del Planner.
 
 **Profundidad por pieza (Nivel 3):**
 
-25. Cada campana tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal).
+25. Cada campaña tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal).
 26. Cada `piezas_clave[]` tiene `razonamiento_creativo` y `racional` no vacios.
 
 ---

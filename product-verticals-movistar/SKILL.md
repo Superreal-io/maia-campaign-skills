@@ -2,7 +2,7 @@
 name: Verticales de Producto - Movistar
 key: product-verticals-movistar
 description: 10 módulos de producto/servicio con drivers emocionales, tono específico, dirección visual, palancas creativas y mandatories por vertical. Skill de referencia para los Agentes B y C al trabajar campañas de producto.
-version: 1.0.0
+versión: 1.0.0
 owner: superreal
 status: active
 source: Maia BTL Specialist v2 Peace of Life (Sección M) - validado por Comunicación Movistar
@@ -201,7 +201,7 @@ Skill de referencia. Los Agentes B y C la cargan cuando el brief incluye product
 - Puntual: dispositivo icónico o nueva categoría
 
 **Mandatories:**
-- **REGLA APPLE:** Ver definicion canonica en `btl-tone-movistar` seccion 5.1. Regla bloqueante.
+- **REGLA APPLE:** Ver definición canonica en `btl-tone-movistar` sección 5.1. Regla bloqueante.
 - Fabricantes: usar imágenes oficiales + logos fabricante
 
 ---
@@ -317,4 +317,4 @@ Try&Pay.
 
 - Si se añaden nuevos productos/servicios al portfolio de Movistar, crear nuevo módulo vertical o actualizar el existente.
 - Cambios en partners (altas/bajas) requieren actualización de la sección correspondiente.
-- Cambios mayores incrementan `version`.
+- Cambios mayores incrementan `versión`.

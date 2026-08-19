@@ -1,8 +1,8 @@
 ---
 name: Principios de Copywriting - Movistar
 key: copywriting-principles-movistar
-description: 9 principios de copywriting creativo, estructura de pieza, guia de inicio y codigo visual. Las reglas formales de identidad verbal estan en brand-voice-movistar. Skill obligatoria para el Creative Copywriter.
-version: 1.1.0
+description: 9 principios de copywriting creativo, estructura de pieza, guia de inicio y código visual. Las reglas formales de identidad verbal estan en brand-voice-movistar. Skill obligatoria para el Creative Copywriter.
+versión: 1.1.0
 owner: superreal
 status: active
 source: Brand Guardian v4 RAG Movistar (secciones 1.2 y 1.3) - validado por Comunicación Movistar
@@ -107,9 +107,9 @@ Enfocado en cerrar con confianza y cercanía.
 
 ## 5. Reglas formales de identidad verbal
 
-Las reglas formales de copy (mayusculas, persona gramatical, tuteo, titulares, emojis, simbolos, terminologia de producto, lenguaje inclusivo, diversidad) estan definidas en `brand-voice-movistar` seccion 5. No se duplican aqui.
+Las reglas formales de copy (mayusculas, persona gramatical, tuteo, titulares, emojis, símbolos, terminologia de producto, lenguaje inclusivo, diversidad) estan definidas en `brand-voice-movistar` sección 5. No se duplican aquí.
 
-El Creative Copywriter carga ambas skills: `brand-voice-movistar` para identidad verbal + evaluacion de tono, y esta skill para tecnica creativa y estructura de pieza.
+El Creative Copywriter carga ambas skills: `brand-voice-movistar` para identidad verbal + evaluación de tono, y esta skill para técnica creativa y estructura de pieza.
 
 ---
 
@@ -117,11 +117,11 @@ El Creative Copywriter carga ambas skills: `brand-voice-movistar` para identidad
 
 - **Strategist:** Referencia para detectar copies en el input que violen principios formales.
 - **Planner:** No la usa directamente (no escribe copies).
-- **Creative Copywriter:** La carga OBLIGATORIAMENTE. Aplica los 9 principios creativos al idear territorios y copies. Las 19 reglas formales las verifica contra `brand-voice-movistar` seccion 5 (fuente unica); si un copy viola una regla, lo reescribe y documenta en `formal_rules_check`.
+- **Creative Copywriter:** La carga OBLIGATORIAMENTE. Aplica los 9 principios creativos al idear territorios y copies. Las 19 reglas formales las verifica contra `brand-voice-movistar` sección 5 (fuente única); si un copy viola una regla, lo reescribe y documenta en `formal_rules_check`.
 - **Art Director:** La consulta para verificar que la jerarquía visual respeta el código visual para copy (sección 3).
 
 ## Mantenimiento
 
 - Cualquier cambio requiere validación del equipo de Comunicación Movistar.
-- Cambios mayores incrementan `version`.
+- Cambios mayores incrementan `versión`.
 - Si se detecta discrepancia con Brand Guardian v4, se sincroniza y documenta.

@@ -1,8 +1,8 @@
 ---
 name: "Brand Visual Composition - Movistar"
 key: brand-visual-composition-movistar
-description: "Reglas de composicion visual: grid (1/16), jerarquia tipografica Y-based, composicion de precios, matriz WCAG de contraste, Do's/Don'ts de color por fondo, reglas de layout, logotipo y fotografia. Skill obligatoria para el Art Director."
-version: 2.0.0
+description: "Reglas de composición visual: grid (1/16), jerarquía tipografica Y-based, composición de precios, matriz WCAG de contraste, Do's/Don'ts de color por fondo, reglas de layout, logotipo y fotografía. Skill obligatoria para el Art Director."
+versión: 2.0.0
 owner: superreal
 status: active
 source: "091022_Movistar_Refresh_Guidelines.pptx (197 slides) + 2025_Movistar_Toolkit_OnePage.pdf + Brand Guardian v4 RAG"
@@ -37,9 +37,9 @@ La M es el elemento más reconocible. Siempre luce su Azul Movistar (#0066FF). E
 ### 1.2b. Como escribir "Movistar"
 En titulares o textos donde Movistar actue como nombre de producto, se escribe con M mayuscula. No se permite "movistar" en minusculas en estos contextos. Esto refuerza el reconocimiento de marca sin necesidad del logotipo.
 
-### 1.3. Tamano minimo
+### 1.3. Tamano mínimo
 - **Minimo oficial de marca** (Refresh Guidelines 2025, slide 21): 10 mm en impresion, 20 px en digital. Por debajo de esto, nunca.
-- **Minimo operativo MAIA para piezas de campana**: 60 px. Es una regla interna de protagonismo de marca (la M como identificador principal), no un limite de la guia oficial. Aplica a los mockups de D; puede bajarse hasta el minimo oficial en formatos muy pequenos (favicon, display reducido) documentandolo en el rationale.
+- **Minimo operativo MAIA para piezas de campaña**: 60 px. Es una regla interna de protagonismo de marca (la M como identificador principal), no un limite de la guia oficial. Aplica a los mockups de D; puede bajarse hasta el mínimo oficial en formatos muy pequenos (favicon, display reducido) documentandolo en el rationale.
 
 ### 1.4. Área de protección
 Se construye un cuadrado tomando como referencia el ancho de la propia M. Ningún elemento gráfico o tipográfico puede invadir ese espacio.
@@ -152,9 +152,9 @@ Los caracteres toman inspiración directa de la M. Curvas, terminales y detalles
 ## 4. Matriz de contraste WCAG
 
 ### 4.1. Niveles
-- **AAA:** contraste minimo 7:1. Completamente accesible.
-- **AA:** contraste minimo 4.5:1. Accesible para textos >16pt, iconos, grafismos.
-- **A:** contraste minimo 3:1. Accesible para textos >24pt, iconos, grafismos.
+- **AAA:** contraste mínimo 7:1. Completamente accesible.
+- **AA:** contraste mínimo 4.5:1. Accesible para textos >16pt, iconos, grafismos.
+- **A:** contraste mínimo 3:1. Accesible para textos >24pt, iconos, grafismos.
 
 ### 4.2. Matriz completa
 
@@ -193,7 +193,7 @@ Los caracteres toman inspiración directa de la M. Curvas, terminales y detalles
 ### 5.2. Formatos digitales
 - Lado corto < 300px: margen = 15px
 - Lado corto >= 300px: margen = 25px
-- M: minimo operativo MAIA 60px, minimo oficial absoluto 20px (ver seccion 1.3)
+- M: mínimo operativo MAIA 60px, mínimo oficial absoluto 20px (ver sección 1.3)
 
 ### 5.3. Posición de la M
 1. Prioritaria: esquina superior derecha
@@ -202,35 +202,35 @@ Los caracteres toman inspiración directa de la M. Curvas, terminales y detalles
 
 ### 5.4. Layouts disponibles
 
-El sistema va desde la fluidez (layouts a sangre) hasta composiciones con elementos conectados. Cada tipo tiene su proposito:
+El sistema va desde la fluidez (layouts a sangre) hasta composiciones con elementos conectados. Cada tipo tiene su propósito:
 
-| Tipo | Descripcion | Cuando usarlo |
+| Tipo | Descripción | Cuando usarlo |
 |------|-------------|---------------|
 | **Fondo completo** | Color plano o imagen a sangre, sin contenedores | Piezas de alto impacto (LOVE), OOH, portadas |
-| **Faldones** | Franja de color/imagen como base para texto | Banners, cabeceras con fotografia parcial |
-| **Contenedor** | Bloque independiente que agrupa informacion | Piezas con mucho contenido, productos |
-| **Contenedor conectado** | Forma flexible con vertices redondeados que juega con elementos externos (M, titular) | Comunicaciones digitales, display, social. Es el layout mas versatil y diferencial |
+| **Faldones** | Franja de color/imagen como base para texto | Banners, cabeceras con fotografía parcial |
+| **Contenedor** | Bloque independiente que agrupa información | Piezas con mucho contenido, productos |
+| **Contenedor conectado** | Forma flexible con vertices redondeados que juega con elementos externos (M, titular) | Comunicaciones digitales, display, social. Es el layout más versátil y diferencial |
 
 ### 5.5. Contenedor conectado (detalle)
 
-El contenedor conectado es el recurso de layout mas caracteristico de la nueva identidad. Reglas:
+El contenedor conectado es el recurso de layout más caracteristico de la nueva identidad. Reglas:
 
-- **Vertices redondeados:** 8px en digital, 1/6 del margen en print. Misma proporcion que en contenedores de resalte.
-- **Juego compositivo:** el contenedor siempre interactua con elementos externos (M o titular). Puede ajustarse al logotipo, al titulo, o a ambos.
-- **Distancia minima:** 1 modulo X entre el contenedor y cualquier otro elemento.
-- **Uso prioritario:** contenedor ajustado a la M o al titulo (crea legibilidad optima).
-- **Uso excepcional:** contenedor no ajustado a ningun elemento (solo cuando el formato lo exige).
+- **Vertices redondeados:** 8px en digital, 1/6 del margen en print. Misma proporción que en contenedores de resalte.
+- **Juego compositivo:** el contenedor siempre interactúa con elementos externos (M o titular). Puede ajustarse al logotipo, al título, o a ambos.
+- **Distancia mínima:** 1 modulo X entre el contenedor y cualquier otro elemento.
+- **Uso prioritario:** contenedor ajustado a la M o al título (crea legibilidad optima).
+- **Uso excepcional:** contenedor no ajustado a ningún elemento (solo cuando el formato lo exige).
 - **Prohibido:** contenedores que no aprovechen el espacio del formato o donde la M no cumpla el sistema de firma.
 - **Color en contenedores:** se puede usar un color secundario para jerarquizar contenido. Utilizar siempre color en los contenedores conectados para asegurar legibilidad de M y textos.
 
-### 5.6. Tipos de titulo
+### 5.6. Tipos de título
 
-| Tipo | Descripcion | Proporcion |
+| Tipo | Descripción | Proporción |
 |------|-------------|-----------|
-| **Titulo basico** | Tamano pautado en referencia al formato | Segun escala Y (seccion 6) |
-| **Super titulo** | Solo 1-2 palabras, ajustado a los margenes laterales | Escala hasta ocupar el ancho disponible |
+| **Titulo básico** | Tamano pautado en referencia al formato | Segun escala Y (sección 6) |
+| **Super título** | Solo 1-2 palabras, ajustado a los margenes laterales | Escala hasta ocupar el ancho disponible |
 
-El super titulo se reserva para comunicaciones de maximo impacto donde el mensaje es una o dos palabras ("Conecta", "Descubre").
+El super título se reserva para comunicaciones de máximo impacto donde el mensaje es una o dos palabras ("Conecta", "Descubre").
 
 ---
 
@@ -257,8 +257,8 @@ Y = altura de la mayúscula del título principal (H1).
 
 ### 6.4. Contenido complementario
 - Legal siempre en el extremo inferior del layout
-- Distancia legal-bodycopy: minimo 1 módulo, máximo 5 módulos
-- Bodycopy separado del subtítulo: minimo 2 módulos
+- Distancia legal-bodycopy: mínimo 1 módulo, máximo 5 módulos
+- Bodycopy separado del subtítulo: mínimo 2 módulos
 - Legal ajustado a márgenes laterales del formato
 
 ### 6.5. Espaciado entre niveles (resumen)
@@ -328,12 +328,12 @@ Espacio entre precio nuevo y tachado: ~0.05Y.
 
 ## 8. Usos incorrectos generales (prohibiciones absolutas)
 
-Estas reglas se aplican a TODA pieza, sin excepcion:
+Estas reglas se aplican a TODA pieza, sin excepción:
 
 1. **No usar colores secundarios oscuros como fondo.** Los fondos validos son: Azul Movistar, Blanco Movistar, Negro Movistar (excepcional), y secundarios claros.
-2. **No producir piezas sin Azul Movistar.** El azul debe estar presente en toda comunicacion (como fondo, como M, como acento, o como color de texto).
+2. **No producir piezas sin Azul Movistar.** El azul debe estar presente en toda comunicación (como fondo, como M, como acento, o como color de texto).
 3. **No usar dos colores en contenedores.** Un solo color por contenedor.
-4. **No usar mas de un color secundario por pieza.** Si usas verde claro, no puedes usar coral claro en la misma pieza.
+4. **No usar más de un color secundario por pieza.** Si usas verde claro, no puedes usar coral claro en la misma pieza.
 5. **No combinar contenedor destacado + palabra destacada.** Elegir uno de los dos recursos, nunca ambos.
 6. **Todos los contenedores tienen vertices redondeados.** 8px en digital, 1/6 del margen en print. Sin excepciones.
 
@@ -358,17 +358,17 @@ Estas reglas se aplican a TODA pieza, sin excepcion:
 ## Como usa el Art Director esta skill
 
 1. **Antes de empezar:** cargar esta skill + `brand-visual-guidelines-movistar` + `movistar-visual-production` (assets y scripts)
-2. **Grid:** calcular X para el formato (seccion 5), posicionar M, establecer margenes
-3. **Layout:** elegir tipo de layout (seccion 5.4): fondo completo, faldones, contenedor o contenedor conectado
-4. **Jerarquia:** calcular Y a partir del H1, derivar todos los tamanos proporcionalmente (seccion 6)
-5. **Color:** consultar Do's/Don'ts de la seccion 3 + prohibiciones absolutas de la seccion 8
-6. **Precios:** si la pieza tiene precio protagonista, aplicar composicion de la seccion 7
-7. **Logo:** verificar version de color correcta segun prioridad (seccion 1.2). Usar los slots `{{LOGO_*}}` de `movistar-visual-production`
+2. **Grid:** calcular X para el formato (sección 5), posicionar M, establecer margenes
+3. **Layout:** elegir tipo de layout (sección 5.4): fondo completo, faldones, contenedor o contenedor conectado
+4. **Jerarquia:** calcular Y a partir del H1, derivar todos los tamanos proporcionalmente (sección 6)
+5. **Color:** consultar Do's/Don'ts de la sección 3 + prohibiciones absolutas de la sección 8
+6. **Precios:** si la pieza tiene precio protagonista, aplicar composición de la sección 7
+7. **Logo:** verificar versión de color correcta según prioridad (sección 1.2). Usar los slots `{{LOGO_*}}` de `movistar-visual-production`
 8. **Tipografia:** usar el slot `{{FONT_FACE_MIN}}` de `movistar-visual-production` (assemble.py lo rellena). Solo pesos oficiales (300-800)
-9. **Fotografia:** si hay imagen, verificar principios de la seccion 9. La foto se genera con `generate_image.py` (estilo magic-prompt); placeholder con `data-prompt` solo como fallback flaggeado
+9. **Fotografía:** si hay imagen, verificar principios de la sección 9. La foto se genera con `generate_image.py` (estilo magic-prompt); placeholder con `data-prompt` solo como fallback flaggeado
 
 ## Mantenimiento
 
 - Cualquier cambio requiere validación del equipo de Comunicación Movistar.
-- Cambios mayores incrementan `version`.
+- Cambios mayores incrementan `versión`.
 - Si se detecta discrepancia con el brand book (091022_Movistar_Refresh_Guidelines.pptx), se sincroniza y documenta.

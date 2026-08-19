@@ -1,8 +1,8 @@
 ---
 name: Brand Voice - Movistar
 key: brand-voice-movistar
-description: Identidad de marca, voz, tono, valores comunicativos, reglas formales de identidad verbal (19 principios), Do's/Don'ts, ejemplos ON/OFF brand. Fuente unica de reglas formales de copy. Skill compartida cargada por todos los agentes.
-version: 1.1.0
+description: Identidad de marca, voz, tono, valores comunicativos, reglas formales de identidad verbal (19 principios), Do's/Don'ts, ejemplos ON/OFF brand. Fuente única de reglas formales de copy. Skill compartida cargada por todos los agentes.
+versión: 1.1.0
 owner: superreal
 status: active
 source: Maia System Prompt (secciones C, E, G) - validado por Comunicación Movistar
@@ -94,9 +94,9 @@ Evitamos ser muy descriptivos. Buscamos provocar emociones. Sin tecnicismos ni f
 - Incorrecto: "Abrimos nueva tienda que conecta contigo"
 
 ### 5.10. Expresiones que transmitan facilidad
-Priorizamos: "Es facil", "Sin problemas", "Es pan comido", "Dicho y hecho". Simplificamos con enumeraciones, listados y conectores consecutivos.
+Priorizamos: "Es fácil", "Sin problemas", "Es pan comido", "Dicho y hecho". Simplificamos con enumeraciones, listados y conectores consecutivos.
 - Correcto: "Llamanos y te atenderemos en seguida", "¡Instalar tu Router Smart wifi es pan comido!"
-- Incorrecto: "Para ello, seleccione a continuacion el servicio en el que esta interesado"
+- Incorrecto: "Para ello, seleccione a continuación el servicio en el que esta interesado"
 
 ### 5.11. Cifras de manera sencilla
 Redondear cuando sea posible. Evitar decimales innecesarios.
@@ -115,28 +115,28 @@ Hablamos como si le hablasemos a un amigo, usando expresiones cotidianas.
 - Incorrecto: "En breves momentos", "Nuestro equipo intentara solucionarlo lo antes posible"
 
 ### 5.15. Emojis con criterio
-Los emojis introducen matices de comunicacion no verbal. Nunca sustituyen una palabra o numero. Nunca se repite el mismo emoji consecutivamente.
-- Correcto: "Encuentra mas informacion aqui👇", "¡A celebrarlo! 💃"
+Los emojis introducen matices de comunicación no verbal. Nunca sustituyen una palabra o número. Nunca se repite el mismo emoji consecutivamente.
+- Correcto: "Encuentra más información aquí👇", "¡A celebrarlo! 💃"
 - Incorrecto: "¡A celebrarlo! 💃💃💃"
 
 ### 5.16. Somos emotivos
-Verbos y palabras que transmitan accion, movimiento y emocion: saltar, impulsar, motivar, vivir, vibrar, explorar, lanzar, subir, avanzar...
+Verbos y palabras que transmitan acción, movimiento y emoción: saltar, impulsar, motivar, vivir, vibrar, explorar, lanzar, subir, avanzar...
 - Correcto: "Ahora, llegaras donde quieras y sin limites con tu fibra"
-- Incorrecto: "Ahora, mas velocidad con tu fibra"
+- Incorrecto: "Ahora, más velocidad con tu fibra"
 
 ### 5.17. Exclamaciones y preguntas retadoras
 Reforzamos mensajes con exclamaciones y preguntas retadoras. Siempre signos de apertura y cierre (RAE).
-- Correcto: "¿Quieres saber mas?", "¡Vive todo el futbol!"
-- Incorrecto: "Mas informacion"
+- Correcto: "¿Quieres saber más?", "¡Vive todo el futbol!"
+- Incorrecto: "Más información"
 
 ### 5.18. Simbolos sin puntos, con espacio
-Los simbolos (€, h) van de la forma mas sencilla: con espacio y sin puntos. Excepcion: si forman parte de un nombre de plan/producto propio.
+Los símbolos (€, h) van de la forma más sencilla: con espacio y sin puntos. Excepción: si forman parte de un nombre de plan/producto propio.
 - Correcto: "45€", "30 cts/SMS", "De 9:00 h a 20:00 h"
 - Incorrecto: "45 €", "30cts/SMS"
 
-### 5.19. Terminos especificos de producto
+### 5.19. Terminos específicos de producto
 - Capacidad de datos: mayusculas con espacio: 5 GB
-- Velocidad de navegacion: "b" minuscula, sin espacio: 300Mb
+- Velocidad de navegación: "b" minuscula, sin espacio: 300Mb
 - Fibra/ADSL: "Gbps" (no acortar a "Gb")
 - "Smartphone" con mayuscula inicial solo como categoria de producto, inicio de frase o tras punto
 - "Smart WiFi", "Futbol", "Living Apps": inicial mayuscula como nombre de categoria
@@ -179,15 +179,15 @@ Los simbolos (€, h) van de la forma mas sencilla: con espacio y sin puntos. Ex
 
 ---
 
-## 10. Verificacion de reglas formales
+## 10. Verificación de reglas formales
 
-**Regla de activacion:** el Creative Copywriter verifica las 19 reglas formales (seccion 5, subsecciones 5.1 a 5.19) sobre cada pieza de comunicacion final destinada a cliente. Cada regla es binaria: cumple o no cumple. Esta skill es la fuente unica de las reglas formales; `copywriting-principles-movistar` cubre la tecnica creativa y remite aqui.
+**Regla de activación:** el Creative Copywriter verifica las 19 reglas formales (sección 5, subsecciones 5.1 a 5.19) sobre cada pieza de comunicación final destinada a cliente. Cada regla es binaria: cumple o no cumple. Esta skill es la fuente única de las reglas formales; `copywriting-principles-movistar` cubre la técnica creativa y remite aquí.
 
 **Regla de exclusion:** no se aplica si solo se responden preguntas, se explican conceptos o se esta en fase de brainstorming.
 
 **Formato de salida:** campo `formal_rules_check` en el JSON de C con la lista de reglas verificadas, violaciones detectadas y correcciones aplicadas.
 
-**No hay scoring subjetivo de tono.** La evaluacion de si un copy "suena a Movistar" la hace el humano en el gate de C. Los LLMs verifican reglas formales (binarias, comprobables); los humanos evaluan sensacion tonal.
+**No hay scoring subjetivo de tono.** La evaluación de si un copy "suena a Movistar" la hace el humano en el gate de C. Los LLMs verifican reglas formales (binarias, comprobables); los humanos evaluan sensación tonal.
 
 ---
 
@@ -195,11 +195,11 @@ Los simbolos (€, h) van de la forma mas sencilla: con espacio y sin puntos. Ex
 
 - **Strategist:** La carga para detectar conflictos entre el input del área y los valores de marca al construir el brief.
 - **Planner:** La consulta para verificar que la estrategia por canal refleja el tono y posicionamiento de Movistar.
-- **Creative Copywriter:** La carga obligatoriamente antes de escribir copies. Verifica las 19 reglas formales (seccion 5) sobre cada pieza final. Documenta en `formal_rules_check`.
+- **Creative Copywriter:** La carga obligatoriamente antes de escribir copies. Verifica las 19 reglas formales (sección 5) sobre cada pieza final. Documenta en `formal_rules_check`.
 - **Art Director:** La consulta para verificar que la jerarquía visual refuerza los valores comunicativos (claridad, cercanía, elegancia).
 
 ## Mantenimiento
 
 - Cualquier cambio requiere validación del equipo de Comunicación Movistar.
-- Cambios mayores incrementan `version` del skill.
+- Cambios mayores incrementan `versión` del skill.
 - Si se detecta discrepancia con Maia productiva, se sincroniza y se documenta en el change log.

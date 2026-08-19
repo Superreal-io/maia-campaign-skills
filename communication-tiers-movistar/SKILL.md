@@ -2,7 +2,7 @@
 name: Niveles de Comunicación - Movistar
 key: communication-tiers-movistar
 description: Framework LOVE/CHOOSE/BUY que determina la flexibilidad visual y el enfoque creativo de cada campaña. El Planner clasifica la campaña; el Creative Copywriter adapta el territorio creativo; el Art Director ajusta la rigidez del sistema visual.
-version: 1.0.0
+versión: 1.0.0
 owner: superreal
 status: active
 source: Brand Guardian v4 RAG Movistar (secciones 8 y 9) - validado por Comunicación Movistar
@@ -157,5 +157,5 @@ Motivar la compra. Se enfoca en precio y promociones.
 ## Mantenimiento
 
 - Cualquier cambio requiere validación del equipo de Comunicación Movistar.
-- Cambios mayores incrementan `version`.
+- Cambios mayores incrementan `versión`.
 - Si se detecta discrepancia con Brand Guardian v4, se sincroniza y documenta.

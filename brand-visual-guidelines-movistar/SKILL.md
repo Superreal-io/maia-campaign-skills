@@ -1,8 +1,8 @@
 ---
 name: Brand Visual Guidelines - Movistar
 key: brand-visual-guidelines-movistar
-description: Fuente unica de verdad para paleta cromatica, tipografias y espaciados de la identidad visual vigente de Movistar. Consumido por la HTML Component Library y por cualquier skill que genere output visual.
-version: 2.0.0
+description: Fuente única de verdad para paleta cromatica, tipografías y espaciados de la identidad visual vigente de Movistar. Consumido por la HTML Component Library y por cualquier skill que genere output visual.
+versión: 2.0.0
 owner: superreal
 status: active
 source: 091022_Movistar_Refresh_Guidelines.pptx + 2025_Movistar_Toolkit_OnePage.pdf
@@ -10,7 +10,7 @@ source: 091022_Movistar_Refresh_Guidelines.pptx + 2025_Movistar_Toolkit_OnePage.
 
 # Brand Visual Guidelines - Movistar
 
-Fuente unica de verdad visual. Todos los archivos que generen HTML, CSS o cualquier output visual consumen estas definiciones. Ningun componente define colores o tipografias propios.
+Fuente única de verdad visual. Todos los archivos que generen HTML, CSS o cualquier output visual consumen estas definiciones. Ningun componente define colores o tipografías propios.
 
 > **HEX del azul confirmado:** #0066FF (confirmado por el cliente, junio 2026).
 
@@ -46,15 +46,15 @@ Fuente unica de verdad visual. Todos los archivos que generen HTML, CSS o cualqu
 - 10% Negro Movistar
 - 20% Colores secundarios (repartidos entre los cuatro claros)
 
-### Reglas de combinacion
+### Reglas de combinación
 
 - No mezclar dos colores secundarios distintos en una misma pieza.
-- El Azul Movistar debe estar siempre presente como ancla cromatica en toda comunicacion.
+- El Azul Movistar debe estar siempre presente como ancla cromatica en toda comunicación.
 - No usar colores secundarios oscuros como fondo. Los fondos validos son: Azul, Blanco, Negro (excepcional), y secundarios claros.
-- Maximo un contenedor destacado por pieza.
-- No combinar contenedor destacado + palabra resaltada en titulo. Elegir uno.
+- Máximo un contenedor destacado por pieza.
+- No combinar contenedor destacado + palabra resaltada en título. Elegir uno.
 
-### Referencias Pantone / RAL (para produccion)
+### Referencias Pantone / RAL (para producción)
 
 | Color | Pantone | RAL |
 |---|---|---|
@@ -76,7 +76,7 @@ Fuente unica de verdad visual. Todos los archivos que generen HTML, CSS o cualqu
 
 ### Tipografia corporativa: Movistar Sans
 
-Tipografia exclusiva con licencia. Variable font con eje de peso (wght: 300-800) y eje de inclinacion (slnt: 0-90).
+Tipografia exclusiva con licencia. Variable font con eje de peso (wght: 300-800) y eje de inclinación (slnt: 0-90).
 
 | Peso | font-weight | Uso principal |
 |---|---|---|
@@ -86,9 +86,9 @@ Tipografia exclusiva con licencia. Variable font con eje de peso (wght: 300-800)
 | Regular | 400 | Body text, parrafos |
 | Light | 300 | Disclaimers, texto legal, notas al pie |
 
-Las italicas (oblique 90deg) se reservan para resaltar palabras clave o terminos en otros idiomas.
+Las italicas (oblique 90deg) se reservan para resaltar palabras clave o términos en otros idiomas.
 
-**La tipografia se inyecta con el slot `{{FONT_FACE_MIN}}` de `movistar-visual-production`** (los woff2 viven como archivos en `brand/fonts/` y assemble.py los embebe; nunca se copia base64 a mano).
+**La tipografía se inyecta con el slot `{{FONT_FACE_MIN}}` de `movistar-visual-production`** (los woff2 viven como archivos en `brand/fonts/` y assemble.py los embebe; nunca se copia base64 a mano).
 
 ### Fallbacks web-safe
 
@@ -96,7 +96,7 @@ Las italicas (oblique 90deg) se reservan para resaltar palabras clave o terminos
 font-family: "Movistar Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 ```
 
-**Importante:** el fallback anterior (tipografia "Telefonica") es de la identidad anterior y no debe usarse.
+**Importante:** el fallback anterior (tipografía "Telefónica") es de la identidad anterior y no debe usarse.
 
 ---
 
@@ -178,7 +178,7 @@ body {
 }
 
 h1 { font-size: 2.25rem; font-weight: var(--font-weight-extrabold); line-height: 1.15; color: var(--movistar-text); }
-h2 { font-size: 1.75rem; font-weight: var(--font-weight-regular); line-height: 1.2; color: var(--movistar-text); } /* subtitulos en Regular: jerarquia por tamano, no por peso (Refresh Guidelines 2025) */
+h2 { font-size: 1.75rem; font-weight: var(--font-weight-regular); line-height: 1.2; color: var(--movistar-text); } /* subtitulos en Regular: jerarquía por tamaño, no por peso (Refresh Guidelines 2025) */
 h3 { font-size: 1.25rem; font-weight: var(--font-weight-medium); line-height: 1.3; color: var(--movistar-text); }
 p  { font-size: 1rem; font-weight: var(--font-weight-regular); }
 ```
@@ -198,4 +198,4 @@ Regla rápida: Negro sobre Blanco Movistar (AAA) y Blanco sobre Azul Movistar (A
 - Este archivo es la ÚNICA fuente de tokens visuales del sistema. Ningún otro archivo define colores ni tipografías.
 - HEX del azul: #0066FF, confirmado por el cliente en junio 2026 y alineado con las Refresh Guidelines 2025. Cerrado.
 - Si se obtiene acceso al design system de Movistar (Figma, tokens JSON), migrar a ese formato y deprecar este archivo.
-- Cambios mayores incrementan `version`.
+- Cambios mayores incrementan `versión`.
