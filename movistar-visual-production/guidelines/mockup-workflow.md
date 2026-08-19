@@ -20,10 +20,10 @@ Regla de oro: **si es para persuadir, va con mockup. Si es para producir, va pla
 ## Flujo estándar (2 pasos)
 
 ### Paso 1: generar la pieza plana
-Sigue las reglas del design system y las referencias en `../reference-pieces/INDEX.md` del formato pedido. Salida: PNG rectangular con la creatividad final.
+Sigue las reglas del design system y las referencias en `../references/INDEX.md` del formato pedido. Salida: PNG rectangular con la creatividad final.
 
 ### Paso 2: incrustar en template
-1. Elegir template. Ver `../mockup-templates/` y las subcarpetas por tipo. Si el usuario no especifica, elige el más natural para el formato:
+1. Elegir template. Ver `../templates/mockups/` y las subcarpetas por tipo. Si el usuario no específica, elige el más natural para el formato:
    - MUPI → `exterior/marquesina-*.png`
    - Valla/lona → `exterior/lona-*.png` o `exterior/valla-*.png`
    - Cartel A3 → `exterior/wild-posting-muro.png` o `print/cartel-a3-pared.png`
@@ -35,9 +35,9 @@ Sigue las reglas del design system y las referencias en `../reference-pieces/IND
 
 2. Correr el script (desde la raíz del skill o el pack):
    ```bash
-   python MOV_Skill_Extension/scripts/mockup_composer.py \
+   python scripts/mockup_composer.py \
      -c out/creativa.png \
-     -t MOV_Skill_Extension/mockup-templates/exterior/marquesina-gran-via.png \
+     -t templates/mockups/exterior/marquesina-gran-via.png \
      -o out/mupi-final.png
    ```
    El script lee automáticamente `marquesina-gran-via.corners.json` si está al lado del template.
@@ -57,7 +57,7 @@ Cuando el resultado del paso 2 no basta (iluminación compleja, reflejos, sombra
 
 ## Reglas de integración visual
 
-- **Ilumación coherente**: si el template es nocturno (mupi Gran Vía), aplica sombras cálidas de sodio. Si es diurno, sombra fría suave.
+- **Iluminación coherente**: si el template es nocturno (mupi Gran Vía), aplica sombras cálidas de sodio. Si es diurno, sombra fría suave.
 - **Sombra proyectada** al suelo o pared cuando la pieza está en soporte físico (mupi, chevalet). El campo `shadow_opacity` en el JSON de esquinas lo activa.
 - **Reflejos** en cristal (marquesina, escaparate, pantalla iPhone) son deseables pero difíciles con PIL; delegar al flujo de alto realismo.
 - **Escala del logo**: la M expresiva en la pieza plana debe verse legible tras el warp. Si el template comprime mucho la esquina donde va la M, generar la creativa con la M algo más grande de lo normal.

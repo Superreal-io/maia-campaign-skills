@@ -4,12 +4,10 @@
 > por el equipo. El prompt original esta debajo sin modificar. Este bloque traduce su mecanica
 > de GPT a la del pipeline:
 >
-> - **"Gold Standards en tu Knowledge (17 PNGs)"** -> en el pipeline son
->   `references/gold-standards/email/` pasados con `--ref`. OJO: el GPT referencia 17 emails
->   por nombre (email-segunda-fibra, email-FTTR, email-dispositivos, email-futbol...) que NO
->   estan en este repo; aqui solo hay 3. La tabla de familias sigue valiendo como criterio,
->   pero hasta que se importen esos 17 PNGs, usa las 3 disponibles + la familia como
->   descripcion en el prompt.
+> - **"Gold Standards en tu Knowledge (17 PNGs)"** -> en el pipeline son las 13 piezas de
+>   `references/gold-standards/email/` pasadas con `--ref`. **Para elegir cuales pasar,
+>   consulta la tabla "Que referencias pasar" en `gold-standards/INDEX.md`** (filas que
+>   empiezan por "Email"). La tabla indica la combinacion de 2-3 refs por caso de uso.
 > - **"photography-prompt.md"** -> `guidelines/magic-prompt.md`.
 > - **Generacion** -> `scripts/generate_image.py`. En el pipeline el email FINAL se monta en
 >   HTML (paso 2 del SKILL.md); este prototyper sirve para (a) generar la fotografia del hero
@@ -17,6 +15,14 @@
 >   construir el HTML.
 > - **Dimensiones:** para un prototipo-imagen completo usa `--size 1280x2560` como maximo
 >   (el generador limita el ratio a 3:1; un email largo no cabe en una sola imagen).
+> - **Resolucion:** 3 piezas originales son `res-baja` (454-508 px) y cubren patrones de
+>   precio. Las 10 restantes son de alta resolucion (1262-2506 px originales, normalizadas
+>   a max 1536 px) y cubren 8 familias con renders completos. Preferir las de alta resolucion
+>   como dominante.
+> - **Familias sin gold standard:** Deporte futbol, Deporte multi, Ficcion/OTT,
+>   Seguridad/Alarmas y Cross-sell/Partner no tienen pieza en el repo. Para estas familias,
+>   genera con la familia como descripcion en el prompt y usa la referencia mas cercana por
+>   modo visual (dark, lifestyle, catalogo).
 >
 > **VALIDADO 17-08-2026 (solo el hero)** (test real, gpt-image-2, quality medium,
 > refs: email-multiproducto-3-cards + digital-landing-precio-sobre-foto):
@@ -24,10 +30,6 @@
 > - El hero salio fiel a la referencia: collage de 3 fotos con separadores diagonales,
 >   titular navy bold, remate manuscrito cyan con destello, logo Movistar arriba izquierda.
 >   Luz calida y grano natural, sin look CGI.
-> - Limite conocido del canal: las 3 referencias de email del repo son de baja resolucion
->   (454-508 px). La mejora real es importar los 17 gold standards del Knowledge del GPT
->   original (1260-1712 px, una familia por tipo de email) a gold-standards/email/.
->   Hasta entonces, este canal valida heros pero no emails completos como imagen.
 
 ---
 
@@ -50,20 +52,22 @@ Si recibes un documento largo, extrae los elementos de email y procede.
 
 Analiza el copy y selecciona la familia que mejor encaje. Cada familia tiene Gold Standards en tu Knowledge — **consúltalos antes de generar**. Son tu referencia principal de composición, proporción y ritmo visual.
 
-| Familia | Cuándo | Hero | Gold Standards |
-|---------|--------|------|----------------|
-| Hogar / Fibra | Fibra, FTTR, segunda línea | Blanco + foto lifestyle o dark tech | email-segunda-fibra, email-FTTR |
-| Dispositivos | Móviles, tablets, catálogo Swap | Producto en cutout, escena lifestyle o fondo negro | email-dispositivos, email-dispositivos2 |
-| Dispositivos premium | iPhone Pro, gama alta | Negro puro, producto con luz dramática | email-equipamiento |
-| Deporte fútbol | Champions, Liga, Mundial | Navy oscuro + foto deportiva a sangre | email-futbol, email-futbol2 |
-| Deporte multi | Motor, golf, tenis | Foto deportiva full-bleed | email-deportes |
-| Entretenimiento | Movistar Plus+, contenido estacional | Dorado cálido + mosaico de contenido | email-movistarplus |
-| Ficción / OTT | HBO, Sky, Apple TV+, Disney+ | Oscuro + thumbnails de series/películas | email-ficcion |
-| Seguridad / Alarmas | Prosegur | Co-brand header + foto lifestyle | email-MPA |
-| Cross-sell / Partner | Repsol, otros partners | Co-brand header + propuesta conjunta | email-jv-repsol |
-| Servicios | Renting, eSim, value-add | Azul sólido o blanco + producto integrado | email-renting-cars, email-esimflag |
-| Multi-producto | Ventajas, packs estacionales | Blanco + secciones por producto | email-ventajas, email-ventajas-2 |
-| Convergente | Fibra + móvil + TV | Blanco + thumbnails TV en hero | email-mimovistar-convergente |
+| Familia | Cuándo | Hero | Gold Standards en el repo |
+|---------|--------|------|--------------------------|
+| Hogar / Fibra | Fibra, FTTR, segunda línea | Blanco + foto lifestyle o dark tech | `email-segunda-fibra-lifestyle`, `email-fttr-dark-router` |
+| Dispositivos | Móviles, tablets, catálogo Swap | Producto en cutout, fondo gris-azul | `email-dispositivos-iphone17-swap` |
+| Dispositivos premium | iPhone Pro, gama alta | Negro puro, producto con luz dramática | `email-equipamiento-iphone17pro-black` |
+| Deporte fútbol | Champions, Liga, Mundial | Navy oscuro + foto deportiva a sangre | Sin GS. Usar `email-fttr-dark-router` (dark) como base visual |
+| Deporte multi | Motor, golf, tenis | Foto deportiva full-bleed | Sin GS. Usar `email-esimflag-travel-lifestyle` (foto hero) como base visual |
+| Entretenimiento | Movistar Plus+, contenido estacional | Dorado cálido + mosaico de contenido | `email-movistarplus-catalogo-verano` |
+| Ficción / OTT | HBO, Sky, Apple TV+, Disney+ | Oscuro + thumbnails de series/películas | Sin GS. Usar `email-movistarplus-catalogo-verano` (catalogo) como base visual |
+| Seguridad / Alarmas | Prosegur | Co-brand header + foto lifestyle | Sin GS. Usar `email-segunda-fibra-lifestyle` (lifestyle) como base visual |
+| Cross-sell / Partner | Repsol, otros partners | Co-brand header + propuesta conjunta | Sin GS. Usar `email-convergente-pack-iconos` (estructura multi-bloque) como base |
+| Servicios | Renting, eSim, value-add | Azul sólido o blanco + producto integrado | `email-renting-coches-comparativa`, `email-esimflag-travel-lifestyle` |
+| Multi-producto | Ventajas, packs estacionales | Blanco + secciones por producto | `email-ventajas-verano-multiseccion`, `email-ventajas-proteccion-digital` |
+| Convergente | Fibra + móvil + TV | Blanco + thumbnails TV en hero | `email-convergente-pack-iconos` |
+
+> Todos los archivos estan en `references/gold-standards/email/`, extension `.jpg`. Ademas hay 3 piezas transversales de precio (res-baja): `email-multiproducto-3-cards`, `email-oferta-grafico-price-card` y `email-oferta-comparativa-precio`, utiles como segunda referencia para reforzar la jerarquia de precio en cualquier familia.
 
 ### 2. Genera la imagen
 
@@ -132,5 +136,6 @@ Si detectas alguno de estos problemas en el copy recibido, genera la imagen pero
 
 ## Knowledge
 
-- **Gold Standards (17 PNGs):** referencia visual primaria
-- **photography-prompt.md:** instrucciones para fotografía lifestyle
+- **Gold Standards (13 JPGs):** `references/gold-standards/email/`. Referencia visual primaria
+- **Tabla de seleccion:** `gold-standards/INDEX.md`, seccion "Que referencias pasar" (filas Email)
+- **photography-prompt.md** (`guidelines/magic-prompt.md`): instrucciones para fotografia lifestyle

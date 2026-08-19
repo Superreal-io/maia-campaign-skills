@@ -3,22 +3,30 @@
 > **Origen:** GPT personalizado "Movistar Tienda PLV Prototyper" v2 (agosto 2026), probado.
 > Prompt original debajo, sin modificar. Traduccion de mecanica:
 >
-> - **"Gold Standards de Tienda en tu Knowledge"** -> `references/gold-standards/tienda/`
->   con `--ref`. Los nombres del GPT (plv-movistar-dispositivos, plv-movistar-marca,
->   plv-movistar-hogar) no coinciden con los del repo: usa la tabla de seleccion de
->   `gold-standards/INDEX.md` (producto+precio, multiproducto, etiqueta, mosaico contenidos).
+> - **"Gold Standards de Tienda en tu Knowledge"** -> las 16 piezas de
+>   `references/gold-standards/tienda/` pasadas con `--ref`. **Para elegir cuales pasar,
+>   consulta la tabla "Que referencias pasar" en `gold-standards/INDEX.md`** (filas que
+>   empiezan por "PLV", "Chevalet", "Mockup de entorno", "Secuencia perimetral" o
+>   "Pieza de tienda").
 > - **"photography-prompt.md"** -> `guidelines/magic-prompt.md`.
 > - **Dimensiones -> flags:** CARTEL A3 1024x1536 -> `--aspect 2:3` (exacto).
 >   ETIQUETA 1024x1024 -> `--aspect 1:1` (exacto). STOPPER -> `--aspect 2:3`.
+>   PLV pantalla digital 16:9 -> `--aspect 16:9`. PLV totem 9:16 -> `--aspect 9:16`.
 > - **El principio del canal ("bajar la ansiedad tecnologica") y el orden
 >   beneficio-antes-que-precio** aplican tambien al construir el HTML de la pieza,
 >   no solo a la imagen generada.
+> - **Piezas del set (16):** 7 PLV pantalla digital (producto+precio h y v, multiproducto,
+>   etiqueta x2, mosaico contenidos h y v, poster destacado), 3 chevalets impresos
+>   (3 cajas res-baja, foto mundial, multiproducto pastel), 2 entornos de tienda (flagship
+>   Gran Via 1920x1080, muro de verbos), 1 perimetral (mockup 6 pantallas), 1 store page
+>   (banner compacto 600x300), y la unica pieza sin marcas de terceros del canal
+>   (`tienda-plv-etiqueta-sin-ip`).
 >
 > **VALIDADO 17-08-2026** (test real, gpt-image-2, quality medium, 16:9,
 > refs: plv-producto-precio-samsung + plv-producto-precio-iphone):
 >
 > - Clavo el sistema completo: fondo pastel de la ref, titular azul sentence case,
->   jerarquia "Desde 16 €/mes" con el simbolo correcto, claim de 24 meses y legal de tienda.
+>   jerarquia "Desde 16 EUR/mes" con el simbolo correcto, claim de 24 meses y legal de tienda.
 > - **Con "no third-party logos" en el prompt, el dispositivo salio generico sin marca**
 >   aunque las dos referencias eran de Samsung y iPhone. La exclusion funciona: es la via
 >   para piezas de dispositivo sin comprometer trade dress de fabricante.
@@ -55,11 +63,14 @@ Si recibes un documento largo, extrae los elementos de Tienda y procede.
 
 Consulta los Gold Standards de Tienda en tu Knowledge antes de generar.
 
-| Modo | Cuándo | Fondo | Gold Standards |
-|------|--------|-------|----------------|
-| **Claro** | Oferta, producto, fibra, dispositivos, vuelta al cole | `#FFFAF5` | plv-movistar-dispositivos |
-| **Azul** | Marca, beneficio de cliente, Ventaja Personal | `#0066FF` | plv-movistar-marca |
-| **Foto con zona limpia** | Lifestyle, hogar, familia, protección | Foto en la mitad superior, color plano en la inferior | plv-movistar-hogar |
+| Modo | Cuándo | Fondo | Gold Standards en el repo |
+|------|--------|-------|--------------------------|
+| **Claro** | Oferta, producto, fibra, dispositivos, vuelta al cole | `#FFFAF5` o pastel (verde menta, amarillo palido) | `tienda-plv-producto-precio-samsung`, `tienda-plv-producto-precio-iphone`, `tienda-plv-producto-precio-vertical-samsung`, `tienda-plv-multiproducto-verano`, `tienda-chevalet-multiproducto-pastel` |
+| **Azul** | Marca, beneficio de cliente, Ventaja Personal | `#0066FF` | `tienda-plv-etiqueta-sin-ip` (la unica sin terceros), `tienda-plv-etiqueta-ser-cliente` |
+| **Foto con zona limpia** | Lifestyle, hogar, familia, proteccion, evento | Foto en la mitad superior, color plano en la inferior | `tienda-chevalet-foto-mundial-tv`, `tienda-chevalet-3-cajas` (res-baja) |
+| **Contenidos / Entretenimiento** | Movistar+, ficcion, catalogo | Fondo oscuro o neutro con mosaico de caratulas | `tienda-plv-mosaico-ficcion-disney`, `tienda-plv-mosaico-ficcion-disney-vertical`, `tienda-plv-poster-destacado-ficcion` |
+
+> Todos los archivos estan en `references/gold-standards/tienda/`, extension `.jpg`. Ademas hay 2 entornos (`tienda-entorno-flagship-granvia` a 1920x1080 y `tienda-entorno-muro-verbos`) para mockups contextuales, 1 perimetral (`tienda-perimetral-mockup-6-pantallas`) para la mecanica del canal, y 1 store page (`tienda-storepage-banner-compacto` a 600x300).
 
 ### 2. Genera la imagen
 
@@ -132,5 +143,6 @@ Genera la imagen pero incluye nota si detectas:
 - Más de una idea dominante → "En tienda cada soporte tiene una única misión"
 
 ## Knowledge
-- **Gold Standards Tienda PLV (PNGs):** cartelería y etiquetas reales — referencia primaria
-- **photography-prompt.md:** instrucciones para fotografía lifestyle
+- **Gold Standards (16 JPGs):** `references/gold-standards/tienda/`. Referencia visual primaria
+- **Tabla de seleccion:** `gold-standards/INDEX.md`, seccion "Que referencias pasar" (filas PLV, Chevalet, Mockup, Perimetral)
+- **photography-prompt.md** (`guidelines/magic-prompt.md`): instrucciones para fotografia lifestyle

@@ -3,10 +3,10 @@
 > **Origen:** GPT personalizado "Movistar Meta Prototyper" (agosto 2026), probado.
 > Prompt original debajo, sin modificar. Traduccion de mecanica:
 >
-> - **"Imagen Gold Standard subida al chat"** -> `--ref`. OJO: **el canal Meta no tiene
->   Gold Standards en el repo todavia** (hueco declarado en `gold-standards/INDEX.md`).
->   Hasta que existan: genera con la familia como descripcion + flag `sin_gold_standard`,
->   o usa la referencia mas cercana de digital SOLO si la familia coincide.
+> - **"Imagen Gold Standard subida al chat"** -> `--ref` con las 24 piezas de
+>   `references/gold-standards/meta/`. **Para elegir cuales pasar, consulta la tabla
+>   "Que referencias pasar" en `gold-standards/INDEX.md`** (filas que empiezan por "Meta").
+>   La tabla indica la combinacion de 2-3 refs por caso de uso.
 > - **Dimensiones -> flags:** Stories 1080x1920 -> `--aspect 9:16` (genera 1152x2048).
 >   Feed cuadrado 1080x1080 -> `--aspect 1:1`. Feed horizontal 1080x566 -> `--size 1920x1008`
 >   (ratio ~1.9; 566 no es multiplo de 16).
@@ -15,6 +15,9 @@
 >   No los marques como violacion de paleta en el QA de piezas Meta.
 > - **Detalle critico del canal:** NO hay boton CTA dentro de la imagen (el CTA es nativo
 >   de Meta) y el logo M va bottom-right, no top-right como en el resto de canales.
+> - **Resolucion:** 18 de las 24 piezas son `res-baja` (338-600 px). 6 estan a 1080+ px
+>   (Pack completo cine y futbol en feed y story, Hogar/Fibra verano y estudiantes en feed).
+>   Para formatos donde exista version 1080 px, usala como dominante.
 
 ---
 
@@ -59,16 +62,18 @@ Replica esa estructura adaptándola al copy recibido.
 
 ### 2. Identifica la familia visual
 
-| Familia | Cuándo | Fondo |
-|---|---|---|
-| Hogar / Fibra | Fibra, segunda residencia | Blanco `#FFFAF5` |
-| Convergente | Fibra + móvil + TV, miMovistar | Blanco `#FFFAF5` |
-| Fútbol / Deporte | Champions, Liga, Mundial, DAZN | Azul `#0066FF` |
-| Ficción / Contenido | Netflix, M+, series | Azul `#0066FF` + thumbnails |
-| Dispositivos catálogo | Ofertas multi-producto, "0€/mes" | Salmón `#F5E6DC` |
-| Dispositivos co-brand | Ray-Ban Meta, Google Pixel | Verde claro `#CEF7BF` |
-| Value-add / Partner | ChatGPT, eSimFLAG | Azul `#0066FF` |
-| Pack completo | Convergente + dispositivo + contenido | Blanco `#FFFAF5` |
+| Familia | Cuándo | Fondo | Gold Standards en el repo |
+|---|---|---|---|
+| Hogar / Fibra | Fibra, segunda residencia | Blanco `#FFFAF5` | `meta-story-foto-hogar-fibra`, `meta-feed-foto-hogar-fibra-verano-1080` (1080 px), `meta-feed-grafico-fibra-estudiantes-1080` (1080 px, sin foto) |
+| Convergente | Fibra + móvil + TV, miMovistar | Blanco `#FFFAF5` | `meta-story-convergente-pareja`, `meta-story-foto-convergente-laliga`, `meta-story-convergente-dispositivos`, `meta-story-convergente-netflix` + `v2`, `meta-landscape-convergente-pareja` |
+| Fútbol / Deporte | Champions, Liga, Mundial, DAZN | Azul `#0066FF` | `meta-story-futbol-dazn`, `meta-story-futbol-champions`, `meta-feed-futbol-ilustracion` |
+| Ficción / Contenido | Netflix, M+, series | Azul `#0066FF` + thumbnails | Sin pieza standalone; usar las convergente-netflix como referencia de thumbnails |
+| Dispositivos catálogo | Ofertas multi-producto, "0€/mes" | Salmón `#F5E6DC` | `meta-feed-catalogo-ofertas`, `meta-story-dispositivo-google-pixel` |
+| Dispositivos co-brand | Ray-Ban Meta, Google Pixel | Verde claro `#CEF7BF` | `meta-feed-dispositivo-rayban-verde`, `meta-feed-dispositivo-rayban-azul`, `meta-feed-dispositivo-rayban-salmon`, `meta-feed-foto-rayban-playa` |
+| Value-add / Partner | ChatGPT, eSimFLAG | Azul `#0066FF` | `meta-feed-chatgpt-plus` |
+| Pack completo | Convergente + dispositivo + contenido | Blanco `#FFFAF5` | `meta-feed-pack-completo-cine-1080` + `story` (1080 px), `meta-feed-pack-completo-futbol-dispositivos-1080` + `story` (1080 px), `meta-story-pack-completo` (res-baja) |
+
+> Todos los archivos estan en `references/gold-standards/meta/`, extension `.jpg`. Los nombres de arriba omiten la ruta y la extension por brevedad.
 
 ### 3. Genera la imagen
 

@@ -55,7 +55,7 @@ Referencia: `landing.png`, `landing2.png`, `landing-mov.png`.
    - Titular Bold 40-48px, sentence case, 2-3 líneas, azul o negro.
    - Bloque de precio dentro de card azul filled:
        "19,90€ /mes" : número XXL 64px blanco Extrabold + € 32px + /mes 16px
-       sub-linea "Precio especial clientes miMovistar" azul-claro `#D3EEFF`
+       sub-línea "Precio especial clientes miMovistar" azul-claro `#D3EEFF`
    - Body 16px con contexto (2-3 líneas).
    - CTA pill azul filled: "Ver [producto]".
    - Legal 12px muted: "Sujeto a cobertura y condiciones de contratación."
@@ -138,9 +138,11 @@ Referencia: `landing.png`, `landing2.png`, `landing-mov.png`.
 
 ## Reglas de color por sección
 
-- **Web genérica**: secciones impares fondo Blanco Movistar `#FFFAF5`. Secciones pares fondo Azul Movistar `#0066FF` o secundario claro.
-- **Landing**: fondo dominante Blanco Movistar. Bloques de énfasis en azul filled (precio, CTA panel final). Segmentación usa DOS secundarios (excepción binaria).
+- **Web genérica y landing web (movistar.es)**: fondo dominante **blanco puro** (`#FFFFFF`), secciones alternas en **azul muy claro** (`#EFF5FB`). El footer usa azul solido `#0066FF`. **NUNCA `#FFFAF5`** (Blanco Movistar warm white) en web: ese tono es exclusivo de piezas offline (email, display, tienda).
+- **Landing de campaña personalizada** (email-like, con saludo): fondo dominante `#FFFAF5` (Blanco Movistar). Bloques de énfasis en azul filled (precio, CTA panel final). Segmentación usa DOS secundarios (excepción binaria).
 - **Máximo un secundario por página**, excepto en la sección de segmentación de landing donde la dualidad es intencional.
+
+> **Distinción web vs offline (IMPORTANTE).** Las landings en movistar.es NO usan `#FFFAF5`, la M expresiva como elemento decorativo, fotografias hero a sangre ni colores secundarios prominentes. El web real usa: fondo blanco puro o azul palido, iconos outline azules, producto en cutout, mucho espacio en blanco. El sistema MAIA debe distinguir cuando genera una landing web (estos patrones) vs una pieza offline tipo email/display/tienda (patrones del audit-report).
 
 ---
 
@@ -187,6 +189,32 @@ Cuando no hay datos personalizados disponibles, quitar el saludo y usar copy gen
 
 ---
 
+## CTAs en landing web (patron gold standard)
+
+En las landings reales de movistar.es, el CTA siempre aparece en par (dual CTA):
+
+- **Primario:** boton relleno pill (border-radius grande), texto blanco, fondo azul `#0066FF`. Texto en sentence case, sin exclamación. Ejemplos: "Calcular cuota", "Contratar".
+- **Secundario:** link azul con flecha `>`, SIN boton outline. Texto: "Más información >". Siempre debajo o al lado del primario.
+
+**El secundario en web NUNCA es un boton outline.** El patron outline es valido en piezas offline (email, display), pero en landing web el secundario es siempre un link de texto azul con flecha.
+
+**Co-branding:** cuando la landing tiene co-brand con un partner (Prosegur, Ayvens, etc.), el color del CTA primario puede cambiar al color corporativo del partner (ej. rojo #C50000 para Prosegur). El secundario mantiene link azul Movistar.
+
+---
+
+## Cards de producto en web
+
+Patron observado en las 3 landings analizadas:
+
+- Grid horizontal de 4 columnas en desktop.
+- Cada card: fondo blanco, **borde gris fino** (`#E0E0E0` aprox.), **border-radius redondeado** (8px), **sin box-shadow**.
+- Nombre de producto en bold, bullets de features, precio prominente, dual CTA (boton + link).
+- Badges de estado ("Novedad" en verde, "Exclusivo Movistar" en rojo oscuro, "Con cargador" en color solido) en la esquina superior izquierda de la card, siempre con texto blanco.
+
+**NO usar box-shadow en cards web.** Las sombras aparecen en mockups offline pero las landings reales usan borde fino sin sombra.
+
+---
+
 ## Checklist landing antes de publicar
 
 - [ ] Header simplificado, saludo personalizado en su sitio.
@@ -195,6 +223,9 @@ Cuando no hay datos personalizados disponibles, quitar el saludo y usar copy gen
 - [ ] Segmentación por perfil si aplica al producto (2 cards paralelas).
 - [ ] Toggle o elemento interactivo si el producto lo requiere (activación remota, aviso).
 - [ ] CTA panel final con imagen o icono + resumen de oferta.
+- [ ] CTA dual correcto: primario = boton relleno, secundario = link con flecha (no outline).
+- [ ] Fondos web: blanco puro + #EFF5FB. NUNCA #FFFAF5 en landing web.
+- [ ] Cards de producto: borde fino, sin box-shadow.
 - [ ] Legal completo antes del footer.
 - [ ] Footer minimal (no big footer).
 - [ ] Sin em dashes en copy.

@@ -3,27 +3,39 @@
 > **Origen:** GPT personalizado "Movistar Plus+ Prototyper" (agosto 2026), el que mejor
 > resultado da de los cuatro. Prompt original debajo, sin modificar. Traduccion de mecanica:
 >
-> - **"Imagen Gold Standard subida al chat"** -> `--ref` con las piezas de
->   `references/gold-standards/movistarplus/`. La regla "el ratio de la referencia determina
->   la pieza" se conserva: WOW -> refs de WOW; videocartela -> refs de videocartela
->   (ver tabla de seleccion en `gold-standards/INDEX.md`).
+> - **"Imagen Gold Standard subida al chat"** -> `--ref` con las 16 piezas de
+>   `references/gold-standards/movistarplus/`. **Para elegir cuales pasar, consulta la tabla
+>   "Que referencias pasar" en `gold-standards/INDEX.md`** (filas que empiezan por
+>   "Videocartela", "WOW", "Banner M+", "Campana M+", "Pieza smartphone M+" o "Mockup").
+>   La regla "el ratio de la referencia determina la pieza" se conserva.
 > - **Dimensiones -> flags del script:**
 >   WOW 1920x640 -> `--size 1920x640` (valido: multiplos de 16, ratio 3:1 exacto).
 >   VIDEOCARTELA 1920x1080 -> `--aspect 16:9` (genera 2048x1152; 1080 NO es multiplo de 16
 >   y el script lo rechazaria).
+>   BANNER ~3:1 a ~3.5:1 -> `--size 1920x640` o `--size 1920x544` segun el ratio de la ref.
 > - **La seccion Fotografia de este prompt** es la version calibrada por canal de
 >   `guidelines/magic-prompt.md`: usala tal cual para escribir el prompt de la foto.
 > - **Detalle critico del canal:** CTA en WOW = link con `>`, nunca boton pill. Es la regla
 >   que mas se viola al generar sin referencia.
+> - **Correccion agosto 2026:** Las campanas de M+ van sobre **azul Movistar** con pastilla
+>   blanca y keyword en azul, NO sobre negro con marcador amarillo. El modo oscuro existe
+>   pero lo pone el key art o la foto a sangre, no un fondo negro plano. Referencia clave:
+>   `movistarplus-banner-ficcion-catalogo-azul` (la unica pieza de catalogo sobre azul).
+> - **Piezas del set:** 10 originales de Figma (videocartelas, WOW, web banner, UI oscura,
+>   smartphone, mockups UI, hero) + 6 banners reales del cliente (MPA/Prosegur, cross-sell
+>   FTTR, deportes F1, deportes MotoGP, dispositivos iPhone 17 Pro, ficcion catalogo azul).
+>   Una de las 6 (cross-sell FTTR) no tiene marcas de terceros.
+> - **Regla operativa:** referencias de M+ solo se combinan entre si, nunca con las de
+>   otros canales.
 >
 > **VALIDADO 17-08-2026** (test A/B real, gpt-image-2, quality medium, videocartela 16:9,
 > refs: videocartela-completa-qr + videocartela-cobranding-disney):
 >
-> - CON refs el modelo clavo la retícula de la videocartela real: pastilla blanca con texto
->   azul, lockup "Ficción Total 18 €/mes" con el simbolo € correcto, legal "Durante 6 meses
+> - CON refs el modelo clavo la reticula de la videocartela real: pastilla blanca con texto
+>   azul, lockup "Ficcion Total 18 EUR/mes" con el simbolo EUR correcto, legal "Durante 6 meses
 >   | Sin permanencia", 3 posters a la derecha con sus cajas redondeadas. SIN refs invento
 >   una composicion parecida pero con detalles fuera de sistema (escribio "EUR/mes" literal
->   en vez de €, footer inventado, pastilla usada como badge de producto).
+>   en vez de EUR, footer inventado, pastilla usada como badge de producto).
 > - **Leccion critica: las referencias transfieren tambien el TEXTO.** El prompt del test no
 >   especificaba titular y el modelo copio el titular, los titulos y el legal LITERALES de la
 >   referencia. En produccion el prompt debe llevar SIEMPRE el copy real completo (titular,
@@ -60,17 +72,19 @@ Si recibes un documento largo, extrae los elementos de M+ y procede.
 |-------|--------|-------|------------------------|-------------|
 | **WOW** | Banner horizontal del carousel hero de M+ | ~3:1 apaisado | **1920 × 640 px** | Sí |
 | **VIDEOCARTELA** | Versión expandida: más body copy, precio, QR, pasos | 16:9 | **1920 × 1080 px** | Solo si hay precio o acción concreta |
+| **BANNER** | Banner de campana dentro de M+ (deportes, dispositivos, cross-sell, catalogo) | ~2.5:1 a ~3.5:1 | **1920 × 544-768 px** (segun ratio de la ref) | Solo si la campana no es ficcion/entretenimiento (esas usan WOW/videocartela) |
 
 **Qué pieza generar lo determina el ratio de la imagen Gold Standard subida.** Mídelo antes de generar:
 
-- Imagen muy apaisada (~3:1, mucho más ancha que alta) → WOW, 1920 × 640 px
+- Imagen muy apaisada (~3:1, mucho más ancha que alta) → WOW o BANNER, 1920 × 640 px
 - Imagen 16:9 (~1.78) → VIDEOCARTELA, 1920 × 1080 px
+- Imagen ~2.5:1 a ~3.5:1 pero con contenido de deportes/dispositivos/cross-sell → BANNER
 
 Solo si no hay imagen de referencia, genera la WOW por defecto. Si el usuario pide explícitamente una pieza distinta a la de la imagen, gana la petición del usuario.
 
 Además: si el copy incluye precio, QR o pasos detallados, genera también la videocartela como pieza complementaria.
 
-No generes la NUX/MUX — es un mockup de contexto que se monta aparte.
+No generes la NUX/MUX -- es un mockup de contexto que se monta aparte.
 
 ---
 
@@ -94,12 +108,14 @@ Tu objetivo es replicar esa estructura adaptándola al copy recibido.
 
 Analiza el copy y confirma el modo de fondo. La imagen subida es tu referencia primaria.
 
-| Modo | Cuándo | Fondo |
-|------|--------|-------|
-| **Claro** | Hogar, familia, viajes, lifestyle, dispositivos estacionales | `#FFFAF5` blanco Movistar |
-| **Oscuro** | Tech, premium, alarmas, seguridad | Negro / navy |
-| **Azul** | Contenido, entretenimiento, ficción, cine | `#0066FF` |
-| **Foto a sangre** | Deporte, fútbol, motor, grandes eventos | Fotografía full-bleed |
+| Modo | Cuándo | Fondo | Gold Standards en el repo |
+|------|--------|-------|--------------------------|
+| **Claro** | Hogar, familia, viajes, lifestyle, dispositivos estacionales | `#FFFAF5` blanco Movistar | Sin GS claro en M+; usar videocartelas (azul) como base de estructura |
+| **Oscuro** | Tech, premium, cross-sell, dispositivos, co-brand servicio | Negro / navy / gris oscuro | `movistarplus-ui-campana-oscura-precio-tachado`, `movistarplus-banner-crosssell-fttr`, `movistarplus-banner-dispositivos-iphone17pro`, `movistarplus-banner-mpa-prosegur`, `movistarplus-banner-deportes-f1` |
+| **Azul** | Contenido, entretenimiento, ficcion, cine, catalogo | `#0066FF` | `movistarplus-videocartela-completa-qr`, `movistarplus-videocartela-cobranding-disney`, `movistarplus-wow-banner-ficcion`, `movistarplus-wow-banner-disney`, `movistarplus-banner-ficcion-catalogo-azul` |
+| **Foto a sangre** | Deporte, futbol, motor, grandes eventos | Fotografia full-bleed | `movistarplus-banner-deportes-motogp` (diurna), `movistarplus-banner-deportes-f1` (oscura con foto) |
+
+> Todos los archivos estan en `references/gold-standards/movistarplus/`, extension `.jpg`.
 
 ### 3. Genera la imagen
 
