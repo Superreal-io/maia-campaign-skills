@@ -2,7 +2,7 @@
 name: Brand Visual Guidelines - Movistar
 key: brand-visual-guidelines-movistar
 description: Fuente única de verdad para paleta cromatica, tipografías y espaciados de la identidad visual vigente de Movistar. Consumido por la HTML Component Library y por cualquier skill que genere output visual.
-versión: 2.0.0
+version: 2.0.0
 owner: superreal
 status: active
 source: 091022_Movistar_Refresh_Guidelines.pptx + 2025_Movistar_Toolkit_OnePage.pdf

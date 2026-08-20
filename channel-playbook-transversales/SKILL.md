@@ -2,7 +2,7 @@
 name: "Channel Playbook -- Transversales de Orquestación"
 key: channel-playbook-transversales
 description: Principios transversales que ordenan la comunicación de Movistar cuando una campaña vive en varios canales a la vez. Coherencia cross-canal, presión acumulada, personalización, validación automatica.
-versión: 1.0.0
+version: 1.0.0
 owner: client
 status: active
 channel: transversal

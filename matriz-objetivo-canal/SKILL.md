@@ -2,7 +2,7 @@
 name: Matriz Objetivo x Canal Movistar
 key: matriz-objetivo-canal
 description: 6 matrices de referencia que cruzan objetivo de campaña con canales recomendados. Notoriedad, consideración, performance, fidelización, educación, retención.
-versión: 1.0.0
+version: 1.0.0
 owner: client
 status: active
 ---

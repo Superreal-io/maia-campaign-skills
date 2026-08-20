@@ -2,7 +2,7 @@
 name: Channel Playbook -- Tienda
 key: channel-playbook-tienda
 description: Playbook operativo del canal Tienda fisica Movistar. Principios estrategicos, visuales, de tono y por soporte. Reglas de validación automatica y coherencia con CRM.
-versión: 2.0.0
+version: 2.0.0
 owner: client
 status: active
 channel: tienda

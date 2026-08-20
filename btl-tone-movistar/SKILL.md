@@ -2,7 +2,7 @@
 name: Tono BTL y Guardrails Operativos - Movistar
 key: btl-tone-movistar
 description: Tipologias de tono BTL (desarrollo/captación/fidelización), priorización de sesgos por tipologia, y guardrails operativos (acuerdo Apple, partners, Peace of Life).
-versión: 2.0.0
+version: 2.0.0
 owner: superreal
 status: active
 source: Maia BTL Specialist v2 Peace of Life (Secciones D.4, K, L) - validado por Comunicación Movistar

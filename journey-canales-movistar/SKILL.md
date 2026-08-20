@@ -2,7 +2,7 @@
 name: Journey de Canales Movistar
 key: journey-canales-movistar
 description: Logica de secuencia entre canales. Cada canal debe mover al cliente al siguiente paso natural, no repetir el anterior. Ejemplo correcto vs incorrecto.
-versión: 1.0.0
+version: 1.0.0
 owner: client
 status: active
 ---

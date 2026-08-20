@@ -1,7 +1,7 @@
 ---
 name: movistar-visual-production
 description: Stack de producción visual del Art Director (D) para piezas Movistar presentables a cliente. Assets de marca como archivos (fuentes, logos, tokens), fotografía real vía OpenAI (gpt-image-2), ensamblado programático por slots, y bucle de verificación visual con render. Sustituye a visual-01-brand-assets, visual-02-brand-typography y el enfoque base64 de visual-03.
-versión: 1.2.0
+version: 1.3.0
 owner: superreal
 status: active
 loaded_by: D (Art Director)

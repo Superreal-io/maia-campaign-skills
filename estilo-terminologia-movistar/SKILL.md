@@ -2,7 +2,7 @@
 name: Estilo y Terminología - Movistar
 key: estilo-terminologia-movistar
 description: Reglas de estilo, formato, terminología obligatoria/prohibida, precios, fechas, abreviaturas, siglas y puntuación de Movistar. Extraído del corpus validado de Maia. Skill compartida cargada por los Agentes C y D.
-versión: 1.0.0
+version: 1.0.0
 owner: superreal
 status: active
 source: Maia System Prompt (sección H) - validado por Comunicación Movistar

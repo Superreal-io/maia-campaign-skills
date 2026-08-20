@@ -2,7 +2,7 @@
 name: Tesis Estrategica de Comunicación Movistar
 key: tesis-estrategica-movistar
 description: Filosofia de comunicación Movistar. Desde donde vender (claridad, confianza, relevancia) vs desde donde NO (ruido, saturación, presión). Frases guia para decisiones estrategicas.
-versión: 1.0.0
+version: 1.0.0
 owner: client
 status: active
 ---

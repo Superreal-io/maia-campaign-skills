@@ -2,7 +2,7 @@
 name: "Brand Visual Composition - Movistar"
 key: brand-visual-composition-movistar
 description: "Reglas de composición visual: grid (1/16), jerarquía tipografica Y-based, composición de precios, matriz WCAG de contraste, Do's/Don'ts de color por fondo, reglas de layout, logotipo y fotografía. Skill obligatoria para el Art Director."
-versión: 2.0.0
+version: 2.0.0
 owner: superreal
 status: active
 source: "091022_Movistar_Refresh_Guidelines.pptx (197 slides) + 2025_Movistar_Toolkit_OnePage.pdf + Brand Guardian v4 RAG"

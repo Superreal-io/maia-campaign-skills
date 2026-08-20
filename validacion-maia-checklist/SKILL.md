@@ -2,7 +2,7 @@
 name: Checklist de Validación MAIA
 key: validacion-maia-checklist
 description: 17 criterios de validación del sistema MAIA. Los usa el Campaign Manager en Cierre como capa de control de calidad transversal.
-versión: 2.0.0
+version: 2.0.0
 owner: system
 status: active
 ---

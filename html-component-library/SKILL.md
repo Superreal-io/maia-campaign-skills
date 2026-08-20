@@ -2,7 +2,7 @@
 name: HTML Component Library - Movistar
 key: html-component-library
 description: Componentes HTML reutilizables basados en los layouts oficiales de Movistar (PPT template + Brand Book + Toolkit). Consume tokens de brand-visual-guidelines-movistar y assets (fuentes, logos) vía slots de movistar-visual-production.
-versión: 2.4.0
+version: 2.4.0
 owner: agent-d
 status: active
 depends_on:

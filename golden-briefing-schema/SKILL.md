@@ -2,7 +2,7 @@
 name: Golden Briefing Schema
 key: golden-briefing-schema
 description: Schema canonico del Golden Briefing. Artefacto que el Strategist produce y que los Agentes B, C y D consumen como ground truth. Versionado, JSON-parseable, trazable. Un Golden Briefing por stream.
-versión: 2.0.0
+version: 2.0.0
 owner: agente-a
 status: active
 ---

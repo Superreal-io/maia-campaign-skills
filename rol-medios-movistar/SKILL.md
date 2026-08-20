@@ -2,7 +2,7 @@
 name: Rol General de Medios Movistar
 key: rol-medios-movistar
 description: Arquitectura general de medios Movistar. Tres tipos (masivos, propios, captación tactica) con su rol, para que sirven y para que NO.
-versión: 1.0.0
+version: 1.0.0
 owner: client
 status: active
 ---

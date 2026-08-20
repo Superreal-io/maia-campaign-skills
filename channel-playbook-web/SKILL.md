@@ -2,7 +2,7 @@
 name: Channel Playbook -- Web
 key: channel-playbook-web
 description: Playbook operativo del canal Web (movistar.es, landings de campaña, área privada). Principios de claridad, estructura, conversión, confianza. Reglas de validación automatica y referentes.
-versión: 2.0.0
+version: 2.0.0
 owner: client
 status: active
 channel: web

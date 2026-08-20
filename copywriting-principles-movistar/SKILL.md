@@ -2,7 +2,7 @@
 name: Principios de Copywriting - Movistar
 key: copywriting-principles-movistar
 description: 9 principios de copywriting creativo, estructura de pieza, guia de inicio y código visual. Las reglas formales de identidad verbal estan en brand-voice-movistar. Skill obligatoria para el Creative Copywriter.
-versión: 1.1.0
+version: 1.1.0
 owner: superreal
 status: active
 source: Brand Guardian v4 RAG Movistar (secciones 1.2 y 1.3) - validado por Comunicación Movistar

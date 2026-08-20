@@ -2,7 +2,7 @@
 name: Reglas Transversales del Planner
 key: reglas-planner-movistar
 description: 20 reglas transversales (P01-P20) para el Planner. Checklist auditable de criterio estratégico aplicable a cualquier briefing.
-versión: 1.0.0
+version: 1.0.0
 owner: client
 status: active
 ---

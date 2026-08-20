@@ -2,7 +2,7 @@
 name: Channel Playbook -- Digital
 key: channel-playbook-digital
 description: Playbook del ecosistema digital Movistar. Tesis estratégica, principios operativos, arquitectura de funnel, reglas por canal, matriz de decisión, validación automatica.
-versión: 2.0.0
+version: 2.0.0
 owner: client
 status: active
 channel: digital

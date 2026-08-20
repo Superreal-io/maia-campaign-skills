@@ -2,7 +2,7 @@
 name: Campaign Output Format
 key: campaign-output-format
 description: Schema canónico de los artefactos que producen los Agentes B y C -- Estrategia por Canal (B) y Estrategia Creativa (C). Define formato, validación y trazabilidad al Golden Briefing.
-versión: 2.0.0
+version: 2.0.0
 owner: system
 status: active
 ---

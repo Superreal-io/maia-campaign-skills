@@ -2,7 +2,7 @@
 name: "Channel Playbook -- Email / CRM"
 key: channel-playbook-email
 description: Playbook operativo del canal CRM con email como canal principal de ejecución. Principios editoriales, visuales y comerciales. Reglas de validación automatica, tipos de email y referentes.
-versión: 2.0.0
+version: 2.0.0
 owner: client
 status: active
 channel: email

@@ -2,7 +2,7 @@
 name: Channel Playbook -- Movistar+
 key: channel-playbook-movistarplus
 description: Playbook del canal Movistar+ como CRM audiovisual premium. Rol estratégico, principios editoriales, specs por formato con ejemplos, jerarquía de formatos, reglas de validación automatica.
-versión: 2.0.0
+version: 2.0.0
 owner: client
 status: active
 channel: movistarplus

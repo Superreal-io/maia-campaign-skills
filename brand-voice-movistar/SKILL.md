@@ -2,7 +2,7 @@
 name: Brand Voice - Movistar
 key: brand-voice-movistar
 description: Identidad de marca, voz, tono, valores comunicativos, reglas formales de identidad verbal (19 principios), Do's/Don'ts, ejemplos ON/OFF brand. Fuente única de reglas formales de copy. Skill compartida cargada por todos los agentes.
-versión: 1.1.0
+version: 1.1.0
 owner: superreal
 status: active
 source: Maia System Prompt (secciones C, E, G) - validado por Comunicación Movistar

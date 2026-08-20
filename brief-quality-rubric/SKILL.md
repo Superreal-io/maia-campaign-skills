@@ -2,7 +2,7 @@
 name: Brief Quality Rubric
 key: brief-quality-rubric
 description: Los 14 criterios oficiales contra los que el Strategist evalúa cualquier documento de input. Scoring ponderado (max 21 pts). Fuente oficial Movistar.
-versión: 2.0.0
+version: 2.0.0
 owner: briefing-maker
 status: active
 source: Dirección de Publicidad, Marca y Patrocinios -- documento "criterios.md" oficial
