@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<!-- Plantilla slot-based: email CRM desktop 600px.
+     Table-based para compatibilidad con clientes de correo.
+     NO usa slot de fuentes: ensamblar con assemble.py --no-font.
+     HEX directos de la paleta cerrada (no CSS variables).
+     Bloques modulares: header, hero, headline+body, precio, CTA, legal.
+     El modelo edita SOLO los textos y el data-prompt; los slots los rellena assemble.py -->
+<style>
+@page { size: 600px 1200px; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 600px; overflow: hidden; }
+body {
+  background: #F5F5F5;
+  -webkit-text-size-adjust: none;
+}
+</style>
+</head>
+<body style="margin:0; padding:0; background:#F5F5F5;">
+
+<!-- Wrapper exterior gris -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+       style="background:#F5F5F5;">
+<tr><td align="center" style="padding:24px 0;">
+
+  <!-- Contenedor 600px -->
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"
+         style="background:#FFFAF5; border-collapse:collapse;">
+
+    <!-- ========== BLOQUE 1: HEADER ========== -->
+    <tr>
+      <td style="padding:24px 32px; background:#FFFAF5;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="left" valign="middle" style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; color:#0066FF; font-weight:700;">
+              [OVERLINE OPCIONAL: ej. "miMovistar"]
+            </td>
+            <td align="right" valign="middle" width="48">
+              <img src="{{LOGO_MARK}}" alt="Movistar" width="48" height="48"
+                   style="display:block; border:0;">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ========== BLOQUE 2: HERO ========== -->
+    <tr>
+      <td style="padding:0; background:#FFFAF5;">
+        <img src="{{IMG:outputs/hero-email.png}}"
+             data-prompt="[descripcion Magic Prompt de la foto del hero]"
+             alt="" width="600" style="display:block; width:100%; height:auto; border:0;"
+             data-refs="[Track A o B segun INDEX.md]">
+      </td>
+    </tr>
+
+    <!-- ========== BLOQUE 3: TITULAR + BODY ========== -->
+    <tr>
+      <td style="padding:32px 32px 16px 32px; background:#FFFAF5;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                        font-size:28px; line-height:1.15; font-weight:800; color:#262423;
+                        padding-bottom:16px;">
+              [TITULAR: sentence case, 2-3 lineas max, una keyword en
+              <span style="color:#0066FF;">azul</span> max]
+            </td>
+          </tr>
+          <tr>
+            <td style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                        font-size:16px; line-height:1.5; font-weight:400; color:#262423;">
+              [Body copy: 2-4 lineas. Secundario respecto al titular. Sin em dashes.]
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ========== BLOQUE 4: PRECIO (opcional, borrar si no aplica) ========== -->
+    <tr>
+      <td style="padding:16px 32px; background:#FFFAF5;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                        font-size:14px; font-weight:400; color:#0066FF; padding-bottom:4px;">
+              [Overline precio: "Desde", "Por solo", "Ahora por"]
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                           font-size:56px; font-weight:800; color:#262423; line-height:1;">
+                XX</span>
+              <span style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                           font-size:24px; font-weight:700; color:#262423; vertical-align:super;">
+                eur/mes</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                        font-size:14px; font-weight:400; color:#6F7176; padding-top:4px;">
+              [Condicion: "Sin permanencia" / "Durante 48 meses"]
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ========== BLOQUE 5: CTA PILL ========== -->
+    <tr>
+      <td align="center" style="padding:16px 32px 24px 32px; background:#FFFAF5;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="center"
+                style="background:#0066FF; border-radius:28px; padding:14px 40px;">
+              <span style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                           font-size:16px; font-weight:700; color:#FFFFFF; text-decoration:none;">
+                [CTA: sentence case, sin exclamacion]</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ========== BLOQUE 6: "SER CLIENTE TIENE VENTAJAS" (opcional) ========== -->
+    <tr>
+      <td style="padding:0 32px 24px 32px; background:#FFFAF5;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="center"
+                style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                        font-size:14px; font-weight:400; color:#262423;">
+              Ser cliente <span style="font-weight:700;">tiene ventajas</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ========== BLOQUE 7: FOOTER LEGAL ========== -->
+    <tr>
+      <td style="padding:16px 32px 24px 32px; background:#F5F5F5; border-top:1px solid #E5E5E5;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="font-family:'Movistar Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+                        font-size:11px; line-height:1.4; font-weight:400; color:#6F7176;">
+              [Legal: condiciones, restricciones, enlace a condiciones generales]
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+  </table>
+  <!-- /Contenedor 600px -->
+
+</td></tr>
+</table>
+<!-- /Wrapper exterior -->
+
+</body>
+</html>

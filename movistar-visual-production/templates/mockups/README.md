@@ -88,4 +88,4 @@ Prompt tipo *"empty subway station marquee, front view, natural morning light, n
 
 - kebab-case, sin espacios.
 - Prefijo por tipo si aplica (`marquesina-`, `valla-`, `iphone-`, `macbook-`, `cartel-a3-`).
-- Ciudad o contexto sólo si es relevante (`marquesina-gran-via` vs `marquesina-generica`).
+- Ciudad o contexto sólo si es relevante (`marquesina-gran-via` vs `marquesina-genérica`).

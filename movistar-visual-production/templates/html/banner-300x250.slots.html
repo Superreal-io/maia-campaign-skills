@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<!-- Plantilla slot-based: Display MPU 300x250 (pieza representativa MAIA).
+     Renderizar a 1200x1000 (4x) para calidad: render.py --width 1200 --height 1000.
+     Dimensiones internas 1200x1000 = 4x de 300x250.
+     CTA pill azul filled (presente en MPU, ausente en 320x100).
+     Frame de cierre (frame 3): el mas completo con todos los elementos.
+     Sistema 1/16: X=~16px nativo -> ~64px a 4x. Margen ~60px. Logo M min 160px (40px nativo).
+     El modelo edita SOLO los textos y el data-prompt; los slots los rellena assemble.py -->
+<style>
+{{FONT_FACE_MIN}}
+{{TOKENS_CSS}}
+
+@page { size: 1200px 1000px; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1200px; height: 1000px; overflow: hidden; }
+body {
+  font-family: "Movistar Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--movistar-white, #FFFAF5);
+  color: var(--movistar-black, #262423);
+  position: relative;
+}
+
+/* Logo M top-right */
+.mark {
+  position: absolute; top: 48px; right: 48px;
+  width: 160px; height: auto; z-index: 10;
+  /* Azul sobre fondo claro, blanco sobre fondo azul/oscuro */
+}
+
+/* Zona 1: Titular (arriba) */
+.headline {
+  position: absolute; top: 48px; left: 60px; right: 220px;
+  font-weight: 800; font-size: 68px; line-height: 1.1;
+  color: var(--movistar-blue, #0066FF);
+  /* Max ~40 chars en 300x250 nativo */
+}
+
+/* Zona 2: Foto/producto (centro) */
+.hero {
+  position: absolute; top: 280px; left: 0; right: 0;
+  height: 360px; object-fit: cover; width: 100%;
+}
+
+/* Zona 3: Precio + CTA + Ser cliente (abajo) */
+.bottom-zone {
+  position: absolute; bottom: 48px; left: 60px; right: 60px;
+}
+
+.price-row {
+  margin-bottom: 16px;
+}
+.price-overline {
+  font-weight: 400; font-size: 28px; color: var(--movistar-blue, #0066FF);
+  margin-bottom: 4px;
+}
+.price {
+  font-weight: 800; font-size: 96px; line-height: 1;
+  color: var(--movistar-black, #262423);
+}
+.price small {
+  font-size: 40px; font-weight: 700; vertical-align: super;
+}
+.price-condition {
+  font-weight: 400; font-size: 24px; color: #6F7176;
+  margin-top: 4px;
+}
+
+/* "Ser cliente tiene ventajas" */
+.loyalty {
+  font-weight: 400; font-size: 24px; color: var(--movistar-black, #262423);
+  margin-top: 12px;
+}
+.loyalty strong { font-weight: 700; }
+
+/* CTA pill azul filled */
+.cta-pill {
+  display: inline-block;
+  background: var(--movistar-blue, #0066FF);
+  color: #FFFFFF;
+  font-weight: 700; font-size: 28px;
+  padding: 16px 48px;
+  border-radius: 40px;
+  margin-top: 16px;
+  /* Sentence case, sin exclamacion */
+}
+
+/* Legal */
+.legal {
+  position: absolute; bottom: 16px; left: 60px; right: 60px;
+  font-weight: 400; font-size: 20px; line-height: 1.3;
+  color: #6F7176;
+  /* Solo si hay precio/condicion. Max 2 lineas */
+}
+</style>
+</head>
+<body>
+
+  <!-- Logo M top-right -->
+  <img class="mark" src="{{LOGO_MARK}}" alt="Movistar">
+
+  <!-- Zona 1: Titular -->
+  <h1 class="headline">[TITULAR: ExtraBold, sentence case, max ~40 chars]</h1>
+
+  <!-- Zona 2: Foto lifestyle o producto cutout -->
+  <img class="hero" src="{{IMG:outputs/hero-display.png}}"
+       data-prompt="[descripcion Magic Prompt]"
+       data-refs="[Track A o B segun INDEX.md, refs digital/]" alt="">
+
+  <!-- Zona 3: Precio + CTA -->
+  <div class="bottom-zone">
+    <!-- Precio: borrar si no aplica -->
+    <div class="price-row">
+      <div class="price-overline">[Desde]</div>
+      <div class="price">XX<small>eur/mes</small></div>
+      <div class="price-condition">[Sin permanencia]</div>
+    </div>
+
+    <!-- Ser cliente tiene ventajas: borrar si no aplica -->
+    <div class="loyalty">Ser cliente <strong>tiene ventajas</strong></div>
+
+    <!-- CTA pill azul filled -->
+    <div class="cta-pill">[CTA: sentence case, sin exclamacion]</div>
+  </div>
+
+  <!-- Legal: solo si hay precio/condicion -->
+  <!-- <div class="legal">[Legal discreto, max 2 lineas]</div> -->
+
+</body>
+</html>

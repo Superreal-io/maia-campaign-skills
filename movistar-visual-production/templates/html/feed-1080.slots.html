@@ -19,11 +19,14 @@ body {
   position: relative;
 }
 .mark {
-  position: absolute; top: 48px; right: 48px;
-  width: 96px; height: auto;
+  position: absolute; bottom: 48px; right: 48px;
+  width: 96px; height: auto; z-index: 10;
+  /* Meta fondo claro: M en bottom-right (app-meta.md).
+     Si el precio ocupa esta esquina, mover .price a left
+     o reducir .mark a 72px. */
 }
 .headline {
-  position: absolute; top: 72px; left: 68px; right: 200px;
+  position: absolute; top: 72px; left: 68px; right: 68px;
   font-weight: 800; font-size: 76px; line-height: 1.05;
   letter-spacing: -0.02em; color: #0066FF;
 }
@@ -37,8 +40,9 @@ body {
 .offer .name { font-weight: 700; font-size: 44px; }
 .offer .context { font-weight: 400; font-size: 28px; color: #6F7176; margin-top: 8px; }
 .price {
-  position: absolute; right: 0; bottom: 0;
+  position: absolute; left: 0; bottom: 0;
   font-weight: 800; font-size: 84px; color: #0066FF; line-height: 1;
+  /* Precio a la izquierda para dejar bottom-right libre para la M */
 }
 .price small { font-size: 36px; font-weight: 700; vertical-align: super; }
 </style>
@@ -54,9 +58,6 @@ body {
       <div class="context">[Linea de contexto breve]</div>
     </div>
     <div class="price">XX<small>€/mes</small></div>
-  </div>
-</body>
-</html>div>
   </div>
 </body>
 </html>

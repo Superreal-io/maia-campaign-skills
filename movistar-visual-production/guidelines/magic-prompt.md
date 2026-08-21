@@ -79,7 +79,6 @@ Deliver exactly **one prompt**.
 - Never include video directions unless the user explicitly asks for video.
 - Never use empty descriptors like "beautiful," "epic," or "amazing" without translating them into visible image traits.
 - Never reference specific artist, photographer, or director names inside the prompt.
-- Never mention "the reference", "the template" or "the gold standard" inside the prompt. Describe the piece as if the reference did not exist; reference images enter only via `--ref`. Meta-instructions about the reference measurably degrade output quality.
 - Never write prompts that feel synthetic, generic, or detached from real image-making logic.
 
 ---
@@ -149,180 +148,65 @@ An older woman checks her smartphone in a lived-in living room during early morn
 
 ---
 
+## Anclas de estilo
+
+Cuando uses el sistema de referencia con anclas (`references/gold-standards/fotografia/_anclas/`),
+refuerza con palabras en el prompt lo que la imagen ancla transmite. Las 4 anclas y su
+descripcion textual:
+
+### ancla-interior-luz-calida
+
+Luz artificial domestica: lampara de pie, pantalla de television, luz de cocina. Temperatura
+calida (3000-3500K). Sombras suaves con relleno por rebote en paredes. Piel con textura real,
+grano visible, tono dorado sutil. Contraste moderado-bajo. Sensacion de noche o atardecer de
+interior. Sin flash, sin luz cenital dura. Casting diverso, representacion espanola, ropa de
+estar en casa.
+
+**Palabras clave para el prompt:** warm artificial lamp light, soft bounced shadows, golden
+skin tone, visible grain, relaxed domestic evening, no flash, no overhead light.
+
+### ancla-exterior-luz-natural
+
+Luz de sol directo o difuso segun hora: manana dorada, mediodia con nubes altas, atardecer
+lateral. Temperatura variable (5000-6500K dia, 3500K golden hour). Sombras definidas con
+contraste medio-alto. Piel con textura real, imperfecciones visibles. Entornos urbanos o
+naturales espanoles/mediterraneos: calle, terraza, parque, playa, montana. Sin estudio, sin
+fondo neutro.
+
+**Palabras clave para el prompt:** natural daylight, outdoor Spanish/Mediterranean setting,
+real skin texture, moderate contrast, editorial documentary feel, no studio.
+
+### ancla-producto-en-mano
+
+Dispositivo integrado en la accion, no aislado. Manos reales con textura (venas, pliegues,
+unas naturales). Angulo 3/4 o ligeramente picado. Luz mixta (natural + pantalla del
+dispositivo). Foco selectivo: nitidez en manos y pantalla, fondo suavemente desenfocado.
+Grano sutil. Sin fondo blanco limpio, sin estudio de producto, sin flotacion.
+
+**Palabras clave para el prompt:** device held naturally in real hands, 3/4 angle, selective
+focus on hands and screen, mixed lighting, subtle grain, no white background, no floating
+product.
+
+### ancla-retail-luz-tienda
+
+Interior de tienda con iluminacion comercial: focos de carril, luz difusa de techo,
+iluminacion de producto en expositores. Temperatura neutra-fria (4000-5000K). Contraste
+medio. Materiales visibles: madera, metacrilato, metal, terrazo. Casting de asesor o cliente
+en interaccion natural. Elementos de marca Movistar (azul en mobiliario, pantallas con M)
+integrados en el entorno, no como overlay.
+
+**Palabras clave para el prompt:** retail store interior, commercial track lighting, neutral
+temperature, visible materials (wood, metal, glass), natural customer-advisor interaction,
+Movistar blue in furniture, no overlay.
+
+---
+
 ## Validation checklist
 
-- ✔ Relevant to the visual brief
-- ✔ Clear and executable
-- ✔ Platform-agnostic
-- ✔ Focused on one prompt only
-- ✔ Written in natural language
-- ✔ Outputs the final prompt in English
-- ✔ Useful for a human or AI prompter
-
----
----
-
-# Prompts calibrados por canal
-
-Todo lo de arriba es la doctrina general: cómo se escribe un prompt de marca desde cero.
-Esta sección es lo contrario: **prompts que ya se han ejecutado, han dado un resultado
-aprobado y por tanto no hay que reinventar**. Se copian, se les cambia la escena, y se
-ejecutan con las referencias que se indican.
-
-Un prompt entra aquí solo cuando cumple las tres:
-
-1. Se ha ejecutado de verdad y la pieza resultante pasó el QA visual.
-2. Se sabe con qué Gold Standards se ejecutó. Un prompt sin sus referencias no es
-   reproducible: la mitad del resultado venía de las imágenes.
-3. Está escrito con la parte fija separada de la parte variable, de forma que se pueda
-   reutilizar sin reescribirlo.
-
-Los prompts calibrados **ganan** a la doctrina general. Si un prompt calibrado del canal
-contradice una regla de las secciones anteriores, gana el calibrado: es evidencia empírica
-frente a una regla escrita.
-
----
-
-## Formato de una entrada
-
-Se copia este bloque tal cual. Los seis campos son obligatorios; sin uno cualquiera de
-ellos la entrada no es reutilizable y no vale.
-
-```markdown
-### <CANAL> · <formato> · <modo FOTO|GRAFICO|MIXTO>
-
-- **Aspect / size:** `--aspect 2:3` (o `--size 1024x1536`)
-- **Referencias:**
-  `references/gold-standards/<canal>/<archivo-1>.jpg`
-  `references/gold-standards/<canal>/<archivo-2>.jpg`
-- **Origen:** <de dónde sale: GPT M+ Prototyper, run agosto-26 pieza X, etc.>
-- **Validado:** <fecha> · <quién> · <qué pieza salió y qué QA pasó>
-
-**Prompt base** (lo fijo, no se toca):
-
-​```text
-<4-5 frases. Todo lo que NO cambia entre piezas de este canal: tipo de plano, lente,
-luz, textura, nivel de realismo, integración del dispositivo, acabado editorial.>
-​```
-
-**Variables** (lo que se sustituye en cada pieza):
-
-| Marcador | Qué se pone | Ejemplo real |
-| --- | --- | --- |
-| `{SCENE}` | La escena y qué está pasando | a woman in her sixties on a village terrace at dusk |
-| `{SUBJECT}` | Quién aparece y qué lo hace específico | ... |
-| `{DEVICE_ACTION}` | Cómo se integra el dispositivo en la acción | ... |
-
-**Exclusiones obligatorias de este canal** (van al final del prompt, en positivo cuando
-se pueda; si la referencia tiene columna `Ojo` en el INDEX, su neutralización va aquí):
-
-- <p.ej. "no visible third-party logos or brand marks of any kind on garments, screens or signage">
-- <p.ej. "the brand symbol must sit on a background of clearly different value, never blue on blue">
-
-**Qué falla si se cambia:** <la línea que hay que dejar en paz y por qué. Es el campo más
-útil de todos: evita que el siguiente lo rompa por mejorarlo.>
-```
-
----
-
-## Cómo se rellena esto
-
-Los prompts que funcionan hoy no están en el repo: están dentro de los GPT personalizados
-por canal (M+ Prototyper, email, display, tienda PLV). Volcarlos es una tarea de
-transcripción, no de invención. El orden:
-
-1. **Coger el prompt tal como está en el GPT.** Sin "mejorarlo". Si funciona, funciona por
-   razones que no siempre son visibles.
-2. **Partirlo en fijo y variable.** Lo que se repite en todas las piezas del canal va al
-   Prompt base; lo que cambia se marca con `{LLAVES}` y se documenta en la tabla.
-3. **Ejecutarlo con `--ref` y las referencias del canal**, y mirar el resultado. Es probable
-   que cambie respecto al GPT: el GPT no tenía las referencias. Si mejora, se anota la fecha
-   de validación. Si empeora, el problema es la elección de referencias, no el prompt:
-   revisa la tabla de `gold-standards/INDEX.md`.
-4. **Rellenar "Qué falla si se cambia"** con lo que se aprendió al ejecutarlo, no con una
-   suposición.
-
-Un canal sin entrada aquí no está prohibido: se genera con la doctrina general. Pero está
-regenerando desde cero cada vez, y eso es exactamente lo que esta sección existe para evitar.
-
----
-
-## Entradas
-
-> **Actualización 17 de agosto de 2026:** los prompts calibrados de los GPT ya están
-> volcados al repo, pero como documentos completos por canal en `guidelines/prototypers/`
-> (email, movistarplus, tienda-plv, meta), no como entradas troceadas en este formato.
-> Motivo: cada GPT es un sistema completo (familias visuales + composición + paleta +
-> alertas), no un prompt suelto, y trocearlo perdería el contexto que lo hace funcionar.
->
-> **Regla de precedencia:** en su canal, el prototyper manda sobre la doctrina general de
-> este documento. Este formato de entrada queda para prompts sueltos que se calibren en el
-> futuro para canales sin prototyper (exterior, BTL, display).
->
-> Pendiente de calibrar: exterior, BTL, display / digital.
-
-### MOVISTAR+ · videocartela / WOW · MIXTO
-
-- **Aspect / size:** `--aspect 16:9` (videocartela) o `--size 1920x640` (WOW)
-- **Referencias:**
-  `references/gold-standards/movistarplus/movistarplus-videocartela-completa-qr.jpg` (dominante)
-  `references/gold-standards/movistarplus/movistarplus-videocartela-cobranding-disney.jpg`
-- **Origen:** test A/B local 17-08-2026
-- **Validado:** 17-08-2026 · board · la pieza con refs clavó pastilla, precio con €, legal y zona de pósters
-
-**Prompt base:**
-
-```text
-A Movistar+ promotional banner for a streaming offer: white bold headline on the left side reading '{TITULAR}' over a Movistar blue background, a white pill-shaped tag with '{NOMBRE_OFERTA}' in blue, a large price reading '{PRECIO} €/mes', a small legal line reading '{LEGAL}', and three vertical movie posters on the right side showing {CONTENIDO_POSTERS}. Clean broadcast-quality layout, sentence case.
-```
-
-**Variables:** `{TITULAR}` copy real · `{NOMBRE_OFERTA}` keyword de la pastilla · `{PRECIO}` importe · `{LEGAL}` línea legal real · `{CONTENIDO_POSTERS}` los títulos reales de la campaña (si no se describen, hereda los de la referencia).
-
-**Exclusiones:** si la pieza no lleva QR, no mencionarlo; si no lleva precio, excluir "price, per-month rate, 'Desde'".
-
-**Qué falla si se cambia:** quitar la descripción de los pósters hace que el modelo copie los títulos de la referencia (Hamnet, Ted Lasso...). Escribir "EUR" en vez de dejar que la referencia imponga "€" no falla, la referencia lo corrige.
-
-### TIENDA · pantalla PLV producto+precio · MIXTO
-
-- **Aspect / size:** `--aspect 16:9` (horizontal) o `--aspect 9:16` (tótem, ref vertical primero)
-- **Referencias:**
-  `references/gold-standards/tienda/tienda-plv-producto-precio-samsung.jpg`
-  `references/gold-standards/tienda/tienda-plv-producto-precio-iphone.jpg`
-- **Origen:** test A/B local 17-08 + piloto Paperclip 18-08
-- **Validado:** 18-08-2026 · board · sistema clavado a la primera, dispositivo genérico pese a refs de marca
-
-**Prompt base:**
-
-```text
-A Movistar in-store digital retail screen for a device offer on a {COLOR_FONDO} flat background: bold blue headline in sentence case at the top reading '{TITULAR}', a generic premium {DISPOSITIVO} in the center, {BLOQUE_OFERTA}, a short claim line reading '{CLAIM}' and small legal text reading '{LEGAL}' at the bottom. Clean flat editorial layout, no third-party logos or brand marks anywhere.
-```
-
-**Variables:** `{COLOR_FONDO}` pale mint / pale yellow según campaña · `{TITULAR}` copy real · `{DISPOSITIVO}` smartphone / foldable / tablet · `{BLOQUE_OFERTA}` "an offer block with 'Desde {X}€/mes' in large black type" o, si la pieza no lleva precio, "no price anywhere" · `{CLAIM}` y `{LEGAL}` copy real.
-
-**Exclusiones:** "no third-party logos" es obligatoria (las refs llevan Samsung/Apple). Si lleva Swap: escribir el lockup exacto "MovistarSwap" (junto).
-
-**Qué falla si se cambia:** quitar "no third-party logos" reproduce el logo de la referencia. Sin titular literal, hereda el de la ref del iPhone.
-
-### EMAIL · hero fotográfico · FOTO
-
-- **Aspect / size:** `--aspect 3:2`
-- **Referencias:**
-  `references/gold-standards/email/email-multiproducto-3-cards.jpg`
-  `references/gold-standards/digital/digital-landing-precio-sobre-foto.jpg`
-- **Origen:** test A/B local 17-08
-- **Validado:** 17-08-2026 · board · collage, titular navy y remate manuscrito fieles al sistema
-
-**Prompt base:**
-
-```text
-A warm lifestyle collage for a telecom email hero: three stitched photos showing {ESCENA_1}, {ESCENA_2} and {ESCENA_3}, with a navy bold headline overlaid reading '{TITULAR}' and a handwritten cyan flourish reading '{REMATE}'. Natural light, editorial realism, subtle grain.
-```
-
-**Variables:** `{ESCENA_1..3}` escenas de la campaña (personas antes que dispositivos, entornos vividos) · `{TITULAR}` copy real · `{REMATE}` remate estacional (o quitar la frase si la campaña no lo lleva).
-
-**Exclusiones:** sin look CGI/HDR, sin piel plástica (ya implícito en "editorial realism, subtle grain").
-
-**Qué falla si se cambia:** describir solo una escena en vez de tres rompe el collage; el collage de 3 es el sistema del hero multiproducto.
-
-<!-- Añade entradas nuevas siguiendo el mismo formato cuando se validen más canales. -->
-
+- Relevant to the visual brief
+- Clear and executable
+- Platform-agnostic
+- Focused on one prompt only
+- Written in natural language
+- Outputs the final prompt in English
+- Useful for a human or AI prompter

@@ -27,7 +27,8 @@ Cada entregable M+ consta de 2 o 3 piezas con nomenclatura interna fija:
 - Ancho: ~1600-2335px (varia según entregable)
 - Alto: ~320-470px
 - Ratio aproximado: **5:1** (muy apaisado)
-- Para MAIA, usar **1920x640px** como dimensión estándar (ratio 3:1)
+- Para MAIA, usar **1920x640px** como dimension estandar (ratio 3:1)
+- **Por que 3:1 y no 5:1:** `gpt-image-2` impone un limite de ratio maximo de 3:1 en `validate_size()`. El ratio real del WOW (~5:1) no se puede generar de una pasada. A 1920x640 (3:1) la pieza funciona visualmente y encaja en el carousel. Si produccion necesita el ratio exacto (ej. 1920x384), generar a 1920x640 y recortar el alto en postproduccion
 
 ### Layout
 
