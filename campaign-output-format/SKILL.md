@@ -349,6 +349,14 @@ campaign_creative-strategy:
           accion_sugerida: "string"
       
       # ── Copy Prototype por canal (OBLIGATORIO) ──
+      # NOTA DE RESPONSABILIDAD: copy_prototype cubre TODOS los canales activos de la
+      # campaña con copy completo por canal+formato. No es una preselección de qué se
+      # produce finalmente ni un orden de prioridad — es el insumo completo. La selección
+      # de qué piezas concretas se llevan a producción final (representativas por canal
+      # y sub-corriente) es responsabilidad del Art Director (D), usando este array junto
+      # con scoring_crm y piezas_clave como criterio. C no debe entregar aparte ningún
+      # array adicional de "piezas a producir" fuera de este schema — si algo así aparece
+      # en una implementación, no está gobernado por este formato y no pasa por V17.
       copy_prototype:
         - canal: "string"
           formato: "string (ej. email hero, banner 728x90, cartel A3)"
@@ -384,6 +392,9 @@ campaign_creative-strategy:
           tema_a_vigilar: "string (1 frase -- el mayor riesgo de esta pieza)"
 
       # ── Nivel 3: Profundidad por pieza clave ──
+      # NOTA: piezas_clave documenta la pieza LIDER por canal principal, con su
+      # razonamiento — no sustituye ni agota la selección completa de piezas que D
+      # decide producir (ver nota de responsabilidad en copy_prototype arriba).
       piezas_clave:
         - canal: "string"
           tipo: "string (ej. push principal, email explicativo)"
@@ -447,7 +458,7 @@ campaign_creative-strategy:
 
 **Profundidad por pieza (Nivel 3):**
 
-25. Cada campaña tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal).
+25. Cada campaña tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal). **Nota:** la selección completa de qué piezas se producen finalmente es responsabilidad del Art Director (D) a partir de `copy_prototype` + `scoring_crm` + `piezas_clave` — este schema no define ni valida un array separado de "producción visual"; si una implementación lo tiene, actualízala para que D seleccione directamente de estos tres arrays.
 26. Cada `piezas_clave[]` tiene `razonamiento_creativo` y `racional` no vacios.
 
 ---
