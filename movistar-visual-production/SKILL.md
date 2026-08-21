@@ -101,6 +101,8 @@ Por cada `{{IMG:...}}`: escribe el prompt siguiendo `guidelines/magic-prompt.md`
 - **Track A (solo fotografia):** cuando el prompt pide una foto pura sin texto ni logos ni marcos. Usa `references/gold-standards/fotografia/` con el sistema escena + ancla de estilo. Para piezas slot-based donde la foto va en `{{IMG:...}}` y los elementos graficos los pone el HTML.
 - **Track B (pieza completa):** cuando generas la pieza entera con texto, precio, logo y composicion. Usa `references/gold-standards/<canal>/` como hasta ahora.
 
+**Track A validado (2026-08-21):** un test comparativo con/sin referencias fotograficas confirmo que Track A mejora la coherencia de luz (~3000K consistente), el casting espanol y la textura/grano respecto a generacion solo con texto. Track A es la opcion por defecto para toda fotografia de escena; solo omitirlo si hay una razon documentada.
+
 **Nunca mezcles tracks:** no pases una referencia de pieza completa (Track B) cuando el prompt dice "pure photograph, no text" (Track A). La referencia y el prompt deben empujar en la misma direccion.
 
 **A0. Si el canal tiene prototyper, leelo primero.** `guidelines/prototypers/` tiene el prompt calibrado de los 6 canales: email, movistarplus, tienda-plv, meta, exterior y display. Cada uno define familias visuales, composicion por formato, paleta del canal, reglas criticas (CTA link en M+, sin boton en Meta ni en exterior, beneficio antes que precio en tienda, CTA pill en display excepto mobile) y alertas de validacion. Cada archivo empieza con un bloque de adaptacion que mapea dimensiones a los flags del script. El prototyper manda sobre la doctrina generica de magic-prompt.md en su canal.
@@ -108,9 +110,10 @@ Por cada `{{IMG:...}}`: escribe el prompt siguiendo `guidelines/magic-prompt.md`
 **A. Elegir.** `references/gold-standards/INDEX.md` tiene la tabla "Que referencias pasar según lo que estes generando" con la combinación resuelta por canal y por modo. Reglas:
 
 - **Siempre 2 referencias. `refs: 0` es un fallo, no una opcion.** Seleccion en cascada:
-  1. **Escena exacta** en `fotografia/<familia>/` (Track A) o `<canal>/` (Track B) -> va primera. Ancla de su familia (Track A) o segunda referencia del canal (Track B), segunda.
-  2. **Sin escena exacta:** coge la **escena adyacente** (misma familia, o misma condicion de luz interior/exterior) y ponla **segunda**; el **ancla va primera**. Describe en el prompt las diferencias entre la escena adyacente y la que necesitas, para que el modelo no arrastre lo que no toca.
+  1. **Escena exacta** en `fotografia/<familia>/` (Track A) o `<canal>/` (Track B). **Ancla siempre como ref 1, escena como ref 2.** El modelo da mas peso a ref 1; si la escena va primero, su casting y composicion contaminan el resultado aunque el prompt pida otra cosa (validado en test A/B 2026-08-21).
+  2. **Sin escena exacta:** coge la **escena adyacente** (misma familia, o misma condicion de luz interior/exterior) como ref 2; **ancla sigue como ref 1**. Describe en el prompt las diferencias entre la escena adyacente y la que necesitas, para que el modelo no arrastre lo que no toca.
   3. **Sin familia aplicable** (caso raro): las **dos anclas** mas cercanas. Nunca cero.
+- **Advertencia de composicion:** la escena de referencia puede dominar el encuadre incluso yendo como ref 2. Cuando el encuadre del prompt difiera del de la escena (ej. plano abierto vs POV por encima del hombro), refuerzalo con indicaciones explicitas de angulo de camara en el prompt. El orden de refs no basta para contrarrestarlo.
 - Registra en el rationale que nivel de la cascada usaste (`escena_exacta`, `escena_adyacente` o `solo_anclas`). El flag `sin_gold_standard` desaparece; se sustituye por `referencia_aproximada` cuando se usa el nivel 2 o 3.
 - Combina por **modo**, no solo por canal: foto de escena con referencias FOTO, fondo grafico con referencias GRAFICO.
 - Movistar+ solo con Movistar+: sus referencias se combinan entre si, nunca con otros canales. Su codigo real es azul con pastilla blanca y keyword azul; el modo oscuro lo pone el key art, no un fondo negro.
