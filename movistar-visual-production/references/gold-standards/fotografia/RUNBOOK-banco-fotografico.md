@@ -345,38 +345,38 @@ Crear el INDEX de fotografia/ con la taxonomia completa:
 ## Checklist de ejecucion
 
 ```
-CAPA A (gratis, ~1h)
-- [ ] Revisar visualmente las 97 gold standards + 41 pieces
-- [ ] Anotar candidatas con zona foto cropeable > 300px lado corto
-- [ ] Hacer los crops con PIL
-- [ ] Clasificar por familia
-- [ ] Descartar crops < 300px
-- [ ] Contar crops por familia, anotar gaps
+CAPA A (gratis, ~1h) -- COMPLETADA 2026-08-21
+- [x] Revisar visualmente las 97 gold standards + 41 pieces
+- [x] Anotar candidatas con zona foto cropeable > 300px lado corto
+- [x] Hacer los crops con PIL
+- [x] Clasificar por familia
+- [x] Descartar crops < 300px
+- [x] Contar crops por familia, anotar gaps
 
-CAPA B (~5 EUR, ~40min) -- requiere Paperclip
-- [ ] Generar 5 candidatas ancla-interior-luz-calida
-- [ ] Generar 5 candidatas ancla-exterior-luz-natural
-- [ ] Generar 5 candidatas ancla-producto-en-mano
-- [ ] Generar 5 candidatas ancla-retail-luz-tienda
-- [ ] Seleccion humana: 1 ganadora por ancla
-- [ ] Normalizar y guardar en _anclas/
+CAPA B (~5 EUR, ~40min) -- COMPLETADA 2026-08-21
+- [x] Generar 5 candidatas ancla-interior-luz-calida
+- [x] Generar 5 candidatas ancla-exterior-luz-natural
+- [x] Generar 5 candidatas ancla-producto-en-mano
+- [x] Generar 5 candidatas ancla-retail-luz-tienda
+- [x] Seleccion humana: 1 ganadora por ancla
+- [x] Normalizar y guardar en _anclas/
 
-CAPA C (~10 EUR, ~1h) -- requiere Paperclip + Capa B
-- [ ] Inventario de gaps por familia
-- [ ] Generar 2-3 escenas semilla por familia deficitaria
-- [ ] Normalizar y clasificar
+CAPA C (~10 EUR, ~1h) -- COMPLETADA 2026-08-21
+- [x] Inventario de gaps por familia
+- [x] Generar 2-3 escenas semilla por familia deficitaria
+- [x] Normalizar y clasificar
 
-PASO D (~1 EUR, ~20min)
-- [ ] A/B test de orden de dominancia en 2-3 familias
-- [ ] Documentar resultado
+PASO D (~1 EUR, ~20min) -- COMPLETADO 2026-08-21
+- [x] A/B test de orden de dominancia en 3 familias (6 generaciones)
+- [x] Documentar resultado: ancla siempre ref 1, escena ref 2
 
-PASO E (gratis, ~20min)
-- [ ] Escribir INDEX.md con taxonomia completa
+PASO E (gratis, ~20min) -- COMPLETADO 2026-08-21
+- [x] Escribir INDEX.md con taxonomia completa
 
-PASO F (~3 EUR, ~40min)
-- [ ] Elegir 2-3 piezas sin referencia anteriores
-- [ ] Regenerar con Track A
-- [ ] Comparar y documentar
+PASO F (~3 EUR, ~40min) -- COMPLETADO 2026-08-21
+- [x] Elegir 2-3 piezas sin referencia anteriores
+- [x] Regenerar con Track A (4 generaciones)
+- [x] Comparar y documentar: Track A confirmado como default
 ```
 
 ---

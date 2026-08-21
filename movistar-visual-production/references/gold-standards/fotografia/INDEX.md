@@ -76,13 +76,34 @@ Se usan como `--ref` de nivel 3 en la cascada de seleccion del Art Director.
 | foto-tienda-flagship-interior.jpg | Senaletica Movistar integrada en entorno |
 | _(digital-display-pack halfpage)_ | Crop resultante < 300px en alto |
 
-## Proximos pasos (opcionales)
+## Resultados de validacion
 
-- **Paso D**: A/B test de orden de dominancia ancla vs escena en 2-3 familias (~1 EUR)
-- **Paso F**: Regenerar 2-3 piezas anteriores con Track A y comparar (~3 EUR)
+### Paso D: Orden de dominancia (2026-08-21)
+
+Test A/B en 3 familias (interior-domestico, exterior-urbano, producto-en-mano), 6 generaciones.
+
+**Decision: ancla siempre como ref 1, escena como ref 2.**
+
+- D1 (interior): ancla-first preserva casting del prompt y look calido. Escena-first contamina casting.
+- D2 (exterior): empate tecnico.
+- D3 (producto): empate. Hallazgo adicional: la escena puede dominar la composicion independientemente del orden. Reforzar encuadre en el prompt cuando difiera de la escena.
+
+### Paso F: Con/sin Track A (2026-08-21)
+
+Comparativo interior-domestico (baseline sin ref vs con ref). Exterior tambien regenerado con refs.
+
+**Decision: Track A es la opcion por defecto para toda fotografia de escena.**
+
+- Coherencia de luz: con ref mantiene dorado 3000K consistente; sin ref sale mas neutra/plana.
+- Casting espanol: mejora ligera con ref.
+- Textura y grano: la version con ref transfiere la textura del ancla.
+
+Ambas decisiones documentadas en SKILL.md.
 
 ## Historial de ejecucion
 
 - **Capa A** (2026-08-21): 5 crops extraidos de gold standards existentes. 2 descartados por texto, 1 por tamanio.
 - **Capa B** (2026-08-21): 20 candidatas generadas (5 por ancla). 4 ganadoras seleccionadas + 4 descartadas reutilizadas como seeds.
 - **Capa C** (2026-08-21): 4 seeds generadas con anclas como --ref (3 producto + 1 retail). Cobertura 5/5 familias alcanzada.
+- **Paso D** (2026-08-21): 6 generaciones A/B en 3 familias. Regla fija: ancla como ref 1.
+- **Paso F** (2026-08-21): 4 generaciones comparativas. Track A confirmado como default.
