@@ -25,12 +25,29 @@ Una pieza entra aquí si cumple las cuatro:
    Las que están por debajo entran marcadas `res-baja` porque la composición vale aunque
    el detalle tipográfico no se lea.
 
-Todas están normalizadas a **JPEG q90, lado largo máximo 1536 px**. Las imágenes de entrada
+Todas estan normalizadas a **JPEG q90, lado largo maximo 1536 px**. Las imagenes de entrada
 se facturan como tokens: pasar un PNG de 2 MB cuesta dinero y no mejora nada.
 
 ---
 
-## Catálogo
+## Dos tracks de referencia
+
+Este INDEX cubre las referencias de **Track B** (pieza completa): piezas reales con texto,
+precio, logo y composicion, organizadas por canal. Se usan cuando generas la pieza entera
+con todos sus elementos graficos.
+
+**Track A** (fotografia pura) vive en `fotografia/` con su propio `INDEX.md`. Se usa cuando
+el prompt pide solo una foto sin texto ni logos ni marcos, tipicamente para rellenar un slot
+`{{IMG:...}}` en una pieza slot-based donde los elementos graficos los pone el HTML.
+
+**Regla critica: nunca mezcles tracks.** No pases una referencia de pieza completa (Track B)
+cuando el prompt dice "pure photograph, no text" (Track A), ni viceversa. La referencia y el
+prompt deben empujar en la misma direccion. Si tiran en direcciones opuestas, el modelo solo
+puede aprovechar luz y paleta de la referencia, y toda la informacion compositiva se pierde.
+
+---
+
+## Catalogo (Track B: piezas completas por canal)
 
 | Archivo | Canal | Formato real | Modo | Qué demuestra | Ojo |
 | --- | --- | --- | --- | --- | --- |
