@@ -79,6 +79,7 @@ Deliver exactly **one prompt**.
 - Never include video directions unless the user explicitly asks for video.
 - Never use empty descriptors like "beautiful," "epic," or "amazing" without translating them into visible image traits.
 - Never reference specific artist, photographer, or director names inside the prompt.
+- Never mention "the reference", "the template" or "the gold standard" inside the prompt. Describe the piece as if the reference did not exist; reference images enter only via `--ref`. Meta-instructions about the reference measurably degrade output quality.
 - Never write prompts that feel synthetic, generic, or detached from real image-making logic.
 
 ---
