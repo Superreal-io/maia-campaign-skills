@@ -1,7 +1,7 @@
 ---
 name: movistar-visual-production
-description: Stack de producción visual del Art Director (D) para piezas Movistar presentables a cliente. Assets de marca como archivos (fuentes, logos, tokens), fotografía real vía OpenAI (gpt-image-2), ensamblado programático por slots, y bucle de verificación visual con render. Sustituye a visual-01-brand-assets, visual-02-brand-typography y el enfoque base64 de visual-03.
-versión: 1.2.0
+description: Stack de produccion visual del Art Director (D) para piezas Movistar presentables a cliente. Assets de marca como archivos (fuentes, logos, tokens), fotografia real via OpenAI (gpt-image-2), ensamblado programatico por slots, y bucle de verificacion visual con render. Sustituye a visual-01-brand-assets, visual-02-brand-typography y el enfoque base64 de visual-03.
+version: 1.5.0
 owner: superreal
 status: active
 loaded_by: D (Art Director)
@@ -11,7 +11,9 @@ requires_env:
 
 # Movistar Visual Production
 
-Esta skill convierte la Estrategia Creativa en piezas finales presentables a cliente. Regla central: **el modelo nunca genera base64 ni copia assets a mano**. Escribe HTML con slots, y los scripts ensamblan, generan fotografía y renderizan.
+Esta skill convierte la Estrategia Creativa en piezas finales presentables a cliente. Regla central: **el modelo nunca genera base64 ni copia assets a mano**. Escribe HTML con slots, y los scripts ensamblan, generan fotografia y renderizan.
+
+> **El campo `version` del frontmatter no lleva tilde.** Es una clave YAML, no prosa: Paperclip busca `version` y con `versión` no detecta el update. No pases correctores ortograficos sobre el frontmatter ni sobre bloques de codigo de este archivo.
 
 ## Estructura del bundle
 
@@ -52,10 +54,21 @@ templates/
 └── mockups/          Entornos + corners.json para el composer
 scripts/
 ├── assemble.py       Rellena slots (fuentes, logos, tokens, imagenes)
-├── generate_image.py Fotografía vía OpenAI (OPENAI_API_KEY, gpt-image-2)
+├── generate_image.py Fotografia via OpenAI (OPENAI_API_KEY, gpt-image-2). Soporta --ref y --dry-run
 ├── render.py         HTML a PNG para verificación visual
 └── mockup_composer.py  Incrusta la pieza en un entorno real
 ```
+
+## Verificacion de arranque (30 segundos, obligatoria)
+
+Antes de producir nada, en cada ticket:
+
+```bash
+head -6 movistar-visual-production/SKILL.md               # confirma la version del bundle
+ls movistar-visual-production/references/gold-standards/  # debe listar los canales + fotografia
+```
+
+Si la version no es la esperada o falta una carpeta, pide un `git pull origin main` del workspace antes de producir. Un upload manual al repo puede haber revertido el stack: tras cualquier pull, verifica con `--dry-run` antes de generar. Motivo: una tanda entera de 17 piezas se produjo sin referencias porque el workspace estaba clavado en un commit anterior, y esta misma skill ha sido revertida por un upload manual mas de una vez.
 
 ## Workflow por pieza (obligatorio, en este orden)
 
@@ -122,6 +135,7 @@ Reglas del prompt (validadas en producción 18-08-2026, son la diferencia medida
 - **El prompt describe la pieza, no la referencia.** PROHIBIDO escribir "following the reference", "the template", "the gold standard" o equivalentes dentro del prompt. Escribe el prompt como si la referencia no existiera: que se ve, donde, con que luz, con que jerarquia y con que textos EXACTOS. La referencia entra solo por `--ref`.
 - **Si usas escena adyacente (nivel 2 de la cascada), el prompt debe declarar las diferencias.** Ejemplo: si la referencia es una terraza exterior y necesitas un salon interior, el prompt dice explicitamente "indoor living room at night, artificial lamp light" para que el modelo no importe la luz de exterior de la referencia. Lo que no corrijas explicitamente, lo heredas.
 - **Parte del prompt calibrado del canal** si existe en `guidelines/magic-prompt.md` sección "Entradas" (M+, tienda y email hero ya tienen). Sustituye las variables por el copy real y no toques la parte fija.
+- **Toda cifra del prompt debe existir literal en el `copy_prototype`.** El modelo inventa precios plausibles: una cifra no aprobada llega a cliente. Si no esta, no la pongas.
 - **`--quality high` para entregables.** `medium` solo para pruebas y dry-runs de calibración.
 
 ```bash
@@ -134,6 +148,13 @@ python3 scripts/generate_image.py \
 Las rutas de `--ref` son relativas a `movistar-visual-production/`. Ejecuta el script desde ahí. Si dice `ERROR: referencia no encontrada`, te imprime el cwd actual.
 
 **Limite de ratio del modelo:** `gpt-image-2` acepta un ratio maximo de 3:1 (validado en `validate_size()` lineas 123-125). Formatos con ratio superior (ej. WOW banner de M+ a 1920x384, ratio 5:1) no se pueden generar de una pasada. Workaround: generar al ratio valido mas cercano (1920x640 para WOW) y recortar en postproduccion si se necesita el ratio exacto.
+
+**Tecnicas de produccion validadas (conservalas):**
+
+- **Logo M en pieza generada:** el modelo no lo reproduce bien. Tapa la M generada con un parche del color exacto del fondo y superpon el SVG real de `brand/logos/`.
+- **WOW y videocartela de la misma campana comparten key art**: genera una vez y compon ambas piezas a partir del mismo resultado.
+- **La foto se genera al ratio real de su zona**, nunca a otro ratio para recortar despues salvo el workaround de ratio maximo descrito arriba.
+- **La M en pantallas PLV de tienda no va en la pieza** (vive en los frames bumper). En el soporte impreso si va, segun pida el copy.
 
 **D. Documentar.** En el design rationale, seccion Fotografia: prompt literal + **Gold Standards usados por nombre de archivo** + por que esos + exclusiones metidas por la columna `Ojo` + **nivel de cascada** (`escena_exacta`, `escena_adyacente` o `solo_anclas`). Una entrada sin la linea de Gold Standards o sin el nivel de cascada esta incompleta.
 
@@ -154,15 +175,24 @@ Si el script avisa de slots sin resolver, corrige antes de seguir.
 python3 scripts/render.py -i outputs/pieza.html -o outputs/pieza.png --width <W> --height <H>
 ```
 
-MIRA el PNG (herramienta Read) y evalúa contra esta checklist:
+MIRA el PNG (herramienta Read) y evalua. **Los puntos 6 a 13 son checks deterministas: se responden si o no, no se interpretan.** Salieron de defectos reales de una tanda de 17 piezas y son los que mas se escapan.
 
-1. Las 5 non-negotiables: azul #0066FF presente; fondo #FFFAF5 (nunca blanco puro); max un secundario; solo Movistar Sans; sentence case y CTAs específicos sin exclamación.
-2. El patron del formato en audit-report (jerarquía, posición de la M, estructura).
-3. Nada solapado, cortado ni desbordado; legibilidad a la distancia del soporte.
-4. La foto integra: luz creible, personas reales, sin look CGI.
-5. Test de parecido: puesta junto a las referencias reales, encaja como una más.
+1. **Azul #0066FF presente**, maximo un color secundario, solo Movistar Sans, sentence case, CTAs especificos sin exclamacion.
+2. **Fondo correcto del canal.** #FFFAF5 es la base en piezas offline, pero hay excepciones legitimas: display (fondo segun campana, ver `app-ads.md`), Meta (fondos variados por familia, incluidos salmon y verde claro, ver `app-meta.md`), M+ (modo claro/oscuro/foto, ver `app-movistarplus.md`), landing web (blanco puro + #EFF5FB, ver `app-web.md`). Consulta el guideline del canal antes de marcar un fondo como error.
+3. **El patron del formato** en `brand/audit-report.md` (jerarquia, posicion de la M, estructura).
+4. **Nada solapado, cortado ni desbordado.** Legibilidad a la distancia del soporte.
+5. **La foto integra:** luz creible, personas reales, sin look CGI, coherente con el tono.
+6. **El titular cierra con punto.** El sistema tipografico Movistar cierra el titular con punto final. Regla incondicional, no solo en impreso. En una tanda real faltaba en 14 de 17 piezas.
+7. **El logo M donde manda el canal.** Meta: **abajo derecha**. Resto: arriba derecha o segun playbook. Pantalla PLV de tienda: sin M en pieza.
+8. **El CTA del tipo correcto.** M+ (WOW y videocartela): **link subrayado con `>`, nunca boton**. Meta: **sin boton CTA en la imagen**. Resto: pill relleno azul.
+9. **Sin jerga interna en copy de cliente.** Prohibido en pieza: "BAF", "Stand Alone", "Horecas", "SA", "winback", "churn", codigos internos. Si el copy de C los trae, traduce y flaggea `jerga_corregida`.
+10. **Todo en sentence case.** Sin Title Case residual: "Vuelta al cole" no "Vuelta al Cole"; eyebrows sin mayusculas completas.
+11. **Si el texto esta DENTRO de la imagen generada, lectura letra a letra con zoom.** Tildes, ñ, dieresis, signos de apertura, cifras y simbolo €. Y lectura semantica: ¿la frase tiene sentido? Caso real: "vuelve a sonar" donde el copy decia "sonar". Una errata es bloqueante.
+12. **Fisica de escena** en la fotografia: sombras de contacto, objetos con apoyo creible, reflejos coherentes, sin duplicados imposibles. Es lo que delata la IA ante cliente.
+13. **Producto hero:** si la pieza ensena un dispositivo concreto, que sea ese modelo. El modelo falla aqui (caso real: iPhone X donde iba un iPhone 17). Si no puedes garantizarlo, pide dispositivo generico o flaggea `producto_no_verificado`.
+14. **Test de parecido:** puesta junto a las referencias reales, encaja como una mas.
 
-Si algo falla, corrige el HTML y repite ensamblado + render. Máximo 2 iteraciones; si a la segunda no pasa, entrega con flag `qa_visual_fallido` y detalle.
+Si algo falla, corrige y repite. Maximo 2 iteraciones. Si a la segunda el texto dentro de imagen no sale limpio, produce esa pieza con el HTML editable (texto vivo) y flaggea `texto_en_imagen_fallido`. Para el resto, entrega con flag `qa_visual_fallido` y detalle.
 
 ### 6. Mockup contextual (si es para presentar a cliente)
 Sigue `guidelines/mockup-workflow.md`: pieza plana en PNG + template de `templates/mockups/` + `scripts/mockup_composer.py`. Si no hay template del formato, genera el entorno con `generate_image.py` (prompt de entorno vacio, sin branding), anota las esquinas en `.corners.json` y guardalo en la subcarpeta para reutilizar.
@@ -176,8 +206,12 @@ Sigue `guidelines/mockup-workflow.md`: pieza plana en PNG + template de `templat
 
 ## Anti-patrones
 
-- Escribir base64 a mano (fuentes, logos, imagenes): NUNCA. Es la causa historica de tipografía rota.
+- Escribir base64 a mano (fuentes, logos, imagenes): NUNCA. Es la causa historica de tipografia rota.
+- **Mezclar tracks de referencia**: pieza completa (Track B) como referencia de una foto pura (Track A), o al reves.
+- **Mencionar la referencia dentro del prompt.**
+- **Poner una cifra que no esta en el `copy_prototype`.**
 - Placeholder dashed en una entrega final: solo se admite con flag `imagen_provisional` y motivo.
 - SVG a mano alzada con coordenadas para formatos fotograficos: usar HTML fijo + render.
 - Entregar sin haber mirado el render: prohibido.
-- Inventar HEX o tokens: si falta un valor, TODO + flag.
+- Inventar HEX o tokens: si falta un valor, TODO + flag. Y verifica el nombre del token contra `colors.css`.
+- Pasar un corrector ortografico sobre el frontmatter o los bloques de codigo de esta skill.
