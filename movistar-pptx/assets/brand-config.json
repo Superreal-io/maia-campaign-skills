@@ -1,0 +1,56 @@
+{
+  "brand": "movistar",
+  "display_name": "Movistar",
+  "palette": {
+    "blue":        { "hex": "0066FF", "name": "Azul Movistar" },
+    "black":       { "hex": "262423", "name": "Negro Movistar" },
+    "white":       { "hex": "FFFAF5", "name": "Blanco Movistar" },
+    "blue_soft":   { "hex": "D3EEFF", "name": "Azul claro" },
+    "green_soft":  { "hex": "CEF7BF", "name": "Verde claro" },
+    "yellow_soft": { "hex": "FFE99C", "name": "Amarillo claro" },
+    "coral_soft":  { "hex": "FFC5A8", "name": "Coral claro" },
+    "blue_dark":   { "hex": "022D67", "name": "Azul oscuro" },
+    "green_dark":  { "hex": "38552B", "name": "Verde oscuro" },
+    "yellow_dark": { "hex": "5E4A09", "name": "Amarillo oscuro" },
+    "coral_dark":  { "hex": "62301A", "name": "Coral oscuro" },
+    "gray":        { "hex": "5A5A5A", "name": "Gray" }
+  },
+  "palette_source": "movistar-brand-guidelines/assets/colors/movistar-palette.ase + SRSKILLTEMP/movistar/info.md (confirmación escrita de Silvia) = fuente de verdad; los hexes coinciden byte a byte con scripts/_contracts.py::CANONICAL_SCHEME, que es lo que el build normaliza dentro de la plantilla. Movistar es COLOR PLANO, sin degradados.",
+  "palette_note": "Los cuatro secundarios existen en pareja CLARO/OSCURO y NO son intercambiables: el claro es superficie (fondo de capítulo, panel, tarjeta) y el oscuro es EXCEPCIÓN de uso puntual (texto/detalle sobre claro), nunca fondo de sistema. Hasta la v3 este fichero listaba `green`=36552B y `yellow`=5E4A09 como si fueran los secundarios de referencia y el mapa de capítulos resolvía a ellos: era el bug corregido en 4.0.0 (ver `chapter_color_system.note`). El verde oscuro se alinea además a 38552B, el valor de info.md, en vez del 36552B que arrastraba la v3 (ver _contracts.PARAMETROS_ABIERTOS['verde_oscuro']).",
+  "chapter_color_system": {
+    "note": "Color de FONDO del separador de cada capítulo. Los secundarios van en su versión CLARA (verde CEF7BF, amarillo FFE99C), nunca en la oscura — es lo que hace la propia plantilla: SEPARADOR_NUMERO_04_VERDE tiene bg CEF7BF y SEPARADOR_NUMERO_03_AMARILLO bg FFE99C, verificado sobre el binario. La v3 mapeaba 'verde'/'amarillo' a los oscuros (36552B / 5E4A09) a través de `color_theme_to_purpose_priority`, contra lo que dice el propio info.md del cliente.",
+    "by_chapter": { "01": "AZUL", "02": "VERDE", "03": "AMARILLO", "04": "NEGRO" },
+    "allowed": ["AZUL", "VERDE", "AMARILLO", "CORAL", "AZULCLARO", "NEGRO", "CREMA"],
+    "allowed_note": "Los 7 fondos que la plantilla ofrece de verdad para un separador (la serie SEPARADOR_NUMERO_01..07 del refresh, más sus gemelos del clásico). `by_chapter` es la preferencia del cliente para los 4 primeros capítulos; `allowed` es lo que existe. Los tokens son los mismos de `variant.value`/`bg_semantic` del catálogo, así que el gate compara sin traducir nada.",
+    "token_hex": {
+      "AZUL": "0066FF", "VERDE": "CEF7BF", "AMARILLO": "FFE99C", "CORAL": "FFC5A8",
+      "AZULCLARO": "D3EEFF", "NEGRO": "262423", "CREMA": "FFFAF5"
+    }
+  },
+  "font_family_primary": "MovistarSans",
+  "font_family_pptx": "Movistar Sans",
+  "rules": {
+    "min_slides": 8,
+    "max_slides": 18,
+    "must_start_with_purpose": "cover",
+    "must_end_with_purpose": "closing",
+    "chapter_must_start_with_purpose": "section_divider",
+    "language": "es-ES"
+  },
+  "qa_gates_note": "Fuente única de los umbrales/patrones deterministas que build_catalog.py y mvst_pptx.py (set_text()/verify_deck()/save()) SÍ leen en tiempo de ejecución — si cambias un umbral, cámbialo aquí, no en el código, y regenera el catálogo (`python scripts/build_catalog.py`) para que la prosa de references/slides-index.md siga derivada de estos valores y no de la memoria de nadie.",
+  "qa_gates_capacity_note": "Hay DOS holguras de capacidad porque hay dos clases de texto de ejemplo en la plantilla. `capacity_headroom_ratio` (1.15) se aplica cuando el ejemplo lo calibró el diseñador del cliente: la longitud del propio ejemplo ES la medida del diseño (capacity_source: 'medida'). `capacity_headroom_ratio_geometria` (1.50) se aplica a las 82 diapositivas MATERIALIZADAS (81 del sistema clásico + 1 del refresh), cuyo ejemplo lo generó el build al 85% de la capacidad de la caja: ahí la referencia es la capacidad GEOMÉTRICA medida con las métricas reales de Movistar Sans (capacity_source: 'geometria'), y la holgura es mayor a propósito porque esa estimación es conservadora (0,93 de eficiencia de corte de línea, líneas enteras hacia abajo) y muchas de esas cajas llevan normAutofit. ⚠️ Cambiar cualquiera de las dos mueve `max_chars_approx` de los 51 arquetipos heredados y el fichero-oro `references/roles-baseline-54.json` hará fallar el build: no se tocan sin una decisión explícita.",
+  "qa_gates_deck_note": "Los umbrales de composición se endurecieron en 4.0.0 al pasar de 54 a 156 arquetipos: con 156 nombres disponibles, un deck puede usar 6 nombres distintos de INTERIOR_TXT_* que se ven casi iguales y pasar un check de diversidad de NOMBRES. Por eso `max_dominant_composition_ratio` mide sobre `composition_id` (la maqueta física, que es lo que ve el cliente) y es el gate que de verdad importa; `max_dominant_slide_ratio` se conserva como red secundaria.",
+  "qa_gates": {
+    "capacity_headroom_ratio": 1.15,
+    "capacity_headroom_ratio_geometria": 1.50,
+    "max_dominant_slide_ratio": 0.30,
+    "max_dominant_composition_ratio": 0.35,
+    "max_divider_ratio": 0.25,
+    "min_master_share": 0.25,
+    "min_filled_ratio": 0.80,
+    "seed_image_gate": "warn",
+    "movistar_lowercase_pattern": "\\bmovistar\\b",
+    "em_dash_pattern": "—"
+  },
+  "qa_gates_seed_image_note": "82 zonas de imagen de 35 arquetipos llevan una foto SEMILLA que el build puso para que la diapositiva materializada no saliera con un hueco gris. Un deck que clone una de ellas y no llame a set_image() entrega la foto semilla al cliente. `seed_image_gate: 'warn'` lo reporta como aviso en 4.0.0 a propósito — Movistar es la única marca en producción y un script existente que hoy entrega pasaría a fallar de golpe. Sube a 'block' en 4.1.0, cuando los scripts guardados de SuperStudio ya hayan visto el aviso."
+}

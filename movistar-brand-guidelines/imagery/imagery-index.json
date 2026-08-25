@@ -1,0 +1,2764 @@
+{
+  "version": "1.3.0",
+  "brand": "Movistar",
+  "updated": "2026-06-25",
+  "total_images": 81,
+  "categorias": {
+    "personas": "Retratos y editoriales de personas",
+    "hogar": "Familia, senior, intimidad doméstica",
+    "conectividad": "Uso de dispositivos en contexto cotidiano",
+    "producto": "Dispositivos Movistar y tech",
+    "deporte": "Fútbol y outdoor activo (Movistar patrocina LaLiga y deporte)",
+    "paisaje": "Naturaleza, viajes, aventura",
+    "urbano": "Profesionales y escenas de ciudad",
+    "marca": "Logo y presencia de marca en contexto",
+    "fondo": "Fondos de color plano de marca con lockup y claim fijo 'es por todos.' (uso muy acotado, no fotografía de estilo de vida)"
+  },
+  "moods": [
+    "calido",
+    "epico",
+    "dinamico",
+    "sereno",
+    "editorial",
+    "intimo",
+    "profesional",
+    "juvenil"
+  ],
+  "usos": [
+    "portada",
+    "separador_capitulo",
+    "slide_contenido",
+    "full_bleed",
+    "acompanamiento_texto",
+    "thumbnail"
+  ],
+  "images": [
+    {
+      "id": "familia-padre-bebe",
+      "source_file": "hogar/familia-padre-bebe.png",
+      "categoria": "hogar",
+      "tags": [
+        "familia",
+        "bebe",
+        "padre",
+        "juego",
+        "cariño",
+        "intergeneracional"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#A08060",
+        "#804020",
+        "#C0A080"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "notas": "Luz muy cálida, emoción alta. Ideal para secciones sobre familia, bienestar, conexión humana. No apta como fondo de texto denso (ya ocupa mucho foco emocional).",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "camiseta-mediterraneo",
+      "source_file": "deporte/camiseta-mediterraneo.jpg",
+      "categoria": "deporte",
+      "tags": [
+        "futbol",
+        "mediterraneo",
+        "lifestyle",
+        "casa-blanca",
+        "numero-17",
+        "editorial"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#E0E0C0",
+        "#806040",
+        "#A08060"
+      ],
+      "w": 1376,
+      "h": 768,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "full_bleed"
+      ],
+      "notas": "Hero editorial de fútbol en clave cálida. Funciona de portada o separador de capítulos sobre deporte/patrocinios.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "senior-pareja-tablet",
+      "source_file": "hogar/senior-pareja-tablet.jpg",
+      "categoria": "hogar",
+      "tags": [
+        "senior",
+        "pareja",
+        "tablet",
+        "hogar",
+        "inclusion-digital",
+        "salon"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#E0E0E0",
+        "#000000",
+        "#806040"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "notas": "Inclusión digital senior en casa. Útil para secciones sobre accesibilidad, servicios residenciales, envejecimiento activo.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "pro-cafeteria-urbana",
+      "source_file": "urbano/pro-cafeteria-urbana.png",
+      "categoria": "urbano",
+      "tags": [
+        "profesional",
+        "laptop",
+        "cafeteria",
+        "urbano",
+        "working",
+        "bicicleta",
+        "ventana"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#E0E0E0",
+        "#200000",
+        "#202020"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "notas": "Profesional trabajando en cafetería con vista urbana. Bueno para secciones B2B, movilidad laboral, fibra empresarial.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "estadio-futbol-movil",
+      "source_file": "deporte/estadio-futbol-movil.png",
+      "categoria": "deporte",
+      "tags": [
+        "futbol",
+        "estadio",
+        "grabacion",
+        "movil",
+        "experiencia",
+        "juventud",
+        "fan"
+      ],
+      "mood": "dinamico",
+      "colores_dominantes": [
+        "#000000",
+        "#202020",
+        "#A08040"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo"
+      ],
+      "notas": "Espectador grabando un partido en el estadio. Perfecto para LaLiga, patrocinio deportivo, experiencia fan.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "router-movistar-hogar",
+      "source_file": "producto/router-movistar-hogar.jpg",
+      "categoria": "producto",
+      "tags": [
+        "router",
+        "movistar",
+        "fibra",
+        "hogar",
+        "tv",
+        "planta",
+        "producto"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#C0C0C0",
+        "#606060",
+        "#000000"
+      ],
+      "w": 1920,
+      "h": 1072,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "notas": "Router oficial Movistar con logo M visible. Alta resolución (5504×3072). Hero para secciones sobre fibra, conectividad residencial, producto.",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ]
+    },
+    {
+      "id": "senior-smartphone-salon",
+      "source_file": "hogar/senior-smartphone-salon.jpg",
+      "categoria": "hogar",
+      "tags": [
+        "senior",
+        "smartphone",
+        "salon",
+        "hogar",
+        "inclusion-digital",
+        "solitario"
+      ],
+      "mood": "intimo",
+      "colores_dominantes": [
+        "#806040",
+        "#A08060",
+        "#402020"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "notas": "Mujer mayor usando smartphone en sillón. Tono íntimo. Para secciones sobre accesibilidad, autonomía digital, usuarios senior.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "amigos-vista-ciudad",
+      "source_file": "urbano/amigos-vista-ciudad.png",
+      "categoria": "urbano",
+      "tags": [
+        "amigos",
+        "grupo",
+        "ciudad",
+        "barcelona",
+        "vista",
+        "amanecer",
+        "conexion"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#C0C0C0",
+        "#606060",
+        "#A0C0C0"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo"
+      ],
+      "notas": "Grupo de amigos mirando Barcelona desde un mirador. Bueno para conexión, comunidad, juventud urbana.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "montanero-amanecer-nieve",
+      "source_file": "paisaje/montanero-amanecer-nieve.png",
+      "categoria": "paisaje",
+      "tags": [
+        "montaña",
+        "nieve",
+        "amanecer",
+        "aventura",
+        "outdoor",
+        "epico",
+        "solitario"
+      ],
+      "mood": "epico",
+      "colores_dominantes": [
+        "#204040",
+        "#002020",
+        "#C0C0A0"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "full_bleed"
+      ],
+      "notas": "Cima nevada al amanecer. Mood épico-inspirador. Ideal para portadas, secciones sobre superación, objetivos.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "playa-espejo-atardecer",
+      "source_file": "paisaje/playa-espejo-atardecer.png",
+      "categoria": "paisaje",
+      "tags": [
+        "playa",
+        "atardecer",
+        "espejo",
+        "serenidad",
+        "azul",
+        "caminantes",
+        "horizonte"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#004060",
+        "#006080",
+        "#002040"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "full_bleed"
+      ],
+      "notas": "Playa espejo al crepúsculo en tonos azul Movistar. Muy on-brand cromáticamente. Excelente para portadas o full-bleed.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "ciclista-costa",
+      "source_file": "deporte/ciclista-costa.png",
+      "categoria": "deporte",
+      "tags": [
+        "ciclismo",
+        "mtb",
+        "costa",
+        "reflejo",
+        "outdoor",
+        "aventura",
+        "acantilado"
+      ],
+      "mood": "dinamico",
+      "colores_dominantes": [
+        "#C0C0C0",
+        "#404040",
+        "#606060"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo"
+      ],
+      "notas": "Ciclista MTB junto al mar con reflejo. Para ciclismo, Movistar Team, outdoor.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "carretera-costera-motos",
+      "source_file": "paisaje/carretera-costera-motos.png",
+      "categoria": "paisaje",
+      "tags": [
+        "carretera",
+        "costa",
+        "motos",
+        "road-trip",
+        "atardecer",
+        "viaje",
+        "oceano"
+      ],
+      "mood": "epico",
+      "colores_dominantes": [
+        "#A0A0A0",
+        "#406060",
+        "#202020"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "separador_capitulo",
+        "slide_contenido"
+      ],
+      "notas": "Road trip en motos por costa. Mood viajero. Para secciones sobre movilidad, libertad, descubrimiento.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "futbol-silueta-atardecer",
+      "source_file": "deporte/futbol-silueta-atardecer.png",
+      "categoria": "deporte",
+      "tags": [
+        "futbol",
+        "silueta",
+        "atardecer",
+        "epico",
+        "balon",
+        "horizonte",
+        "solitario"
+      ],
+      "mood": "epico",
+      "colores_dominantes": [
+        "#202020",
+        "#806060",
+        "#604040"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "full_bleed"
+      ],
+      "notas": "Silueta de futbolista rematando al atardecer. Muy épico. Portada perfecta para deck sobre deporte o patrocinio.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "movil-cocina-casual",
+      "source_file": "conectividad/movil-cocina-casual.jpg",
+      "categoria": "conectividad",
+      "tags": [
+        "movil",
+        "cocina",
+        "manos",
+        "casual",
+        "lifestyle",
+        "cotidiano",
+        "scroll"
+      ],
+      "mood": "intimo",
+      "colores_dominantes": [
+        "#002020",
+        "#000000",
+        "#204040"
+      ],
+      "w": 1392,
+      "h": 752,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "notas": "Uso cotidiano del móvil en casa. Lifestyle neutro y universal. Anclaje para secciones sobre uso digital, consumo de contenido.",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ]
+    },
+    {
+      "id": "pro-terraza-paris",
+      "source_file": "urbano/pro-terraza-paris.jpg",
+      "categoria": "urbano",
+      "tags": [
+        "profesional",
+        "laptop",
+        "terraza",
+        "editorial",
+        "estilo",
+        "mujer",
+        "remote-work"
+      ],
+      "mood": "editorial",
+      "colores_dominantes": [
+        "#000000",
+        "#C0C0C0",
+        "#202000"
+      ],
+      "w": 1408,
+      "h": 768,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "notas": "Mujer pro trabajando en terraza parisina, estilo editorial. Lifestyle aspiracional. Para trabajo híbrido, movilidad, profesional moderno.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "libertad-azul-movistar",
+      "source_file": "personas/libertad-azul-movistar.jpg",
+      "categoria": "personas",
+      "tags": [
+        "mujer",
+        "libertad",
+        "alegria",
+        "editorial",
+        "viento",
+        "azul-movistar",
+        "sol"
+      ],
+      "mood": "dinamico",
+      "colores_dominantes": [
+        "#E0C0C0",
+        "#000000",
+        "#E0C0A0"
+      ],
+      "w": 1408,
+      "h": 768,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "separador_capitulo"
+      ],
+      "notas": "Vestido azul Movistar. Máxima afinidad cromática con la marca. Mood de libertad y energía. Usar como portada o separador destacado.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "diversidad-trio-editorial",
+      "source_file": "personas/diversidad-trio-editorial.jpg",
+      "categoria": "personas",
+      "tags": [
+        "diversidad",
+        "equipo",
+        "editorial",
+        "retrato",
+        "mujeres",
+        "inclusion",
+        "estudio"
+      ],
+      "mood": "editorial",
+      "colores_dominantes": [
+        "#000000",
+        "#A0A0A0",
+        "#202000"
+      ],
+      "w": 1024,
+      "h": 1024,
+      "aspect": "1:1",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "portada",
+        "full_bleed"
+      ],
+      "notas": "Retrato cuadrado (1:1). Diversidad e inclusión. Solo usos que admitan aspect cuadrado — no full-bleed en 16:9.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "intimidad-libro-casa",
+      "source_file": "hogar/intimidad-libro-casa.jpg",
+      "categoria": "hogar",
+      "tags": [
+        "lectura",
+        "libro",
+        "manos",
+        "intimidad",
+        "hogar",
+        "cotidiano",
+        "pausa"
+      ],
+      "mood": "intimo",
+      "colores_dominantes": [
+        "#000000",
+        "#806040",
+        "#806060"
+      ],
+      "w": 1408,
+      "h": 768,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto",
+        "full_bleed"
+      ],
+      "notas": "Lectura en casa, manos en primer plano. Mood íntimo/pausado. Ideal para secciones sobre ocio, bienestar digital, desconexión.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "auriculares-azul-producto",
+      "source_file": "producto/auriculares-azul-producto.jpg",
+      "categoria": "producto",
+      "tags": [
+        "auriculares",
+        "tech",
+        "producto",
+        "azul",
+        "premium",
+        "close-up",
+        "audio"
+      ],
+      "mood": "editorial",
+      "colores_dominantes": [
+        "#E0E0E0",
+        "#C0C0C0",
+        "#A0A0A0"
+      ],
+      "w": 1408,
+      "h": 768,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "full_bleed"
+      ],
+      "notas": "Producto en azul afín a la marca. Para secciones sobre contenido streaming, audio, dispositivos.",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ]
+    },
+    {
+      "id": "bienestar-rostro-sol",
+      "source_file": "personas/bienestar-rostro-sol.jpg",
+      "categoria": "personas",
+      "tags": [
+        "bienestar",
+        "retrato",
+        "cielo-azul",
+        "serenidad",
+        "sombra-vegetal",
+        "mujer",
+        "sol"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#80A0C0",
+        "#402020",
+        "#402000"
+      ],
+      "w": 1280,
+      "h": 896,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "separador_capitulo",
+        "slide_contenido"
+      ],
+      "notas": "Cielo azul claro afín a la marca. Mood bienestar/serenidad. Para secciones sobre salud digital, calidad de vida, ESG.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "pareja-puerto-verano",
+      "source_file": "paisaje/pareja-puerto-verano.jpg",
+      "categoria": "paisaje",
+      "tags": [
+        "pareja",
+        "puerto",
+        "verano",
+        "mediterraneo",
+        "barcos",
+        "vacaciones",
+        "azul"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#A0C0C0",
+        "#80A0A0",
+        "#C0C0C0"
+      ],
+      "w": 1408,
+      "h": 768,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "full_bleed"
+      ],
+      "notas": "Pareja de espaldas en puerto mediterráneo. Tonalidades azules on-brand. Ideal para verano, campañas emocionales, lifestyle.",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ]
+    },
+    {
+      "id": "movil-naranja-fondo-azul",
+      "source_file": "producto/movil-naranja-fondo-azul.jpg",
+      "categoria": "producto",
+      "tags": [
+        "movil",
+        "producto",
+        "funda",
+        "contraste",
+        "azul-movistar",
+        "mano",
+        "tech"
+      ],
+      "mood": "editorial",
+      "colores_dominantes": [
+        "#000000",
+        "#002040",
+        "#204060"
+      ],
+      "w": 1408,
+      "h": 768,
+      "aspect": "16:9",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "full_bleed"
+      ],
+      "notas": "Smartphone contra fondo azul Movistar profundo. Composición editorial muy brand. Usar en secciones sobre terminales, servicios móviles.",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ]
+    },
+    {
+      "id": "marca-logo-fachada",
+      "source_file": "marca/marca-logo-fachada.jpeg",
+      "categoria": "marca",
+      "tags": [
+        "logo",
+        "movistar",
+        "fachada",
+        "tienda",
+        "retail",
+        "ciudad",
+        "brand"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#C0C0C0",
+        "#402000",
+        "#000000"
+      ],
+      "w": 1152,
+      "h": 896,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "slide_contenido"
+      ],
+      "notas": "Logo M de Movistar en cartel sobre fachada. Única imagen que muestra marca explícita. Reservar para cierre, portada institucional o sección sobre presencia física.",
+      "reglas": [
+        "la_M_siempre_azul_movistar",
+        "no_recolorear_ni_deformar_logo",
+        "1_logo_por_pieza"
+      ]
+    },
+    {
+      "id": "movistar-atardecer-01",
+      "source_file": "atardecer/movistar-atardecer-01.png",
+      "categoria": "hogar",
+      "momento_dia": "atardecer",
+      "tags": [
+        "madre",
+        "bebe",
+        "sofa",
+        "movil",
+        "hogar",
+        "intimo"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#E8A062",
+        "#C06030",
+        "#F0C088"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · atardecer · calido. madre, bebe, sofa, movil, hogar."
+    },
+    {
+      "id": "movistar-atardecer-02",
+      "source_file": "atardecer/movistar-atardecer-02.png",
+      "categoria": "urbano",
+      "momento_dia": "atardecer",
+      "tags": [
+        "ciudad",
+        "terraza",
+        "social",
+        "gente",
+        "atardecer",
+        "madrid"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#E8A062",
+        "#C06030",
+        "#F0C088"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · atardecer · calido. ciudad, terraza, social, gente, atardecer."
+    },
+    {
+      "id": "movistar-atardecer-03",
+      "source_file": "atardecer/movistar-atardecer-03.png",
+      "categoria": "personas",
+      "momento_dia": "atardecer",
+      "tags": [
+        "retrato",
+        "hombre",
+        "contraluz",
+        "sol",
+        "sereno"
+      ],
+      "mood": "epico",
+      "colores_dominantes": [
+        "#E8A062",
+        "#C06030",
+        "#F0C088"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · atardecer · epico. retrato, hombre, contraluz, sol, sereno."
+    },
+    {
+      "id": "movistar-atardecer-04",
+      "source_file": "atardecer/movistar-atardecer-04.png",
+      "categoria": "hogar",
+      "momento_dia": "atardecer",
+      "tags": [
+        "cocina",
+        "mujer",
+        "hogar",
+        "cotidiano"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#E8A062",
+        "#C06030",
+        "#F0C088"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · atardecer · calido. cocina, mujer, hogar, cotidiano."
+    },
+    {
+      "id": "movistar-atardecer-05",
+      "source_file": "atardecer/movistar-atardecer-05.png",
+      "categoria": "paisaje",
+      "momento_dia": "atardecer",
+      "tags": [
+        "ciclismo",
+        "playa",
+        "verano",
+        "amigos",
+        "costa",
+        "deporte"
+      ],
+      "mood": "epico",
+      "colores_dominantes": [
+        "#E8A062",
+        "#C06030",
+        "#F0C088"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "separador_capitulo"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · atardecer · epico. ciclismo, playa, verano, amigos, costa."
+    },
+    {
+      "id": "movistar-atardecer-06",
+      "source_file": "atardecer/movistar-atardecer-06.png",
+      "categoria": "urbano",
+      "momento_dia": "atardecer",
+      "tags": [
+        "mujer",
+        "llamada",
+        "movil",
+        "ciudad",
+        "bokeh"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#E8A062",
+        "#C06030",
+        "#F0C088"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · atardecer · calido. mujer, llamada, movil, ciudad, bokeh."
+    },
+    {
+      "id": "movistar-manana-01",
+      "source_file": "manana/movistar-manana-01.jpg",
+      "categoria": "marca",
+      "momento_dia": "manana",
+      "tags": [
+        "padre",
+        "bebe",
+        "manos",
+        "M",
+        "familia",
+        "marca",
+        "intimo"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#E8D8C0",
+        "#D0B088",
+        "#F0E0C8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "la_M_siempre_azul_movistar",
+        "no_recolorear_ni_deformar_logo",
+        "1_logo_por_pieza"
+      ],
+      "notas": "Banco oficial 2025 · manana · calido. padre, bebe, manos, M, familia."
+    },
+    {
+      "id": "movistar-manana-02",
+      "source_file": "manana/movistar-manana-02.jpg",
+      "categoria": "personas",
+      "momento_dia": "manana",
+      "tags": [
+        "niño",
+        "lectura",
+        "libro",
+        "hogar"
+      ],
+      "mood": "intimo",
+      "colores_dominantes": [
+        "#E8D8C0",
+        "#D0B088",
+        "#F0E0C8"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · manana · intimo. niño, lectura, libro, hogar."
+    },
+    {
+      "id": "movistar-manana-03",
+      "source_file": "manana/movistar-manana-03.jpg",
+      "categoria": "personas",
+      "momento_dia": "manana",
+      "tags": [
+        "niño",
+        "risa",
+        "alegre",
+        "amarillo",
+        "retrato"
+      ],
+      "mood": "juvenil",
+      "colores_dominantes": [
+        "#E8D8C0",
+        "#D0B088",
+        "#F0E0C8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · manana · juvenil. niño, risa, alegre, amarillo, retrato."
+    },
+    {
+      "id": "movistar-manana-04",
+      "source_file": "manana/movistar-manana-04.jpg",
+      "categoria": "hogar",
+      "momento_dia": "manana",
+      "tags": [
+        "senior",
+        "abuelos",
+        "tablet",
+        "sofa",
+        "intergeneracional"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#E8D8C0",
+        "#D0B088",
+        "#F0E0C8"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · manana · calido. senior, abuelos, tablet, sofa, intergeneracional."
+    },
+    {
+      "id": "movistar-manana-05",
+      "source_file": "manana/movistar-manana-05.jpg",
+      "categoria": "hogar",
+      "momento_dia": "manana",
+      "tags": [
+        "bebe",
+        "madre",
+        "manos",
+        "cuidado"
+      ],
+      "mood": "intimo",
+      "colores_dominantes": [
+        "#E8D8C0",
+        "#D0B088",
+        "#F0E0C8"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · manana · intimo. bebe, madre, manos, cuidado."
+    },
+    {
+      "id": "movistar-manana-06",
+      "source_file": "manana/movistar-manana-06.jpg",
+      "categoria": "hogar",
+      "momento_dia": "manana",
+      "tags": [
+        "desayuno",
+        "balcon",
+        "tablet",
+        "cotidiano",
+        "urbano"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#E8D8C0",
+        "#D0B088",
+        "#F0E0C8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · manana · calido. desayuno, balcon, tablet, cotidiano, urbano."
+    },
+    {
+      "id": "movistar-mediodia-01",
+      "source_file": "mediodia/movistar-mediodia-01.png",
+      "categoria": "urbano",
+      "momento_dia": "mediodia",
+      "tags": [
+        "mujer",
+        "profesional",
+        "laptop",
+        "trabajo"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#C0C0B0",
+        "#8090A0",
+        "#E0E0D8"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · mediodia · profesional. mujer, profesional, laptop, trabajo."
+    },
+    {
+      "id": "movistar-mediodia-02",
+      "source_file": "mediodia/movistar-mediodia-02.png",
+      "categoria": "paisaje",
+      "momento_dia": "mediodia",
+      "tags": [
+        "coche",
+        "conduccion",
+        "costa",
+        "viaje",
+        "verano",
+        "movilidad"
+      ],
+      "mood": "dinamico",
+      "colores_dominantes": [
+        "#C0C0B0",
+        "#8090A0",
+        "#E0E0D8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "separador_capitulo"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · mediodia · dinamico. coche, conduccion, costa, viaje, verano."
+    },
+    {
+      "id": "movistar-mediodia-03",
+      "source_file": "mediodia/movistar-mediodia-03.png",
+      "categoria": "hogar",
+      "momento_dia": "mediodia",
+      "tags": [
+        "cocina",
+        "pareja",
+        "movil",
+        "receta",
+        "cotidiano"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#C0C0B0",
+        "#8090A0",
+        "#E0E0D8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · mediodia · calido. cocina, pareja, movil, receta, cotidiano."
+    },
+    {
+      "id": "movistar-mediodia-04",
+      "source_file": "mediodia/movistar-mediodia-04.png",
+      "categoria": "personas",
+      "momento_dia": "mediodia",
+      "tags": [
+        "madre",
+        "bebe",
+        "ventana",
+        "reflejo"
+      ],
+      "mood": "intimo",
+      "colores_dominantes": [
+        "#C0C0B0",
+        "#8090A0",
+        "#E0E0D8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · mediodia · intimo. madre, bebe, ventana, reflejo."
+    },
+    {
+      "id": "movistar-mediodia-05",
+      "source_file": "mediodia/movistar-mediodia-05.png",
+      "categoria": "hogar",
+      "momento_dia": "mediodia",
+      "tags": [
+        "padre",
+        "hijo",
+        "juego",
+        "risa",
+        "familia"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#C0C0B0",
+        "#8090A0",
+        "#E0E0D8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · mediodia · calido. padre, hijo, juego, risa, familia."
+    },
+    {
+      "id": "movistar-mediodia-06",
+      "source_file": "mediodia/movistar-mediodia-06.png",
+      "categoria": "hogar",
+      "momento_dia": "mediodia",
+      "tags": [
+        "senior",
+        "smartphone",
+        "sillon",
+        "hogar"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#C0C0B0",
+        "#8090A0",
+        "#E0E0D8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · mediodia · sereno. senior, smartphone, sillon, hogar."
+    },
+    {
+      "id": "movistar-mediodia-07",
+      "source_file": "mediodia/movistar-mediodia-07.png",
+      "categoria": "urbano",
+      "momento_dia": "mediodia",
+      "tags": [
+        "hombre",
+        "laptop",
+        "cafeteria",
+        "ciudad",
+        "teletrabajo"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#C0C0B0",
+        "#8090A0",
+        "#E0E0D8"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · mediodia · profesional. hombre, laptop, cafeteria, ciudad, teletrabajo."
+    },
+    {
+      "id": "movistar-noche-01",
+      "source_file": "noche/movistar-noche-01.png",
+      "categoria": "deporte",
+      "momento_dia": "noche",
+      "tags": [
+        "futbol",
+        "estadio",
+        "movil",
+        "grabar",
+        "noche",
+        "laliga"
+      ],
+      "mood": "dinamico",
+      "colores_dominantes": [
+        "#202840",
+        "#405070",
+        "#101820"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "separador_capitulo"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · noche · dinamico. futbol, estadio, movil, grabar, noche."
+    },
+    {
+      "id": "movistar-noche-02",
+      "source_file": "noche/movistar-noche-02.png",
+      "categoria": "urbano",
+      "momento_dia": "noche",
+      "tags": [
+        "tren",
+        "laptop",
+        "viaje",
+        "noche",
+        "movilidad",
+        "teletrabajo"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#202840",
+        "#405070",
+        "#101820"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · noche · profesional. tren, laptop, viaje, noche, movilidad."
+    },
+    {
+      "id": "movistar-noche-03",
+      "source_file": "noche/movistar-noche-03.png",
+      "categoria": "hogar",
+      "momento_dia": "noche",
+      "tags": [
+        "sofa",
+        "portatil",
+        "entretenimiento",
+        "noche",
+        "relax"
+      ],
+      "mood": "intimo",
+      "colores_dominantes": [
+        "#202840",
+        "#405070",
+        "#101820"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · noche · intimo. sofa, portatil, entretenimiento, noche, relax."
+    },
+    {
+      "id": "movistar-noche-04",
+      "source_file": "noche/movistar-noche-04.png",
+      "categoria": "urbano",
+      "momento_dia": "noche",
+      "tags": [
+        "cine",
+        "evento",
+        "noche",
+        "social",
+        "ocio",
+        "pantalla"
+      ],
+      "mood": "dinamico",
+      "colores_dominantes": [
+        "#202840",
+        "#405070",
+        "#101820"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · noche · dinamico. cine, evento, noche, social, ocio."
+    },
+    {
+      "id": "movistar-tarde-01",
+      "source_file": "tarde/movistar-tarde-01.png",
+      "categoria": "personas",
+      "momento_dia": "tarde",
+      "tags": [
+        "niño",
+        "piscina",
+        "verano",
+        "risa",
+        "flotador"
+      ],
+      "mood": "juvenil",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · juvenil. niño, piscina, verano, risa, flotador."
+    },
+    {
+      "id": "movistar-tarde-02",
+      "source_file": "tarde/movistar-tarde-02.png",
+      "categoria": "urbano",
+      "momento_dia": "tarde",
+      "tags": [
+        "biblioteca",
+        "arcos",
+        "lectura",
+        "sereno",
+        "cultura"
+      ],
+      "mood": "editorial",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · editorial. biblioteca, arcos, lectura, sereno, cultura."
+    },
+    {
+      "id": "movistar-tarde-03",
+      "source_file": "tarde/movistar-tarde-03.png",
+      "categoria": "hogar",
+      "momento_dia": "tarde",
+      "tags": [
+        "senior",
+        "videollamada",
+        "movil",
+        "conexion",
+        "familia"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · calido. senior, videollamada, movil, conexion, familia."
+    },
+    {
+      "id": "movistar-tarde-04",
+      "source_file": "tarde/movistar-tarde-04.png",
+      "categoria": "urbano",
+      "momento_dia": "tarde",
+      "tags": [
+        "mujer",
+        "profesional",
+        "laptop",
+        "reunion"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "full_bleed",
+        "slide_contenido"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · profesional. mujer, profesional, laptop, reunion."
+    },
+    {
+      "id": "movistar-tarde-05",
+      "source_file": "tarde/movistar-tarde-05.png",
+      "categoria": "hogar",
+      "momento_dia": "tarde",
+      "tags": [
+        "senior",
+        "auriculares",
+        "laptop",
+        "entretenimiento",
+        "sofa"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · sereno. senior, auriculares, laptop, entretenimiento, sofa."
+    },
+    {
+      "id": "movistar-tarde-06",
+      "source_file": "tarde/movistar-tarde-06.png",
+      "categoria": "hogar",
+      "momento_dia": "tarde",
+      "tags": [
+        "hombre",
+        "balcon",
+        "salon",
+        "ventana"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · sereno. hombre, balcon, salon, ventana."
+    },
+    {
+      "id": "movistar-tarde-07",
+      "source_file": "tarde/movistar-tarde-07.png",
+      "categoria": "personas",
+      "momento_dia": "tarde",
+      "tags": [
+        "madre",
+        "hija",
+        "cariño",
+        "atardecer"
+      ],
+      "mood": "intimo",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · intimo. madre, hija, cariño, atardecer."
+    },
+    {
+      "id": "movistar-tarde-08",
+      "source_file": "tarde/movistar-tarde-08.png",
+      "categoria": "hogar",
+      "momento_dia": "tarde",
+      "tags": [
+        "niña",
+        "deberes",
+        "educacion",
+        "tablet",
+        "cocina"
+      ],
+      "mood": "juvenil",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 776,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · juvenil. niña, deberes, educacion, tablet, cocina."
+    },
+    {
+      "id": "movistar-tarde-09",
+      "source_file": "tarde/movistar-tarde-09.png",
+      "categoria": "personas",
+      "momento_dia": "tarde",
+      "tags": [
+        "niños",
+        "risa",
+        "amistad",
+        "mesa",
+        "alegre"
+      ],
+      "mood": "juvenil",
+      "colores_dominantes": [
+        "#D8A878",
+        "#B07840",
+        "#E8C8A0"
+      ],
+      "w": 1080,
+      "h": 778,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · tarde · juvenil. niños, risa, amistad, mesa, alegre."
+    },
+    {
+      "id": "movistar-general-01",
+      "source_file": "general/movistar-general-01.png",
+      "categoria": "producto",
+      "momento_dia": "general",
+      "tags": [
+        "router",
+        "dispositivo",
+        "salon",
+        "hogar"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · sereno. router, dispositivo, salon, hogar."
+    },
+    {
+      "id": "movistar-general-02",
+      "source_file": "general/movistar-general-02.png",
+      "categoria": "producto",
+      "momento_dia": "general",
+      "tags": [
+        "dispositivos",
+        "router",
+        "altavoz",
+        "salon"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · sereno. dispositivos, router, altavoz, salon."
+    },
+    {
+      "id": "movistar-general-03",
+      "source_file": "general/movistar-general-03.png",
+      "categoria": "hogar",
+      "momento_dia": "general",
+      "tags": [
+        "estanteria",
+        "libros",
+        "plantas",
+        "ambiente",
+        "hogar"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · general · calido. estanteria, libros, plantas, ambiente, hogar."
+    },
+    {
+      "id": "movistar-general-04",
+      "source_file": "general/movistar-general-04.png",
+      "categoria": "conectividad",
+      "momento_dia": "general",
+      "tags": [
+        "teletrabajo",
+        "tablet",
+        "portatil",
+        "hogar"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · profesional. teletrabajo, tablet, portatil, hogar."
+    },
+    {
+      "id": "movistar-general-05",
+      "source_file": "general/movistar-general-05.png",
+      "categoria": "marca",
+      "momento_dia": "general",
+      "tags": [
+        "altavoz",
+        "M",
+        "marca",
+        "producto",
+        "escritorio"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "la_M_siempre_azul_movistar",
+        "no_recolorear_ni_deformar_logo",
+        "1_logo_por_pieza"
+      ],
+      "notas": "Banco oficial 2025 · general · calido. altavoz, M, marca, producto, escritorio."
+    },
+    {
+      "id": "movistar-general-06",
+      "source_file": "general/movistar-general-06.png",
+      "categoria": "producto",
+      "momento_dia": "general",
+      "tags": [
+        "dispositivo",
+        "pantalla",
+        "teclado",
+        "escritorio"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · profesional. dispositivo, pantalla, teclado, escritorio."
+    },
+    {
+      "id": "movistar-general-07",
+      "source_file": "general/movistar-general-07.png",
+      "categoria": "producto",
+      "momento_dia": "general",
+      "tags": [
+        "altavoz",
+        "estanteria",
+        "hogar",
+        "producto"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · calido. altavoz, estanteria, hogar, producto."
+    },
+    {
+      "id": "movistar-general-08",
+      "source_file": "general/movistar-general-08.png",
+      "categoria": "conectividad",
+      "momento_dia": "general",
+      "tags": [
+        "teletrabajo",
+        "sillon",
+        "tablet",
+        "hogar"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · sereno. teletrabajo, sillon, tablet, hogar."
+    },
+    {
+      "id": "movistar-general-09",
+      "source_file": "general/movistar-general-09.png",
+      "categoria": "marca",
+      "momento_dia": "general",
+      "tags": [
+        "mujer",
+        "dispositivo",
+        "M",
+        "marca",
+        "producto"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "portada",
+        "separador_capitulo"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "la_M_siempre_azul_movistar",
+        "no_recolorear_ni_deformar_logo",
+        "1_logo_por_pieza"
+      ],
+      "notas": "Banco oficial 2025 · general · sereno. mujer, dispositivo, M, marca, producto."
+    },
+    {
+      "id": "movistar-general-10",
+      "source_file": "general/movistar-general-10.png",
+      "categoria": "producto",
+      "momento_dia": "general",
+      "tags": [
+        "router",
+        "instalacion",
+        "manos",
+        "salon"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · sereno. router, instalacion, manos, salon."
+    },
+    {
+      "id": "movistar-general-11",
+      "source_file": "general/movistar-general-11.png",
+      "categoria": "producto",
+      "momento_dia": "general",
+      "tags": [
+        "bodegon",
+        "dispositivos",
+        "router",
+        "salon"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · sereno. bodegon, dispositivos, router, salon."
+    },
+    {
+      "id": "movistar-general-12",
+      "source_file": "general/movistar-general-12.png",
+      "categoria": "producto",
+      "momento_dia": "general",
+      "tags": [
+        "bodegon",
+        "dispositivos",
+        "M",
+        "marca"
+      ],
+      "mood": "sereno",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 652,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · sereno. bodegon, dispositivos, M, marca."
+    },
+    {
+      "id": "movistar-general-13",
+      "source_file": "general/movistar-general-13.png",
+      "categoria": "hogar",
+      "momento_dia": "general",
+      "tags": [
+        "estanteria",
+        "plantas",
+        "manta",
+        "ambiente"
+      ],
+      "mood": "calido",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "separador_capitulo",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "texto_con_zona_de_contraste",
+        "no_repetir_en_un_deck"
+      ],
+      "notas": "Banco oficial 2025 · general · calido. estanteria, plantas, manta, ambiente."
+    },
+    {
+      "id": "movistar-general-14",
+      "source_file": "general/movistar-general-14.png",
+      "categoria": "conectividad",
+      "momento_dia": "general",
+      "tags": [
+        "mujer",
+        "teletrabajo",
+        "portatil",
+        "hogar"
+      ],
+      "mood": "profesional",
+      "colores_dominantes": [
+        "#C8B8A0",
+        "#A09078",
+        "#E0D8C8"
+      ],
+      "w": 650,
+      "h": 468,
+      "aspect": "4:3",
+      "usos_recomendados": [
+        "slide_contenido",
+        "acompanamiento_texto"
+      ],
+      "usos_evitar": [
+        "full_bleed"
+      ],
+      "fuente": "oficial-movistar-2025",
+      "reglas": [
+        "evitar_full_bleed_con_texto",
+        "texto_con_zona_de_contraste"
+      ],
+      "notas": "Banco oficial 2025 · general · profesional. mujer, teletrabajo, portatil, hogar."
+    },
+    {
+      "id": "movistar-fondo-amarillo-centrado",
+      "source_file": "fondos/movistar-fondo-amarillo-centrado.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "amarillo",
+        "centrado"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#FFE99C"
+      ],
+      "w": 1921,
+      "h": 1081,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Amarillo claro) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-amarillo-horizontal",
+      "source_file": "fondos/movistar-fondo-amarillo-horizontal.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "amarillo",
+        "horizontal"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#FFE99C"
+      ],
+      "w": 1928,
+      "h": 1084,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Amarillo claro) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-azul-centrado",
+      "source_file": "fondos/movistar-fondo-azul-centrado.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "azul",
+        "centrado"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#3a66fb"
+      ],
+      "w": 1921,
+      "h": 1081,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Azul (⚠ no exacto al Azul Movistar #0066FF)) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas",
+        "color_no_exacto_a_azul_movistar_no_usar_como_referencia"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-azul-horizontal",
+      "source_file": "fondos/movistar-fondo-azul-horizontal.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "azul",
+        "horizontal"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#3a66fb"
+      ],
+      "w": 1928,
+      "h": 1084,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Azul (⚠ no exacto al Azul Movistar #0066FF)) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas",
+        "color_no_exacto_a_azul_movistar_no_usar_como_referencia"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-azul-claro-centrado",
+      "source_file": "fondos/movistar-fondo-azul-claro-centrado.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "azul-claro",
+        "centrado"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#D3EEFF"
+      ],
+      "w": 1921,
+      "h": 1081,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Azul claro) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-azul-claro-horizontal",
+      "source_file": "fondos/movistar-fondo-azul-claro-horizontal.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "azul-claro",
+        "horizontal"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#D3EEFF"
+      ],
+      "w": 1928,
+      "h": 1084,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Azul claro) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-blanco-centrado",
+      "source_file": "fondos/movistar-fondo-blanco-centrado.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "blanco",
+        "centrado"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#FFFAF5"
+      ],
+      "w": 1921,
+      "h": 1081,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Blanco Movistar) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-blanco-horizontal",
+      "source_file": "fondos/movistar-fondo-blanco-horizontal.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "blanco",
+        "horizontal"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#FFFAF5"
+      ],
+      "w": 1928,
+      "h": 1084,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Blanco Movistar) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-coral-centrado",
+      "source_file": "fondos/movistar-fondo-coral-centrado.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "coral",
+        "centrado"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#FFC5A8"
+      ],
+      "w": 1921,
+      "h": 1081,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Coral claro) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-coral-horizontal",
+      "source_file": "fondos/movistar-fondo-coral-horizontal.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "coral",
+        "horizontal"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#FFC5A8"
+      ],
+      "w": 1928,
+      "h": 1084,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Coral claro) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-verde-centrado",
+      "source_file": "fondos/movistar-fondo-verde-centrado.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "verde",
+        "centrado"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#CEF7BF"
+      ],
+      "w": 1921,
+      "h": 1081,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Verde claro) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    },
+    {
+      "id": "movistar-fondo-verde-horizontal",
+      "source_file": "fondos/movistar-fondo-verde-horizontal.png",
+      "categoria": "fondo",
+      "tags": [
+        "fondo",
+        "color plano",
+        "lockup",
+        "es por todos",
+        "verde",
+        "horizontal"
+      ],
+      "mood": "profesional",
+      "momento_dia": "general",
+      "colores_dominantes": [
+        "#CEF7BF"
+      ],
+      "w": 1928,
+      "h": 1084,
+      "aspect": "16:9",
+      "usos_recomendados": [],
+      "notas": "Fondo de color plano (Verde claro) con el lockup y el claim FIJO \"es por todos.\" incrustado en la imagen. Uso muy acotado: SOLO cuando ese mensaje encaje literalmente con la pieza (employer branding/cultura interna) — nunca como fondo genérico de marca. Fuente: Toolkit_Empleados/Fondos Teams del cliente (incorporado 2026-07-10).",
+      "usos_evitar": [
+        "fondo_generico",
+        "deck_comercial_sin_relacion_con_es_por_todos"
+      ],
+      "reglas": [
+        "claim_fijo_no_editable",
+        "uso_muy_acotado_ver_notas"
+      ],
+      "fuente": "toolkit-empleados-2026"
+    }
+  ],
+  "logos_nota": "El logotipo (la 'M') se sirve por blob igual que las fotos: se referencia en HTML/React como movistar://<id> (nunca base64; el runtime NO inyecta el logo, solo la FUENTE). El backend resuelve el id al PNG web-optimizado del blob. Elige la variante por fondo — ver assets/logo/README.md y brand/logo.md §2.1.6. Fallback sin backend: SVG limpio con <symbol>/<use> desde assets/logo/.",
+  "logos": [
+    {"id": "logo-m-blue", "source_file": "logo/blob/movistar-m-blue.png", "categoria": "logo", "variante": "azul", "usos_recomendados": ["fondo_claro", "fondo_blanco", "fondo_secundario_claro"], "usos_evitar": ["fondo_azul_movistar", "fondo_negro", "imagen_oscura"], "notas": "La M en Azul Movistar #0066FF. Uso por defecto: sobre fondos claros / Blanco Movistar / secundarios claros."},
+    {"id": "logo-m-white", "source_file": "logo/blob/movistar-m-white.png", "categoria": "logo", "variante": "blanco", "usos_recomendados": ["fondo_azul_movistar", "fondo_negro", "imagen_azulada"], "usos_evitar": ["fondo_claro", "fondo_blanco", "imagen_clara"], "notas": "La M en blanco. Solo sobre Azul Movistar, Negro Movistar o foto azulada que garantice legibilidad."},
+    {"id": "logo-m-mono", "source_file": "logo/blob/movistar-m-mono.png", "categoria": "logo", "variante": "mono", "usos_recomendados": ["neutro", "una_tinta"], "usos_evitar": [], "notas": "La M monocroma (Negro Movistar #262423). Casos neutros / a una tinta."}
+  ],
+  "momentos_dia": {
+    "atardecer": "Luz dorada de atardecer (calido, emocional)",
+    "manana": "Luz matinal suave (familiar, cotidiano)",
+    "mediodia": "Luz diurna plena (activo, profesional)",
+    "noche": "Nocturno con luces (entretenimiento, movilidad)",
+    "tarde": "Tarde calida (cotidiano, juvenil/senior)",
+    "general": "Sin momento especifico; producto/bodegon y ambiente de hogar"
+  },
+  "nota_banco_oficial": "46 fotos oficiales Movistar (banco 2025) organizadas por momento del dia, ademas del set tematico previo. fuente='oficial-movistar-2025'. Limitacion: viven en el sandbox sin URL publica -> aplican a PPTX/PDF, NO se incrustan en artifacts HTML/React.",
+  "reglas_globales": [
+    "Las fotos viven en el sandbox sin URL publica: NO incrustar en artifacts HTML/React (CSP/offline). Aplican a PPTX/PDF; el source_file es la ruta dentro del sandbox.",
+    "Nunca colocar texto sobre fotografia sin zona de contraste o scrim (ver brand/contrast-matrix.md).",
+    "No repetir la misma foto dentro de un mismo deck; rota entre candidatos equivalentes.",
+    "Respeta usos_evitar de cada entrada (p.ej. full_bleed con texto en bodegones de producto).",
+    "En decks .pptx manda la skill movistar-pptx si da reglas de imagen/variedad/colocacion.",
+    "Color como hilo conductor: prioriza fotos con tonos calidos y detalles en azul/naranja de marca.",
+    "El campo source_file es relativo a imagery/assets/imagery/ (p.ej. tarde/movistar-tarde-03.png).",
+    "1 logo por pieza; la M siempre en Azul Movistar (no recolorear)."
+  ]
+}

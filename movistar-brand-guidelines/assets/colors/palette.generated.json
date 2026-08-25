@@ -1,0 +1,257 @@
+{
+  "brand": "movistar",
+  "source": "movistar-palette.ase (Adobe .ase = fuente de verdad del color base)",
+  "note": "Generado por scripts/parse_ase.py. No editar a mano; re-generar. `palette` sale del .ase (7 swatches base: 3 principales + 4 secundarios claros). `secondary_dark`/`grays`/`semantic` NO están en el .ase — son colores derivados de brand/color-palette.md §4.1.2/§4.5 y brand/contrast-matrix.md (refresh nov-2025), definidos en las constantes de parse_ase.py. Movistar es COLOR PLANO: sin degradados.",
+  "color_model": "flat",
+  "palette": [
+    {
+      "name": "#0066ff",
+      "model": "RGB",
+      "hex": "#0066FF",
+      "rgb": [
+        0,
+        102,
+        255
+      ],
+      "rol": "Azul Movistar",
+      "uso": "principal; presente en toda comunicacion"
+    },
+    {
+      "name": "#fffaf5",
+      "model": "RGB",
+      "hex": "#FFFAF5",
+      "rgb": [
+        255,
+        250,
+        245
+      ],
+      "rol": "Blanco Movistar",
+      "uso": "fondo claro (NO blanco puro)"
+    },
+    {
+      "name": "#262423",
+      "model": "RGB",
+      "hex": "#262423",
+      "rgb": [
+        38,
+        36,
+        35
+      ],
+      "rol": "Negro Movistar",
+      "uso": "texto/fondo oscuro (NO negro puro)"
+    },
+    {
+      "name": "#d3eeff",
+      "model": "RGB",
+      "hex": "#D3EEFF",
+      "rgb": [
+        211,
+        238,
+        255
+      ],
+      "rol": "Azul claro (secundario)",
+      "uso": "acento por seccion/capitulo"
+    },
+    {
+      "name": "#cef7bf",
+      "model": "RGB",
+      "hex": "#CEF7BF",
+      "rgb": [
+        206,
+        247,
+        191
+      ],
+      "rol": "Verde claro (secundario)",
+      "uso": "acento por seccion/capitulo"
+    },
+    {
+      "name": "#ffe99c",
+      "model": "RGB",
+      "hex": "#FFE99C",
+      "rgb": [
+        255,
+        233,
+        156
+      ],
+      "rol": "Amarillo claro (secundario)",
+      "uso": "acento por seccion/capitulo"
+    },
+    {
+      "name": "#ffc5a8",
+      "model": "RGB",
+      "hex": "#FFC5A8",
+      "rgb": [
+        255,
+        197,
+        168
+      ],
+      "rol": "Coral claro (secundario)",
+      "uso": "acento por seccion/capitulo"
+    }
+  ],
+  "secondary_dark": [
+    {
+      "hex": "#022D67",
+      "rgb": [
+        2,
+        45,
+        103
+      ],
+      "rol": "Azul oscuro (secundario)"
+    },
+    {
+      "hex": "#36552B",
+      "rgb": [
+        54,
+        85,
+        43
+      ],
+      "rol": "Verde oscuro (secundario)"
+    },
+    {
+      "hex": "#5E4A09",
+      "rgb": [
+        94,
+        74,
+        9
+      ],
+      "rol": "Amarillo oscuro (secundario)"
+    },
+    {
+      "hex": "#62301A",
+      "rgb": [
+        98,
+        48,
+        26
+      ],
+      "rol": "Coral oscuro (secundario)"
+    }
+  ],
+  "grays": [
+    {
+      "hex": "#FFFAF5",
+      "rgb": [
+        255,
+        250,
+        245
+      ],
+      "step": 1,
+      "rol": "Blanco Movistar"
+    },
+    {
+      "hex": "#F3EEEA",
+      "rgb": [
+        243,
+        238,
+        234
+      ],
+      "step": 2
+    },
+    {
+      "hex": "#DFDBD6",
+      "rgb": [
+        223,
+        219,
+        214
+      ],
+      "step": 3
+    },
+    {
+      "hex": "#BFBCB8",
+      "rgb": [
+        191,
+        188,
+        184
+      ],
+      "step": 4
+    },
+    {
+      "hex": "#9F9C99",
+      "rgb": [
+        159,
+        156,
+        153
+      ],
+      "step": 5
+    },
+    {
+      "hex": "#807D7B",
+      "rgb": [
+        128,
+        125,
+        123
+      ],
+      "step": 6
+    },
+    {
+      "hex": "#605E5C",
+      "rgb": [
+        96,
+        94,
+        92
+      ],
+      "step": 7
+    },
+    {
+      "hex": "#403F3D",
+      "rgb": [
+        64,
+        63,
+        61
+      ],
+      "step": 8
+    },
+    {
+      "hex": "#262423",
+      "rgb": [
+        38,
+        36,
+        35
+      ],
+      "step": 9,
+      "rol": "Negro Movistar"
+    }
+  ],
+  "semantic": [
+    {
+      "hex": "#0066FF",
+      "rol": "Acento",
+      "estado": "regular"
+    },
+    {
+      "hex": "#005EEB",
+      "rol": "Acento",
+      "estado": "hover"
+    },
+    {
+      "hex": "#048239",
+      "rol": "Positivo",
+      "estado": "regular"
+    },
+    {
+      "hex": "#036D30",
+      "rol": "Positivo",
+      "estado": "hover"
+    },
+    {
+      "hex": "#926C00",
+      "rol": "Alerta",
+      "estado": "regular"
+    },
+    {
+      "hex": "#745600",
+      "rol": "Alerta",
+      "estado": "hover"
+    },
+    {
+      "hex": "#C10000",
+      "rol": "Negativo",
+      "estado": "regular"
+    },
+    {
+      "hex": "#AD0000",
+      "rol": "Negativo",
+      "estado": "hover"
+    }
+  ]
+}

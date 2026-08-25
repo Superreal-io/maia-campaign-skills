@@ -1,0 +1,225 @@
+/*
+ * brand-tokens.css — Movistar: emparejamientos de contraste/color/logo YA resueltos para
+ * Artifacts HTML/React.
+ *
+ * Por qué existe: `brand/color-palette.md` §4 y `brand/contrast-matrix.md` dan la REGLA (qué color
+ * de texto sobre qué fondo, qué combinaciones están "Prohibido") pero el modelo tenía que "elegir"
+ * cada vez que componía un bloque — margen de error real. Este fichero convierte esas reglas en
+ * clases mecánicas: usa `.bg-azul` o `.bg-verde-claro` y el color de texto correcto YA viene con
+ * ella, no hay que decidir nada. Fuente de verdad de los VALORES:
+ * `assets/colors/palette.generated.json`; este CSS los APLICA, no los redefine.
+ *
+ * ⚠️ DOS INVERSIONES de Movistar respecto a las 4 marcas del paraguas Mahou (NO las copies):
+ *   1. COLOR PLANO: Movistar NO tiene degradados. Aquí NO hay ninguna clase `.grad-*` y
+ *      `scripts/lint_artifact.py::check_gradients` marca como FAIL cualquier `linear/radial/conic
+ *      -gradient`. Da riqueza con fondos de color plano alternados y fotos de banco, nunca con un
+ *      degradado.
+ *   2. FUENTE inyectada por el runtime: Movistar es la ÚNICA marca cuya tipografía inyecta
+ *      `artifact-flow` en los artifacts web (`injectBrandFont`, gated a movistar). Por eso este
+ *      fichero declara `font-family:'Movistar Sans'` en `body` y NO pega NINGÚN `@font-face` en
+ *      base64 — pegarlo es un FAIL (`fontface_base64_pegado`): cuesta ~15s de tokens y arriesga
+ *      cortar el stream (docs/FONT-RUNTIME-INJECTION-PROPOSAL.md). Esto es lo OPUESTO a Mahou/
+ *      San Miguel/Alhambra (que sí embeben la fuente en base64). No lo revierta.
+ *
+ * Uso: solo para Artifacts HTML/React (`assets/html/patterns.html` compone bloques con estas
+ * clases). Cárgalo bajo demanda — no hace falta leerlo si el output no es un artifact web.
+ */
+
+:root {
+  /* Principales — brand/color-palette.md §4.1.1, palette.generated.json.
+     Blanco/Negro Movistar son especiales: NUNCA blanco puro #fff ni negro puro #000
+     (SKILL.md regla nº5; check_pure_black_white los marca como FAIL). */
+  --mvst-azul: #0066ff;      /* Azul Movistar — principal, presente en toda comunicación */
+  --mvst-blanco: #fffaf5;    /* Blanco Movistar — fondo claro (NO #ffffff) */
+  --mvst-negro: #262423;     /* Negro Movistar — texto/fondo oscuro premium (NO #000000) */
+
+  /* Secundarios claros — acentos/fondos por sección (§4.1.2). Sobre ellos el texto va SIEMPRE en
+     Negro Movistar: usarlos como TEXTO sobre fondo claro es la combinación "Prohibido" de la
+     matriz (check_prohibited_combos). */
+  --mvst-azul-claro: #d3eeff;
+  --mvst-verde-claro: #cef7bf;
+  --mvst-amarillo-claro: #ffe99c;
+  --mvst-coral-claro: #ffc5a8;
+
+  /* Secundarios oscuros — fondos expresivos (§4.1.2). Sobre ellos el texto va en Blanco Movistar. */
+  --mvst-azul-oscuro: #022d67;
+  --mvst-verde-oscuro: #36552b;
+  --mvst-amarillo-oscuro: #5e4a09;
+  --mvst-coral-oscuro: #62301a;
+
+  /* Gama de grises (§4.5, refresh nov-2025) — neutros para UI/texto secundario/bordes. Los dos
+     extremos SON Blanco/Negro Movistar. Aquí solo declaro los pasos que uso; el resto en §4.5. */
+  --mvst-gris-1: #f3eeea;    /* paso 2 — superficie muy sutil */
+  --mvst-gris-2: #dfdbd6;    /* paso 3 — líneas/bordes */
+  --mvst-gris-5: #605e5c;    /* paso 7 — texto secundario sobre fondo claro */
+
+  /* Semánticos regular/hover — brand/contrast-matrix.md. Todos pasan AA como TEXTO sobre Blanco
+     Movistar (verificado: positivo 4.76, alerta 4.64, negativo 6.20, acento 4.66). NO los uses
+     como texto sobre fondos de color (bajan de 4.5:1). */
+  --mvst-acento: #0066ff;         --mvst-acento-hover: #005eeb;
+  --mvst-positivo: #048239;       --mvst-positivo-hover: #036d30;
+  --mvst-alerta: #926c00;         --mvst-alerta-hover: #745600;
+  --mvst-negativo: #c10000;       --mvst-negativo-hover: #ad0000;
+
+  /* Tipografía — brand/typography.md §3. SOLO el nombre de familia: el runtime inyecta el fichero
+     real de Movistar Sans en el artifact. NUNCA añadas un @font-face con base64 aquí. */
+  --mvst-font: 'Movistar Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+
+/* ---- Base ------------------------------------------------------------------------------------
+   El default de todo el documento: Movistar Sans + Negro sobre Blanco (par AAA, 14.9:1). Así,
+   cualquier texto que no viva dentro de un bloque `.bg-*` ya cae en un par legible correcto. */
+html { font-family: var(--mvst-font); } /* también el <title> y cualquier texto fuera de <body> */
+body {
+  font-family: var(--mvst-font);
+  background: var(--mvst-blanco);
+  color: var(--mvst-negro);
+  margin: 0;
+}
+
+/* ---- Emparejamientos fondo→texto YA resueltos (brand/color-palette.md §4.2/§4.3) --------------
+   Aplica la clase del FONDO y el color de texto correcto viene incluido. No elijas el color a
+   mano. Ratios WCAG anotados (calculados con la fórmula del propio linter). */
+
+/* Fondos principales */
+.bg-azul   { background: var(--mvst-azul);   color: var(--mvst-blanco); } /* 4.66:1 AA */
+.bg-negro  { background: var(--mvst-negro);  color: var(--mvst-blanco); } /* 14.9:1 AAA — premium */
+.bg-blanco { background: var(--mvst-blanco); color: var(--mvst-negro);  } /* 14.9:1 AAA */
+
+/* Fondos secundarios CLAROS → texto Negro Movistar (§4.3.1). Nunca texto claro encima. */
+.bg-azul-claro     { background: var(--mvst-azul-claro);     color: var(--mvst-negro); } /* 12.8:1 */
+.bg-verde-claro    { background: var(--mvst-verde-claro);    color: var(--mvst-negro); } /* 13.0:1 */
+.bg-amarillo-claro { background: var(--mvst-amarillo-claro); color: var(--mvst-negro); } /* 12.8:1 */
+.bg-coral-claro    { background: var(--mvst-coral-claro);    color: var(--mvst-negro); } /* 10.2:1 */
+
+/* Fondos secundarios OSCUROS → texto Blanco Movistar. Para composiciones más expresivas. */
+.bg-azul-oscuro     { background: var(--mvst-azul-oscuro);     color: var(--mvst-blanco); } /* 12.9:1 */
+.bg-verde-oscuro    { background: var(--mvst-verde-oscuro);    color: var(--mvst-blanco); } /*  8.1:1 */
+.bg-amarillo-oscuro { background: var(--mvst-amarillo-oscuro); color: var(--mvst-blanco); } /*  8.2:1 */
+.bg-coral-oscuro    { background: var(--mvst-coral-oscuro);    color: var(--mvst-blanco); } /* 10.3:1 */
+
+/* Superficie gris sutil (UI, tarjetas neutras) — §4.5 */
+.bg-gris-claro { background: var(--mvst-gris-1); color: var(--mvst-negro); } /* 13.4:1 */
+
+/* ---- Colores de TEXTO sueltos ----------------------------------------------------------------
+   `.text-azul` sirve para destacar UNA palabra del titular (§4.4.3) y va **SOLO sobre Blanco
+   Movistar**: 4.66:1 AA. NUNCA sobre un secundario claro (~4.0:1) ni sobre `.bg-gris-claro`
+   (`--mvst-gris-1` #F3EEEA → **4.20:1**, por debajo del 4.5 de `check_contrast`).
+   ⚠️ Este comentario decía antes "(o gris muy claro)" y era FALSO para `.text-azul`: un
+   `.mvst-eyebrow .text-azul` dentro de una sección `.bg-gris-claro` es un FAIL directo del propio
+   linter de la skill. `.text-secundario` sí aguanta el gris (5.60:1). */
+.text-azul     { color: var(--mvst-azul); }
+.text-negro    { color: var(--mvst-negro); }
+.text-blanco   { color: var(--mvst-blanco); } /* solo sobre fondos oscuros/azul */
+.text-secundario { color: var(--mvst-gris-5); } /* texto secundario sobre fondo claro (7.0:1) */
+
+/* Semánticos como texto (solo sobre Blanco Movistar) — feedback de estado, nunca color de marca */
+.text-positivo { color: var(--mvst-positivo); }
+.text-alerta   { color: var(--mvst-alerta); }
+.text-negativo { color: var(--mvst-negativo); }
+
+/* ---- Contenedor destacado (§4.2.2/§4.3.1) ----------------------------------------------------
+   El "contenedor destacado" puede ir en Blanco o en un secundario CLARO, nunca en Azul Movistar
+   (compite con el logo) ni en secundario oscuro. `.mvst-badge` es el chip base; combínalo con un
+   `.bg-*` claro. Su texto lo trae la clase `.bg-*`. */
+.mvst-badge {
+  display: inline-block;
+  padding: 0.35em 0.9em;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+/* ---- CTA / botón -----------------------------------------------------------------------------
+   Botón principal en Azul Movistar con texto Blanco (§4.4.5 — reforzar reconocimiento de marca). */
+.mvst-cta {
+  display: inline-block;
+  background: var(--mvst-azul);
+  color: var(--mvst-blanco);
+  padding: 0.7em 1.4em;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ---- Scrim para texto sobre FOTO (brand/contrast-matrix.md; SKILL.md regla nº8) --------------
+   Regla dura: nunca texto sobre foto sin zona de contraste. El contenedor de la imagen necesita
+   `position:relative` y una altura (ponlos tú en el bloque). `.mvst-scrim` oscurece la foto y
+   `.mvst-over` sube el texto por encima con `z-index`. El velo va en Negro Movistar
+   semitransparente (no negro puro) para que el texto Blanco Movistar sea legible. Un DEGRADADO no
+   aplica aquí — Movistar es color plano.
+   `.mvst-over` DEBE ser `position:absolute; inset:0` (no solo `position:relative`): con solo
+   `relative`, el bloque no se superpone a la foto — fluye DESPUÉS de ella en el documento y el
+   `overflow:hidden` del contenedor lo recorta por completo (título/logo invisibles, sin ningún
+   error visual obvio porque `.mvst-scrim` sí se veía). El `z-index:2` por sí solo no basta si el
+   propio bloque no está posicionado sobre la imagen. Bug real encontrado por render visual de
+   `patterns.html` (el HERO_FOTO de referencia no mostraba el texto) — `check_text_over_image` de
+   `lint_artifact.py` no lo detecta porque solo comprueba que exista un scrim o un z-index en algún
+   ancestro, no que el contenedor esté realmente superpuesto. */
+.mvst-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(38, 36, 35, 0.55); /* Negro Movistar al 55% */
+  z-index: 1;
+  pointer-events: none;
+}
+.mvst-over {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  color: var(--mvst-blanco);
+}
+
+/* ---- Logo: color por fondo, ya resuelto (brand/logo.md §2) -----------------------------------
+   La M va SIEMPRE en Azul Movistar; solo va en Blanco sobre fondo Azul Movistar (o foto azulada
+   legible). No hay clase de color para el logo: el color vive en el propio asset —
+   `movistar://logo-m-blue` / `-white` / `-mono` (blob), o el `<use fill=...>` del sprite inline
+   (ver patterns.html). Tabla de decisión:
+     fondo Blanco / secundario claro / foto clara   → M Azul (logo-m-blue)
+     fondo Azul Movistar / foto azulada legible      → M Blanca (logo-m-white)
+     fondo Negro Movistar (uso excepcional)          → M Azul (logo-m-blue)
+   Máximo 1 logo por pieza (§2.1.2). Usa `<symbol>`+`<use>` si la M aparece más de una vez
+   (check_duplicate_svg). */
+
+/* ---- Escala tipográfica (Movistar Sans; titulares SIN punto final — copywriting §1.3 nº14) ---
+   Las clases `.mvst-h*`/`.mvst-eyebrow` cuentan como titular para el linter
+   (check_titular_period): no termines su texto en punto. */
+.mvst-eyebrow {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  /* ⚠️ SIN `opacity`. Llevaba `opacity: 0.9` y rompía AA en silencio sobre fondos de marca:
+     Blanco Movistar al 90 % sobre Azul se compone en rgb(230,235,246) = **4.05:1**, por debajo de
+     4.5. Y `lint_artifact.py` NO modela `opacity` en ningún check, así que el gate no podía verlo
+     — un defecto invisible en el fichero que sirve de referencia al modelo. Si quieres jerarquía
+     visual en el antetítulo, bájala con COLOR de la paleta (`.text-secundario`), no con alfa. */
+}
+.mvst-h1 {
+  font-weight: 800; /* Movistar Sans Extrabold */
+  font-size: clamp(2rem, 5.5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0.2em 0;
+}
+.mvst-h2 {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  line-height: 1.1;
+  margin: 0.2em 0;
+}
+.mvst-h3 {
+  font-weight: 700; /* Bold */
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.2;
+  margin: 0.2em 0;
+}
+.mvst-body {
+  font-weight: 400; /* Regular */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.mvst-legal {
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
