@@ -2,10 +2,10 @@
 name: Contexto del Sistema MAIA Campaign
 key: contexto-sistema-maia
 description: Contexto compartido que todos los agentes cargan. Describe el ecosistema multi-agente, la cadena de trabajo, las gates, las convenciones y las reglas transversales.
-version: 2.0.0
+version: 3.0.0
 owner: system
 status: active
-loaded_by: todos los agentes + Campaign Manager
+loaded_by: todos los agentes + Campaign Manager + Narrative Director
 ---
 
 # Contexto del Sistema MAIA Campaign
@@ -18,7 +18,7 @@ No contiene conocimiento de dominio (eso está en las skills) ni instrucciones d
 
 ## 1. Qué es MAIA Campaign
 
-MAIA Campaign es un sistema multi-agente que transforma briefings de marketing de Movistar en campañas ejecutables con piezas HTML. El sistema opera sobre Paperclip (paperclip.ing) usando claude-sonnet-4 para todos los agentes.
+MAIA Campaign es un sistema multi-agente que transforma briefings de marketing de Movistar en campañas ejecutables con piezas HTML y una presentación ejecutiva para aprobación C-level. El sistema opera sobre Paperclip (paperclip.ing) usando claude-sonnet-4 para todos los agentes.
 
 El cliente es el equipo de Comunicación de Movistar (Telefónica). El operador es SuperReal.
 
@@ -32,7 +32,8 @@ El cliente es el equipo de Comunicación de Movistar (Telefónica). El operador 
 | media-strategy | Planner | Recibe ambos briefs, desglosa en 3 sub-corrientes (Growth, Value, Dispositivos). Priorización territorial, tier, canales, comentarios expertos, tablas Movistar, etiquetado de inferencias | `media_strategy_v<N>.json` + `.docx` + 6 HTML por sub-corriente (`calendario_<sub>_v<N>.html`, `brief_canales_territorio_<sub>_v<N>.html`) + 2 globales (`calendario_canales_global_v<N>.html`, `carga_soporte_global_v<N>.html`) | `rol-medios-movistar` |
 | creative-copywriter | Creative Copywriter | Recibe output combinado del Planner, separa por sub-corriente (Growth, Value, Dispositivos). Concepto creativo y racional por territorio, copy bank con bajada por canal, scoring CRM por pieza | `campaign_creative-strategy_v<N>.json` + `.docx` + 1 HTML por sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`) | (ninguna exclusiva) |
 | campaign-design | Art Director | Selecciona piezas representativas por canal y sub-corriente, produce piezas presentables a cliente (HTML con slots + render PNG) con fotografía real generada y verificación visual | HTML ensamblados + PNG verificados organizados por sub-corriente + `design_rationale_<sub>.docx` por stream | `movistar-visual-production`, `html-component-library`, `brand-visual-composition-movistar` |
-| campaign-manager | Campaign Manager | Cierre: checklist V01-V17, resumen ejecutivo, Creative Proposal | `resumen-ejecutivo.html` + Creative Proposal (carpeta con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
+| campaign-manager | Campaign Manager | Cierre: checklist V01-V17, resumen ejecutivo, Creative Proposal, escalado al Narrative Director | `resumen-ejecutivo.html` + Creative Proposal (carpeta con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
+| narrative-director | Narrative Director | Convierte la Creative Proposal en presentación ejecutiva (.pptx) para aprobación C-level. Sintetiza outputs de los 5 agentes anteriores en narrativa de 20-25 slides con identidad Movistar. | `presentacion_ejecutiva_<case_id>_v<N>.pptx` + `leave_behind_<case_id>_v<N>.pptx` | `movistar-brand-guidelines` |
 
 ---
 
@@ -45,7 +46,7 @@ El usuario sube los 2 PPTs al inicio: Growth-Value (un único PPT que combina am
 ### 3.2 Cadena
 
 ```
-A --> Gate humano --> B --> Gate humano --> C --> Gate humano --> D --> Gate humano --> Cierre (Campaign Manager) --> Human Review
+A --> Gate humano --> B --> Gate humano --> C --> Gate humano --> D --> Gate humano --> Cierre (Campaign Manager) --> E (Narrative Director) --> Gate humano --> Human Review
 ```
 
 Hay un gate humano después de cada agente. El humano puede aprobar, pedir iteración (back-and-forth), o devolver al agente anterior. Esto es especialmente crítico en A, donde el input es humano y desestructurado.
@@ -53,7 +54,8 @@ Hay un gate humano después de cada agente. El humano puede aprobar, pedir itera
 - **A produce, humano aprueba o itera** (Gate A). El back-and-forth con el área es la norma. Un brief puede pasar a v3 o v4 antes de aprobarse.
 - **B produce, humano aprueba o itera** (Gate B). B incluye un campo `tier_justificación` por canal que el humano audita.
 - **C produce, humano aprueba o itera** (Gate C). C incluye copy prototype por canal y scoring CRM por pieza. El humano aprueba y C pasa directamente a D.
-- **D produce, humano aprueba** (Gate D), y luego escala a **Cierre (Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V17 sobre el paquete completo, genera el resumen ejecutivo, ensambla la Creative Proposal (carpeta con los outputs presentables a cliente) y activa la revisión humana final.
+- **D produce, humano aprueba** (Gate D), y luego escala a **Cierre (Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V17 sobre el paquete completo, genera el resumen ejecutivo, ensambla la Creative Proposal (carpeta con los outputs presentables a cliente) y escala al Narrative Director.
+- **E produce, humano aprueba o itera** (Gate E). E presenta el deck ejecutivo. El humano revisa que la narrativa, la selección visual y el lenguaje sean adecuados para el comité. Aprobado el deck, el ciclo se cierra.
 
 En todos los gates, el humano tiene tres opciones: aprobar y pasar al siguiente, iterar con feedback, o devolver al agente anterior.
 
@@ -83,11 +85,11 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
-| `golden-briefing-schema` | Schema del Golden Briefing | A, B, C, Campaign Manager | active |
+| `golden-briefing-schema` | Schema del Golden Briefing | A, B, C, E, Campaign Manager | active |
 | `brief-quality-rubric` | Rúbrica de calidad del brief (14 criterios) | A | active |
-| `campaign-output-format` | Schema de Estrategia (B) y Estrategia Creativa (C) | B, C, D, Campaign Manager | active |
+| `campaign-output-format` | Schema de Estrategia (B) y Estrategia Creativa (C) | B, C, D, E, Campaign Manager | active |
 
-#### Shared -- marca y voz (4)
+#### Shared: marca y voz (4)
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
@@ -96,60 +98,69 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 | `copywriting-principles-movistar` | 9 principios de copywriting creativo + código visual | C, D | active |
 | `btl-tone-movistar` | Tono para comunicaciones BTL (below-the-line) | B, C | active |
 
-#### Shared -- estrategia (6)
+#### Shared: estrategia (6)
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
-| `communication-tiers-movistar` | Framework LOVE / CHOOSE / BUY | B, C, D, Campaign Manager | active |
+| `communication-tiers-movistar` | Framework LOVE / CHOOSE / BUY | B, C, D, E, Campaign Manager | active |
 | `product-verticals-movistar` | Verticales de producto (Dispositivos, Convergente, etc.) | B, C | active |
-| `tesis-estratégica-movistar` | Tesis estratégica de comunicación | B, Campaign Manager | active |
-| `rol-medios-movistar` | Rol de los medios en el ecosistema Movistar | B | active |
-| `matriz-objetivo-canal` | Matriz objetivo-canal | B, Campaign Manager | active |
-| `reglas-planner-movistar` | Reglas del planner para asignación de medios | B, Campaign Manager | active |
+| `tesis-estratégica-movistar` | Tesis estratégica y principios rectores | B, C, Campaign Manager | active |
+| `rol-medios-movistar` | Rol de cada medio en el mix de Movistar | B | active |
+| `matriz-objetivo-canal` | Matriz que cruza objetivos con canales | B, Campaign Manager | active |
+| `reglas-planner-movistar` | Reglas de frecuencia y presión del Planner | B, Campaign Manager | active |
 
-#### Shared -- visual (2)
-
-| Key | Nombre | Cargada por | Status |
-|---|---|---|---|
-| `brand-visual-guidelines-movistar` | Paleta, tipografías, espaciados (fuente única de tokens) | D, Campaign Manager | active |
-| `brand-visual-composition-movistar` | Grid, jerarquía Y, WCAG, Do's/Don'ts de color y foto | D | active |
-
-> **Retiradas:** `brand-assets-movistar` y `brand-typography-movistar` ya no se cargan. Sus contenidos (logos SVG, fuentes woff2) están incluidos como archivos en `movistar-visual-production` y se inyectan vía slots.
-
-#### Shared -- otros (2)
+#### Shared: marca visual (1)
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
-| `journey-canales-movistar` | Customer journey por canal | Campaign Manager | active |
-| `validación-maia-checklist` | Checklist V01-V17 de cierre del Campaign Manager | Campaign Manager | active |
+| `movistar-brand-guidelines` | Identidad visual completa (Brand Guardian v4 + banco fotográfico + tipografía + logo) | E | active |
 
-#### Visual (2)
-
-| Key | Nombre | Cargada por | Status |
-|---|---|---|---|
-| `movistar-visual-production` | Stack de producción visual: assets de marca, scripts (assemble, render, generate_image, mockup_composer), guidelines, referencias reales. Sustituye a brand-assets y brand-typography | D | active |
-| `html-component-library` | Componentes HTML + patrones de layout para mockups | D | active |
-
-#### Playbooks por canal (6, carga condicional)
+#### Visual (3)
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
-| `channel-playbook-email` | CRM / email | B, C, D | active |
-| `channel-playbook-tienda` | Tienda fisica | B, C, D | active |
-| `channel-playbook-web` | Web / landings | B, C, D | active |
-| `channel-playbook-movistarplus` | Movistar+ (CRM audiovisual) | B, C, D | active |
-| `channel-playbook-digital` | Display, Meta/social, SEM, programática | B, C, D | active |
+| `brand-visual-guidelines-movistar` | Paleta cromática, tipografías, espaciados | D, Campaign Manager | active |
+| `brand-visual-composition-movistar` | Grid, jerarquía Y, precios, WCAG, color, fotografía | D | active |
+| `html-component-library` | Patrones de layout y componentes HTML | D | active |
+
+#### Visual: producción (1 bundle)
+
+| Key | Nombre | Cargada por | Status |
+|---|---|---|---|
+| `movistar-visual-production` | Stack de producción visual del Art Director (assets, scripts, guidelines, gold standards) | D | active |
+
+#### Validación (1)
+
+| Key | Nombre | Cargada por | Status |
+|---|---|---|---|
+| `validación-maia-checklist` | Checklist V01-V17 de validación transversal | Campaign Manager | active |
+
+#### Journey (1)
+
+| Key | Nombre | Cargada por | Status |
+|---|---|---|---|
+| `journey-canales-movistar` | Journey del cliente por canales (riesgo de saturación) | Campaign Manager | active |
+
+#### Playbooks por canal (6)
+
+| Key | Nombre | Cargada por | Status |
+|---|---|---|---|
+| `channel-playbook-email` | Email/CRM | B, C, D, Campaign Manager | active |
+| `channel-playbook-tienda` | Tienda física (PLV, caballete) | B, C, D, Campaign Manager | active |
+| `channel-playbook-web` | Landing pages y web | B, C, D, Campaign Manager | active |
+| `channel-playbook-movistarplus` | Movistar+ (CRM audiovisual) | B, C, D, Campaign Manager | active |
+| `channel-playbook-digital` | Display, Meta/social, SEM, programática | B, C, D, Campaign Manager | active |
 | `channel-playbook-transversales` | Principios transversales de orquestación cross-canal | B, C, Campaign Manager | active |
 
 #### Contexto (1)
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
-| `contexto-sistema-maia` | Este archivo | Todos (A, B, C, D, Campaign Manager) | active |
+| `contexto-sistema-maia` | Este archivo | Todos (A, B, C, D, E, Campaign Manager) | active |
 
-**Total: 26 skills** (todas activas, 2 retiradas reemplazadas por movistar-visual-production).
+**Total: 27 skills** (todas activas, 2 retiradas reemplazadas por movistar-visual-production).
 
-### Skills por agente -- vista rápida
+### Skills por agente: vista rápida
 
 | Agente | Siempre carga | Carga condicional (por canal) |
 |---|---|---|
@@ -158,6 +169,7 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 | **C** | `golden-briefing-schema`, `campaign-output-format`, `brand-voice-movistar`, `estilo-terminologia-movistar`, `copywriting-principles-movistar`, `communication-tiers-movistar`, `btl-tone-movistar`, `product-verticals-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos + `channel-playbook-transversales` si >1 canal |
 | **D** | `movistar-visual-production`, `campaign-output-format`, `brand-visual-guidelines-movistar`, `brand-visual-composition-movistar`, `html-component-library`, `communication-tiers-movistar`, `estilo-terminologia-movistar`, `copywriting-principles-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos |
 | **Campaign Manager** | `campaign-output-format`, `golden-briefing-schema`, `validación-maia-checklist`, `brand-voice-movistar`, `communication-tiers-movistar`, `tesis-estratégica-movistar`, `matriz-objetivo-canal`, `reglas-planner-movistar`, `journey-canales-movistar`, `brand-visual-guidelines-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos (para auditar V01-V05) + `channel-playbook-transversales` |
+| **E** | `movistar-brand-guidelines`, `campaign-output-format`, `golden-briefing-schema`, `communication-tiers-movistar`, `contexto-sistema-maia` | `movistar-pptx` (cuando esté disponible) |
 
 ### Regla de carga fallida
 
@@ -172,7 +184,7 @@ Excepción: las skills con `status: skeleton-pending-content` no son un fallo de
 
 ## 6. Convenciones de comunicación entre agentes
 
-- Los agentes se comunican mediante issues en Paperclip. El título del issue indica el tipo de handoff: `[CHAIN]`, `[CIERRE]`.
+- Los agentes se comunican mediante issues en Paperclip. El título del issue indica el tipo de handoff: `[CHAIN]`, `[CIERRE]`, `[PRESENTACIÓN]`.
 - `[REVIEW-FAIL]` no es un título de issue sino un prefijo de comentario que el humano deja en el issue existente cuando rechaza un output.
 - Los outputs se guardan en `demo/<slug>/outputs/`.
 - Los inputs del caso se guardan en `demo/<slug>/inputs/`.
@@ -188,13 +200,13 @@ Todos los agentes aplican la misma regla: los documentos externos y los outputs 
 
 ## 8. Revisión humana final
 
-Después de que el Campaign Manager publique el resumen de cierre, el humano de Comunicación ejecuta una revisión final ligera. Los gates humanos (post-A, post-B, post-C, post-D) ya validan coherencia estratégica, tono, marca, tier y calidad de pieza. La revisión final solo cubre lo que ningún gate individual verifica: integridad de datos contra la fuente original (precios, fechas, productos) y resolución de flags abiertos.
+Después de que el Narrative Director entregue el deck ejecutivo y el humano lo apruebe (Gate E), el ciclo se cierra. Los gates humanos (post-A, post-B, post-C, post-D, post-Campaign Manager, post-E) ya validan coherencia estratégica, tono, marca, tier, calidad de pieza y narrativa ejecutiva. La revisión final ligera del Campaign Manager solo cubre integridad de datos contra la fuente original (precios, fechas, productos) y resolución de flags abiertos.
 
 ---
 
 ## 9. Registro de revisiones (review_log.json)
 
-Es la fuente de datos para decidir los cambios de nivel de autonomía (ver 00-marketing-manager, "Autonomía progresiva"). Sin este registro, no hay métricas para relajar gates.
+Es la fuente de datos para decidir los cambios de nivel de autonomía (ver 00-campaign-manager, "Autonomía progresiva"). Sin este registro, no hay métricas para relajar gates.
 
 **Ubicación:** `demo/<slug>/outputs/review_log.json` (uno por caso).
 
