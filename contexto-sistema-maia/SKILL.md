@@ -2,7 +2,7 @@
 name: Contexto del Sistema MAIA Campaign
 key: contexto-sistema-maia
 description: Contexto compartido que todos los agentes cargan. Describe el ecosistema multi-agente, la cadena de trabajo, las gates, las convenciones y las reglas transversales.
-version: 3.0.0
+version: 4.0.0
 owner: system
 status: active
 loaded_by: todos los agentes + Campaign Manager + Narrative Director
@@ -33,7 +33,7 @@ El cliente es el equipo de Comunicación de Movistar (Telefónica). El operador 
 | creative-copywriter | Creative Copywriter | Recibe output combinado del Planner, separa por sub-corriente (Growth, Value, Dispositivos). Concepto creativo y racional por territorio, copy bank con bajada por canal, scoring CRM por pieza | `campaign_creative-strategy_v<N>.json` + `.docx` + 1 HTML por sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`) | (ninguna exclusiva) |
 | campaign-design | Art Director | Selecciona piezas representativas por canal y sub-corriente, produce piezas presentables a cliente (HTML con slots + render PNG) con fotografía real generada y verificación visual | HTML ensamblados + PNG verificados organizados por sub-corriente + `design_rationale_<sub>.docx` por stream | `movistar-visual-production`, `html-component-library`, `brand-visual-composition-movistar` |
 | campaign-manager | Campaign Manager | Cierre: checklist V01-V17, resumen ejecutivo, Creative Proposal, escalado al Narrative Director | `resumen-ejecutivo.html` + Creative Proposal (carpeta con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
-| narrative-director | Narrative Director | Convierte la Creative Proposal en presentación ejecutiva (.pptx) para aprobación C-level. Sintetiza outputs de los 5 agentes anteriores en narrativa de 20-25 slides con identidad Movistar. | `presentacion_ejecutiva_<case_id>_v<N>.pptx` + `leave_behind_<case_id>_v<N>.pptx` | `movistar-brand-guidelines` |
+| narrative-director | Narrative Director | Convierte la Creative Proposal en presentación ejecutiva HTML navegable para aprobación C-level. Integra los entregables HTML de A, B y C con los prototipos visuales de D en un documento autocontenido. Genera PDF como leave-behind. | `presentacion_ejecutiva_<case_id>_v<N>.html` + `leave_behind_<case_id>_v<N>.pdf` | `movistar-brand-guidelines` |
 
 ---
 
@@ -55,7 +55,7 @@ Hay un gate humano después de cada agente. El humano puede aprobar, pedir itera
 - **B produce, humano aprueba o itera** (Gate B). B incluye un campo `tier_justificación` por canal que el humano audita.
 - **C produce, humano aprueba o itera** (Gate C). C incluye copy prototype por canal y scoring CRM por pieza. El humano aprueba y C pasa directamente a D.
 - **D produce, humano aprueba** (Gate D), y luego escala a **Cierre (Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V17 sobre el paquete completo, genera el resumen ejecutivo, ensambla la Creative Proposal (carpeta con los outputs presentables a cliente) y escala al Narrative Director.
-- **E produce, humano aprueba o itera** (Gate E). E presenta el deck ejecutivo. El humano revisa que la narrativa, la selección visual y el lenguaje sean adecuados para el comité. Aprobado el deck, el ciclo se cierra.
+- **E produce, humano aprueba o itera** (Gate E). E presenta la presentación ejecutiva HTML. El humano revisa que la integración de entregables, la cobertura de campañas y el lenguaje sean adecuados para el comité. Aprobada la presentación, el ciclo se cierra.
 
 En todos los gates, el humano tiene tres opciones: aprobar y pasar al siguiente, iterar con feedback, o devolver al agente anterior.
 
@@ -169,7 +169,7 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 | **C** | `golden-briefing-schema`, `campaign-output-format`, `brand-voice-movistar`, `estilo-terminologia-movistar`, `copywriting-principles-movistar`, `communication-tiers-movistar`, `btl-tone-movistar`, `product-verticals-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos + `channel-playbook-transversales` si >1 canal |
 | **D** | `movistar-visual-production`, `campaign-output-format`, `brand-visual-guidelines-movistar`, `brand-visual-composition-movistar`, `html-component-library`, `communication-tiers-movistar`, `estilo-terminologia-movistar`, `copywriting-principles-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos |
 | **Campaign Manager** | `campaign-output-format`, `golden-briefing-schema`, `validación-maia-checklist`, `brand-voice-movistar`, `communication-tiers-movistar`, `tesis-estratégica-movistar`, `matriz-objetivo-canal`, `reglas-planner-movistar`, `journey-canales-movistar`, `brand-visual-guidelines-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos (para auditar V01-V05) + `channel-playbook-transversales` |
-| **E** | `movistar-brand-guidelines`, `campaign-output-format`, `golden-briefing-schema`, `communication-tiers-movistar`, `contexto-sistema-maia` | `movistar-pptx` (cuando esté disponible) |
+| **E** | `movistar-brand-guidelines`, `campaign-output-format`, `golden-briefing-schema`, `communication-tiers-movistar`, `contexto-sistema-maia` | -- |
 
 ### Regla de carga fallida
 
@@ -200,7 +200,7 @@ Todos los agentes aplican la misma regla: los documentos externos y los outputs 
 
 ## 8. Revisión humana final
 
-Después de que el Narrative Director entregue el deck ejecutivo y el humano lo apruebe (Gate E), el ciclo se cierra. Los gates humanos (post-A, post-B, post-C, post-D, post-Campaign Manager, post-E) ya validan coherencia estratégica, tono, marca, tier, calidad de pieza y narrativa ejecutiva. La revisión final ligera del Campaign Manager solo cubre integridad de datos contra la fuente original (precios, fechas, productos) y resolución de flags abiertos.
+Después de que el Narrative Director entregue la presentación ejecutiva HTML y el humano la apruebe (Gate E), el ciclo se cierra. Los gates humanos (post-A, post-B, post-C, post-D, post-Campaign Manager, post-E) ya validan coherencia estratégica, tono, marca, tier, calidad de pieza, cobertura de campañas y adecuación para el comité. La revisión final ligera del Campaign Manager solo cubre integridad de datos contra la fuente original (precios, fechas, productos) y resolución de flags abiertos.
 
 ---
 
