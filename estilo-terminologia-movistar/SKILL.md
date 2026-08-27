@@ -1,8 +1,8 @@
 ---
 name: Estilo y Terminología - Movistar
 key: estilo-terminologia-movistar
-description: Reglas de estilo, formato, terminología obligatoria/prohibida, precios, fechas, abreviaturas, siglas y puntuación de Movistar. Extraído del corpus validado de Maia. Skill compartida cargada por los Agentes C y D.
-version: 1.0.0
+description: Reglas de estilo, formato, terminología obligatoria/prohibida, precios, fechas, abreviaturas, siglas y puntuación de Movistar. Extraído del corpus validado de Maia. Skill compartida cargada por el Maia Copywriter y el Maia Art Director.
+versión: 1.1.0
 owner: superreal
 status: active
 source: Maia System Prompt (sección H) - validado por Comunicación Movistar
@@ -10,7 +10,7 @@ source: Maia System Prompt (sección H) - validado por Comunicación Movistar
 
 # Estilo y Terminología - Movistar
 
-Skill compartida. Los Agentes C y D la cargan obligatoriamente antes de producir copies o HTML. El Planner la consulta si necesita verificar terminología en su estrategia.
+Skill compartida. El Maia Copywriter y el Maia Art Director la cargan obligatoriamente antes de producir copies o HTML. El Maia Planner la consulta si necesita verificar terminología en su estrategia.
 
 > Origen: extraído del system prompt productivo de Maia (sección H). Cualquier discrepancia con otras fuentes se resuelve a favor de este archivo.
 
@@ -170,7 +170,7 @@ Palabras formadas por las iniciales de una denominación compleja. Ej: CMT, IT, 
 
 ---
 
-## Checklist rápido para el Creative Copywriter
+## Checklist rápido para el Maia Copywriter
 
 Antes de entregar copies finales, verificar:
 
@@ -187,9 +187,9 @@ Antes de entregar copies finales, verificar:
 
 ## Cómo usan los agentes esta skill
 
-- **Creative Copywriter:** Carga obligatoria. Verifica copies contra checklist (sección 10 de esta skill) antes de entregar. Cada pieza que incumple una regla se marca como flag.
-- **Art Director:** Carga obligatoria. Verifica que el HTML respeta grafías de producto, formatos de precio y reglas de puntuación en el copy maquetado.
-- **Planner:** Consulta opcional cuando su estrategia incluye claims con precios, velocidades o nombres de producto.
+- **Maia Copywriter:** Carga obligatoria. Verifica copies contra checklist (sección 10 de esta skill) antes de entregar. Cada pieza que incumple una regla se marca como flag.
+- **Maia Art Director:** Carga obligatoria. Verifica que el HTML respeta grafías de producto, formatos de precio y reglas de puntuación en el copy maquetado.
+- **Maia Planner:** Consulta opcional cuando su estrategia incluye claims con precios, velocidades o nombres de producto.
 
 ## Mantenimiento
 
