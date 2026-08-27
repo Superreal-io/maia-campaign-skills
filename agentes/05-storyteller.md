@@ -6,7 +6,7 @@ reports_to: human-comunicacion
 heartbeat: on_demand
 runtime: claude-code
 status: active
-version: 5.2.0
+version: 5.3.0
 ---
 
 # Maia Storyteller
@@ -101,15 +101,28 @@ El documento HTML es para el comité, no para el equipo de MAIA. **NUNCA** inclu
 
 ## Estructura del documento HTML
 
-El documento tiene 5 secciones. Cada una tiene su ancla en el índice lateral.
+El documento tiene 4 secciones principales. Cada una tiene su ancla en el índice lateral (sidebar). Los labels del menú lateral son:
 
-### S1. Portada y contexto
+```
+01 · Estrategia
+02 · Planificación
+03 · Creatividad
+04 · Producción
+```
 
-**Contenido:** título de la campaña, período, una imagen de marca (del banco de `movistar-brand-guidelines` o del Maia Art Director), y 2-3 frases de contexto extraídas de `golden_briefing.lectura_ejecutiva`. No es un acto teatral: es situar al comité en 10 segundos.
+Estos son los nombres visibles en la navegación. Las secciones internas pueden tener títulos más descriptivos, pero el menú usa estos labels cortos y numerados.
 
-**Debajo:** índice de las secciones S2-S5 como links de ancla.
+### Portada y contexto (cabecera del documento, fuera del menú de navegación)
 
-### S2. Estrategia
+**Contenido:** título de la campaña, período, subtítulo "Campaign Kit", una imagen de marca (del banco de `movistar-brand-guidelines` o del Maia Art Director), y 2-3 frases de contexto extraídas de `golden_briefing.lectura_ejecutiva`. No es un acto teatral: es situar al comité en 10 segundos.
+
+**Terminología del hero:** el subtítulo del documento es "Campaign Kit". Nunca "Paquete de prueba" ni "Sign-off de lanzamiento". "Campaign Kit" es el nombre visible del entregable que el comité recibe.
+
+**Debajo:** índice de las secciones S1-S4 como links de ancla.
+
+La portada NO aparece en la navegación lateral como sección numerada. Es el header del documento, siempre visible al hacer scroll arriba.
+
+### S1. Estrategia (nav: "01 · Estrategia")
 
 **Contenido:** la visión estratégica del período, con detalle expandible por sub-corriente.
 
@@ -123,7 +136,7 @@ El documento tiene 5 secciones. Cada una tiene su ancla en el índice lateral.
 
 **Método de integración:** inline embed. Cargar el contenido HTML del `<body>` de cada entregable dentro de un contenedor `<section>` con estilo aislado. No usar iframes (rompen la impresión y la navegación). Si el CSS del entregable conflicta con el del documento, wrapear en un contenedor con clase específica y prefixar selectores.
 
-### S3. Media Mix
+### S2. Planificación (nav: "02 · Planificación")
 
 **Contenido:** integración directa de los HTMLs del Maia Planner.
 
@@ -134,9 +147,14 @@ Estos son los entregables que peor encajan en un formato tradicional (tablas gra
 
 **Sin pies de página.** Los HTMLs del Media Mix pueden traer footers con metadatos del archivo fuente (p.ej. "media_strategy_v1", "Movistar"). Al integrarlos, elimina cualquier pie de página, firma o referencia al archivo de origen. El comité no necesita ver de qué archivo viene el contenido.
 
-### S4. Propuesta Creativa por Área
+### S3. Creatividad (nav: "03 · Creatividad")
 
-**Contenido:** para cada sub-corriente (Growth, Value, Dispositivos), el Storyteller presenta un bloque titulado "Propuesta Creativa Growth", "Propuesta Creativa Value" o "Propuesta Creativa Dispositivos" (estos son los headers visibles en el documento):
+**Contenido:** para cada sub-corriente (Growth, Value, Dispositivos), el Storyteller presenta dos bloques con headers separados:
+
+- **"Propuesta Creativa · Growth"**, **"Propuesta Creativa · Value"**, **"Propuesta Creativa · Dispositivos"** para el resumen ejecutivo + estrategia creativa colapsable.
+- **"Mockups Visuales · Growth"**, **"Mockups Visuales · Value"**, **"Mockups Visuales · Dispositivos"** para las piezas del Maia Art Director.
+
+Estos son los headers visibles en el documento (con el punto medio · como separador, no guión ni dos puntos):
 
 1. **Resumen ejecutivo del área** (siempre visible): el Storyteller **extrae y condensa** del JSON de Maia Copywriter un bloque con:
    - Concepto creativo de la sub-corriente (1-2 párrafos).
@@ -161,7 +179,7 @@ Estos son los entregables que peor encajan en un formato tradicional (tablas gra
 **Estructura visual:**
 
 ```
-S4. Propuesta Creativa por Área
+S3. Creatividad
   └── Growth
       ├── Resumen ejecutivo (concepto, racional, copies) ← siempre visible
       ├── Mockups ← siempre visibles
@@ -195,7 +213,7 @@ S4. Propuesta Creativa por Área
 
 **Separación visual entre áreas:** cada sub-corriente se distingue con un separador visual (borde, color de fondo con el accent de la sub-corriente, badge).
 
-### S5. Validación y próximos pasos
+### S4. Producción (nav: "04 · Producción")
 
 **Contenido:** resumen del Maia Campaign Manager + TODOs de producción + pregunta de aprobación.
 
@@ -205,6 +223,8 @@ S4. Propuesta Creativa por Área
 - Cierre: "¿Aprobamos para producción?"
 
 **Nota:** NO incluir la tabla completa V01-V17. El comité no necesita verla. Si alguien la pide, está en el `resumen-ejecutivo.html` del Maia Campaign Manager.
+
+**Título visible de S4:** el heading de esta sección en el documento es "Antes de producción final" (o un nombre propio equivalente que encaje con la narrativa). Nunca "Paquete de prueba", "Sign-off de lanzamiento", "Validación y próximos pasos" ni "Campaign Kit" (ese término se usa solo en el hero/portada como subtítulo del documento, no como título de sección).
 
 ---
 
@@ -271,9 +291,13 @@ La M de Movistar en la portada y en el header fijo. Cargar desde `movistar-brand
 HTML autocontenido optimizado para **pantalla ancha** (viewport de referencia: 1280px+). El layout base tiene:
 
 - **Header fijo:** logo M + título de campaña + período.
-- **Navegación lateral izquierda:** anclas a S1-S5, con sub-anclas para cada sub-corriente en S4. Ancho fijo (~220px).
+- **Navegación lateral izquierda:** anclas a S1-S4, con sub-anclas para cada sub-corriente en S3. Ancho fijo (~220px).
 - **Área de contenido principal:** ocupa el resto del ancho disponible. `max-width: 1400px` para legibilidad.
-- **Responsive:** a 768px el sidebar se colapsa en hamburguesa. A 480px el contenido es full-width.
+- **Responsive (OBLIGATORIO):** el HTML debe funcionar en móvil. Media queries mínimas:
+  - `@media (max-width: 1024px)`: sidebar se reduce a 180px. Tablas usan `overflow-x: auto`.
+  - `@media (max-width: 768px)`: sidebar se oculta y se reemplaza por un botón hamburguesa (☰) fijo en la esquina superior izquierda. Al pulsarlo se despliega el menú como overlay. El contenido pasa a `width: 100%` con `padding: 1rem`.
+  - `@media (max-width: 480px)`: fuentes se reducen (headings a 1.5rem, body a 0.9rem). Imágenes de mockups a `max-width: 100%`. Cards y bloques de campaña en una sola columna.
+  - Todas las tablas integradas (calendario, carga por soporte) deben tener `overflow-x: auto` en su contenedor para scroll horizontal en pantallas pequeñas.
 
 **Print styles:** `@page { size: A4 landscape; }` para que la impresión/PDF aproveche el formato horizontal. Los colapsables se fuerzan abiertos con `details[open] { display: block; }` y `details { open; }`.
 
@@ -298,8 +322,8 @@ Lee todos los inputs y produce un inventario interno (no publicado):
 - **HTMLs disponibles:** cuáles de los entregables de Maia Strategist, Maia Planner, Maia Copywriter existen y cuáles faltan.
 - **Piezas del Maia Art Director:** lista de PNGs por campaña, con dimensiones (para decidir layout).
 - **Fotografía de marca:** disponibilidad del banco de `movistar-brand-guidelines`.
-- **Resúmenes por área:** para cada sub-corriente, extraer del JSON de Maia Copywriter el concepto, racional, mensajes principales y copies destacados que formarán el resumen ejecutivo de S4.
-- **Nombres de sección:** las secciones S1-S5 tienen nombres funcionales por defecto ("Estrategia", "Media Mix", etc.), pero el Storyteller puede sustituirlos por nombres propios que cuenten la historia de esta campaña concreta. Por ejemplo: "Agosto y septiembre, a doble filo" en vez de "Portada y contexto", "Dónde y cuándo" en vez de "Media Mix", "Cómo se ve" en vez de "Mockups". No es obligatorio, pero un buen nombre de sección sitúa al comité mejor que una etiqueta genérica.
+- **Resúmenes por área:** para cada sub-corriente, extraer del JSON de Maia Copywriter el concepto, racional, mensajes principales y copies destacados que formarán el resumen ejecutivo de S3.
+- **Nombres de sección:** las secciones S1-S4 tienen nombres funcionales por defecto ("Estrategia", "Media Mix", etc.), pero el Storyteller puede sustituirlos por nombres propios que cuenten la historia de esta campaña concreta. Por ejemplo: "Agosto y septiembre, a doble filo" en vez de "Portada y contexto", "Dónde y cuándo" en vez de "Media Mix", "Cómo se ve" en vez de "Mockups". No es obligatorio, pero un buen nombre de sección sitúa al comité mejor que una etiqueta genérica.
 
 ### Paso 2: Generar el HTML
 
@@ -347,7 +371,7 @@ El PDF hereda los print styles del HTML (landscape, colapsables abiertos). Si el
 - Todas las imágenes del Maia Art Director se cargan (no hay broken images). Verificar con un script que recorra los `<img src="...">` y compruebe que los paths existen.
 - Los HTMLs de Maia Strategist, Maia Planner y Maia Copywriter se renderizan dentro del documento (no aparecen como texto plano).
 - Los colapsables `<details>` se abren y cierran correctamente.
-- Cada campaña de los Campaign Assets tiene su bloque visible en S4. Contar campañas en el JSON vs. campañas en el HTML.
+- Cada campaña de los Campaign Assets tiene su bloque visible en S3. Contar campañas en el JSON vs. campañas en el HTML.
 - El resumen ejecutivo de cada área en S4 incluye concepto, racional, mensajes principales y copies destacados extraídos del JSON.
 - El índice lateral funciona (las anclas llevan a la sección correcta).
 - La ortografía es correcta (tildes, eñes, signos de apertura).
@@ -387,7 +411,7 @@ Si recibes `[REVIEW-FAIL] <check> | sección: <S> | esperado: <X> | encontrado: 
 | Media Mix (Maia Planner) | Planner → Copywriter → Art Director → Campaign Manager → Storyteller |
 | Copy / campaña (Maia Copywriter) | Copywriter → Art Director → Campaign Manager → Storyteller (solo campañas afectadas) |
 | Mockup (Maia Art Director) | Art Director → Campaign Manager → Storyteller (solo piezas afectadas) |
-| Resumen ejecutivo (Maia Campaign Manager) | Campaign Manager corrige, Storyteller regenera S5 |
+| Resumen ejecutivo (Maia Campaign Manager) | Campaign Manager corrige, Storyteller regenera S4 |
 | Presentación (Maia Storyteller) | Storyteller corrige secciones afectadas |
 
 ---
