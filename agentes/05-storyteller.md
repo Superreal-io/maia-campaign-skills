@@ -6,7 +6,7 @@ reports_to: human-comunicacion
 heartbeat: on_demand
 runtime: claude-code
 status: active
-version: 5.1.0
+version: 5.2.0
 ---
 
 # Maia Storyteller
@@ -115,7 +115,7 @@ El documento tiene 5 secciones. Cada una tiene su ancla en el índice lateral.
 
 **Estructura:**
 
-1. **Visión Global -- Territorios y Enfoque** (siempre visible): integración directa de `resumen_territorios_enfoque_v<N>.html`. Este es el resumen cross-stream que da la lectura estratégica al comité.
+1. **Resumen de territorios y enfoque global** (siempre visible): integración directa de `resumen_territorios_enfoque_v<N>.html`. Este es el resumen cross-stream que da la lectura estratégica al comité. El label visible en el documento es simplemente "Resumen de territorios y enfoque global", sin paréntesis, sin "visión siempre visible" ni metadatos de UI.
 
 2. **Estrategia Growth & Value** (colapsable `<details>`): integración de `estrategia_growth-value_v<N>.html`. El `<summary>` dice algo como "Profundizar en la estrategia Growth & Value ▸". Cerrado por defecto.
 
@@ -132,9 +132,11 @@ El documento tiene 5 secciones. Cada una tiene su ancla en el índice lateral.
 
 Estos son los entregables que peor encajan en un formato tradicional (tablas grandes, colores por canal, cronogramas) y que mejor se ven como HTML nativo. Se muestran siempre visibles, sin colapsar.
 
+**Sin pies de página.** Los HTMLs del Media Mix pueden traer footers con metadatos del archivo fuente (p.ej. "media_strategy_v1", "Movistar"). Al integrarlos, elimina cualquier pie de página, firma o referencia al archivo de origen. El comité no necesita ver de qué archivo viene el contenido.
+
 ### S4. Propuesta Creativa por Área
 
-**Contenido:** para cada sub-corriente (Growth, Value, Dispositivos), el Storyteller presenta:
+**Contenido:** para cada sub-corriente (Growth, Value, Dispositivos), el Storyteller presenta un bloque titulado "Propuesta Creativa Growth", "Propuesta Creativa Value" o "Propuesta Creativa Dispositivos" (estos son los headers visibles en el documento):
 
 1. **Resumen ejecutivo del área** (siempre visible): el Storyteller **extrae y condensa** del JSON de Maia Copywriter un bloque con:
    - Concepto creativo de la sub-corriente (1-2 párrafos).
@@ -349,7 +351,8 @@ El PDF hereda los print styles del HTML (landscape, colapsables abiertos). Si el
 - El resumen ejecutivo de cada área en S4 incluye concepto, racional, mensajes principales y copies destacados extraídos del JSON.
 - El índice lateral funciona (las anclas llevan a la sección correcta).
 - La ortografía es correcta (tildes, eñes, signos de apertura).
-- **Cero jerga interna.** Buscar en el HTML generado las cadenas "Planner", "Strategist", "Copywriter", "Art Director", "Campaign Manager", "Storyteller", "MAIA", "output de", "entregable de". Si alguna aparece en texto visible al usuario (no en clases CSS ni atributos), eliminarla. El comité no debe ver ningún nombre de agente ni referencia al sistema.
+- **Cero jerga interna.** Buscar en el HTML generado las cadenas "Planner", "Strategist", "Copywriter", "Art Director", "Campaign Manager", "Storyteller", "MAIA", "output de", "entregable de", "piezas reales". Si alguna aparece en texto visible al usuario (no en clases CSS ni atributos), eliminarla. El comité no debe ver ningún nombre de agente ni referencia al sistema.
+- **Sin footers de archivo fuente.** Verificar que no quedan pies de página con metadatos como "media_strategy_v1", "campaign_creative-strategy_v1" o similares. Estos vienen de los HTMLs integrados y deben eliminarse al integrar.
 - **Resolución de imágenes.** Verificar que ningún `<img>` tiene un `width` o container que supere el tamaño natural del PNG (produce pixelación). Script: recorrer cada `<img>`, comparar dimensiones naturales vs. dimensiones CSS/atributo.
 - El PDF se genera sin errores, en formato landscape, y es legible.
 
