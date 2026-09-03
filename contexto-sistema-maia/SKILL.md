@@ -2,7 +2,7 @@
 name: Contexto del Sistema MAIA Campaign
 key: contexto-sistema-maia
 description: Contexto compartido que todos los agentes cargan. Describe el ecosistema multi-agente, la cadena de trabajo, las gates, las convenciones y las reglas transversales.
-version: 5.0.0
+version: 5.1.0
 owner: system
 status: active
 loaded_by: todos los agentes (Maia Strategist, Maia Planner, Maia Copywriter, Maia Art Director, Maia Campaign Manager, Maia Storyteller)
@@ -39,11 +39,17 @@ El cliente es el equipo de Comunicación de Movistar (Telefónica). El operador 
 
 ## 3. Cadena de trabajo
 
-### 3.1 Streams de entrada
+### 3.1 Trigger del workflow
+
+El proceso real comienza fuera de MAIA: el CMO de Movistar envía mensualmente un email a los responsables de las áreas comerciales con un paquete de "Flash de Tendencias" preparado por Havas Media Network. Son 5 informes (Territorios, Fútbol, Fibra, Convergencia, Dispositivos) con datos de mercado, señales de demanda, inteligencia competitiva y recomendaciones. Las áreas usan estos flashes para preparar sus presentaciones de plan comercial (los PPTs que entran en MAIA).
+
+El operador (SuperReal) copia los flashes del período en `Inputs/trend-flashes/YYYY-MM/`. El Maia Strategist los carga como contexto para validar si los briefings de área se alinean con las tendencias que el CMO les señaló. Ver skill `trend-flash-context` para el detalle del framework de validación.
+
+### 3.2 Streams de entrada
 
 El usuario sube los 2 PPTs al inicio: Growth-Value (un único PPT que combina ambos) y Dispositivos (PPT separado). El Maia Strategist produce 2 Golden Briefings independientes (uno por stream). A partir de ahí, la cadena es única: el Maia Planner recibe ambos briefs y produce un output combinado con 3 sub-corrientes (Growth, Value, Dispositivos). El Maia Copywriter recibe ese output y separa internamente por sub-corriente. Cada sub-corriente tiene corrientes de demanda distintas (Growth: captación, desarrollo, winback; Value: fidelización, cerberus, migraciones tecnológicas; Dispositivos: las propias del plan de dispositivos).
 
-### 3.2 Cadena
+### 3.3 Cadena
 
 ```
 Maia Strategist → Gate humano → Maia Planner → Gate humano → Maia Copywriter → Gate humano → Maia Art Director → Gate humano → Cierre (Maia Campaign Manager) → Maia Storyteller → Gate humano → Human Review
