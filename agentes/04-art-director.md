@@ -7,7 +7,7 @@ heartbeat: on_demand
 budget_monthly_usd: 100
 runtime: claude-code
 status: active
-version: 4.1.0
+version: 4.3.0
 env:
   OPENAI_API_KEY: $secret:openai-image-key
 ---
@@ -110,7 +110,9 @@ Esto va al design rationale. Si no puedes articularlo, no has pensado lo suficie
 
 ### Paso 3: Construir el HTML con slots
 
-Todos los formatos se producen como HTML. Determina si es un formato con layout flexible (email, landing, display) o un formato de dimensiones fijas (social, tienda, exterior, M+).
+Todos los formatos se producen como HTML. Determina si es un formato con layout flexible (email, landing, display) o un formato con layout fijo de dimensiones en pixels (social, tienda, exterior, M+).
+
+**Nota terminológica:** "Track A" y "Track B" en este prompt se refieren EXCLUSIVAMENTE al sistema de referencias fotográficas de la skill `movistar-visual-production` (Track A = fotografía pura, Track B = pieza completa). NO confundir con los dos tipos de layout (flexible vs fijo), que son una clasificación de formato, no de referencia.
 
 **Regla central: NUNCA escribas base64 ni copies assets a mano.** Usa los slots que `assemble.py` rellena programaticamente.
 
@@ -127,21 +129,21 @@ Todos los formatos se producen como HTML. Determina si es un formato con layout 
 | `{{LOGO_LOCKUP_INVERSE}}` | data URI del lockup horizontal inverso |
 | `{{IMG:outputs/<slug>.png}}` | data URI de la imagen generada |
 
-#### Track A: Layout flexible (email, landing, display)
+#### Layout flexible (email, landing, display)
 
 **Base CSS:** Escribe `{{FONT_FACE_MIN}}` y `{{TOKENS_CSS}}` al inicio del `<style>`. Usa las variables `--movistar-*` para todos los colores. NO definas variables CSS propias.
 
 **Excepción email:** los emails NO llevan slots de fuente (ensambla con `--no-font`). En email, usa el fallback: `font-family: 'Movistar Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;` en cada celda. Sin `:root`, usa HEX directos de la paleta cerrada.
 
-**Plantilla base:** Parte de la plantilla del formato en `templates/html/` de la skill `movistar-visual-production` si existe. Si no, usa los patrones de layout de `html-component-library`. NO construyas layouts desde cero.
+**Plantilla base:** Parte de la plantilla directa del formato en `templates/html/` de la skill `movistar-visual-production`. Si no existe, no improvises un layout nuevo: usa solo un fallback de plantilla aprobado para la misma familia de formato y regístralo como `template_fallback` en el rationale. Si no hay fallback aprobado, devuelve `[REVIEW-FAIL] template_missing` antes de producir. Los formatos sin plantilla directa deben añadirse al bundle antes de convertirse en producción recurrente.
 
 **Componentes:** Para CTAs, precios, cards, headers y footers, usa los componentes de `html-component-library` secciones 2-3. Adapta copies y dimensiones, pero manten las clases CSS y estructura HTML.
 
-#### Track B: Dimensiones fijas (social, tienda, exterior, M+)
+#### Layout fijo (social, tienda, exterior, M+)
 
 Estos formatos se producen como HTML con dimensiones fijas en pixels y se renderizan a PNG.
 
-**Plantilla:** Parte de la plantilla del formato en `templates/html/` si existe (ej. `feed-1080.slots.html` para social feed). Si no, construye HTML fijo siguiendo el patron del formato en `brand/audit-report.md`.
+**Plantilla:** Parte de la plantilla directa del formato en `templates/html/` (ej. `feed-1080.slots.html` para social feed). Si no existe, no construyas HTML fijo desde cero: usa solo un fallback de plantilla aprobado para la misma familia y documenta `template_fallback`; si no existe, devuelve `[REVIEW-FAIL] template_missing`. El `audit-report.md` sirve para validar la adaptación, no para inventar una retícula nueva.
 
 **Estructura básica:**
 
@@ -167,32 +169,61 @@ html, body { width: <W>px; height: <H>px; overflow: hidden; }
 
 SVG solo se produce bajo peticion explícita de vector editable.
 
-#### Fotografía (ambos tracks)
+#### Fotografía (ambos tipos de layout)
 
-Cada hueco de imagen se genera con `scripts/generate_image.py` usando un prompt escrito siguiendo `guidelines/magic-prompt.md` (4-5 frases cinematograficas en ingles, realismo editorial, universo Movistar) y **pasando 2-3 Gold Standards con `--ref`**.
+Cada hueco de imagen se genera con `scripts/generate_image.py` usando un prompt escrito siguiendo `guidelines/magic-prompt.md` (4-5 frases cinematograficas en ingles, realismo editorial, universo Movistar) y **pasando siempre 2 referencias visuales con `--ref`**.
 
-**Generar sin referencia visual esta prohibido si existe Gold Standard para el canal.** El prompt describe la escena; la referencia transmite lo que el prompt no puede describir: composicion, luz, jerarquia y codigo de marca. Sin referencia el modelo produce stock generico. Esa fue la causa raiz de la calidad visual insuficiente de ciclos anteriores.
+**Generar sin referencia visual esta prohibido. `refs: 0` es un fallo, no una opcion.** El prompt describe la escena; la referencia transmite lo que el prompt no puede describir: composicion, luz, jerarquia y codigo de marca. Sin referencia el modelo produce stock generico. Esa fue la causa raiz de la calidad visual insuficiente de ciclos anteriores.
 
-**Paso A0 -- si el canal tiene prototyper, leelo primero.** `guidelines/prototypers/` (email, movistarplus, tienda-plv, meta) contiene los prompts calibrados de los GPT validados por el equipo: familias visuales por tipo de campana, composicion por formato, paleta del canal y reglas criticas que no estan en ningun otro sitio (CTA link con `>` en M+, sin boton CTA en Meta, beneficio antes que precio en tienda, logo M bottom-right en Meta vs top-right en el resto). Cada archivo abre con un bloque de adaptacion que traduce sus dimensiones a los flags del script. En su canal, el prototyper manda sobre la doctrina generica de `magic-prompt.md`. Sus alertas de validacion se incorporan al QA visual de la pieza.
+**Dos tracks de referencia, dos carpetas (definidos en la skill `movistar-visual-production`):**
 
-**Paso A -- elegir las referencias.** Abre `references/gold-standards/INDEX.md`. Tiene una tabla, "Que referencias pasar segun lo que estes generando", con la combinacion ya resuelta por canal y por modo (FOTO / GRAFICO / MIXTO). Elige de ahi.
+- **Track A (solo fotografía):** cuando el prompt pide una foto pura sin texto ni logos ni marcos. Usa `references/gold-standards/fotografia/` con el sistema escena + ancla de estilo. Para piezas slot-based donde la foto va en `{{IMG:...}}` y los elementos graficos los pone el HTML. **Prompt obligatorio de Track A:** "Pure editorial photograph. No text, logos, prices, buttons, graphic frames or branding overlays." (incluir siempre como primera frase).
+- **Track B (pieza completa):** cuando generas la pieza entera con texto, precio, logo y composicion. Usa `references/gold-standards/<canal>/` como hasta ahora. Puede incluir copy, precio y composicion exacta en el prompt.
 
-Reglas de seleccion, en este orden de prioridad:
+**Nunca mezcles tracks:** no pases una referencia de pieza completa (Track B) cuando el prompt dice "pure photograph" (Track A). La referencia y el prompt deben empujar en la misma direccion. Track A es la opcion por defecto para toda fotografia de escena; solo omitirlo si hay una razon documentada.
 
-1. **2 o 3 referencias. Nunca mas, nunca cero.** Mas de 3 diluyen la senal y encarecen la llamada: las imagenes de entrada se facturan como tokens y `gpt-image-2` las procesa siempre en alta fidelidad. Con 4 o mas, el script avisa.
-2. **El orden importa: la primera `--ref` domina.** Conserva el detalle mas fino y la textura mas rica; las siguientes influyen menos. Pon primero la que mas se parezca a lo que quieres conseguir, y si en la pieza hay caras, la de las caras va primera. El `--dry-run` te marca cual es la dominante.
-3. **Combina modo, no solo canal.** Si generas una foto de escena, las dos referencias deben ser piezas en modo FOTO. Si generas un fondo grafico de color plano, en modo GRAFICO. Mezclar modos produce una imagen que no es ni una cosa ni la otra.
-4. **Movistar+ solo con Movistar+.** Las referencias de `references/gold-standards/movistarplus/` se combinan entre si (videocartela con videocartela, WOW con WOW), nunca con las de otros canales: M+ tiene su propio sistema (pastilla blanca con keyword azul, QR de contratacion, key art a la derecha) y mezclarlo con el codigo general lo contamina.
-5. **El co-branding de las referencias es oficial, el contenido es de SU campana.** Muchas referencias de M+ y tienda llevan key art y logos de partners (Disney+, HBO Max, Samsung, Apple): es como Movistar publica y NO es motivo para no usarlas. La regla es de contenido: si la pieza nueva promociona otros titulos u otros dispositivos, el prompt describe el contenido nuevo para que el modelo no arrastre el de la referencia. Si la pieza nueva es 100% Movistar sin partner, anade la exclusion de logos ajenos al prompt (referencias sin ningun partner: `tienda-plv-etiqueta-sin-ip.jpg` y `exterior-cartel-tipografico-paleta.jpg`).
-6. **Si la fila del INDEX tiene la columna `Ojo` rellena, ese defecto va al prompt como exclusion explicita.** Ejemplo: la referencia del MUPI sobre azul tiene la M azul sobre azul con contraste insuficiente. Si la usas, el prompt debe pedir contraste alto en el simbolo. El modelo copia los defectos igual que copia las virtudes.
-7. **Si el canal no tiene Gold Standard** (BTL, TMKS, D2D, SMS, push, lona, display servido limpio, caballete impreso a resolucion): genera sin `--ref`, flaggea `sin_gold_standard` y dilo en el rationale. No inventes una referencia de otro canal para rellenar: una referencia equivocada es peor que ninguna.
+**Paso A0 -- si el canal tiene prototyper, leelo primero.** `guidelines/prototypers/` tiene los prompts calibrados de los 6 canales: email, movistarplus, tienda-plv, meta, exterior y display. Cada uno define familias visuales, composicion por formato, paleta del canal y reglas criticas que no estan en ningun otro sitio (CTA link con `>` en M+, sin boton CTA en Meta ni en exterior, beneficio antes que precio en tienda, logo M bottom-right en Meta vs top-right en el resto, CTA pill en display excepto mobile). Cada archivo abre con un bloque de adaptacion que traduce sus dimensiones a los flags del script. En su canal, el prototyper manda sobre la doctrina generica de `magic-prompt.md`. Sus alertas de validacion se incorporan al QA visual de la pieza.
+
+**Paso A -- elegir las referencias (obligatorio).** Lee el índice que corresponda al track: `references/gold-standards/fotografia/INDEX.md` para Track A y `references/gold-standards/INDEX.md` para Track B. **Siempre son 2 referencias**, pero cada track tiene una lógica distinta:
+
+**Track A — fotografía pura.**
+
+1. `--ref` 1: ancla de estilo de `fotografia/_anclas/` correspondiente a la familia (interior, exterior, producto o retail).
+2. `--ref` 2: escena exacta de `fotografia/<familia>/`. Si no existe, usa una escena adyacente de la misma familia o misma condición de luz. Si no hay familia aplicable, usa una segunda ancla cercana.
+
+Registra `reference_level` como `escena_exacta`, `escena_adyacente` o `solo_anclas`. Aplica el flag `referencia_aproximada` en los dos últimos casos. Si la escena de referencia no coincide con el encuadre solicitado, especifica el ángulo de cámara y las diferencias en el prompt: lo que no corrijas explícitamente, el modelo puede heredarlo.
+
+**Track B — pieza completa.**
+
+1. `--ref` 1: precedente primario del mismo canal, formato y modo visual.
+2. `--ref` 2: precedente secundario del mismo canal y modo, elegido para reforzar la misma retícula o componente.
+
+**Nunca uses anclas fotográficas en Track B.** Registra `reference_level` como `precedente_directo` si ambos precedentes corresponden al formato o como `precedente_analogo` si uno es de un ratio hermano. Aplica el flag `referencia_aproximada` solo en `precedente_analogo`. Para Movistar+ las dos referencias son siempre de `gold-standards/movistarplus/`.
+
+Reglas complementarias de seleccion:
+
+- **Combina por modo, no solo por canal.** Foto de escena con referencias FOTO, fondo grafico con referencias GRAFICO. Mezclar modos produce una imagen que no es ni una cosa ni la otra.
+- **Movistar+ solo con Movistar+.** Las referencias de `references/gold-standards/movistarplus/` se combinan entre si, nunca con otros canales: M+ tiene su propio sistema (pastilla blanca con keyword azul, QR de contratacion, key art a la derecha) y mezclarlo con el codigo general lo contamina.
+- **El co-branding de las referencias es oficial, el contenido es de SU campana.** Muchas referencias de M+ y tienda llevan key art y logos de partners (Disney+, HBO Max, Samsung, Apple): es como Movistar publica y NO es motivo para no usarlas. La regla es de contenido: si la pieza nueva promociona otros titulos u otros dispositivos, el prompt describe el contenido nuevo para que el modelo no arrastre el de la referencia. Si la pieza nueva es 100% Movistar sin partner, anade la exclusion de logos ajenos al prompt (referencias sin ningun partner: `tienda-plv-etiqueta-sin-ip.jpg` y `exterior-cartel-tipografico-paleta.jpg`).
+- **Si la fila del INDEX tiene la columna `Ojo` rellena, ese defecto va al prompt como exclusion explicita.** El modelo copia los defectos igual que las virtudes.
 
 **Paso B -- comprobar antes de gastar.** Una sola vez por sesion, con `--dry-run`:
 
+**Track A:**
+
 ```bash
 python3 scripts/generate_image.py -p "test" -o /tmp/t.png --aspect <ratio> \
-  --ref references/gold-standards/<canal>/<archivo>.jpg \
-  --ref references/gold-standards/<canal>/<archivo>.jpg \
+  --ref references/gold-standards/fotografia/_anclas/<ancla>.jpg \
+  --ref references/gold-standards/fotografia/<familia>/<escena>.jpg \
+  --dry-run
+```
+
+**Track B:**
+
+```bash
+python3 scripts/generate_image.py -p "test" -o /tmp/t.png --aspect <ratio> \
+  --ref references/gold-standards/<canal>/<precedente-primario>.jpg \
+  --ref references/gold-standards/<canal>/<precedente-secundario>.jpg \
   --dry-run
 ```
 
@@ -200,7 +231,7 @@ Tiene que decir `endpoint: .../v1/images/edits`, `encoding: multipart/form-data`
 
 **Paso C -- generar.** Tres reglas de prompt, validadas en produccion (18-08-2026):
 
-1. **El prompt describe la pieza, no la referencia.** PROHIBIDO escribir "following the reference", "the template", "the gold standard" ni equivalentes dentro del prompt. Escribe el prompt como si la referencia no existiera: que se ve, donde, con que luz, con que jerarquia y con que textos EXACTOS. La referencia entra solo por `--ref`. Esta medido: los prompts con meta-instrucciones producen piezas mediocres; los que describen la pieza producen piezas buenas con las mismas referencias.
+1. **El prompt describe el resultado, no la referencia.** PROHIBIDO escribir "following the reference", "the template", "the gold standard" ni equivalentes dentro del prompt. La referencia entra solo por `--ref`. En Track A describe únicamente escena, encuadre y luz: no incluyas copy, precios, logos ni instrucciones de composición gráfica. En Track B, solo si la pieza completa se genera como imagen, incluye los textos exactos aprobados. Si el texto se compone en HTML, nunca lo pidas dentro de la imagen. Esta separación evita texto duplicado o ilegible.
 2. **Parte del prompt calibrado del canal** (seccion "Entradas" de `guidelines/magic-prompt.md`; M+, tienda y email hero ya tienen). Sustituye las variables por el copy real, no toques la parte fija.
 3. **`--quality high` para entregables.** `medium` solo para pruebas.
 
@@ -209,8 +240,8 @@ python3 scripts/generate_image.py \
   -p "<prompt>" \
   -o outputs/<slug>-<zona>.png \
   --aspect <ratio> --quality high \
-  --ref references/gold-standards/<canal>/<archivo-1>.jpg \
-  --ref references/gold-standards/<canal>/<archivo-2>.jpg
+  --ref <referencia-1-segun-track> \
+  --ref <referencia-2-segun-track>
 ```
 
 Las rutas de `--ref` son relativas a `movistar-visual-production/`, que es el directorio desde el que se ejecuta el script. Si el script dice `ERROR: referencia no encontrada`, es que estas en otro directorio: te imprime el cwd actual para que lo veas.
@@ -219,16 +250,18 @@ Escribe el slot `{{IMG:outputs/<slug>-<zona>.png}}` en el HTML con un atributo `
 
 **Paso D -- documentar en el rationale.** En la seccion **Fotografia** de cada territorio, por cada imagen generada:
 
+- **reference_track**: `photography` (Track A) o `full_piece` (Track B).
+- **reference_level**: Track A: `escena_exacta`, `escena_adyacente` o `solo_anclas`. Track B: `precedente_directo` o `precedente_analogo`.
+- **references**: los 2 archivos, por nombre, y en una linea por que esos y no otros.
 - El prompt literal que enviaste.
-- **Gold Standards usados**, por nombre de archivo, y en una linea por que esos y no otros.
 - Si alguna referencia tenia columna `Ojo`, que exclusion metiste en el prompt para neutralizarla.
-- Si generaste sin referencia, el flag `sin_gold_standard` y el motivo.
+- Si usaste `escena_adyacente`, `solo_anclas` o `precedente_analogo`, el flag `referencia_aproximada`.
 
-Una entrada de Fotografia sin la linea de Gold Standards esta incompleta y no pasa el QA de salida.
+Una entrada de Fotografia sin reference_track, reference_level o la linea de references esta incompleta y no pasa el QA de salida.
 
 Si la API no esta disponible, usa como stand-in un crop coherente de `references/pieces/` y flaggea `imagen_provisional`.
 
-#### Logo (ambos tracks)
+#### Logo (ambos tipos de layout)
 
 Usa los slots de logo:
 - **Formato compacto** (social, exterior, display, tienda): `{{LOGO_MARK}}` o `{{LOGO_MARK_INVERSE}}`.
@@ -262,15 +295,9 @@ Renderiza la pieza ensamblada a PNG:
 python3 scripts/render.py -i outputs/pieza.html -o outputs/pieza.png --width <W> --height <H>
 ```
 
-MIRA el PNG (herramienta Read) y evalua contra esta checklist:
+MIRA el PNG (herramienta Read) y evalua contra la **checklist vigente de la skill `movistar-visual-production`** (seccion "Verificacion visual", 14 checks). No dupliques la checklist aqui: leela de la skill para que se mantenga sincronizada cuando la skill se actualice. Los 14 checks incluyen non-negotiables de marca, patron del formato, legibilidad, foto integrada, titular con punto, logo M en posicion correcta del canal, tipo de CTA correcto, sin jerga interna, sentence case, texto dentro de imagen letra a letra, fisica de escena, producto hero y test de parecido.
 
-1. **5 non-negotiables:** azul #0066FF presente; fondo #FFFAF5 como base en piezas offline, con excepciones por canal (display: fondo segun campana, ver `app-ads.md`; META: fondos variados segun campana, ver `app-meta.md`; M+: modo claro/oscuro/foto, ver `app-movistarplus.md`; landing web: blanco puro + #EFF5FB, ver `app-web.md`); maximo un secundario; solo Movistar Sans; sentence case y CTAs especificos sin exclamacion.
-2. **Patron del formato:** compara contra el bloque del formato en `brand/audit-report.md` (jerarquía, posición de la M, estructura).
-3. **Nada solapado, cortado ni desbordado.** Legibilidad a la distancia del soporte.
-4. **Foto integrada:** luz creible, personas reales, sin look CGI, coherente con el tono de la pieza.
-5. **Test de parecido:** puesta junto a las referencias reales, encaja como una más.
-
-Si algo falla, corrige el HTML y repite ensamblado + render. Máximo 2 iteraciones; si a la segunda no pasa, entrega con flag `qa_visual_fallido` y detalle.
+Si algo falla, corrige el HTML y repite ensamblado + render. Maximo 2 iteraciones. Si a la segunda el texto dentro de imagen no sale limpio, produce esa pieza con el HTML editable (texto vivo) y flaggea `texto_en_imagen_fallido`. Para el resto, entrega con flag `qa_visual_fallido` y detalle.
 
 ### Paso 6: QA textual
 
@@ -284,7 +311,7 @@ Aplica estas verificaciones al HTML ensamblado:
 4. **Checklist del playbook.** Cada pieza pasa el checklist rapido del playbook de su canal (sección 8).
 5. **Naming de tokens (no email).** Verifica que tu `:root` usa los nombres exactos `--movistar-*`, `--space-*`, `--font-weight-*`.
 6. **Logo correcto.** Slot correspondiente, variante normal/inverse según fondo.
-7. **Plantilla base.** Verificar que partiste de una plantilla (no layout desde cero).
+7. **Plantilla base.** Verificar que partiste de una plantilla directa o que existe un `template_fallback` aprobado y documentado. No se admite layout desde cero.
 
 ---
 
@@ -400,12 +427,15 @@ El formato exacto de cada pieza depende del canal (ver tabla de selección). No 
 
 ### Fotografía
 [Por cada imagen generada:
+ - reference_track: photography | full_piece (Track A o Track B de la skill)
+ - reference_level: Track A = escena_exacta | escena_adyacente | solo_anclas; Track B = precedente_directo | precedente_analogo
+ - references: [<archivo-1>.jpg, <archivo-2>.jpg] -- y en una linea por que esos
  - Prompt: el prompt literal enviado
- - Gold Standards usados: <archivo-1>.jpg, <archivo-2>.jpg -- y en una linea por que esos
  - Exclusiones: si alguna referencia tenia columna `Ojo` en el INDEX, que exclusion se metio en el prompt
  - Resultado del QA visual de la foto
-La linea de Gold Standards es OBLIGATORIA. Si se genero sin referencia, poner el flag
-`sin_gold_standard` y el motivo. Una entrada sin esta linea no pasa el QA de salida.]
+Los campos reference_track, reference_level y references son OBLIGATORIOS.
+Si se uso escena_adyacente, solo_anclas o precedente_analogo, poner el flag `referencia_aproximada`.
+Una entrada sin la linea de references o sin el nivel de cascada no pasa el QA de salida.]
 
 ### QA visual
 [Resultado de la checklist: qué pasó, qué se corrigió, iteraciones necesarias]
@@ -453,7 +483,7 @@ Un `design_rationale_<sub>.docx` por cada sub-corriente que tenga piezas produci
    - **Referencias consultadas** (heading 3): OBLIGATORIO. Que piezas reales se consultaron y que patrones se extrajeron.
    - **Concepto visual** (heading 3): prosa 1-2 parrafos. Bloque con fondo lightBlue (#EBF2FF).
    - **Layout y composición** (heading 3).
-   - **Fotografía** (heading 3): por cada imagen, prompt literal + Gold Standards usados por nombre de archivo + exclusiones de columna Ojo + resultado del QA visual. La linea de Gold Standards es obligatoria.
+   - **Fotografía** (heading 3): por cada imagen, reference_track + reference_level + references (2 archivos por nombre) + prompt literal + exclusiones de columna Ojo + resultado del QA visual. Los campos reference_track, reference_level y references son obligatorios. El flag `referencia_aproximada` aplica en `escena_adyacente`, `solo_anclas` o `precedente_analogo`.
    - **QA visual** (heading 3): checklist con resultado.
    - **Adaptación mobile** (heading 3): solo si aplica (emails, piezas responsive).
    - **Alternativas descartadas** (heading 3): bloque con fondo grey (#F5F7FA).
@@ -582,7 +612,7 @@ Si recibes `[REVIEW-FAIL] <bloque.check> | pieza/campaña: <id> | esperado: <X> 
 
 Carga al inicio de cada ticket:
 
-- `movistar-visual-production` (OBLIGATORIA -- stack de producción visual: assets, scripts, guidelines, referencias reales)
+- `movistar-visual-production` (OBLIGATORIA -- stack de producción visual: assets, scripts, guidelines, referencias reales). **Verificar versión al inicio de cada ticket:** `head -6 movistar-visual-production/SKILL.md` y confirmar `version: 1.5.0` o posterior; `references/gold-standards/` debe incluir `fotografia/`. Si no coincide, falta una carpeta o `generate_image.py --help` no muestra `--ref` y `--dry-run`, pedir `git pull` antes de producir. Un upload manual puede haber revertido el stack.
 - `campaign-output-format` (para parsear la Estrategia Creativa)
 - `brand-visual-guidelines-movistar` (OBLIGATORIA -- paleta, tipografías, espaciados)
 - `html-component-library` (patrones de layout y componentes. Sus instrucciones de copiar base64 quedan anuladas por movistar-visual-production)
