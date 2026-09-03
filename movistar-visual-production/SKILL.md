@@ -1,7 +1,7 @@
 ---
 name: movistar-visual-production
 description: Stack de produccion visual del Art Director (D) para piezas Movistar presentables a cliente. Assets de marca como archivos (fuentes, logos, tokens), fotografia real via OpenAI (gpt-image-2), ensamblado programatico por slots, y bucle de verificacion visual con render. Sustituye a visual-01-brand-assets, visual-02-brand-typography y el enfoque base64 de visual-03.
-version: 1.5.0
+version: 1.5.1
 owner: superreal
 status: active
 loaded_by: D (Art Director)
@@ -99,7 +99,9 @@ Por cada `{{IMG:...}}`: escribe el prompt siguiendo `guidelines/magic-prompt.md`
 **Dos tracks de referencia, dos carpetas:**
 
 - **Track A (solo fotografia):** cuando el prompt pide una foto pura sin texto ni logos ni marcos. Usa `references/gold-standards/fotografia/` con el sistema escena + ancla de estilo. Para piezas slot-based donde la foto va en `{{IMG:...}}` y los elementos graficos los pone el HTML.
-- **Track B (pieza completa):** cuando generas la pieza entera con texto, precio, logo y composicion. Usa `references/gold-standards/<canal>/` como hasta ahora.
+- **Track B (pieza completa):** cuando generas la pieza entera con texto, precio, logo y composicion. Usa `references/gold-standards/<canal>/` como hasta ahora. Dos niveles de referencia:
+  - **`precedente_directo`:** mismo canal, mismo formato y mismo modo visual.
+  - **`precedente_analogo`:** mismo canal y modo visual, pero formato o ratio hermano. Aplica flag `referencia_aproximada`.
 
 **Track A validado (2026-08-21):** un test comparativo con/sin referencias fotograficas confirmo que Track A mejora la coherencia de luz (~3000K consistente), el casting espanol y la textura/grano respecto a generacion solo con texto. Track A es la opcion por defecto para toda fotografia de escena; solo omitirlo si hay una razon documentada.
 
@@ -109,12 +111,20 @@ Por cada `{{IMG:...}}`: escribe el prompt siguiendo `guidelines/magic-prompt.md`
 
 **A. Elegir.** `references/gold-standards/INDEX.md` tiene la tabla "Que referencias pasar según lo que estes generando" con la combinación resuelta por canal y por modo. Reglas:
 
-- **Siempre 2 referencias. `refs: 0` es un fallo, no una opcion.** Seleccion en cascada:
-  1. **Escena exacta** en `fotografia/<familia>/` (Track A) o `<canal>/` (Track B). **Ancla siempre como ref 1, escena como ref 2.** El modelo da mas peso a ref 1; si la escena va primero, su casting y composicion contaminan el resultado aunque el prompt pida otra cosa (validado en test A/B 2026-08-21).
+- **Siempre 2 referencias. `refs: 0` es un fallo, no una opcion.** Cada track tiene su logica de seleccion:
+
+  **Track A (fotografia pura):** seleccion en cascada:
+  1. **Escena exacta** en `fotografia/<familia>/`. **Ancla siempre como ref 1, escena como ref 2.** El modelo da mas peso a ref 1; si la escena va primero, su casting y composicion contaminan el resultado aunque el prompt pida otra cosa (validado en test A/B 2026-08-21).
   2. **Sin escena exacta:** coge la **escena adyacente** (misma familia, o misma condicion de luz interior/exterior) como ref 2; **ancla sigue como ref 1**. Describe en el prompt las diferencias entre la escena adyacente y la que necesitas, para que el modelo no arrastre lo que no toca.
   3. **Sin familia aplicable** (caso raro): las **dos anclas** mas cercanas. Nunca cero.
-- **Advertencia de composicion:** la escena de referencia puede dominar el encuadre incluso yendo como ref 2. Cuando el encuadre del prompt difiera del de la escena (ej. plano abierto vs POV por encima del hombro), refuerzalo con indicaciones explicitas de angulo de camara en el prompt. El orden de refs no basta para contrarrestarlo.
-- Registra en el rationale que nivel de la cascada usaste (`escena_exacta`, `escena_adyacente` o `solo_anclas`). El flag `sin_gold_standard` desaparece; se sustituye por `referencia_aproximada` cuando se usa el nivel 2 o 3.
+  - Registra `reference_level`: `escena_exacta`, `escena_adyacente` o `solo_anclas`. Aplica flag `referencia_aproximada` en los dos ultimos.
+
+  **Track B (pieza completa):** seleccion por precedente:
+  1. **`precedente_directo`:** ref 1 y ref 2 del mismo canal, formato y modo visual.
+  2. **`precedente_analogo`:** al menos una referencia es de un ratio hermano del mismo canal y modo. Aplica flag `referencia_aproximada`.
+  - **Nunca uses anclas fotograficas en Track B.** Registra `reference_level`: `precedente_directo` o `precedente_analogo`.
+
+- **Advertencia de composicion (Track A):** la escena de referencia puede dominar el encuadre incluso yendo como ref 2. Cuando el encuadre del prompt difiera del de la escena (ej. plano abierto vs POV por encima del hombro), refuerzalo con indicaciones explicitas de angulo de camara en el prompt. El orden de refs no basta para contrarrestarlo.
 - Combina por **modo**, no solo por canal: foto de escena con referencias FOTO, fondo grafico con referencias GRAFICO.
 - Movistar+ solo con Movistar+: sus referencias se combinan entre si, nunca con otros canales. Su codigo real es azul con pastilla blanca y keyword azul; el modo oscuro lo pone el key art, no un fondo negro.
 - El co-branding de las referencias es oficial (partners de Movistar): usalas sin miedo. Regla de contenido: si la pieza nueva promociona otros titulos u otros dispositivos, describe el contenido nuevo en el prompt para no arrastrar el de la referencia. Pieza 100% Movistar sin partner: anade exclusion de logos ajenos (referencias sin partner: tienda-plv-etiqueta-sin-ip.jpg y exterior-cartel-tipografico-paleta.jpg).
@@ -159,7 +169,7 @@ Las rutas de `--ref` son relativas a `movistar-visual-production/`. Ejecuta el s
 - **La foto se genera al ratio real de su zona**, nunca a otro ratio para recortar despues salvo el workaround de ratio maximo descrito arriba.
 - **La M en pantallas PLV de tienda no va en la pieza** (vive en los frames bumper). En el soporte impreso si va, segun pida el copy.
 
-**D. Documentar.** En el design rationale, seccion Fotografia: prompt literal + **Gold Standards usados por nombre de archivo** + por que esos + exclusiones metidas por la columna `Ojo` + **nivel de cascada** (`escena_exacta`, `escena_adyacente` o `solo_anclas`). Una entrada sin la linea de Gold Standards o sin el nivel de cascada esta incompleta.
+**D. Documentar.** En el design rationale, seccion Fotografia: `reference_track` (`photography` o `full_piece`) + `reference_level` (Track A: `escena_exacta`, `escena_adyacente` o `solo_anclas`; Track B: `precedente_directo` o `precedente_analogo`) + prompt literal + **Gold Standards usados por nombre de archivo** + por que esos + exclusiones metidas por la columna `Ojo`. Una entrada sin reference_track, reference_level o la linea de Gold Standards esta incompleta.
 
 Si la API no esta disponible, usa como stand-in un crop coherente de `references/pieces/` y flaggea `imagen_provisional`.
 
