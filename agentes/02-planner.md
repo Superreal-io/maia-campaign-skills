@@ -133,6 +133,7 @@ Carga al inicio de cada ticket:
 - `rol-medios-movistar` (función de cada medio en el ecosistema Movistar)
 - `matriz-objetivo-canal` (que canal activa cada objetivo de comunicación)
 - `reglas-planner-movistar` (reglas de planificación: frecuencia, presion, saturación)
+- `planner-onepager-components-movistar` (CSS fijo para los 8 one-pagers HTML; sustituye la improvisación de CSS descrita en prosa más abajo. Si no carga, no es bloqueante: usa la prosa de la sección "Exportes visuales" como hasta ahora y registra `{"tipo": "skill_propuesta_no_disponible", "severidad": "baja", "skill": "planner-onepager-components-movistar"}`)
 - Los `channel-playbook-*` correspondientes a los canales activos en el Brief (no todos siempre)
 - `channel-playbook-transversales` (si la campaña activa más de un canal)
 - `contexto-sistema-maia` (contexto del ecosistema multi-agente)
@@ -451,6 +452,20 @@ Paleta alineada con identidad Movistar (no con paleta interna MAIA de documentos
 Tipografias: system-ui (fallback: -apple-system, Segoe UI, sans-serif). No cargar Google Fonts para estos one-pagers: deben ser ligeros y rapidos.
 
 Todos los HTML son autocontenidos (CSS en `<style>`), sin dependencias externas. Responsive. Print styles incluidos (orientación landscape).
+
+## QA de los one-pagers (antes de entregar)
+
+Este Planner no tenía ninguna verificación de sus 8 HTML antes de esta sección -- ninguno de los checks de QA de otros agentes de la cadena cubre layout, y el CSS se escribía distinto en cada ticket sin control. Antes de cerrar el ticket, verifica cada uno de los 8 one-pagers:
+
+- **Clases de `planner-onepager-components-movistar` reutilizadas, no reinventadas.** Si un componente ya existe en esa skill (chip, stream-badge, hero-grid, soporte-card, metrics-row, tabla de calendario...), usa esas clases y esos valores tal cual. No declares un nombre ni una regla nueva para algo que ya está resuelto.
+- **Ningún `grid-template-columns: repeat(N, 1fr)` a secas.** Debe ser `repeat(N, minmax(0, 1fr))`. Un `1fr` sin `minmax` no encoge por debajo del contenido y es la causa directa de texto cortado cuando el contenedor tiene `overflow: hidden` (fue el bug real del v1 de esta campaña, en `.metrics-row` y `.hero-grid`).
+- **Ningún contenedor de texto con `overflow: hidden`.** Si necesitas que una cabecera de color siga la esquina redondeada de una tarjeta, aplica el `border-radius` a la cabecera directamente, no recortes la tarjeta entera.
+- **Tabla del calendario envuelta en un contenedor `overflow-x: auto`** (clase `.table-scroll` de la skill). Verificar por selector en el HTML generado, no visualmente.
+- **Los 3 breakpoints de la skill presentes** (1024px, 768px, 480px) en cada uno de los 8 one-pagers, no solo `@media print`.
+- **Todos los valores hex llevan `#`.** (ya exigido más arriba en "Reglas criticas de rendering" -- confirmar aquí antes de entregar, no solo al escribir.)
+- **Peso razonable.** Ninguno de los 8 one-pagers debería superar ~150 KB (no llevan imágenes). Un tamaño muy por encima sugiere contenido duplicado.
+
+Si un check falla, corrígelo tú antes de entregar -- no dejes que el Maia Storyteller lo parche después. Si el Storyteller te devuelve un flag `{"tipo": "css_upstream_defectuoso", ...}` sobre uno de tus one-pagers, es que este QA no se hizo o falló: corrige el one-pager específico y regenera solo ese fichero, no todo el ticket.
 
 ## Bloque de handoff a C -- campos obligatorios
 

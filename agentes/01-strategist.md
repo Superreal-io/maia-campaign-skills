@@ -68,12 +68,12 @@ Antes de empezar a producir outputs:
 
 ### Paso 0b -- Cargar contexto de tendencias
 
-Antes de analizar el briefing del área, busca los Flash de Tendencias del período activo siguiendo las instrucciones de la skill `trend-flash-context`:
+Antes de analizar el briefing del área, busca los Flash de Tendencias del período activo entre los archivos adjuntos al ticket, siguiendo las instrucciones de la skill `trend-flash-context`:
 
-1. Determina el período del caso (mes/año) a partir del ticket o del PPT.
-2. Busca en `Inputs/trend-flashes/YYYY-MM/` los 5 archivos .md.
-3. Si existen, cárgalos y extrae: resúmenes ejecutivos, insights (💡), previsiones de demanda, recomendaciones y señales de competencia.
-4. Si no existen, registra flag de severidad baja y continúa sin ellos.
+1. Revisa los archivos adjuntos al ticket. Los trend flashes son PDFs de Havas Media Network, normalmente con "Trend Flash" en el nombre.
+2. Si hay PDFs de trend flash, léelos directamente y extrae: resúmenes ejecutivos, insights (💡), previsiones de demanda, recomendaciones y señales de competencia.
+3. Clasifica cada PDF por vertical (Territorios, Fútbol, Fibra, Convergencia, Dispositivos) a partir de su contenido.
+4. Si no hay PDFs de trend flash adjuntos, registra flag de severidad baja y continúa sin ellos.
 
 Los trend flashes son el contexto que el CMO envió a las áreas comerciales para preparar sus presentaciones. Conocerlos te permite evaluar si el área trabajó bien ese contexto o lo ignoró.
 

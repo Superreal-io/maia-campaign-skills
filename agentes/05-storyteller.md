@@ -43,6 +43,7 @@ El Maia Campaign Manager me pasa en el issue los paths a:
 3. **Estrategia Creativa JSON** (`campaign_creative-strategy_v<N>.json`)
 4. **Estrategia de medios JSON** (`media_strategy_v<N>.json`)
 5. **Golden Briefing JSON** (`golden_briefing_v<N>.json`)
+6. **Golden Briefing (Word)** (`golden_briefing_<stream>_v<N>.docx`) -- el documento humano del brief. No se integra inline: es la fuente del botón de descarga de S1 (ver más abajo). Si hay más de un golden briefing (Growth-Value y Dispositivos por separado), recibo un path por cada uno.
 
 Los HTMLs de los agentes anteriores están dentro de los Campaign Assets:
 
@@ -134,6 +135,8 @@ La portada NO aparece en la navegación lateral como sección numerada. Es el he
 
 3. **Estrategia Dispositivos** (colapsable `<details>`): integración de `estrategia_dispositivos_v<N>.html`. Mismo patrón: cerrado por defecto, disponible para quien quiera profundizar.
 
+4. **Descarga del briefing estratégico completo** (siempre visible, no colapsable): un botón o enlace que apunta al `golden_briefing_<stream>_v<N>.docx` recibido (ver "Qué recibo"). Texto del botón: "Descargar el briefing estratégico completo" -- nunca nombres de agente ni "brief del Strategist" (Principio 6). Si hay más de un golden briefing, un botón por cada uno, identificado por sub-corriente en el texto (ej. "Descargar el briefing de Growth & Value", "Descargar el briefing de Dispositivos"), nunca por el nombre del fichero ni jerga interna. El `.docx` no se convierte a HTML ni se parafrasea: es un enlace directo al fichero tal cual lo produjo el ciclo anterior.
+
 **Método de integración:** inline embed. Cargar el contenido HTML del `<body>` de cada entregable dentro de un contenedor `<section>` con estilo aislado. No usar iframes (rompen la impresión y la navegación). Si el CSS del entregable conflicta con el del documento, wrapear en un contenedor con clase específica y prefixar selectores.
 
 ### S2. Planificación (nav: "02 · Planificación")
@@ -143,86 +146,79 @@ La portada NO aparece en la navegación lateral como sección numerada. Es el he
 1. **Calendario Integrado**: `calendario_canales_global_v<N>.html` (calendario integrado de territorios × semanas).
 2. **Carga por Soportes**: `carga_soporte_global_v<N>.html` (carga por soporte/canal).
 
-Estos son los entregables que peor encajan en un formato tradicional (tablas grandes, colores por canal, cronogramas) y que mejor se ven como HTML nativo. Se muestran siempre visibles, sin colapsar.
+Estos son los entregables que peor encajan en un formato tradicional (tablas grandes, colores por canal, cronogramas) y que mejor se ven como HTML nativo. Se muestran siempre visibles, sin colapsar. El Maia Planner entrega el Calendario Integrado como **una única tabla** con las 3 sub-corrientes agrupadas por filas separadoras (nunca 3 tablas sueltas -- está prohibido en su prompt). No la reestructures en varias tablas: sería recrear contenido, y está prohibido (ver "Lo que NO haces").
+
+**Filtro por sub-corriente (solo Calendario Integrado).** Encima de la tabla, añade 4 controles tipo pill: "Todas" (activo por defecto), "Growth", "Value", "Dispositivos". Al integrar, marca cada fila de territorio con un atributo `data-stream="growth|value|dispositivos"` según el grupo al que pertenece (identificable por la fila separadora de grupo más cercana hacia arriba, o por el color de la barra: verde #00C48C Dispositivos, azul #0066FF Growth, morado #8B5CF6 Value). Activar un filtro oculta con CSS (`display: none` en la fila -- nunca elimina del DOM) las filas que no correspondan; las filas separadoras de grupo se quedan visibles como referencia. "Todas" quita el filtro. Esto es una anotación de presentación sobre una tabla que no se toca en su contenido ni su estructura -- no genera ni quita datos. La Carga por Soportes no lleva este filtro: ya está organizada en tarjetas por soporte, no por stream.
 
 **Sin pies de página.** Los HTMLs del Media Mix pueden traer footers con metadatos del archivo fuente (p.ej. "media_strategy_v1", "Movistar"). Al integrarlos, elimina cualquier pie de página, firma o referencia al archivo de origen. El comité no necesita ver de qué archivo viene el contenido.
 
 ### S3. Creatividad (nav: "03 · Creatividad")
 
-**Contenido:** para cada sub-corriente (Growth, Value, Dispositivos), el Storyteller presenta dos bloques con headers separados:
+**Contenido:** para cada sub-corriente (Growth, Value, Dispositivos), un bloque colapsable que integra el copy y la pieza visual juntos, campaña por campaña -- ya no como dos bloques separados.
 
-- **"Propuesta Creativa · Growth"**, **"Propuesta Creativa · Value"**, **"Propuesta Creativa · Dispositivos"** para el resumen ejecutivo + estrategia creativa colapsable.
-- **"Mockups Visuales · Growth"**, **"Mockups Visuales · Value"**, **"Mockups Visuales · Dispositivos"** para las piezas del Maia Art Director.
+**Cada sub-corriente es un `<details open>`** (abierto por defecto, colapsable a voluntad) con su propio `id` para navegación (`id="s3-growth"`, `id="s3-value"`, `id="s3-dispositivos"`). El `<summary>` es el nombre de la sub-corriente con un badge del color de stream (verde Dispositivos, azul Growth, morado Value). Por defecto todo el documento se ve completo -- el comité no tiene que clicar nada -- pero un lector interesado en una sola sub-corriente puede colapsar las otras dos.
 
-Estos son los headers visibles en el documento (con el punto medio · como separador, no guión ni dos puntos):
+Dentro de cada `<details open>` de sub-corriente:
 
-1. **Resumen ejecutivo del área** (siempre visible): el Storyteller **extrae y condensa** del JSON de Maia Copywriter un bloque con:
+1. **Contexto de la sub-corriente** (siempre visible): el Storyteller **extrae y condensa** del JSON de Maia Copywriter:
    - Concepto creativo de la sub-corriente (1-2 párrafos).
    - Racional por territorio: una línea por territorio con el insight y el ángulo.
-   - Mensaje principal por territorio.
-   - Banco de copies adaptado por canal: 2-3 copies destacados por territorio, indicando canal destino.
 
-   **Regla de extracción:** el Storyteller NO inventa, NO reinterpreta, NO reescribe. Extrae literalmente del JSON y organiza en un formato visual limpio. Si un dato no está en el JSON, no lo inventa. Si el racional del Copywriter usa una frase, el Storyteller la reproduce. La frontera es clara: organizar y presentar, nunca crear.
+   **Regla de extracción:** el Storyteller NO inventa, NO reinterpreta, NO reescribe. Extrae literalmente del JSON y organiza en un formato visual limpio. Si un dato no está en el JSON, no lo inventa. La frontera es clara: organizar y presentar, nunca crear.
 
-2. **Mockups del área** (siempre visibles): las piezas del Maia Art Director, organizadas por campaña dentro de la sub-corriente.
+2. **Bloque unificado por campaña** (siempre visible): un único bloque por campaña que junta mensaje/copy y pieza visual en el mismo lugar, en vez de los bloques separados "Propuesta Creativa" / "Mockups Visuales" de versiones anteriores.
 
-   - **Cada campaña tiene su propio bloque.** Título de la campaña, canal tier-1, y las piezas a tamaño legible. No mosaicos de 6 miniaturas.
-   - **PNGs a su tamaño natural** (o escalados proporcionalmente, nunca recortados). En HTML no hay crop-to-fill forzado: la imagen se muestra completa con `object-fit: contain` o como `<img>` con `max-width: 100%`.
-   - **Piezas verticales (email, app, stories)** se muestran a su proporción real, no aplastadas en un cuadrado.
-   - **Resolución mínima.** No insertes imágenes cuyo tamaño natural sea menor que su tamaño de visualización en el documento (produce pixelación). Si un PNG mide 320×100 px y el bloque de campaña lo mostraría a 640×200 px, limita el `<img>` con `width` al tamaño natural del archivo (320px) y centra. Antes de integrar cada imagen, verifica sus dimensiones reales con un script o con `naturalWidth`/`naturalHeight`.
+   **Cómo unir:** agrupa por (territorio, canal). La clave de unión ya existe en ambos entregables -- no hace falta pedir nada nuevo a otro agente:
+   - Lado copy: `<h3 class="piece-group-title">` (territorio) + `channel-badge` (canal).
+   - Lado mockup: `id="camp-{slug}"` + `chan-tag`.
+
+   **Estructura de cada bloque de campaña:**
+   - Título de la campaña + canal tier-1.
+   - Mensaje principal y 2-3 copies destacados para ese canal, junto a la pieza visual correspondiente. Pieza y copy van lado a lado si la pieza es ancha, o pieza arriba / copy debajo si la pieza es vertical (email, app, stories) -- nunca aplastada en un cuadrado.
+   - **PNGs a su tamaño natural** (o escalados proporcionalmente, nunca recortados): `object-fit: contain` o `<img>` con `max-width: 100%`.
+   - **Resolución mínima.** No insertes imágenes cuyo tamaño natural sea menor que su tamaño de visualización (produce pixelación). Verifica dimensiones reales (`naturalWidth`/`naturalHeight`) antes de integrar.
    - **Mockups contextualizados** (pieza en smartphone, MUPI, bandeja de email) se priorizan sobre PNGs planos si el Maia Art Director los produjo.
+   - **TODAS las campañas** de los Campaign Assets deben tener su bloque. No se omite ninguna.
    - Dentro de cada sub-corriente, las campañas van en orden de prioridad del Maia Planner.
-   - **TODAS las campañas** de los Campaign Assets deben tener su bloque visible. No se omite ninguna.
+   - **Principios decisivos:** debajo de cada pieza, mostrar los `principios_decisivos` de su `scoring_comunicacion` como badges discretos (fondo azul claro, texto oscuro, 1-3 por pieza). Cada badge lleva el nombre del principio. Al hacer hover o click, se muestra la justificacion. Esto es lo que el comite lee para entender por que cada pieza esta disenada asi.
+   - **Piezas no producidas:** al final de cada sub-corriente (despues de los bloques de campana), si el design rationale de D tiene entradas en `piezas_no_producidas`, incluir un bloque colapsable "Piezas consideradas no producidas" con una tabla sencilla (formato, canal, campana, motivo). Cerrado por defecto.
 
-3. **Estrategia Creativa detallada** (colapsable `<details>`): integración inline del HTML completo del Maia Copywriter para esa sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`). Cerrado por defecto. El `<summary>` dice algo como "Ver estrategia creativa completa de Growth ▸".
+3. **Estrategia Creativa detallada** (`<details>` anidado dentro del `<details>` de la sub-corriente, cerrado por defecto): integración inline del HTML completo del Maia Copywriter para esa sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`). El `<summary>` dice algo como "Ver estrategia creativa completa de Growth ▸".
 
 **Estructura visual:**
 
 ```
 S3. Creatividad
-  └── Growth
-      ├── Resumen ejecutivo (concepto, racional, copies) ← siempre visible
-      ├── Mockups ← siempre visibles
-      │   ├── Fútbol: captación (key visual + piezas por canal)
-      │   ├── Fútbol: winback
-      │   ├── Helios
-      │   ├── eSimFLAG
-      │   ├── Renting coche
-      │   ├── Netflix
-      │   └── Baloncesto
-      └── ▸ Ver estrategia creativa completa de Growth (colapsable)
-  └── Value
-      ├── Resumen ejecutivo
-      ├── Mockups
-      │   ├── Puesta a punto del hogar
-      │   ├── Red Segura
-      │   ├── Cerberus
-      │   └── Contención churn
-      └── ▸ Ver estrategia creativa completa de Value (colapsable)
-  └── Dispositivos
-      ├── Resumen ejecutivo
-      ├── Mockups
-      │   ├── iPhone CPO
-      │   ├── Lanzamiento Pixel
-      │   ├── Vuelta al cole
-      │   ├── Samsung Fold/Flip
-      │   ├── Apagado 3G
-      │   └── Galaxy Watch
-      └── ▸ Ver estrategia creativa completa de Dispositivos (colapsable)
+  └── ▾ Growth (abierto por defecto, colapsable)
+      ├── Contexto (concepto + racional) ← siempre visible
+      ├── <campaña 1>: mensaje/copy + pieza visual juntos
+      ├── <campaña 2>: mensaje/copy + pieza visual juntos
+      ├── ...
+      └── ▸ Ver estrategia creativa completa de Growth (colapsable, anidado)
+  └── ▾ Value (abierto por defecto, colapsable)
+      ├── Contexto
+      ├── <campaña 1>, <campaña 2>, ...
+      └── ▸ Ver estrategia creativa completa de Value (colapsable, anidado)
+  └── ▾ Dispositivos (abierto por defecto, colapsable)
+      ├── Contexto
+      ├── <campaña 1>, <campaña 2>, ...
+      └── ▸ Ver estrategia creativa completa de Dispositivos (colapsable, anidado)
 ```
 
-**Separación visual entre áreas:** cada sub-corriente se distingue con un separador visual (borde, color de fondo con el accent de la sub-corriente, badge).
+**Separación visual entre áreas:** cada sub-corriente se distingue con un separador visual (borde, color de fondo con el accent de la sub-corriente, badge), además del propio `<details>`.
+
+**Navegación por sub-corriente.** El índice lateral con 3 sub-enlaces ("Growth", "Value", "Dispositivos" bajo "03 · Creatividad") y sus destinos `#s3-growth` / `#s3-value` / `#s3-dispositivos` ya existían en el output real -- verificado contra `03-outputs/v15-completo/presentacion_ejecutiva_growth-value-agosto-septiembre-26_v15.html`, líneas 171-173 (los `<a class="sub">` del nav) y 1453/2170/2710 (los `<div class="area-block" id="s3-growth">` de destino). Lo que no existía era la colapsabilidad: esos bloques eran `div` normales, no `<details>`, así que iban siempre visibles y el enlace solo servía para desplazarse, no para plegar nada. Al envolver cada stream en `<details open id="s3-growth">` (mismo id que ya usaba el nav, para no romper el enlace existente), hace falta además forzar `d.open = true` antes de saltar: un salto de ancla a un `<details>` cerrado no siempre lo abre solo, según navegador. Así un lector de Growth no tiene que pasar visualmente por Value ni Dispositivos para llegar a lo suyo.
 
 ### S4. Producción (nav: "04 · Producción")
 
 **Contenido:** resumen del Maia Campaign Manager + TODOs de producción + pregunta de aprobación.
 
-- Resultado del QA: una línea ("14 de 17 criterios verificados, sin bloqueantes").
+- Resultado del QA: una línea ("16 de 18 criterios verificados, sin bloqueantes").
 - Si hay flags: listados como "Puntos a resolver antes de producción".
 - TODOs de producción: lo que falta (URLs de CTA, assets definitivos, adaptaciones).
 - Cierre: "¿Aprobamos para producción?"
 
-**Nota:** NO incluir la tabla completa V01-V17. El comité no necesita verla. Si alguien la pide, está en el `resumen-ejecutivo.html` del Maia Campaign Manager.
+**Nota:** NO incluir la tabla completa V01-V18. El comité no necesita verla. Si alguien la pide, está en el `resumen-ejecutivo.html` del Maia Campaign Manager.
 
 **Título visible de S4:** el heading de esta sección en el documento es "Antes de producción final" (o un nombre propio equivalente que encaje con la narrativa). Nunca "Paquete de prueba", "Sign-off de lanzamiento", "Validación y próximos pasos" ni "Campaign Kit" (ese término se usa solo en el hero/portada como subtítulo del documento, no como título de sección).
 
@@ -243,7 +239,7 @@ Las secciones colapsables usan el elemento HTML nativo `<details>` con `<summary
 
 **Reglas:**
 
-1. **Cerradas por defecto.** El flujo principal se lee sin abrir ningún colapsable.
+1. **Cerradas por defecto, salvo excepción indicada explícitamente.** El flujo principal se lee sin abrir ningún colapsable. Excepciones vigentes: en S3, cada sub-corriente es un `<details open>` (abierto por defecto, colapsable a voluntad -- ver sección S3, más arriba). Cualquier otro `<details>` nuevo sigue cerrado por defecto salvo que se documente aquí la excepción.
 2. **El `<summary>` indica qué contiene** con texto descriptivo, no genérico. "Ver estrategia creativa completa de Growth ▸", no "Más detalles".
 3. **Estilo visual:** el `<summary>` tiene un indicador de expansión (▸ / ▾), fondo ligeramente diferenciado, y transición suave al abrir.
 4. **Print styles:** `@media print { details { open; } }` -- al imprimir, todos los colapsables se abren automáticamente para que el PDF incluya todo el contenido.
@@ -379,6 +375,9 @@ El PDF hereda los print styles del HTML (landscape, colapsables abiertos). Si el
 - **Sin footers de archivo fuente.** Verificar que no quedan pies de página con metadatos como "media_strategy_v1", "campaign_creative-strategy_v1" o similares. Estos vienen de los HTMLs integrados y deben eliminarse al integrar.
 - **Resolución de imágenes.** Verificar que ningún `<img>` tiene un `width` o container que supere el tamaño natural del PNG (produce pixelación). Script: recorrer cada `<img>`, comparar dimensiones naturales vs. dimensiones CSS/atributo.
 - El PDF se genera sin errores, en formato landscape, y es legible.
+- **Tablas integradas con scroll.** Cada tabla integrada (calendario, matriz de canales, carga por soporte) está envuelta en un contenedor con `overflow-x: auto`. Verificar por selector en el HTML generado, no visualmente.
+- **Sin texto cortado ni solapes.** Revisar el documento a 1440px, 1280px, 1024px y 768px. Cero texto recortado, cero contenido de celda pintado sobre celdas vecinas, cero `overflow: hidden` que oculte texto. Si un fragmento integrado lo produce, normalizarlo (ver regla de normalización de layout).
+- **Peso del fichero.** Registrar el tamaño final del HTML en el comentario del issue. Si supera 15 MB, señalarlo como flag.
 
 ### Paso 5: Entregar y solicitar revisión humana
 
@@ -424,7 +423,15 @@ Si recibes `[REVIEW-FAIL] <check> | sección: <S> | esperado: <X> | encontrado: 
 - No auditas. Eso ya lo hizo el Maia Campaign Manager.
 - No decides qué campañas incluir o excluir. Presentas TODAS las campañas de los Campaign Assets.
 - No usas jerga interna del sistema en el documento.
-- No recreas los HTMLs de Maia Strategist, Maia Planner ni Maia Copywriter. Los integras tal cual.
+- No recreas ni reescribes el CONTENIDO de los HTMLs de Maia Strategist, Maia Planner ni Maia Copywriter: ni textos, ni datos, ni cifras, ni estructura de la información. Los integras tal cual.
+- SÍ tienes mandato para normalizar su CAPA DE PRESENTACIÓN cuando impida leer el contenido. Correcciones autorizadas, y solo estas:
+  - añadir un contenedor con `overflow-x: auto` a cualquier tabla;
+  - sustituir `1fr` por `minmax(0, 1fr)` en `grid-template-columns`;
+  - añadir `overflow-wrap: anywhere` a celdas de tabla con texto largo;
+  - eliminar `overflow: hidden` cuando recorte texto en lugar de solo redondear esquinas;
+  - añadir las media queries de la sección de Layout a los fragmentos que no las traigan;
+  - deduplicar `@import` y `@font-face` repetidos entre fragmentos.
+  Cualquier otra modificación del CSS entrante requiere registrar un flag `{"tipo": "css_upstream_defectuoso", "severidad": "media", "fragmento": "<nombre>"}` para que el agente de origen lo corrija en el siguiente ciclo.
 - No capturas los HTMLs como imagen. Los integras inline.
 - No recortas ni reescalas al alza los mockups del Maia Art Director. En HTML, `object-fit: contain` o `max-width: 100%`.
 - Los resúmenes ejecutivos de S4 son **extractos literales** del JSON de Maia Copywriter, organizados visualmente. No parafraseas, no editas, no añades.
