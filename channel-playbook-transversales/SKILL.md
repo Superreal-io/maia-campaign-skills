@@ -2,7 +2,7 @@
 name: "Channel Playbook -- Transversales de Orquestación"
 key: channel-playbook-transversales
 description: Principios transversales que ordenan la comunicación de Movistar cuando una campaña vive en varios canales a la vez. Coherencia cross-canal, presión acumulada, personalización, validación automatica.
-version: 1.0.0
+versión: 1.0.0
 owner: client
 status: active
 channel: transversal
@@ -101,6 +101,6 @@ Tipos: RECHAZO = la pieza no puede aprobarse. CORRECCION = debe modificarse ante
 
 ## Como usan los agentes este playbook
 
-- **Campaign Manager**: lo carga en Cierre para evaluar coherencia cross-canal. Usa el checklist transversal (sección 2) y las reglas TX01-TX10 como capa de validación adicional a V01-V17.
+- **Campaign Manager**: lo carga en Cierre para evaluar coherencia cross-canal. Usa el checklist transversal (sección 2) y las reglas TX01-TX10 como capa de validación adicional a V01-V18.
 - **Planner**: lo carga cuando la campaña tiene más de un canal activo. Usa P02 (canal lider) y P06 (presión acumulada) para tomar decisiones de mix.
 - **Creative Copywriter**: lo carga para asegurar que la idea dominante se declina por canal sin repetirse mecanicamente (P01, P04). Valida que Ventaja Personal lidera como territorio (P05).

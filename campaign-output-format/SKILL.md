@@ -354,7 +354,7 @@ campaign_creative-strategy:
       # produce finalmente ni un orden de prioridad — es el insumo completo. La selección
       # de qué piezas concretas se llevan a producción final (representativas por canal
       # y sub-corriente) es responsabilidad del Art Director (D), usando este array junto
-      # con scoring_crm y piezas_clave como criterio. C no debe entregar aparte ningún
+      # con scoring_comunicacion y piezas_clave como criterio. C no debe entregar aparte ningun
       # array adicional de "piezas a producir" fuera de este schema — si algo así aparece
       # en una implementación, no está gobernado por este formato y no pasa por V17.
       copy_prototype:
@@ -367,8 +367,8 @@ campaign_creative-strategy:
               peso_visual: "string (ej. 40% del espacio, dominante, secundario)"
           notas_para_d: "string (indicaciones concretas para Art Director)"
 
-      # ── Scoring CRM por pieza (OBLIGATORIO) ──
-      scoring_crm:
+      # ── Scoring de principios de comunicacion por pieza (OBLIGATORIO) ──
+      scoring_comunicacion:
         - pieza: "string (id único de la pieza)"
           canal: "string"
           territorio: "string"
@@ -390,6 +390,9 @@ campaign_creative-strategy:
             gestion_riesgo: 8
             personalizacion: 7
           tema_a_vigilar: "string (1 frase -- el mayor riesgo de esta pieza)"
+          principios_decisivos:                  # max 3, min 1
+            - principio: "string (nombre del principio que mas determino esta pieza)"
+              justificacion: "string (1 frase: por que este principio determino las decisiones de copy/diseno)"
 
       # ── Nivel 3: Profundidad por pieza clave ──
       # NOTA: piezas_clave documenta la pieza LIDER por canal principal, con su
@@ -446,20 +449,21 @@ campaign_creative-strategy:
 16. Si una campaña tiene `flags[]` con severidad `alta`, el Campaign Manager decide si bloquea o acepta el riesgo.
 17. `formal_rules_check` presente en cada campaña con al menos un canal verificado.
 
-**Copy Prototype y Scoring CRM:**
+**Copy Prototype y Scoring de principios de comunicacion:**
 
-18. Cada campaña tiene al menos 1 entrada en `copy_prototype` por canal activo.
+18. Cada campana tiene al menos 1 entrada en `copy_prototype` por canal activo.
 19. Cada `copy_prototype[]` tiene al menos 3 bloques ordenados y `notas_para_d` no vacio.
-20. Cada campaña tiene al menos 1 entrada en `scoring_crm` por pieza principal.
-21. Cada `scoring_crm[].score` es la suma de `base_60` (10 campos x 0-6) + `modulacion_40` (4 campos x 0-10). La suma debe coincidir con `score`.
-22. Cada `scoring_crm[].tema_a_vigilar` no esta vacio.
-23. Si `scoring_crm[].score < 70`, debe existir un flag correspondiente con severidad media.
-24. Cada campaña tiene `sub_corriente` con valor `growth`, `value` o `dispositivos`. Debe haber al menos 1 campaña por cada sub-corriente presente en el output del Planner.
+20. Cada campana tiene al menos 1 entrada en `scoring_comunicacion` por pieza principal.
+21. Cada `scoring_comunicacion[].score` es la suma de `base_60` (10 campos x 0-6) + `modulacion_40` (4 campos x 0-10). La suma debe coincidir con `score`.
+22. Cada `scoring_comunicacion[].tema_a_vigilar` no esta vacio.
+23. Si `scoring_comunicacion[].score < 70`, debe existir un flag correspondiente con severidad media.
+24. Cada `scoring_comunicacion[]` tiene `principios_decisivos` con 1-3 entradas. Cada entrada tiene `principio` (nombre) y `justificacion` (1 frase) no vacios.
+25. Cada campaña tiene `sub_corriente` con valor `growth`, `value` o `dispositivos`. Debe haber al menos 1 campaña por cada sub-corriente presente en el output del Planner.
 
 **Profundidad por pieza (Nivel 3):**
 
-25. Cada campaña tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal). **Nota:** la selección completa de qué piezas se producen finalmente es responsabilidad del Art Director (D) a partir de `copy_prototype` + `scoring_crm` + `piezas_clave` — este schema no define ni valida un array separado de "producción visual"; si una implementación lo tiene, actualízala para que D seleccione directamente de estos tres arrays.
-26. Cada `piezas_clave[]` tiene `razonamiento_creativo` y `racional` no vacios.
+26. Cada campana tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal). **Nota:** la selección completa de qué piezas se producen finalmente es responsabilidad del Art Director (D) a partir de `copy_prototype` + `scoring_comunicacion` + `piezas_clave` — este schema no define ni valida un array separado de "producción visual"; si una implementación lo tiene, actualízala para que D seleccione directamente de estos tres arrays.
+27. Cada `piezas_clave[]` tiene `razonamiento_creativo` y `racional` no vacios.
 
 ---
 

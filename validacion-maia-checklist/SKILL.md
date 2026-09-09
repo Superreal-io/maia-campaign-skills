@@ -1,15 +1,15 @@
 ---
 name: Checklist de Validación MAIA
 key: validacion-maia-checklist
-description: 17 criterios de validación del sistema MAIA. Los usa el Campaign Manager en Cierre como capa de control de calidad transversal.
-version: 2.0.0
+description: 18 criterios de validación del sistema MAIA. Los usa el Campaign Manager en Cierre como capa de control de calidad transversal.
+versión: 2.0.0
 owner: system
 status: active
 ---
 
 # Checklist de Validación MAIA
 
-Cargada por el Campaign Manager. Define los 17 criterios de validación que el Campaign Manager ejecuta en Cierre (post-Art Director) sobre el paquete completo de la campaña.
+Cargada por el Campaign Manager. Define los 18 criterios de validación que el Campaign Manager ejecuta en Cierre (post-Art Director) sobre el paquete completo de la campaña.
 
 Esta skill formaliza la "Validación MAIA": una capa de control transversal que cruza todos los outputs de todos los agentes en un único paso final.
 
@@ -19,7 +19,7 @@ Esta skill formaliza la "Validación MAIA": una capa de control transversal que 
 
 ### Cierre (post-Art Director, sobre el paquete completo)
 
-El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia creativa + mockups) contra estos 17 criterios:
+El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia creativa + mockups) contra estos 18 criterios:
 
 | # | Criterio | Que verificar | Fuente |
 |---|---|---|---|
@@ -39,7 +39,8 @@ El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia
 | V14 | Calidad de pieza | Cada pieza tiene rationale, los placeholders estan documentados, los mockups son editables o tienen dimensiones reales del soporte. | Inspección directa |
 | V15 | Calendario integrado | El `calendario_integrado` de C concreta la `secuencia_sugerida` de B. Hay al menos una entrada por semana del período. No hay semanas vacias sin justificación ni acumulación excesiva en una sola semana. | campaign-output-format |
 | V16 | Tesis estratégica | La `tesis_estrategica` de C es coherente con la `idea_dominante` de B y el `foco` y `mensaje_paraguas` del brief. Todos los territorios de campaña se conectan con la tesis. | campaign-output-format, golden-briefing-schema |
-| V17 | Copy prototype y scoring CRM | Cada campaña tiene `copy_prototype` por canal activo con `notas_para_d` no vacias. Cada pieza tiene `scoring_crm` con score calculado correctamente (base_60 + modulacion_40 = score). Scores < 70 tienen flag correspondiente con severidad media. El `tema_a_vigilar` es específico de la pieza, no genérico. | campaign-output-format |
+| V17 | Copy prototype y scoring de comunicacion | Cada campana tiene `copy_prototype` por canal activo con `notas_para_d` no vacias. Cada pieza tiene `scoring_comunicacion` con score calculado correctamente (base_60 + modulacion_40 = score). Scores < 70 tienen flag correspondiente con severidad media. El `tema_a_vigilar` es especifico de la pieza, no generico. Cada `scoring_comunicacion` tiene `principios_decisivos` con 1-3 entradas (principio + justificacion no vacios). | campaign-output-format |
+| V18 | Piezas no producidas | El design rationale de D incluye seccion `piezas_no_producidas` con toda pieza de `copy_prototype[]` no seleccionada para produccion. Cada entrada tiene formato, canal, campana y motivo_exclusion no vacio. Si todas las piezas fueron producidas, la seccion lo indica explicitamente. | design_rationale |
 
 ---
 

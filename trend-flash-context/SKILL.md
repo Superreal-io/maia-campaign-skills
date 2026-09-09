@@ -1,7 +1,7 @@
 ---
 key: trend-flash-context
 name: "Contexto de Tendencias (Flash mensual)"
-version: 1.0.0
+version: 1.1.0
 status: active
 consumer_agents:
   - strategist
@@ -23,23 +23,23 @@ Son el **trigger real del workflow**: las áreas comerciales reciben estos docum
 3. **Enriquecer el Golden Briefing**: añadir contexto de mercado, datos de competencia y señales de demanda que mejoren la lectura estratégica.
 4. **Mejorar el formulario**: formular preguntas más precisas al área cuando haya desconexión entre lo que el flash decía y lo que el área presentó.
 
-## Estructura de archivos
+## Formato de entrada
 
-**Path canónico:** `Inputs/trend-flashes/YYYY-MM/`
+Los trend flashes llegan como **PDFs** adjuntos al ticket de Paperclip, junto con el PPT del plan comercial del area. El operador de SuperReal los sube al crear el caso.
 
-Cada mes contiene 5 archivos .md con naming fijo:
+**Convención de naming de los PDFs:**
 
-| Archivo | Vertical | Contenido principal |
+| PDF | Vertical | Contenido principal |
 |---|---|---|
-| `YYYY_MM_territorios_trend_flash.md` | Territorios (overview) | Vista consolidada de Fútbol + Fibra + Convergencia + síntesis de Dispositivos |
-| `YYYY_MM_futbol_trend_flash.md` | Fútbol | Mundial, LaLiga, Champions, Multideporte |
-| `YYYY_MM_fibra_trend_flash.md` | Fibra | Velocidad/multigigabit, FTTR, precio/permanencia, cobertura |
-| `YYYY_MM_convergencia_trend_flash.md` | Convergencia | Paquete base, premium con contenido, líneas adicionales, valor añadido |
-| `YYYY_MM_dispositivos_trend_flash.md` | Dispositivos | Marcas, lanzamientos, posicionamiento competitivo operadores |
+| `Territorios Trend Flash [Mes YYYY].pdf` | Territorios (overview) | Vista consolidada de Futbol + Fibra + Convergencia + sintesis de Dispositivos |
+| `Futbol Trend Flash [Mes YYYY].pdf` | Futbol | Mundial, LaLiga, Champions, Multideporte |
+| `Fibra Trend Flash [Mes YYYY].pdf` | Fibra | Velocidad/multigigabit, FTTR, precio/permanencia, cobertura |
+| `Convergencia Trend Flash [Mes YYYY].pdf` | Convergencia | Paquete base, premium con contenido, lineas adicionales, valor añadido |
+| `Dispositivos Trend Flash [Mes YYYY].pdf` | Dispositivos | Marcas, lanzamientos, posicionamiento competitivo operadores |
 
-Los PDFs son la versión formateada de los mismos .md. Trabajar siempre con los .md.
+El naming puede variar ligeramente (Havas no sigue una convención estricta). El Strategist identifica cada flash por su contenido, no por el nombre del archivo.
 
-**Metadata:** cada archivo empieza con un bloque `<!-- METADATA_START ... METADATA_END -->` con campos: `period`, `report_category`, `semantic_tags`, `data_source`.
+**No hay paso de preprocesamiento.** El Strategist lee los PDFs directamente (lectura multimodal nativa de claude-sonnet-4) y extrae el contenido en contexto. No se convierten a .md ni a ningún otro formato intermedio.
 
 ## Estructura interna de cada flash
 
@@ -60,10 +60,10 @@ Todos los flashes siguen una estructura común:
 
 ## Cómo localizar los flashes del período activo
 
-1. Extraer el mes del ticket o del PPT de entrada (ej. "Plan comercial octubre 2026" -> `2026-10`).
-2. Buscar en `Inputs/trend-flashes/2026-10/`.
-3. Si la carpeta no existe o está vacía, registrar flag `{"tipo": "trend_flash_no_disponible", "severidad": "baja"}` y continuar sin ellos. **No es bloqueante**: el Strategist puede operar sin trend flashes, pero el output pierde la capa de validación.
-4. Si la carpeta existe, cargar los 5 .md. Si alguno falta, registrar flag y continuar con los disponibles.
+1. Revisar los archivos adjuntos al ticket. Los trend flashes son PDFs de Havas Media Network, normalmente con "Trend Flash" en el nombre.
+2. Si no hay PDFs de trend flash adjuntos, registrar flag `{"tipo": "trend_flash_no_disponible", "severidad": "baja"}` y continuar sin ellos. **No es bloqueante**: el Strategist puede operar sin trend flashes, pero el output pierde la capa de validación.
+3. Si hay PDFs, leerlos y clasificarlos por vertical (Territorios, Futbol, Fibra, Convergencia, Dispositivos) a partir de su contenido.
+4. Si falta algún vertical, registrar flag y continuar con los disponibles.
 
 **Mapeo flash a stream:**
 

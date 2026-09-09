@@ -30,9 +30,9 @@ El cliente es el equipo de Comunicación de Movistar (Telefónica). El operador 
 |---|---|---|---|---|
 | strategist | Maia Strategist | Traduce objetivos de negocio en estrategia de comunicación: lectura estratégica, corrientes de demanda, jerarquía de territorios, audiencia, rol de canales | `golden_briefing_v<N>.json` + `.docx` + `estrategia_<stream>_v<N>.html` + `formulario_area_<stream>_v<N>.docx` + `resumen_territorios_enfoque_v<N>.html` (global) | `brief-quality-rubric` |
 | media-strategy | Maia Planner | Recibe ambos briefs, desglosa en 3 sub-corrientes (Growth, Value, Dispositivos). Priorización territorial, tier, canales, comentarios expertos, tablas Movistar, etiquetado de inferencias | `media_strategy_v<N>.json` + `.docx` + 6 HTML por sub-corriente (`calendario_<sub>_v<N>.html`, `brief_canales_territorio_<sub>_v<N>.html`) + 2 globales (`calendario_canales_global_v<N>.html`, `carga_soporte_global_v<N>.html`) | `rol-medios-movistar` |
-| creative-copywriter | Maia Copywriter | Recibe output combinado del Maia Planner, separa por sub-corriente (Growth, Value, Dispositivos). Concepto creativo y racional por territorio, copy bank con bajada por canal, scoring CRM por pieza | `campaign_creative-strategy_v<N>.json` + `.docx` + 1 HTML por sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`) | (ninguna exclusiva) |
+| creative-copywriter | Maia Copywriter | Recibe output combinado del Maia Planner, separa por sub-corriente (Growth, Value, Dispositivos). Concepto creativo y racional por territorio, copy bank con bajada por canal, scoring de principios de comunicacion por pieza | `campaign_creative-strategy_v<N>.json` + `.docx` + 1 HTML por sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`) | (ninguna exclusiva) |
 | campaign-design | Maia Art Director | Selecciona piezas representativas por canal y sub-corriente, produce piezas presentables a cliente (HTML con slots + render PNG) con fotografía real generada y verificación visual | HTML ensamblados + PNG verificados organizados por sub-corriente + `design_rationale_<sub>.docx` por stream | `movistar-visual-production`, `html-component-library`, `brand-visual-composition-movistar` |
-| campaign-manager | Maia Campaign Manager | Cierre: checklist V01-V17, resumen ejecutivo, Campaign Assets, escalado al Maia Storyteller | `resumen-ejecutivo.html` + Campaign Assets (carpeta `creative-proposal/` con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
+| campaign-manager | Maia Campaign Manager | Cierre: checklist V01-V18, resumen ejecutivo, Campaign Assets, escalado al Maia Storyteller | `resumen-ejecutivo.html` + Campaign Assets (carpeta `creative-proposal/` con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
 | campaign-presenter | Maia Storyteller | Convierte los Campaign Assets en presentación ejecutiva HTML navegable para aprobación C-level. Integra los entregables HTML de Maia Strategist, Maia Planner y Maia Copywriter con los prototipos visuales de Maia Art Director en un documento autocontenido en formato apaisado. Genera resúmenes ejecutivos por área con secciones colapsables para detalle. Produce PDF como leave-behind. | `presentacion_ejecutiva_<case_id>_v<N>.html` + `leave_behind_<case_id>_v<N>.pdf` | `movistar-brand-guidelines` |
 
 ---
@@ -43,7 +43,7 @@ El cliente es el equipo de Comunicación de Movistar (Telefónica). El operador 
 
 El proceso real comienza fuera de MAIA: el CMO de Movistar envía mensualmente un email a los responsables de las áreas comerciales con un paquete de "Flash de Tendencias" preparado por Havas Media Network. Son 5 informes (Territorios, Fútbol, Fibra, Convergencia, Dispositivos) con datos de mercado, señales de demanda, inteligencia competitiva y recomendaciones. Las áreas usan estos flashes para preparar sus presentaciones de plan comercial (los PPTs que entran en MAIA).
 
-El operador (SuperReal) copia los flashes del período en `Inputs/trend-flashes/YYYY-MM/`. El Maia Strategist los carga como contexto para validar si los briefings de área se alinean con las tendencias que el CMO les señaló. Ver skill `trend-flash-context` para el detalle del framework de validación.
+El operador (SuperReal) adjunta los PDFs de trend flash al ticket de Paperclip junto con el PPT del area comercial. El Maia Strategist los lee directamente (lectura multimodal nativa) y los usa como contexto para validar si los briefings de area se alinean con las tendencias que el CMO les señalo. Ver skill `trend-flash-context` para el detalle del framework de validacion.
 
 ### 3.2 Streams de entrada
 
@@ -59,8 +59,8 @@ Hay un gate humano después de cada agente. El humano puede aprobar, pedir itera
 
 - **Maia Strategist produce, humano aprueba o itera** (Gate Strategist). El back-and-forth con el área es la norma. Un brief puede pasar a v3 o v4 antes de aprobarse.
 - **Maia Planner produce, humano aprueba o itera** (Gate Planner). El Planner incluye un campo `tier_justificación` por canal que el humano audita.
-- **Maia Copywriter produce, humano aprueba o itera** (Gate Copywriter). El Copywriter incluye copy prototype por canal y scoring CRM por pieza. El humano aprueba y Copywriter pasa directamente a Art Director.
-- **Maia Art Director produce, humano aprueba** (Gate Art Director), y luego escala a **Cierre (Maia Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V17 sobre el paquete completo, genera el resumen ejecutivo, ensambla los Campaign Assets (carpeta con los outputs presentables a cliente) y escala al Maia Storyteller.
+- **Maia Copywriter produce, humano aprueba o itera** (Gate Copywriter). El Copywriter incluye copy prototype por canal y scoring de principios de comunicacion por pieza. El humano aprueba y Copywriter pasa directamente a Art Director.
+- **Maia Art Director produce, humano aprueba** (Gate Art Director), y luego escala a **Cierre (Maia Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V18 sobre el paquete completo, genera el resumen ejecutivo, ensambla los Campaign Assets (carpeta con los outputs presentables a cliente) y escala al Maia Storyteller.
 - **Maia Storyteller produce, humano aprueba o itera** (Gate Storyteller). El Storyteller presenta la presentación ejecutiva HTML. El humano revisa que la integración de entregables, la cobertura de campañas y el lenguaje sean adecuados para el comité. Aprobada la presentación, el ciclo se cierra.
 
 En todos los gates, el humano tiene tres opciones: aprobar y pasar al siguiente, iterar con feedback, o devolver al agente anterior.
@@ -139,7 +139,7 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
-| `validación-maia-checklist` | Checklist V01-V17 de validación transversal | Maia Campaign Manager | active |
+| `validación-maia-checklist` | Checklist V01-V18 de validación transversal | Maia Campaign Manager | active |
 
 #### Journey (1)
 
