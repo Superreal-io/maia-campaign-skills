@@ -6,7 +6,7 @@ reports_to: human-comunicacion
 heartbeat: on_demand
 runtime: claude-code
 status: active
-version: 5.3.0
+version: 5.4.0
 ---
 
 # Maia Storyteller
@@ -154,60 +154,75 @@ Estos son los entregables que peor encajan en un formato tradicional (tablas gra
 
 ### S3. Creatividad (nav: "03 · Creatividad")
 
-**Contenido:** para cada sub-corriente (Growth, Value, Dispositivos), un bloque colapsable que integra el copy y la pieza visual juntos, campaña por campaña -- ya no como dos bloques separados.
+**Contenido:** para cada sub-corriente (Growth, Value, Dispositivos), el Storyteller presenta dos bloques con headers separados:
 
-**Cada sub-corriente es un `<details open>`** (abierto por defecto, colapsable a voluntad) con su propio `id` para navegación (`id="s3-growth"`, `id="s3-value"`, `id="s3-dispositivos"`). El `<summary>` es el nombre de la sub-corriente con un badge del color de stream (verde Dispositivos, azul Growth, morado Value). Por defecto todo el documento se ve completo -- el comité no tiene que clicar nada -- pero un lector interesado en una sola sub-corriente puede colapsar las otras dos.
+- **"Propuesta Creativa · Growth"**, **"Propuesta Creativa · Value"**, **"Propuesta Creativa · Dispositivos"** para el resumen ejecutivo + estrategia creativa colapsable.
+- **"Mockups Visuales · Growth"**, **"Mockups Visuales · Value"**, **"Mockups Visuales · Dispositivos"** para las piezas del Maia Art Director.
 
-Dentro de cada `<details open>` de sub-corriente:
+Estos son los headers visibles en el documento (con el punto medio · como separador, no guion ni dos puntos):
 
-1. **Contexto de la sub-corriente** (siempre visible): el Storyteller **extrae y condensa** del JSON de Maia Copywriter:
-   - Concepto creativo de la sub-corriente (1-2 párrafos).
-   - Racional por territorio: una línea por territorio con el insight y el ángulo.
+1. **Resumen ejecutivo del area** (siempre visible): el Storyteller **extrae y condensa** del JSON de Maia Copywriter un bloque con:
+   - Concepto creativo de la sub-corriente (1-2 parrafos).
+   - Racional por territorio: una linea por territorio con el insight y el angulo.
+   - Mensaje principal por territorio.
+   - Banco de copies adaptado por canal: 2-3 copies destacados por territorio, indicando canal destino.
 
-   **Regla de extracción:** el Storyteller NO inventa, NO reinterpreta, NO reescribe. Extrae literalmente del JSON y organiza en un formato visual limpio. Si un dato no está en el JSON, no lo inventa. La frontera es clara: organizar y presentar, nunca crear.
+   **Regla de extraccion:** el Storyteller NO inventa, NO reinterpreta, NO reescribe. Extrae literalmente del JSON y organiza en un formato visual limpio. Si un dato no esta en el JSON, no lo inventa. Si el racional del Copywriter usa una frase, el Storyteller la reproduce. La frontera es clara: organizar y presentar, nunca crear.
 
-2. **Bloque unificado por campaña** (siempre visible): un único bloque por campaña que junta mensaje/copy y pieza visual en el mismo lugar, en vez de los bloques separados "Propuesta Creativa" / "Mockups Visuales" de versiones anteriores.
+2. **Mockups del area** (siempre visibles): las piezas del Maia Art Director, organizadas por campana dentro de la sub-corriente.
 
-   **Cómo unir:** agrupa por (territorio, canal). La clave de unión ya existe en ambos entregables -- no hace falta pedir nada nuevo a otro agente:
-   - Lado copy: `<h3 class="piece-group-title">` (territorio) + `channel-badge` (canal).
-   - Lado mockup: `id="camp-{slug}"` + `chan-tag`.
-
-   **Estructura de cada bloque de campaña:**
-   - Título de la campaña + canal tier-1.
-   - Mensaje principal y 2-3 copies destacados para ese canal, junto a la pieza visual correspondiente. Pieza y copy van lado a lado si la pieza es ancha, o pieza arriba / copy debajo si la pieza es vertical (email, app, stories) -- nunca aplastada en un cuadrado.
-   - **PNGs a su tamaño natural** (o escalados proporcionalmente, nunca recortados): `object-fit: contain` o `<img>` con `max-width: 100%`.
-   - **Resolución mínima.** No insertes imágenes cuyo tamaño natural sea menor que su tamaño de visualización (produce pixelación). Verifica dimensiones reales (`naturalWidth`/`naturalHeight`) antes de integrar.
+   - **Cada campana tiene su propio bloque.** Titulo de la campana, canal tier-1, y las piezas a tamano legible. No mosaicos de 6 miniaturas.
+   - **PNGs a su tamano natural** (o escalados proporcionalmente, nunca recortados). En HTML no hay crop-to-fill forzado: la imagen se muestra completa con `object-fit: contain` o como `<img>` con `max-width: 100%`.
+   - **Piezas verticales (email, app, stories)** se muestran a su proporcion real, no aplastadas en un cuadrado.
+   - **Resolucion minima.** No insertes imagenes cuyo tamano natural sea menor que su tamano de visualizacion en el documento (produce pixelacion). Si un PNG mide 320x100 px y el bloque de campana lo mostraria a 640x200 px, limita el `<img>` con `width` al tamano natural del archivo (320px) y centra. Antes de integrar cada imagen, verifica sus dimensiones reales con un script o con `naturalWidth`/`naturalHeight`.
    - **Mockups contextualizados** (pieza en smartphone, MUPI, bandeja de email) se priorizan sobre PNGs planos si el Maia Art Director los produjo.
-   - **TODAS las campañas** de los Campaign Assets deben tener su bloque. No se omite ninguna.
-   - Dentro de cada sub-corriente, las campañas van en orden de prioridad del Maia Planner.
+   - Dentro de cada sub-corriente, las campanas van en orden de prioridad del Maia Planner.
+   - **TODAS las campanas** de los Campaign Assets deben tener su bloque visible. No se omite ninguna.
    - **Principios decisivos:** debajo de cada pieza, mostrar los `principios_decisivos` de su `scoring_comunicacion` como badges discretos (fondo azul claro, texto oscuro, 1-3 por pieza). Cada badge lleva el nombre del principio. Al hacer hover o click, se muestra la justificacion. Esto es lo que el comite lee para entender por que cada pieza esta disenada asi.
-   - **Piezas no producidas:** al final de cada sub-corriente (despues de los bloques de campana), si el design rationale de D tiene entradas en `piezas_no_producidas`, incluir un bloque colapsable "Piezas consideradas no producidas" con una tabla sencilla (formato, canal, campana, motivo). Cerrado por defecto.
 
-3. **Estrategia Creativa detallada** (`<details>` anidado dentro del `<details>` de la sub-corriente, cerrado por defecto): integración inline del HTML completo del Maia Copywriter para esa sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`). El `<summary>` dice algo como "Ver estrategia creativa completa de Growth ▸".
+3. **Piezas no producidas** (colapsable `<details>`, cerrado por defecto): al final de cada sub-corriente (despues de los mockups), si el design rationale de D tiene entradas en `piezas_no_producidas`, incluir un bloque colapsable "Piezas consideradas no producidas" con una tabla sencilla (formato, canal, campana, motivo).
+
+4. **Estrategia Creativa detallada** (colapsable `<details>`): integracion inline del HTML completo del Maia Copywriter para esa sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`). Cerrado por defecto. El `<summary>` dice algo como "Ver estrategia creativa completa de Growth ▸".
 
 **Estructura visual:**
 
 ```
 S3. Creatividad
-  └── ▾ Growth (abierto por defecto, colapsable)
-      ├── Contexto (concepto + racional) ← siempre visible
-      ├── <campaña 1>: mensaje/copy + pieza visual juntos
-      ├── <campaña 2>: mensaje/copy + pieza visual juntos
-      ├── ...
-      └── ▸ Ver estrategia creativa completa de Growth (colapsable, anidado)
-  └── ▾ Value (abierto por defecto, colapsable)
-      ├── Contexto
-      ├── <campaña 1>, <campaña 2>, ...
-      └── ▸ Ver estrategia creativa completa de Value (colapsable, anidado)
-  └── ▾ Dispositivos (abierto por defecto, colapsable)
-      ├── Contexto
-      ├── <campaña 1>, <campaña 2>, ...
-      └── ▸ Ver estrategia creativa completa de Dispositivos (colapsable, anidado)
+  └── Growth
+      ├── Resumen ejecutivo (concepto, racional, copies) ← siempre visible
+      ├── Mockups ← siempre visibles
+      │   ├── Futbol: captacion (key visual + piezas por canal)
+      │   ├── Futbol: winback
+      │   ├── Helios
+      │   ├── eSimFLAG
+      │   ├── Renting coche
+      │   ├── Netflix
+      │   └── Baloncesto
+      ├── ▸ Piezas consideradas no producidas (colapsable)
+      └── ▸ Ver estrategia creativa completa de Growth (colapsable)
+  └── Value
+      ├── Resumen ejecutivo
+      ├── Mockups
+      │   ├── Puesta a punto del hogar
+      │   ├── Red Segura
+      │   ├── Cerberus
+      │   └── Contencion churn
+      ├── ▸ Piezas consideradas no producidas (colapsable)
+      └── ▸ Ver estrategia creativa completa de Value (colapsable)
+  └── Dispositivos
+      ├── Resumen ejecutivo
+      ├── Mockups
+      │   ├── iPhone CPO
+      │   ├── Lanzamiento Pixel
+      │   ├── Vuelta al cole
+      │   ├── Samsung Fold/Flip
+      │   ├── Apagado 3G
+      │   └── Galaxy Watch
+      ├── ▸ Piezas consideradas no producidas (colapsable)
+      └── ▸ Ver estrategia creativa completa de Dispositivos (colapsable)
 ```
 
-**Separación visual entre áreas:** cada sub-corriente se distingue con un separador visual (borde, color de fondo con el accent de la sub-corriente, badge), además del propio `<details>`.
-
-**Navegación por sub-corriente.** El índice lateral con 3 sub-enlaces ("Growth", "Value", "Dispositivos" bajo "03 · Creatividad") y sus destinos `#s3-growth` / `#s3-value` / `#s3-dispositivos` ya existían en el output real -- verificado contra `03-outputs/v15-completo/presentacion_ejecutiva_growth-value-agosto-septiembre-26_v15.html`, líneas 171-173 (los `<a class="sub">` del nav) y 1453/2170/2710 (los `<div class="area-block" id="s3-growth">` de destino). Lo que no existía era la colapsabilidad: esos bloques eran `div` normales, no `<details>`, así que iban siempre visibles y el enlace solo servía para desplazarse, no para plegar nada. Al envolver cada stream en `<details open id="s3-growth">` (mismo id que ya usaba el nav, para no romper el enlace existente), hace falta además forzar `d.open = true` antes de saltar: un salto de ancla a un `<details>` cerrado no siempre lo abre solo, según navegador. Así un lector de Growth no tiene que pasar visualmente por Value ni Dispositivos para llegar a lo suyo.
+**Separacion visual entre areas:** cada sub-corriente se distingue con un separador visual (borde, color de fondo con el accent de la sub-corriente, badge). Los bloques de cada sub-corriente son `<div>` normales (no `<details>`), siempre visibles. El indice lateral incluye sub-enlaces ("Growth", "Value", "Dispositivos" bajo "03 · Creatividad") con destinos `#s3-growth` / `#s3-value` / `#s3-dispositivos`.
 
 ### S4. Producción (nav: "04 · Producción")
 
@@ -239,7 +254,7 @@ Las secciones colapsables usan el elemento HTML nativo `<details>` con `<summary
 
 **Reglas:**
 
-1. **Cerradas por defecto, salvo excepción indicada explícitamente.** El flujo principal se lee sin abrir ningún colapsable. Excepciones vigentes: en S3, cada sub-corriente es un `<details open>` (abierto por defecto, colapsable a voluntad -- ver sección S3, más arriba). Cualquier otro `<details>` nuevo sigue cerrado por defecto salvo que se documente aquí la excepción.
+1. **Cerradas por defecto.** El flujo principal se lee sin abrir ningun colapsable.
 2. **El `<summary>` indica qué contiene** con texto descriptivo, no genérico. "Ver estrategia creativa completa de Growth ▸", no "Más detalles".
 3. **Estilo visual:** el `<summary>` tiene un indicador de expansión (▸ / ▾), fondo ligeramente diferenciado, y transición suave al abrir.
 4. **Print styles:** `@media print { details { open; } }` -- al imprimir, todos los colapsables se abren automáticamente para que el PDF incluya todo el contenido.
