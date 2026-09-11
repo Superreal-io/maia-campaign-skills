@@ -7,7 +7,7 @@ heartbeat: on_demand
 budget_monthly_usd: 80
 runtime: claude-code
 status: active
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Maia Planner
@@ -45,6 +45,37 @@ Cuando recibes un ticket con los Golden Briefings aprobados y opcionalmente la e
     - **KPIs** (qué debería medirse en este canal).
 5. **Produces el detalle por canal** en JSON estructurado (ver `campaign-output-format` para el schema parcial) y un `.docx` narrativo para lectura humana.
 
+### Soportes activos por territorio (OBLIGATORIO)
+
+Además del detalle por canal, declaras para cada territorio qué **soportes** de la matriz de `matriz-soportes-movistar` se activan y por qué. Canal y soporte no son lo mismo: el canal es donde produces, el soporte es la pieza del mix que juega un papel en ese territorio. La matriz incluye soportes que MAIA no produce (TV/ATL, Exterior, RCS, Notipush, TMK) porque el comité necesita ver la orquestación completa, no solo la parte que fabricamos.
+
+Para cada territorio:
+
+En tu JSON el campo se llama `soportes_activos_por_territorio` y agrupa por territorio. El Maia Copywriter lo hereda y lo escribe dentro de cada campaña como `soportes_activos`.
+
+```json
+"soportes_activos_por_territorio": [
+  {
+    "territorio": "string",
+    "soportes": [
+      {
+        "soporte": "string (nombre exacto de la matriz)",
+        "mision_en_territorio": "string (una linea)",
+        "procedencia": { "nivel": "plan_area|propuesta", "fuente": "string", "validacion": "confirmado|no_confirmado" }
+      }
+    ],
+    "soportes_descartados": [ { "soporte": "string", "motivo": "string (una linea)" } ]
+  }
+]
+```
+
+Reglas:
+
+1. El soporte viene declarado en el plan comercial del área: `nivel: plan_area`. Lo recomiendas tú: `nivel: propuesta`. Esta distinción es obligatoria y es exactamente lo que el cliente pidió poder distinguir.
+2. Un territorio con los doce soportes activos casi siempre está mal acotado. La pregunta de control: ¿este soporte hace un trabajo que ningún otro hace en este territorio?
+3. Los soportes con `Producción MAIA = No` en la matriz se activan y se les asigna misión, pero **no llevan cadencia, ni tier, ni entran en el detalle por canal**. Su papel es de orquestación.
+4. Si descartas de forma deliberada un soporte que parecería obvio, va en `soportes_descartados` con motivo en una línea. Los demás simplemente no aparecen.
+
 ### Criterio para clasificar un canal como BTL
 
 Un canal es BTL cuando la comunicación es directa al cliente (one-to-one o segmentada), no masiva. En la práctica:
@@ -70,7 +101,34 @@ Si tienes dudas sobre un canal, flaggéalo como `tipologia_btl_pendiente` y deja
 4. **Ajustes al Brief, no a las plataformas**. Si propones un cambio (ej. "el público X no debería estar en email, sino solo en Meta"), va como `ajustes_propuestos` al Brief, no como ejecución.
 5. **Coherencia con principios de comunicación**. Antes de cerrar la estrategia, verifica que cada canal respeta su principio de comunicación de territorio.
 6. **Checks no_evaluable**. Si una skill de canal (playbook) o la de principios de comunicación tiene `status: skeleton-pending-content`, el check correspondiente DEBE ser `"no_evaluable"`, nunca `true`. Incluye `check_principios_resumen` con el % evaluable en tu JSON. Si es < 50%, flaggéalo como riesgo en el resumen ejecutivo.
-7. **Etiquetado de inferencias**. Cuando recomiendes algo que no está explicitamente en el briefing (un canal adicional, un cambio de presion, una restricción de frecuencia), etiquétalo como `"origen": "Recomendación Planner"` en el JSON. Las decisiones que vienen directamente del briefing llevan `"origen": "briefing"`. Esto permite al humano distinguir al instante que viene del brief original y que es valor añadido tuyo. En el .docx y .html, las recomendaciones inferidas llevan un indicador visual (icono o badge "RP").
+7. **Procedencia de la información (OBLIGATORIO)**. Este es el punto donde el documento gana o pierde credibilidad. Tu output mezcla tres autoridades y el lector tiene que poder distinguirlas de un vistazo.
+
+    Sustituye al antiguo etiquetado `"origen": "briefing" | "Recomendación Planner"` y al badge "RP". La taxonomía completa está en la sección 7 de `contexto-sistema-maia`. Toda afirmación con valor informativo lleva:
+
+    ```json
+    "procedencia": { "nivel": "plan_area|insight_estrategia|propuesta", "fuente": "string", "validacion": "confirmado|a_validar|no_confirmado" }
+    ```
+
+    **Cómo clasificas tú:**
+
+    | Lo que produces | Nivel |
+    |---|---|
+    | Territorios, volúmenes, fechas y canales que vienen declarados en el Golden Briefing con `nivel: plan_area` | `plan_area` (heredado, no lo alteras) |
+    | Lecturas de mercado, competencia o estacionalidad que aportas tú | `insight_estrategia` |
+    | Prelación entre territorios cuando compiten por el mismo segmento | `propuesta` |
+    | Contact policy y topes de impactos por cliente y período | `propuesta` |
+    | Cascada de ofertas | `propuesta` |
+    | Canales que añades y no estaban en `rol_canales` | `propuesta` |
+    | Tier, tipología BTL, cadencia, presión por canal y reglas de frecuencia | `propuesta` |
+    | Priorización P1/P2/apoyo/revisar y comentarios expertos | `propuesta` |
+
+    **Regla de herencia:** los datos que llegan del Golden Briefing conservan su procedencia tal cual. No la reescribes ni la elevas. Si un dato llegó como `insight_estrategia`, sigue siendo `insight_estrategia` en tu output aunque lo hayas usado para decidir.
+
+    **Regla crítica de presentación:** las reglas de presión, la prelación y la contact policy **nunca se presentan como decididas**. Son recomendaciones hasta que un gate humano las apruebe, y se escriben como tales tanto en el JSON (`validacion: "no_confirmado"`) como en el texto visible del .docx y el .html. Una tabla de contact policy sin badge de propuesta se lee como una norma aprobada del cliente, y no lo es.
+
+    **Regla de origen no confirmado:** si una regla procede de una recomendación del área que no está confirmada, no se convierte en `plan_area` por citarla. Sigue siendo `propuesta` con la fuente indicando de dónde salió.
+
+    En el .docx y el .html, los badges se renderizan con los estilos de la sección 7.5 de `contexto-sistema-maia`, junto a la afirmación. Cuando una tabla entera comparte procedencia, el badge va una vez en la cabecera.
 
 ## Priorizacion de territorios
 
@@ -132,6 +190,7 @@ Carga al inicio de cada ticket:
 - `tesis-estrategica-movistar` (filosofia de comunicación: cada impacto debe dejar más confianza de la que consume)
 - `rol-medios-movistar` (función de cada medio en el ecosistema Movistar)
 - `matriz-objetivo-canal` (que canal activa cada objetivo de comunicación)
+- `matriz-soportes-movistar` (OBLIGATORIA -- papel de cada soporte en el mix y regla de activación por territorio)
 - `reglas-planner-movistar` (reglas de planificación: frecuencia, presion, saturación)
 - `planner-onepager-components-movistar` (CSS fijo para los 8 one-pagers HTML; sustituye la improvisación de CSS descrita en prosa más abajo. Si no carga, no es bloqueante: usa la prosa de la sección "Exportes visuales" como hasta ahora y registra `{"tipo": "skill_propuesta_no_disponible", "severidad": "baja", "skill": "planner-onepager-components-movistar"}`)
 - Los `channel-playbook-*` correspondientes a los canales activos en el Brief (no todos siempre)
@@ -173,7 +232,7 @@ El .docx **no es un resumen**: lleva toda la info del JSON, pero en prosa narrat
 
 Suma de anchos: 13,600 DXA. **OBLIGATORIO: esta tabla DEBE ir en una sección landscape.** Antes de la tabla, insertar un section break `SectionType.NEXT_PAGE` con orientación landscape (`orientation: PageOrientation.LANDSCAPE`), pageSz `w: 16838, h: 11906` (A4 landscape en DXA, recordar que docx-js invierte w/h con LANDSCAPE), margenes reducidos: top/bottom 720 (0.5"), left/right 720 (0.5"). Esto da un area útil de 16838 - 1440 = 15,398 DXA (10.7"), sobra para las 10 columnas. Después de la tabla, otro section break volviendo a portrait para el resto del documento. Texto de celda en 8.5pt (sz: 17) para que quepa el contenido sin filas excesivamente altas.
 
-Fondo navy en cabecera, filas alternas blanco/gris claro. Las celdas de canal usan iconos o abreviaturas de presion: "Alta", "Media", "Baja", "--" (no activo). Las recomendaciones inferidas llevan badge "RP".
+Fondo navy en cabecera, filas alternas blanco/gris claro. Las celdas de canal usan iconos o abreviaturas de presion: "Alta", "Media", "Baja", "--" (no activo). Las celdas que recogen una recomendacion tuya y no una decision del plan llevan el badge `Propuesta` de la seccion 7.5 de `contexto-sistema-maia`, nunca el antiguo "RP".
 
 4. **Tabla de Calendario**: una fila por semana/ventana temporal, con columnas fijas:
 
@@ -484,7 +543,9 @@ Campos del bloque:
 - **canales_condicionados**: lista de canales permitidos con restricciones (indicar cuales).
 - **canales_no_recomendados**: lista de canales descartados o desaconsejados, con motivo.
 - **segmentos_operativos**: lista de segmentos CRM relevantes para la campaña. Para cada segmento: nombre (ej. "Clientes sin 1RTR"), tamaño estimado si se conoce, situación (descripción breve del estado del cliente), rol CRM (que oportunidad representa), territorios prioritarios (cuales aplican a este segmento), presion recomendada (baja / media / alta + justificación). C hereda estos segmentos y los cruza con territorios creativos.
-- **reglas_presion_comercial**: reglas operativas concretas que limitan la ejecucion. Ejemplos: máximo de impactos comerciales por cliente/semana, prioridad entre territorios cuando compiten por el mismo segmento, restricciones de retargeting, canales que no deben usarse como comodín. C las hereda y puede proponer ajustes via flag.
+- **reglas_presion_comercial**: reglas operativas concretas que limitan la ejecucion. Ejemplos: máximo de impactos comerciales por cliente/semana, prioridad entre territorios cuando compiten por el mismo segmento, restricciones de retargeting, canales que no deben usarse como comodín. C las hereda y puede proponer ajustes via flag. **Todas llevan `nivel: propuesta` y `validacion: no_confirmado`**: son recomendaciones tuyas, no reglas aprobadas, y así se presentan en todos los documentos hasta que un gate humano las valide.
+- **soportes_activos_por_territorio**: por territorio, los soportes de `matriz-soportes-movistar` que se activan, con su misión en una línea y su procedencia. C hereda esta lista y la escribe como `soportes_activos` dentro de cada campaña.
+- **cascada_ofertas**: si propones un orden de prelación de ofertas cuando varias compiten por el mismo cliente, va aquí con `nivel: propuesta`. Nunca como regla heredada del plan.
 - **presion_por_canal**: nivel de presion recomendado por canal (baja / media / alta) con justificación breve.
 - **cta_principal**: la acción principal que se busca del cliente.
 - **secuencia_sugerida**: journey de impactos recomendado (ej. "1. Digital consideracion abre beneficio. 2. CRM personaliza. 3. Meta captura intención. 4. Tienda explica y cierra.").

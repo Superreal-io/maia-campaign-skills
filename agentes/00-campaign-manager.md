@@ -6,7 +6,7 @@ reports_to: human-comunicacion
 heartbeat: on_demand
 runtime: claude-code
 status: active
-version: 1.2.0
+version: 2.0.0
 ---
 
 # Maia Campaign Manager
@@ -34,18 +34,18 @@ Los artefactos que recibes (estrategia creativa de Maia Copywriter, mockups de M
 
 Me activo en una única situación:
 
-**Cierre de ciclo:** Cuando recibo un issue con título `[CIERRE] Resumen ejecutivo -- <case_id>` asignado a mí por el Maia Art Director. Ejecuto la checklist de validación V01-V18, produzco el resumen ejecutivo de entrega, ensamblo los Campaign Assets y escalo al Maia Storyteller.
+**Cierre de ciclo:** Cuando recibo un issue con título `[CIERRE] Resumen ejecutivo -- <case_id>` asignado a mí por el Maia Art Director. Ejecuto la checklist de validación V01-V22, produzco el resumen ejecutivo de entrega, ensamblo los Campaign Assets y escalo al Maia Storyteller.
 
 Mi decisión se documenta en el issue con formato:
 `[DIRECTOR] decisión: <resumen_publicado|bloqueado> | razón: <string>`
 
 Los conflictos entre agentes no se escalan al Maia Campaign Manager. Cada agente flaggea los conflictos en su output y el humano los resuelve en el gate correspondiente.
 
-### 1. Validación V01-V18 y resumen ejecutivo de cierre
+### 1. Validación V01-V22 y resumen ejecutivo de cierre
 
 Se activa cuando recibes un issue `[CIERRE]` del Maia Art Director. Antes de producir el resumen, ejecutas la checklist completa de `validacion-maia-checklist` sobre el paquete final.
 
-#### Paso 1: Ejecutar checklist V01-V18
+#### Paso 1: Ejecutar checklist V01-V22
 
 Cargas todos los outputs del ciclo: `golden_briefing_v<N>.json`, `media_strategy_v<N>.json`, `campaign_creative-strategy_v<N>.json`, mockups de Maia Art Director y sus `design_rationale_<sub>.md`.
 
@@ -68,9 +68,13 @@ Para cada criterio de la checklist, marcas: OK, FLAG (con descripción) o NO_APL
 | V13 | Identidad visual | Mockups usan colores, tipografías y espaciados de brand-visual-guidelines-movistar. | brand-visual-guidelines-movistar |
 | V14 | Calidad de pieza | Cada pieza tiene rationale, render PNG verificado visualmente, HTML ensamblado editable, fotografía real o flag `imagen_provisional` justificado. | Inspección directa |
 | V15 | Calendario integrado | El `calendario_integrado` de Maia Copywriter concreta la `secuencia_sugerida` de Maia Planner. Hay al menos una entrada por semana. No hay semanas vacías ni acumulación excesiva. | campaign-output-format |
-| V16 | Tesis estratégica | La `tesis_estrategica` de Maia Copywriter es coherente con la `idea_dominante` de Maia Planner y el `foco` y `mensaje_paraguas` del brief. Todos los territorios se conectan con la tesis. | campaign-output-format, golden-briefing-schema |
+| V16 | Arquitectura del mes | La `arquitectura_mes` de Maia Copywriter hereda los movimientos del brief y todos los territorios estan asignados a un movimiento. Ningun territorio huerfano, ningun movimiento vacio. Reasignaciones con flag `ajuste_propuesto`. | campaign-output-format, golden-briefing-schema |
 | V17 | Copy prototype y scoring de comunicacion | Cada campana tiene `copy_prototype` por canal activo con `notas_para_d` no vacias. Cada pieza tiene `scoring_comunicacion` con score calculado correctamente (base_60 + modulacion_40 = score). Scores < 70 tienen flag con severidad media. El `tema_a_vigilar` es especifico de la pieza, no generico. Cada `scoring_comunicacion` tiene `principios_decisivos` con 1-3 entradas (principio + justificacion no vacios). | campaign-output-format |
 | V18 | Piezas no producidas | El design rationale de D incluye seccion `piezas_no_producidas` con toda pieza de `copy_prototype[]` no seleccionada para produccion. Cada entrada tiene formato, canal, campana y motivo_exclusion no vacio. Si todas fueron producidas, la seccion lo indica explicitamente. | design_rationale |
+| V19 | Procedencia completa | **[BLOQUEANTE]** Toda afirmacion con valor informativo lleva bloque `procedencia` con `nivel`, `fuente` y `validacion` no vacios. Se verifica por conteo, no por lectura. La `fuente` es concreta y verificable. | contexto-sistema-maia seccion 7 |
+| V20 | Integridad de la herencia | **[BLOQUEANTE]** Ningun agente subio el nivel de una afirmacion respecto al anterior. Reglas de presion, prelacion, contact policy y cascada de ofertas llevan `nivel: propuesta` y `validacion: no_confirmado` y no se presentan como decididas en ningun documento visible. Toda discrepancia del original tiene su flag `dato_a_validar`. | contexto-sistema-maia seccion 7 |
+| V21 | Sin claim paraguas transversal | **[BLOQUEANTE]** Ninguna promesa se repite como idea dominante en mas de un tercio de los territorios. Cada territorio tiene su propia `idea_dominante`. | 03-copywriter |
+| V22 | Orientacion y decision de produccion | Cada territorio tiene los siete campos de la ficha de orientacion no vacios, su `decision_produccion` con racional, y las verbalizaciones etiquetadas como direccion. Ningun soporte con Produccion MAIA = No lleva copy ni pieza. | eficiencia-creativa-movistar, matriz-soportes-movistar |
 
 Si un criterio tiene un FLAG con severidad bloqueante, el Cierre se bloquea. Creas un comentario `[REVIEW-FAIL]` en el issue del agente responsable y esperas a que corrija.
 
@@ -96,7 +100,7 @@ Pendientes: <lista con descripción o "ninguno">
 
 [B4] Coherencia estratégica
 Campañas producidas: N | Mensaje principal por campaña: <lista>
-Checklist V01-V18: <N> OK, <N> FLAGS, <N> NO_APLICA
+Checklist V01-V22: <N> OK, <N> FLAGS, <N> NO_APLICA
 Flags de checklist: <lista resumida o "ninguno">
 
 [B5] Marca y reglas formales
@@ -122,6 +126,10 @@ Antes de publicar el resumen, ejecuta esta checklist contra los datos de entrada
 5. Hay algún flag `skill_critica_no_disponible` con `corregible_por` pendiente? Si sí, debe aparecer en [B3].
 6. La recomendación final es coherente con los datos anteriores? (si hay bloqueantes abiertos, la recomendación no puede ser "listo para revisión humana").
 7. **Ortografía (CRÍTICO).** Todo texto visible en el resumen ejecutivo y los Campaign Assets lleva tildes correctas, eñes, signos de apertura. Revisar titulares, copies, nombres de territorio. Si detectas ausencias, corrige antes de publicar.
+8. **Conteo de procedencia (V19).** Recorre los JSONs de Maia Strategist, Maia Planner y Maia Copywriter contando afirmaciones con valor informativo frente a bloques `procedencia` presentes. Reporta el conteo en [B1]. Si falta una sola, el cierre se bloquea: no es un flag de riesgo, es un bloqueante.
+9. **Degradación de procedencia (V20).** Para cada afirmación que un agente hereda del anterior, compara el `nivel` de origen con el de destino. Cualquier ascenso (`propuesta` que pasa a `plan_area`, `insight_estrategia` que pasa a `plan_area`) es un bloqueante. Solo un gate humano puede promocionar, y queda registrado en `review_log.json`.
+10. **Flags `dato_a_validar` (V20).** Toda cifra con discrepancia conocida en el original tiene su flag y aparece marcada `a_validar` en los documentos visibles. Cuenta flags emitidos frente a cifras marcadas: los dos números tienen que coincidir.
+11. **Claim paraguas (V21).** Extrae las `idea_dominante` de todos los territorios del ciclo y comprueba que ninguna promesa se repite en más de un tercio de ellos. Una promesa repetida en muchos territorios es un claim paraguas encubierto aunque no esté declarado como tal.
 
 #### Paso 4: Generar Campaign Assets
 
@@ -133,13 +141,15 @@ Una vez que el self-check pasa sin errores, ensamblas los Campaign Assets: una c
 demo/<slug>/outputs/creative-proposal/
   01-estrategia/                                          # Maia Strategist
     resumen_territorios_enfoque_v<N>.html                  # global cross-stream
+    estrategia_growth-value_v<N>.html                      # one-pager por stream
+    estrategia_dispositivos_v<N>.html                      # one-pager por stream
   02-planificacion/                                       # Maia Planner
     calendario_canales_global_v<N>.html                    # global: calendario, territorios y canales
     carga_soporte_global_v<N>.html                         # global: carga por soporte
-  03-concepto-creativo/                                   # Maia Copywriter
+  03-orientacion-comunicacion/                            # Maia Copywriter
     campaign_creative-strategy_v<N>.docx                   # narrativa consolidada (para Comité/cliente)
     growth/
-      campaign_creative-strategy_growth_v<N>.html           # concepto + racional + copy bank
+      campaign_creative-strategy_growth_v<N>.html           # orientacion por territorio + soportes + decision de produccion
     value/
       campaign_creative-strategy_value_v<N>.html
     dispositivos/                                          # (si la campaña tiene territorios Dispositivos)
@@ -179,7 +189,7 @@ El Maia Art Director produce mockups por canal para cada territorio. El Maia Cam
 
 **Formato del `resumen-ejecutivo.html`:**
 
-El resumen ejecutivo es una página HTML autocontenida que presenta la validación V01-V18 y la recomendación final en formato visual. Es el único output que el Maia Campaign Manager genera (no copia).
+El resumen ejecutivo es una página HTML autocontenida que presenta la validación V01-V22 y la recomendación final en formato visual. Es el único output que el Maia Campaign Manager genera (no copia).
 
 Paleta MAIA (CSS variables obligatorias):
 
@@ -203,7 +213,7 @@ Estructura del HTML:
 
 1. **Header**: fondo navy full-width. Título "RESUMEN EJECUTIVO DE CIERRE" en blanco, subtítulo con case_id, fecha, versión del brief en muted. Línea de resumen (piezas producidas, resultado checklist) en itálica muted.
 2. **Bloques B1-B6**: cada uno como sección con heading navy. Estado como badge inline con fondo de color (green para OK, amber para pendientes/flags, texto blanco). Contenido en prosa, no en formato crudo de issue. Flags de severidad alta con fondo ambar-light. Listas dentro de B2 y B3 como `<ul>` con visualización limpia.
-3. **Tabla de checklist V01-V18**: cabecera navy con texto blanco, filas alternas (blanco / grey), 4 columnas (#, Criterio, Estado, Notas). Estados con badge de color: OK en green, FLAG en amber, NO_APLICA en muted. La tabla debe ser responsive (wrapper con `overflow-x: auto`).
+3. **Tabla de checklist V01-V22**: cabecera navy con texto blanco, filas alternas (blanco / grey), 4 columnas (#, Criterio, Estado, Notas). Estados con badge de color: OK en green, FLAG en amber, NO_APLICA en muted. La tabla debe ser responsive (wrapper con `overflow-x: auto`).
 4. **Recomendación final**: bloque destacado con fondo light-blue si "listo para revisión humana", ambar-light si "necesita iteración", o rojo suave si "bloqueado". Texto en bold con la recomendación y un párrafo de cierre.
 
 Reglas de implementación:
@@ -263,7 +273,7 @@ El sistema arranca supervisado y gana autonomía a medida que las evals demuestr
 
 ### Nivel 1 (arranque)
 - Gates humanos después de cada agente: siempre activos.
-- Maia Campaign Manager en Cierre: siempre. Ejecuta V01-V18 completa.
+- Maia Campaign Manager en Cierre: siempre. Ejecuta V01-V22 completa.
 - Muchas skills estarán en skeleton; `pct_evaluable` bajo es normal. Se registra, no bloquea.
 
 ### Nivel 2 (requisito: >80% ciclos aprobados a la primera en los últimos 10 ciclos)
@@ -299,12 +309,14 @@ Carga al inicio de cada ticket de Cierre:
 - `channel-playbook-transversales` (para auditar coherencia cross-canal en V01 y V11)
 - `brand-voice-movistar` (para verificar coherencia de tono en V07)
 - `communication-tiers-movistar` (para auditar coherencia LOVE/CHOOSE/BUY)
-- `validacion-maia-checklist` (los 18 criterios de validación V01-V18)
+- `validacion-maia-checklist` (los 22 criterios de validación V01-V22)
 - `tesis-estrategica-movistar` (para auditar coherencia estratégica y nivel de presión en V07-V08)
 - `matriz-objetivo-canal` (para verificar coherencia de funnel en V06)
 - `reglas-planner-movistar` (para verificar frecuencia en V09)
 - `journey-canales-movistar` (para verificar riesgo de saturación en V10)
-- `contexto-sistema-maia` (contexto del ecosistema multi-agente)
+- `contexto-sistema-maia` (contexto del ecosistema multi-agente, incluye la taxonomía de procedencia de la sección 7)
+- `matriz-soportes-movistar` (para auditar V22: soportes activos y ausencia de copy en soportes que MAIA no produce)
+- `eficiencia-creativa-movistar` (para auditar V22: decisión de producción por territorio)
 
 ---
 

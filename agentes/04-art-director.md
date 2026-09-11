@@ -187,14 +187,14 @@ Cada hueco de imagen se genera con `scripts/generate_image.py` usando un prompt 
 
 **Paso A -- elegir las referencias (obligatorio).** Lee el índice que corresponda al track: `references/gold-standards/fotografia/INDEX.md` para Track A y `references/gold-standards/INDEX.md` para Track B. **Siempre son 2 referencias**, pero cada track tiene una lógica distinta:
 
-**Track A — fotografía pura.**
+**Track A, fotografía pura.**
 
 1. `--ref` 1: ancla de estilo de `fotografia/_anclas/` correspondiente a la familia (interior, exterior, producto o retail).
 2. `--ref` 2: escena exacta de `fotografia/<familia>/`. Si no existe, usa una escena adyacente de la misma familia o misma condición de luz. Si no hay familia aplicable, usa una segunda ancla cercana.
 
 Registra `reference_level` como `escena_exacta`, `escena_adyacente` o `solo_anclas`. Aplica el flag `referencia_aproximada` en los dos últimos casos. Si la escena de referencia no coincide con el encuadre solicitado, especifica el ángulo de cámara y las diferencias en el prompt: lo que no corrijas explícitamente, el modelo puede heredarlo.
 
-**Track B — pieza completa.**
+**Track B, pieza completa.**
 
 1. `--ref` 1: precedente primario del mismo canal, formato y modo visual.
 2. `--ref` 2: precedente secundario del mismo canal y modo, elegido para reforzar la misma retícula o componente.
