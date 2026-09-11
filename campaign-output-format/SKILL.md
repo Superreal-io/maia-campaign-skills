@@ -2,7 +2,7 @@
 name: Campaign Output Format
 key: campaign-output-format
 description: Schema canónico de los artefactos que producen los Agentes B y C -- Estrategia por Canal (B) y Estrategia Creativa (C). Define formato, validación y trazabilidad al Golden Briefing.
-version: 2.0.0
+version: 3.0.0
 owner: system
 status: active
 ---
@@ -36,6 +36,18 @@ media_strategy:
     - territorio: "string"
       bloque: "P1|P2|apoyo_tactico|revisar"
       justificacion: "string"
+      procedencia: { nivel: "propuesta", fuente: "Recomendacion Maia Planner", validacion: "no_confirmado" }
+
+  # Soportes activos por territorio (ver matriz-soportes-movistar). C los hereda.
+  soportes_activos_por_territorio:
+    - territorio: "string"
+      soportes:
+        - soporte: "string (nombre exacto de la matriz)"
+          mision_en_territorio: "string (1 linea)"
+          procedencia: { nivel: "plan_area|propuesta", fuente: "string", validacion: "confirmado|no_confirmado" }
+      soportes_descartados:                  # solo los descartados de forma deliberada
+        - soporte: "string"
+          motivo: "string (1 linea)"
 
   # Comentarios expertos (máximo 3, solo cuando aportan valor real)
   comentarios_expertos:
@@ -84,7 +96,8 @@ media_strategy:
   # Detalle por canal
   channels:
     - channel: "email"
-      origen: "briefing|Recomendación Planner"   # etiqueta de inferencia
+      procedencia: { nivel: "plan_area|insight_estrategia|propuesta", fuente: "string", validacion: "confirmado|a_validar|no_confirmado" }
+      # Sustituye al antiguo campo `origen` y al badge "RP" (v3.0). Ver contexto-sistema-maia seccion 7.
       funcion: "string (papel del canal en esta campaña)"
       mensaje_a_priorizar: "string (del Brief)"
       mensaje_descartado: 
@@ -173,7 +186,9 @@ media_strategy:
 1. `brief_id` y `golden_briefing_version` referencian un Brief existente y aprobado.
 2. `executive_summary.canales_activos` ⊆ canales listados en `brief.rol_canales`.
 3. Cada canal en `channels` tiene un playbook cargado correspondiente.
-4. Cada `mensaje_a_priorizar` es coherente con `brief.lectura_ejecutiva.mensaje_paraguas` y los territorios del brief.
+4. Cada `mensaje_a_priorizar` es coherente con el movimiento de `brief.arquitectura_mes` al que pertenece su territorio.
+4b. Cada territorio del brief tiene entrada en `soportes_activos_por_territorio`, cada soporte referencia un nombre existente en `matriz-soportes-movistar`, y cada uno lleva `mision_en_territorio` y `procedencia` no vacios.
+4c. Toda afirmacion con valor informativo del artefacto tiene bloque `procedencia`. Las reglas de presion, prelacion, contact policy y cascada de ofertas llevan `nivel: propuesta` y `validacion: no_confirmado` sin excepcion.
 5. Cada `check_principios[].pasa: true` puede ser auditado por el Campaign Manager cargando los `channel-playbook-*` correspondientes.
 6. Si una skill referenciada tiene `status: skeleton-pending-content`, el check correspondiente DEBE ser `no_evaluable`, nunca `true`. Los agentes no validan contra contenido que no existe.
 7. El `check_principios_resumen.pct_evaluable` debe aparecer en el resumen ejecutivo de la entrega. Si es inferior al 50%, se flaggea como riesgo.
@@ -216,7 +231,12 @@ campaign_creative-strategy:
 
   # ── Nivel 1: Marco estratégico (1 por ciclo) ──
   marco_estrategico:
-    tesis_estrategica: "string (idea rectora que conecta todos los territorios)"
+    arquitectura_mes:                            # heredada del Golden Briefing. NO es un claim.
+      - movimiento: "string (un verbo de negocio)"
+        territorios: ["string"]
+        racional: "string (1 frase)"
+    # PROHIBIDO: cualquier campo que contenga una promesa verbal unica para todo el ciclo
+    # (tesis_estrategica, mensaje_paraguas, claim_mes o equivalente). Eliminado en v3.0.
     ajuste_rector:                               # null si no hay ajuste
       descripcion: "string (que cambia y por que)"
       tipo: "ajuste_propuesto"
@@ -351,11 +371,11 @@ campaign_creative-strategy:
       # ── Copy Prototype por canal (OBLIGATORIO) ──
       # NOTA DE RESPONSABILIDAD: copy_prototype cubre TODOS los canales activos de la
       # campaña con copy completo por canal+formato. No es una preselección de qué se
-      # produce finalmente ni un orden de prioridad — es el insumo completo. La selección
+      # produce finalmente ni un orden de prioridad: es el insumo completo. La selección
       # de qué piezas concretas se llevan a producción final (representativas por canal
       # y sub-corriente) es responsabilidad del Art Director (D), usando este array junto
       # con scoring_comunicacion y piezas_clave como criterio. C no debe entregar aparte ningun
-      # array adicional de "piezas a producir" fuera de este schema — si algo así aparece
+      # array adicional de "piezas a producir" fuera de este schema. Si algo así aparece
       # en una implementación, no está gobernado por este formato y no pasa por V17.
       copy_prototype:
         - canal: "string"
@@ -396,7 +416,7 @@ campaign_creative-strategy:
 
       # ── Nivel 3: Profundidad por pieza clave ──
       # NOTA: piezas_clave documenta la pieza LIDER por canal principal, con su
-      # razonamiento — no sustituye ni agota la selección completa de piezas que D
+      # razonamiento, no sustituye ni agota la selección completa de piezas que D
       # decide producir (ver nota de responsabilidad en copy_prototype arriba).
       piezas_clave:
         - canal: "string"
@@ -424,12 +444,66 @@ campaign_creative-strategy:
     html_outputs_dir: "path/al/directorio/de/htmls"
 ```
 
+### Orientación de comunicación por territorio (Nivel 2)
+
+Es el bloque que se presenta al comité. El resto del Nivel 2 (bajada por canal, copy prototype, scoring) es material interno de producción.
+
+```yaml
+  campaigns:
+    - nombre: "string"
+      sub_corriente: "growth|value|dispositivos"
+
+      decision_produccion:
+        decision: "REUSE|ADAPT|REFRESH|CREATE"
+        activo_referencia: "string | null"        # null solo si decision == CREATE
+        racional: "string (2-3 frases)"
+        matiz_por_soporte: "string | null"
+        necesita_validacion_inventario: true
+        procedencia: { nivel: "propuesta", fuente: "string", validacion: "no_confirmado" }
+
+      orientacion:
+        # Encuadre
+        objetivo: "string (1 frase)"
+        idea_dominante: "string (1 frase, propia del territorio)"
+        tension_oportunidad: "string (1 frase)"
+        tono: "string (1 frase)"
+        # Orientacion
+        principio: "string (1 frase)"
+        por_donde_explorar: "string (1 frase)"
+        que_evitar: "string (1 frase)"
+
+      soportes_activos:
+        - soporte: "string (nombre exacto de matriz-soportes-movistar)"
+          mision_en_territorio: "string (1 linea)"
+          procedencia: { nivel: "plan_area|propuesta", fuente: "string", validacion: "string" }
+
+      mandatorios:
+        - texto: "string"
+          procedencia: { nivel: "string", fuente: "string", validacion: "string" }
+
+      verbalizaciones_ilustrativas:               # max 3, frases de territorio
+        - "string"                                # NUNCA titular + body + CTA
+```
+
+**Bloque `procedencia` (transversal a todo el schema).** Toda afirmación con valor informativo de cualquier artefacto lleva:
+
+```yaml
+procedencia:
+  nivel: "plan_area|insight_estrategia|propuesta"
+  fuente: "string (concreta y verificable)"
+  validacion: "confirmado|a_validar|no_confirmado"
+```
+
+Definición completa en la sección 7 de `contexto-sistema-maia`.
+
+---
+
 ### Validación de la Estrategia Creativa
 
 **Marco estratégico (Nivel 1):**
 
 1. `brief_id` y `media_strategy_id` referencian artefactos existentes y aprobados.
-2. `marco_estrategico.tesis_estrategica` no esta vacio.
+2. `marco_estrategico.arquitectura_mes` tiene entre 3 y 4 movimientos y todos los territorios del ciclo estan asignados a uno. No existe ningun campo con una promesa verbal unica para todo el ciclo.
 3. `marco_estrategico.segmentacion_creativa` cubre todos los segmentos de `media_strategy.handoff_to_c.segmentos_operativos`. No se acepta un segmento omitido sin flag.
 4. `marco_estrategico.reglas_presion_heredadas` es copia literal de `media_strategy.handoff_to_c.reglas_presion_comercial`. Cualquier desviación debe estar en `desviaciones_propuestas` con justificación.
 5. `marco_estrategico.calendario_integrado` tiene al menos una entrada por semana del período de campaña.
@@ -462,8 +536,20 @@ campaign_creative-strategy:
 
 **Profundidad por pieza (Nivel 3):**
 
-26. Cada campana tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal). **Nota:** la selección completa de qué piezas se producen finalmente es responsabilidad del Art Director (D) a partir de `copy_prototype` + `scoring_comunicacion` + `piezas_clave` — este schema no define ni valida un array separado de "producción visual"; si una implementación lo tiene, actualízala para que D seleccione directamente de estos tres arrays.
+26. Cada campana tiene al menos 1 entrada en `piezas_clave` (la pieza lider del canal principal). **Nota:** la selección completa de qué piezas se producen finalmente es responsabilidad del Art Director (D) a partir de `copy_prototype` + `scoring_comunicacion` + `piezas_clave`: este schema no define ni valida un array separado de "producción visual"; si una implementación lo tiene, actualízala para que D seleccione directamente de estos tres arrays.
 27. Cada `piezas_clave[]` tiene `razonamiento_creativo` y `racional` no vacios.
+
+**Orientación de comunicación y procedencia:**
+
+28. Cada campaña tiene `orientacion` con los siete campos no vacios. Cada campo es una frase: si supera las 40 palabras, se flaggea como `orientacion_demasiado_larga` con severidad baja.
+29. Cada `orientacion.idea_dominante` es propia del territorio. Ninguna promesa se repite como idea dominante en mas de un tercio de los territorios del ciclo.
+30. Cada campaña tiene `decision_produccion` con `decision`, `racional` y `necesita_validacion_inventario`. `activo_referencia` es null unicamente cuando `decision` es CREATE.
+31. Ningun `decision_produccion.racional` afirma estar basado en datos de rendimiento mientras no exista inventario de activos.
+32. Cada `soportes_activos[]` referencia un soporte existente en `matriz-soportes-movistar` y tiene `mision_en_territorio` no vacia.
+33. Ningun soporte con `Produccion MAIA = No` tiene entradas en `copy_prototype`, `bajada_por_canal` ni `scoring_comunicacion`.
+34. Cada `verbalizaciones_ilustrativas[]` es una frase de territorio. Como maximo 3 por campaña. Ninguna contiene estructura de pieza (titular mas body mas CTA).
+35. **[BLOQUEANTE]** Toda afirmacion con valor informativo del artefacto tiene bloque `procedencia` con `nivel`, `fuente` y `validacion` no vacios. Se verifica por conteo.
+36. **[BLOQUEANTE]** Ninguna afirmacion heredada tiene un `nivel` superior al que traia del agente anterior.
 
 ---
 
@@ -473,6 +559,12 @@ campaign_creative-strategy:
 - ❌ `mensaje_principal` con conjunciones que delatan multi-mensaje (ej. "Promo X + descuento Y + Mundial").
 - ❌ Estrategia que activa 5 canales pero todos con el mismo mensaje y misma cadencia (síntoma de "shotgun").
 - ❌ Estrategia Creativa sin `idea_creativa` clara (solo copies).
+- ❌ Una misma promesa verbal presentada como paraguas de todos los territorios del ciclo, con o sin etiqueta de "tesis".
+- ❌ Afirmaciones con cifras, fechas o reglas sin bloque `procedencia`.
+- ❌ Reglas de presion, prelacion o contact policy presentadas como decididas en lugar de como propuesta.
+- ❌ Una cifra elegida en silencio entre dos valores contradictorios del original, sin flag `dato_a_validar`.
+- ❌ Verbalizaciones ilustrativas con estructura de pieza cerrada (titular, body y CTA) presentadas como direccion.
+- ❌ Decision REUSE/ADAPT/REFRESH/CREATE presentada como basada en datos sin inventario de activos.
 - ❌ KPIs ambiguos ("engagement", "branding") sin métrica concreta.
 
 ---
