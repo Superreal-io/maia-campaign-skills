@@ -2,7 +2,7 @@
 name: Golden Briefing Schema
 key: golden-briefing-schema
 description: Schema canonico del Golden Briefing. Artefacto que el Strategist produce y que los Agentes B, C y D consumen como ground truth. Versionado, JSON-parseable, trazable. Un Golden Briefing por stream.
-version: 2.0.0
+version: 3.0.0
 owner: agente-a
 status: active
 ---
@@ -51,10 +51,25 @@ brief:
 
   lectura_ejecutiva:
     puntos:                                 # 5-7 puntos estrategicos ordenados por importancia
-      - "string"
-    mensaje_paraguas: "string (1 frase madre que articula todo el stream)"
+      - texto: "string"
+        procedencia: { nivel: "string", fuente: "string", validacion: "string" }
     evidence: "string"
     status: "claro|confuso|ausente"
+
+  arquitectura_mes:                         # sustituye a mensaje_paraguas (v3.0)
+    - movimiento: "string (un verbo de negocio, derivado del briefing de ESTE mes)"
+      territorios: ["string"]
+      racional: "string (1 frase)"
+  # PROHIBIDO: mensaje_paraguas, claim_mes, idea_unica o cualquier campo que contenga
+  # una promesa verbal unica para todo el stream. Eliminado en v3.0.
+
+  flags_dato_a_validar:                     # discrepancias dentro del propio original
+    - concepto: "string"
+      valor_usado: "string"
+      valor_alternativo: "string"
+      fuente_usada: "string"
+      fuente_alternativa: "string"
+      accion_sugerida: "string"
 
   decisiones_pendientes:
     - pregunta: "string"
@@ -74,6 +89,7 @@ brief:
           detalle: "string (contexto operativo)"
       fecha_clave: "string|null"            # ej. "Desde el 15 de julio"
       validacion: "string|null"             # items pendientes de validar
+      procedencia: { nivel: "plan_area|insight_estrategia|propuesta", fuente: "string", validacion: "confirmado|a_validar|no_confirmado" }
     - ...
 
   # ── Bloque 3: Jerarquia de territorios ──
@@ -84,6 +100,7 @@ brief:
       tipo_badge: "compra|consideración|contextual|desarrollo|upsell|estacional|viaje|hogar|captación|consumo|retención|value"
       justificacion: "string"
       condicion: "string|null"              # solo si prioridad = condicional
+      procedencia: { nivel: "plan_area|insight_estrategia|propuesta", fuente: "string", validacion: "confirmado|a_validar|no_confirmado" }
     - ...
 
   # ── Bloque 4: Audiencia y mecánica ──
@@ -93,6 +110,7 @@ brief:
       - nombre: "string"                    # ej. "No cliente, solo móvil"
         descripcion: "string"
         volumen_estimado: "string|null"
+        procedencia: { nivel: "string", fuente: "string", validacion: "string" }
     modelo_segmentacion: "string"           # ej. "Modelo geolocalización (2a residencia)"
     mecanica_principal: "string"            # mecánica de activación
 
@@ -102,14 +120,16 @@ brief:
     - canal: "string"                       # ej. "CRM / Email", "Digital", "BTL", "M+", "Tienda", "TV", "Exterior"
       mision: "string"                      # para que sirve este canal en este stream (no solo presencia)
       notas: "string|null"                  # restricciones o aclaraciones
+      procedencia: { nivel: "plan_area|insight_estrategia|propuesta", fuente: "string", validacion: "confirmado|a_validar|no_confirmado" }
     - ...
 
   # ── Bloque 6: Recomendación de publicidad ──
 
   recomendacion_publicidad:
-    idea_unica_del_mes: "string"            # 1 frase: que debe comunicar la publicidad
+    # Sin idea unica del mes ni claim. La coherencia del periodo vive en arquitectura_mes.
     reglas_del_mes:                         # que no puede faltar, que no puede aparecer
-      - "string"
+      - texto: "string"                     # referida a un producto, canal o timing concreto
+        procedencia: { nivel: "plan_area|insight_estrategia|propuesta", fuente: "string", validacion: "confirmado|a_validar|no_confirmado" }
     condiciones_legales: "string|null"
     status: "claro|confuso|ausente"
 
@@ -125,6 +145,7 @@ brief:
     hitos:
       - fecha: "YYYY-MM-DD"
         descripcion: "string"
+        procedencia: { nivel: "string", fuente: "string", validacion: "string" }
     evidence: "string"
     status: "claro|confuso|ausente"
 
@@ -137,7 +158,8 @@ brief:
   restricciones_mandatorios:
     - tipo: "marca|operativo|legal"
       descripcion: "string"
-      origen: "string"                      # quien lo impone
+      procedencia: { nivel: "plan_area|insight_estrategia|propuesta", fuente: "string", validacion: "confirmado|a_validar|no_confirmado" }
+      # El campo `origen` queda sustituido por `procedencia.fuente` (v3.0).
     - ...
 
   # Evaluación contra la rúbrica
@@ -183,7 +205,7 @@ brief:
 | contexto_negocio | Absorbido en lectura_ejecutiva.puntos | El contexto de negocio se integra como puntos de la lectura |
 | públicos | audiencia_mecanica.segmentos | Estructura más rica con modelo de segmentación |
 | productos_prioritarios | corrientes_demanda[].territorios | Los productos se organizan dentro de territorios y corrientes |
-| mensaje_principal | lectura_ejecutiva.mensaje_paraguas | El mensaje principal es el paraguas estratégico |
+| mensaje_principal | arquitectura_mes | La coherencia del mes son 3-4 movimientos estrategicos, no una promesa verbal unica |
 | accion_esperada | primer_paso | Más concreto y accionable |
 | canales_posibles | rol_canales | Cada canal tiene mision específica, no solo presencia |
 | criterios_exito | Absorbido en corrientes_demanda[].validación + riesgos | Los criterios se vinculan a las corrientes |
@@ -191,7 +213,9 @@ brief:
 | (nuevo) | período | Mes y ano del plan |
 | (nuevo) | corrientes_demanda | Estructura central nueva: agrupa territorios por tipo de oportunidad |
 | (nuevo) | jerarquia_territorios | Priorización explicita de territorios con badge tipificado |
-| (nuevo) | recomendacion_publicidad | Idea única y reglas del mes para publicidad |
+| (nuevo) | arquitectura_mes | 3-4 movimientos estrategicos que ordenan el mes. Sustituye a `mensaje_paraguas` |
+| (nuevo) | flags_dato_a_validar | Discrepancias detectadas dentro del propio plan comercial |
+| (nuevo) | recomendacion_publicidad | Reglas del mes para publicidad. Sin idea única ni claim: la coherencia del mes vive en `arquitectura_mes` |
 
 ## Validación
 
@@ -202,7 +226,9 @@ Antes de publicar un Golden Briefing, valida:
 3. Cada uno de los 14 criterios tiene una entrada en `rubric_evaluation` (criterion_id C01 a C14).
 4. `foco.statement` no esta vacio si `foco.status` es "claro".
 5. `lectura_ejecutiva.puntos` tiene entre 5 y 7 entradas.
-6. `lectura_ejecutiva.mensaje_paraguas` no esta vacio.
+6. `arquitectura_mes` tiene entre 3 y 4 movimientos, cada uno con al menos un territorio asignado. Todos los territorios del stream estan asignados a algun movimiento. No existe ningun campo con una promesa verbal unica para todo el stream.
+6b. Toda afirmacion con valor informativo del brief tiene bloque `procedencia` con `nivel` (`plan_area|insight_estrategia|propuesta`), `fuente` concreta y `validacion` (`confirmado|a_validar|no_confirmado`). Definicion completa en la seccion 7 de `contexto-sistema-maia`.
+6c. Toda cifra marcada `validacion: "a_validar"` tiene su entrada correspondiente en `flags_dato_a_validar`, y viceversa. Los dos conteos coinciden.
 7. `corrientes_demanda` tiene al menos 2 entradas, cada una con al menos 1 territorio.
 8. `jerarquia_territorios` tiene al menos 1 entrada con prioridad "alta".
 9. `rol_canales` tiene al menos 2 entradas con `mision` no vacia.
@@ -215,6 +241,6 @@ Antes de publicar un Golden Briefing, valida:
 ## Mantenimiento
 
 Cambios al schema requieren:
-- Incrementar `versión` del SKILL.
-- Actualizar `Agentes/01-briefing.md` con el set de campos nuevos.
+- Incrementar `version` del SKILL.
+- Actualizar el prompt del Maia Strategist (`agentes/01-strategist.md`) con el set de campos nuevos.
 - Actualizar todos los Briefs existentes con migración o marcarlos `legacy`.
