@@ -7,7 +7,7 @@ heartbeat: on_demand
 budget_monthly_usd: 100
 runtime: claude-code
 status: active
-version: 4.3.0
+version: 4.4.0
 env:
   OPENAI_API_KEY: $secret:openai-image-key
 ---
@@ -320,21 +320,35 @@ Aplica estas verificaciones al HTML ensamblado:
 
 Estos son los UNICOS colores que puedes usar. Cualquier otro HEX es un error:
 
+Los nombres de token de esta tabla son los que **existen de verdad** en `brand/tokens/colors.css`. Si escribes un token que no esta ahi, `var()` no resuelve, el color no se aplica y el texto sale invisible sin que nada falle de forma visible. Copia los nombres tal cual.
+
 | Token CSS | HEX | Nombre |
 |---|---|---|
 | `--movistar-blue` | #0066FF | Azul Movistar |
 | `--movistar-white` | #FFFAF5 | Blanco Movistar |
-| `--movistar-dark` | #262423 | Negro Movistar |
-| `--movistar-blue-light` | #d3eeff | Azul claro |
-| `--movistar-green-light` | #cef7bf | Verde claro |
-| `--movistar-yellow-light` | #ffe99c | Amarillo claro |
-| `--movistar-coral-light` | #ffc5a8 | Coral claro |
-| `--movistar-text-muted` | #6F7176 | Gris texto secundario |
-| `--movistar-blue-hover` | #005EEB | Azul hover |
+| `--movistar-black` | #262423 | Negro Movistar |
+| `--movistar-blue-light` | #D3EEFF | Azul claro |
+| `--movistar-green-light` | #CEF7BF | Verde claro |
+| `--movistar-yellow-light` | #FFE99C | Amarillo claro |
+| `--movistar-coral-light` | #FFC5A8 | Coral claro |
+| `--movistar-text-secondary` | #6F7176 | Gris texto secundario |
+| `--movistar-primary-hover` | #005EEB | Azul hover (alias: `--movistar-cta-hover`) |
+
+**Nombres que NO existen y han causado fallos reales.** No los uses aunque te parezcan naturales:
+
+| Escribes esto (mal) | Existe esto (bien) |
+|---|---|
+| `--movistar-dark` | `--movistar-black` |
+| `--movistar-text-muted` | `--movistar-text-secondary` |
+| `--movistar-blue-hover` | `--movistar-primary-hover` |
+
+**Fallback obligatorio en colores de texto y fondo.** Escribe siempre `var(--token, #HEX)` con el hex de esta tabla como segundo argumento: `color: var(--movistar-black, #262423)`. Asi, si algun dia el token cambia de nombre, la pieza sigue siendo legible en lugar de quedarse con texto invisible.
 
 **Colores adicionales solo para web:** `#FFFFFF` (blanco puro, fondo principal en landing web), `#EFF5FB` (azul muy claro para secciones alternas) y `#E0E0E0` (borde fino de cards). Estos tres HEX solo se usan en piezas web/landing, nunca en offline.
 
 NO uses #022D67, #061A40, ni ningun otro hex "navy" o "oscuro" inventado. Si necesitas un fondo oscuro, usa #262423 (Negro Movistar) o #0066FF (Azul Movistar).
+
+**Aviso sobre `colors.css`.** El fichero de tokens del design system define mas colores de los que aparecen aqui, entre ellos los pares oscuros `--movistar-blue-dark` (#022D67), `--movistar-green-dark`, `--movistar-yellow-dark` y `--movistar-coral-dark`. **Estan fuera de la paleta cerrada de MAIA**: existen como token pero no se usan en piezas. Que un token exista en el design system no significa que este permitido aqui. La paleta de arriba es la lista completa de lo que puedes usar.
 
 ---
 
