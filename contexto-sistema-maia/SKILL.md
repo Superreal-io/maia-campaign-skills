@@ -2,7 +2,7 @@
 name: Contexto del Sistema MAIA Campaign
 key: contexto-sistema-maia
 description: Contexto compartido que todos los agentes cargan. Describe el ecosistema multi-agente, la cadena de trabajo, las gates, las convenciones y las reglas transversales.
-version: 5.2.0
+version: 5.4.0
 owner: system
 status: active
 loaded_by: todos los agentes (Maia Strategist, Maia Planner, Maia Copywriter, Maia Art Director, Maia Campaign Manager, Maia Storyteller)
@@ -32,7 +32,7 @@ El cliente es el equipo de Comunicación de Movistar (Telefónica). El operador 
 | media-strategy | Maia Planner | Recibe ambos briefs, desglosa en 3 sub-corrientes (Growth, Value, Dispositivos). Priorización territorial, tier, canales, comentarios expertos, tablas Movistar, etiquetado de inferencias | `media_strategy_v<N>.json` + `.docx` + 6 HTML por sub-corriente (`calendario_<sub>_v<N>.html`, `brief_canales_territorio_<sub>_v<N>.html`) + 2 globales (`calendario_canales_global_v<N>.html`, `carga_soporte_global_v<N>.html`) | `rol-medios-movistar` |
 | creative-copywriter | Maia Copywriter | Recibe output combinado del Maia Planner, separa por sub-corriente (Growth, Value, Dispositivos). Orientación de comunicación por territorio (objetivo, idea dominante, tensión, tono, principio, por dónde explorar, qué evitar), decisión REUSE/ADAPT/REFRESH/CREATE, soportes activos, y copy prototype más scoring como material interno de producción | `campaign_creative-strategy_v<N>.json` + `.docx` + 1 HTML por sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`) | (ninguna exclusiva) |
 | campaign-design | Maia Art Director | Selecciona piezas representativas por canal y sub-corriente, produce piezas presentables a cliente (HTML con slots + render PNG) con fotografía real generada y verificación visual | HTML ensamblados + PNG verificados organizados por sub-corriente + `design_rationale_<sub>.docx` por stream | `movistar-visual-production`, `html-component-library`, `brand-visual-composition-movistar` |
-| campaign-manager | Maia Campaign Manager | Cierre: checklist V01-V22, resumen ejecutivo, Campaign Assets, escalado al Maia Storyteller | `resumen-ejecutivo.html` + Campaign Assets (carpeta `creative-proposal/` con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
+| campaign-manager | Maia Campaign Manager | Cierre: checklist V01-V24, resumen ejecutivo, Campaign Assets, escalado al Maia Storyteller | `resumen-ejecutivo.html` + Campaign Assets (carpeta `creative-proposal/` con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
 | campaign-presenter | Maia Storyteller | Convierte los Campaign Assets en presentación ejecutiva HTML navegable para aprobación C-level. Integra los entregables HTML de Maia Strategist, Maia Planner y Maia Copywriter en un documento autocontenido apaisado, con fichas de orientación por territorio y plan de producción. No presenta mockups en el deck mensual. Produce PDF como leave-behind. | `presentacion_ejecutiva_<case_id>_v<N>.html` + `leave_behind_<case_id>_v<N>.pdf` | `movistar-brand-guidelines`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar` |
 
 ---
@@ -45,9 +45,11 @@ El proceso real comienza fuera de MAIA: el CMO de Movistar envía mensualmente u
 
 El operador (SuperReal) adjunta los PDFs de trend flash al ticket de Paperclip junto con el PPT del area comercial. El Maia Strategist los lee directamente (lectura multimodal nativa) y los usa como contexto para validar si los briefings de area se alinean con las tendencias que el CMO les señalo. Ver skill `trend-flash-context` para el detalle del framework de validacion.
 
+Al mismo ticket se adjuntan tambien los **4 informes semanales de Publicidad del mes anterior**, que produce el equipo de Analitica de Comunicacion de Telefonica. Son la unica fuente de rendimiento real del sistema y bajan al detalle de creatividad individual. El Maia Strategist los lee y vuelca lo extraido en los campos `cobertura_informes` y `rendimiento_periodo_anterior` del Golden Briefing, que es como el dato llega al Maia Planner y al Maia Copywriter. No son bloqueantes: si faltan, el ciclo continua con menor capacidad de afirmar. Ver skill `informe-semanal-publicidad`.
+
 ### 3.2 Streams de entrada
 
-El usuario sube los 2 PPTs al inicio: Growth-Value (un único PPT que combina ambos) y Dispositivos (PPT separado). El Maia Strategist produce 2 Golden Briefings independientes (uno por stream). A partir de ahí, la cadena es única: el Maia Planner recibe ambos briefs y produce un output combinado con 3 sub-corrientes (Growth, Value, Dispositivos). El Maia Copywriter recibe ese output y separa internamente por sub-corriente. Cada sub-corriente tiene corrientes de demanda distintas (Growth: captación, desarrollo, winback; Value: fidelización, cerberus, migraciones tecnológicas; Dispositivos: las propias del plan de dispositivos).
+El usuario sube al inicio los 2 PPTs, los trend flashes y los informes semanales del mes anterior: Growth-Value (un único PPT que combina ambos) y Dispositivos (PPT separado). El Maia Strategist produce 2 Golden Briefings independientes (uno por stream). A partir de ahí, la cadena es única: el Maia Planner recibe ambos briefs y produce un output combinado con 3 sub-corrientes (Growth, Value, Dispositivos). El Maia Copywriter recibe ese output y separa internamente por sub-corriente. Cada sub-corriente tiene corrientes de demanda distintas (Growth: captación, desarrollo, winback; Value: fidelización, cerberus, migraciones tecnológicas; Dispositivos: las propias del plan de dispositivos).
 
 ### 3.3 Cadena
 
@@ -60,7 +62,7 @@ Hay un gate humano después de cada agente. El humano puede aprobar, pedir itera
 - **Maia Strategist produce, humano aprueba o itera** (Gate Strategist). El back-and-forth con el área es la norma. Un brief puede pasar a v3 o v4 antes de aprobarse.
 - **Maia Planner produce, humano aprueba o itera** (Gate Planner). El Planner incluye un campo `tier_justificación` por canal que el humano audita.
 - **Maia Copywriter produce, humano aprueba o itera** (Gate Copywriter). El Copywriter incluye copy prototype por canal y scoring de principios de comunicacion por pieza. El humano aprueba y Copywriter pasa directamente a Art Director.
-- **Maia Art Director produce, humano aprueba** (Gate Art Director), y luego escala a **Cierre (Maia Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V22 sobre el paquete completo, genera el resumen ejecutivo, ensambla los Campaign Assets (carpeta con los outputs presentables a cliente) y escala al Maia Storyteller.
+- **Maia Art Director produce, humano aprueba** (Gate Art Director), y luego escala a **Cierre (Maia Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V24 sobre el paquete completo, genera el resumen ejecutivo, ensambla los Campaign Assets (carpeta con los outputs presentables a cliente) y escala al Maia Storyteller.
 - **Maia Storyteller produce, humano aprueba o itera** (Gate Storyteller). El Storyteller presenta la presentación ejecutiva HTML. El humano revisa que la integración de entregables, la cobertura de campañas y el lenguaje sean adecuados para el comité. Aprobada la presentación, el ciclo se cierra.
 
 En todos los gates, el humano tiene tres opciones: aprobar y pasar al siguiente, iterar con feedback, o devolver al agente anterior.
@@ -115,6 +117,7 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 | `matriz-objetivo-canal` | Matriz que cruza objetivos con canales | Maia Planner, Maia Campaign Manager | active |
 | `matriz-soportes-movistar` | Papel de cada soporte en el mix y los cinco principios transversales | Maia Planner, Maia Copywriter, Maia Storyteller, Maia Campaign Manager | active |
 | `eficiencia-creativa-movistar` | Reutilizar antes que producir: decisión REUSE / ADAPT / REFRESH / CREATE | Maia Copywriter, Maia Campaign Manager, Maia Storyteller | active |
+| `informe-semanal-publicidad` | Ingesta y uso del informe semanal de rendimiento de Analítica de Comunicación | Maia Strategist, Maia Planner, Maia Copywriter, Maia Campaign Manager | active |
 | `reglas-planner-movistar` | Reglas de frecuencia y presión del Planner | Maia Planner, Maia Campaign Manager | active |
 
 #### Shared: marca visual (1)
@@ -141,7 +144,7 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
-| `validación-maia-checklist` | Checklist V01-V22 de validación transversal | Maia Campaign Manager | active |
+| `validación-maia-checklist` | Checklist V01-V24 de validación transversal | Maia Campaign Manager | active |
 
 #### Journey (1)
 
@@ -166,17 +169,17 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 |---|---|---|---|
 | `contexto-sistema-maia` | Este archivo | Todos (Maia Strategist, Maia Planner, Maia Copywriter, Maia Art Director, Maia Storyteller, Maia Campaign Manager) | active |
 
-**Total: 29 skills** (todas activas, 2 retiradas reemplazadas por movistar-visual-production).
+**Total: 30 skills** (todas activas, 2 retiradas reemplazadas por movistar-visual-production).
 
 ### Skills por agente: vista rápida
 
 | Agente | Siempre carga | Carga condicional (por canal) |
 |---|---|---|
-| **Maia Strategist** | `golden-briefing-schema`, `brief-quality-rubric`, `contexto-sistema-maia` | -- |
-| **Maia Planner** | `golden-briefing-schema`, `campaign-output-format`, `communication-tiers-movistar`, `btl-tone-movistar`, `product-verticals-movistar`, `tesis-estratégica-movistar`, `rol-medios-movistar`, `matriz-objetivo-canal`, `matriz-soportes-movistar`, `reglas-planner-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos + `channel-playbook-transversales` si >1 canal |
-| **Maia Copywriter** | `golden-briefing-schema`, `campaign-output-format`, `brand-voice-movistar`, `estilo-terminologia-movistar`, `copywriting-principles-movistar`, `communication-tiers-movistar`, `btl-tone-movistar`, `product-verticals-movistar`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos + `channel-playbook-transversales` si >1 canal |
+| **Maia Strategist** | `golden-briefing-schema`, `brief-quality-rubric`, `trend-flash-context`, `informe-semanal-publicidad`, `contexto-sistema-maia` | -- |
+| **Maia Planner** | `golden-briefing-schema`, `campaign-output-format`, `communication-tiers-movistar`, `btl-tone-movistar`, `product-verticals-movistar`, `tesis-estratégica-movistar`, `rol-medios-movistar`, `matriz-objetivo-canal`, `matriz-soportes-movistar`, `informe-semanal-publicidad`, `reglas-planner-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos + `channel-playbook-transversales` si >1 canal |
+| **Maia Copywriter** | `golden-briefing-schema`, `campaign-output-format`, `brand-voice-movistar`, `estilo-terminologia-movistar`, `copywriting-principles-movistar`, `communication-tiers-movistar`, `btl-tone-movistar`, `product-verticals-movistar`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar`, `informe-semanal-publicidad`, `contexto-sistema-maia` | Playbooks de los canales activos + `channel-playbook-transversales` si >1 canal |
 | **Maia Art Director** | `movistar-visual-production`, `campaign-output-format`, `brand-visual-guidelines-movistar`, `brand-visual-composition-movistar`, `html-component-library`, `communication-tiers-movistar`, `estilo-terminologia-movistar`, `copywriting-principles-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos |
-| **Maia Campaign Manager** | `campaign-output-format`, `golden-briefing-schema`, `validación-maia-checklist`, `brand-voice-movistar`, `communication-tiers-movistar`, `tesis-estratégica-movistar`, `matriz-objetivo-canal`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar`, `reglas-planner-movistar`, `journey-canales-movistar`, `brand-visual-guidelines-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos (para auditar V01-V05) + `channel-playbook-transversales` |
+| **Maia Campaign Manager** | `campaign-output-format`, `golden-briefing-schema`, `validación-maia-checklist`, `brand-voice-movistar`, `communication-tiers-movistar`, `tesis-estratégica-movistar`, `matriz-objetivo-canal`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar`, `informe-semanal-publicidad`, `reglas-planner-movistar`, `journey-canales-movistar`, `brand-visual-guidelines-movistar`, `contexto-sistema-maia` | Playbooks de los canales activos (para auditar V01-V05) + `channel-playbook-transversales` |
 | **Maia Storyteller** | `movistar-brand-guidelines`, `campaign-output-format`, `golden-briefing-schema`, `communication-tiers-movistar`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar`, `contexto-sistema-maia` | -- |
 
 ### Regla de carga fallida
