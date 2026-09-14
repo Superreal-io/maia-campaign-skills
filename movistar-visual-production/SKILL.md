@@ -1,7 +1,7 @@
 ---
 name: movistar-visual-production
 description: Stack de produccion visual del Art Director (D) para piezas Movistar presentables a cliente. Assets de marca como archivos (fuentes, logos, tokens), fotografia real via OpenAI (gpt-image-2), ensamblado programatico por slots, y bucle de verificacion visual con render. Sustituye a visual-01-brand-assets, visual-02-brand-typography y el enfoque base64 de visual-03.
-version: 1.5.1
+version: 1.6.0
 owner: superreal
 status: active
 loaded_by: D (Art Director)
@@ -195,7 +195,11 @@ MIRA el PNG (herramienta Read) y evalua. **Los puntos 6 a 13 son checks determin
 3. **El patron del formato** en `brand/audit-report.md` (jerarquia, posicion de la M, estructura).
 4. **Nada solapado, cortado ni desbordado.** Legibilidad a la distancia del soporte.
 5. **La foto integra:** luz creible, personas reales, sin look CGI, coherente con el tono.
-6. **El titular cierra con punto.** El sistema tipografico Movistar cierra el titular con punto final. Regla incondicional, no solo en impreso. En una tanda real faltaba en 14 de 17 piezas.
+6. **El titular NO lleva punto final.** Los titulares se dejan abiertos. Regla 14 de `movistar-brand-guidelines/brand/copywriting.md`, que es la guideline oficial del cliente: "Dejamos los titulares abiertos, sin punto final: SOLO en titulares, pero en el resto de textos seguimos siempre las normas de la RAE". Ejemplos correctos de la propia guia: "Solo para ti", "Tenemos todo un mundo de experiencias a solo un clic". Ejemplos incorrectos: "Para ti, cliente.", "Y todavia hay mas.". Aplica a titulares y subtitulares; el body, el legal y el resto de textos siguen la RAE con normalidad.
+
+   **Excepcion, y solo esa:** el claim de marca "es por todos." lleva punto porque forma parte del claim, no es un titular. No lo tomes como precedente para poner punto en titulares.
+
+   *Nota de correccion:* hasta la v1.5.1 este check decia lo contrario ("el titular cierra con punto, regla incondicional"), en contradiccion con `estilo-terminologia-movistar` y con la guideline de marca. Era un error: la observacion de origen fue que en una tanda real 14 de 17 piezas no llevaban punto, y se interpreto como defecto cuando era el comportamiento correcto.
 7. **El logo M donde manda el canal.** Meta: **abajo derecha**. Resto: arriba derecha o segun playbook. Pantalla PLV de tienda: sin M en pieza.
 8. **El CTA del tipo correcto.** M+ (WOW y videocartela): **link subrayado con `>`, nunca boton**. Meta: **sin boton CTA en la imagen**. Resto: pill relleno azul.
 9. **Sin jerga interna en copy de cliente.** Prohibido en pieza: "BAF", "Stand Alone", "Horecas", "SA", "winback", "churn", codigos internos. Si el copy de C los trae, traduce y flaggea `jerga_corregida`.
