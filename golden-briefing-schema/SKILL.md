@@ -2,7 +2,7 @@
 name: Golden Briefing Schema
 key: golden-briefing-schema
 description: Schema canonico del Golden Briefing. Artefacto que el Strategist produce y que los Agentes B, C y D consumen como ground truth. Versionado, JSON-parseable, trazable. Un Golden Briefing por stream.
-version: 3.0.0
+version: 3.1.0
 owner: agente-a
 status: active
 ---
@@ -62,6 +62,44 @@ brief:
       racional: "string (1 frase)"
   # PROHIBIDO: mensaje_paraguas, claim_mes, idea_unica o cualquier campo que contenga
   # una promesa verbal unica para todo el stream. Eliminado en v3.0.
+
+  cobertura_informes:                       # informes semanales de Publicidad del mes anterior
+    semanas_esperadas: 4
+    semanas_disponibles: 0
+    semanas_faltantes: ["YYYY-MM-DD"]
+    nivel_confianza: "alto|medio|bajo"      # 4/4 alto, 2-3/4 medio, 0-1/4 bajo
+    procedencia: { nivel: "insight_estrategia", fuente: "string", validacion: "confirmado" }
+
+  rendimiento_periodo_anterior:             # extraido de los informes semanales. Vacio si no hay informes.
+    # Es el canal por el que el dato de rendimiento llega a B y C. Sin esto, el detalle
+    # por creatividad muere en el Strategist y los agentes aguas abajo no pueden usarlo.
+    por_creatividad:
+      - creatividad: "string"               # codigo de la pieza tal como aparece en el informe
+        campana: "string"
+        territorio_asociado: "string|null"   # territorio de MAIA al que corresponde, si se puede mapear
+        lectura_informe: "string"            # el juicio del informe, citado literal
+        metrica_principal:                   # la que mejor sostiene una decision sobre esta pieza
+          metrica: "CTR|leads|CPL|VTR|clics|interaccion"
+          valor: "string"
+          variacion_vs_s1: "string|null"
+        metricas_secundarias:                # el resto de metricas de respuesta de la misma pieza
+          - metrica: "CTR|leads|CPL|VTR|clics|interaccion"
+            valor: "string"
+            variacion_vs_s1: "string|null"
+        semana: "YYYY-MM-DD"
+        procedencia: { nivel: "insight_estrategia", fuente: "string", validacion: "confirmado" }
+    por_campana:
+      - campana: "string"
+        reparto_soportes: "string"          # ej. "Exterior 80%, Digital 15%, Radio 5%"
+        traccion_trafico: "string"          # que fuente tracciona el trafico y cuanto
+        semana: "YYYY-MM-DD"
+        procedencia: { nivel: "insight_estrategia", fuente: "string", validacion: "confirmado" }
+    contexto_negocio:                       # ventas y similares. NO sirven para juzgar creatividades.
+      - campana: "string"
+        dato: "string"
+        salvedad: "string"                  # lo que el propio informe advierte sobre la lectura
+        semana: "YYYY-MM-DD"
+        procedencia: { nivel: "insight_estrategia", fuente: "string", validacion: "confirmado" }
 
   flags_dato_a_validar:                     # discrepancias dentro del propio original
     - concepto: "string"
@@ -229,6 +267,10 @@ Antes de publicar un Golden Briefing, valida:
 6. `arquitectura_mes` tiene entre 3 y 4 movimientos, cada uno con al menos un territorio asignado. Todos los territorios del stream estan asignados a algun movimiento. No existe ningun campo con una promesa verbal unica para todo el stream.
 6b. Toda afirmacion con valor informativo del brief tiene bloque `procedencia` con `nivel` (`plan_area|insight_estrategia|propuesta`), `fuente` concreta y `validacion` (`confirmado|a_validar|no_confirmado`). Definicion completa en la seccion 7 de `contexto-sistema-maia`.
 6c. Toda cifra marcada `validacion: "a_validar"` tiene su entrada correspondiente en `flags_dato_a_validar`, y viceversa. Los dos conteos coinciden.
+6d. `cobertura_informes` esta presente siempre, incluso con cero informes disponibles, y lleva su bloque `procedencia`. Los agentes aguas abajo lo usan para decidir si pueden apoyar una decision en datos de rendimiento.
+6e. Si `cobertura_informes.semanas_disponibles` es mayor que cero, `rendimiento_periodo_anterior` no puede estar vacio: el Strategist leyo los informes y debe volcar lo que extrajo. Si es cero, `rendimiento_periodo_anterior` es un objeto con las tres listas vacias.
+6f. Toda entrada de `rendimiento_periodo_anterior.por_creatividad[]` usa metricas de RESPUESTA, y solo estas seis: CTR, leads, CPL, VTR, clics, interaccion. Impactos, impresiones, frecuencia y sesiones no entran ahi: van en `por_campana`. Las ventas van en `contexto_negocio` con su salvedad.
+6g. Cada entrada de `por_creatividad[]` tiene exactamente una `metrica_principal`, que es la que el Maia Copywriter copiara en `evidencia_rendimiento`. El resto van en `metricas_secundarias`. Orden de preferencia para elegir la principal: la que el propio informe destaca en su lectura, luego leads, CPL, CTR, VTR, y por ultimo clics o interaccion.
 7. `corrientes_demanda` tiene al menos 2 entradas, cada una con al menos 1 territorio.
 8. `jerarquia_territorios` tiene al menos 1 entrada con prioridad "alta".
 9. `rol_canales` tiene al menos 2 entradas con `mision` no vacia.
