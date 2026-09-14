@@ -1,15 +1,15 @@
 ---
 name: Checklist de Validación MAIA
 key: validacion-maia-checklist
-description: 22 criterios de validación del sistema MAIA. Los usa el Campaign Manager en Cierre como capa de control de calidad transversal.
-version: 3.0.0
+description: 24 criterios de validación del sistema MAIA. Los usa el Campaign Manager en Cierre como capa de control de calidad transversal.
+version: 3.2.0
 owner: system
 status: active
 ---
 
 # Checklist de Validación MAIA
 
-Cargada por el Campaign Manager. Define los 22 criterios de validación que el Campaign Manager ejecuta en Cierre (post-Art Director) sobre el paquete completo de la campaña.
+Cargada por el Campaign Manager. Define los 24 criterios de validación que el Campaign Manager ejecuta en Cierre (post-Art Director) sobre el paquete completo de la campaña.
 
 Esta skill formaliza la "Validación MAIA": una capa de control transversal que cruza todos los outputs de todos los agentes en un único paso final.
 
@@ -19,7 +19,7 @@ Esta skill formaliza la "Validación MAIA": una capa de control transversal que 
 
 ### Cierre (post-Art Director, sobre el paquete completo)
 
-El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia creativa + mockups) contra estos 22 criterios:
+El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia creativa + mockups) contra estos 24 criterios:
 
 | # | Criterio | Que verificar | Fuente |
 |---|---|---|---|
@@ -44,7 +44,9 @@ El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia
 | V19 | Procedencia completa | Toda afirmacion con valor informativo (dato, cifra, volumen, fecha, prioridad, restriccion, regla) lleva bloque `procedencia` con `nivel`, `fuente` y `validacion` no vacios. Cero afirmaciones sin procedencia. La `fuente` es concreta y verificable, nunca "el brief" a secas ni "analisis interno". | contexto-sistema-maia seccion 7 |
 | V20 | Integridad de la herencia de procedencia | Ningun agente ha subido el nivel de una afirmacion respecto al agente anterior. Una `propuesta` de B sigue siendo `propuesta` en C y en E. Las reglas de presion, prelacion, contact policy y cascada de ofertas llevan `nivel: propuesta` y `validacion: no_confirmado`, y en ningun documento visible se presentan como decididas. Toda discrepancia conocida del original tiene su flag `dato_a_validar` y la cifra afectada esta marcada `a_validar`. | contexto-sistema-maia seccion 7 |
 | V21 | Ausencia de claim paraguas transversal | No existe en el paquete una frase, promesa o idea verbal unica presentada como paraguas de todos los territorios. Control operativo: ninguna promesa se repite como idea dominante en mas de un tercio de los territorios del ciclo. Cada territorio tiene su propia `idea_dominante`. | 03-copywriter, golden-briefing-schema |
-| V22 | Orientacion de comunicacion y decision de produccion | Cada territorio tiene los siete campos de la ficha de orientacion (objetivo, idea dominante, tension, tono, principio, por donde explorar, que evitar), todos no vacios y de extension breve. Cada territorio tiene su `decision_produccion` REUSE/ADAPT/REFRESH/CREATE con racional y `necesita_validacion_inventario`. Ninguna decision se presenta como basada en datos. Las verbalizaciones ilustrativas estan etiquetadas como direccion, nunca como copy final. Ningun soporte con Produccion MAIA = No lleva copy ni pieza. | 03-copywriter, eficiencia-creativa-movistar, matriz-soportes-movistar |
+| V22 | Orientacion de comunicacion y decision de produccion | Cada territorio tiene los siete campos de la ficha de orientacion (objetivo, idea dominante, tension, tono, principio, por donde explorar, que evitar), todos no vacios y de extension breve. Cada territorio tiene su `decision_produccion` REUSE/ADAPT/REFRESH/CREATE con racional, `modo` declarado y `necesita_validacion_inventario`. Las verbalizaciones ilustrativas estan etiquetadas como direccion, nunca como copy final. Ningun soporte con Produccion MAIA = No lleva copy ni pieza. | 03-copywriter, eficiencia-creativa-movistar, matriz-soportes-movistar |
+| V23 | Uso correcto del rendimiento | Toda `decision_produccion` en `modo: con_dato` trae `evidencia_rendimiento` completa con una de las seis metricas de RESPUESTA (CTR, leads, CPL, VTR, clics, interaccion) y su semana. **Ninguna decision SOBRE UN ACTIVO se apoya en impactos, impresiones, frecuencia ni ventas** (el Planner si puede usar esas metricas para calibrar presion y mix: la prohibicion es sobre juzgar creatividades, no sobre planificar). Toda decision en `modo: cualitativo` tiene `evidencia_rendimiento: null`, `necesita_validacion_inventario: true` y un racional que no afirma estar basado en datos. Si `cobertura_informes.nivel_confianza` es bajo, ninguna decision esta en modo con_dato. El brief trae `cobertura_informes` y, si hay semanas disponibles, `rendimiento_periodo_anterior` no vacio. | informe-semanal-publicidad, eficiencia-creativa-movistar |
+| V24 | Paridad de version JSON-HTML | **[BLOQUEANTE]** Para cada agente upstream (Strategist, Planner, Copywriter), el sufijo de version del JSON coincide con el de su .docx y con el de todos sus .html. Un JSON parcheado cuyo HTML no se regenero no pasa: se devuelve al agente de origen. El Storyteller integra los HTML tal cual y no los reescribe, asi que un HTML desfasado llega intacto al comite. | 01-strategist, 02-planner, 03-copywriter |
 
 ---
 
