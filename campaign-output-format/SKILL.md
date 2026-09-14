@@ -2,7 +2,7 @@
 name: Campaign Output Format
 key: campaign-output-format
 description: Schema canónico de los artefactos que producen los Agentes B y C -- Estrategia por Canal (B) y Estrategia Creativa (C). Define formato, validación y trazabilidad al Golden Briefing.
-version: 3.0.0
+version: 3.1.0
 owner: system
 status: active
 ---
@@ -458,7 +458,13 @@ Es el bloque que se presenta al comité. El resto del Nivel 2 (bajada por canal,
         activo_referencia: "string | null"        # null solo si decision == CREATE
         racional: "string (2-3 frases)"
         matiz_por_soporte: "string | null"
-        necesita_validacion_inventario: true
+        modo: "con_dato|cualitativo"              # obligatorio. Ver eficiencia-creativa-movistar seccion 3
+        evidencia_rendimiento:                    # solo si modo == con_dato, null si cualitativo
+          metrica: "CTR|leads|CPL|VTR|clics|interaccion"
+          valor: "string"
+          creatividad: "string"                   # codigo de la pieza en el informe semanal
+          semana: "YYYY-MM-DD"
+        necesita_validacion_inventario: true      # false solo si modo == con_dato
         procedencia: { nivel: "propuesta", fuente: "string", validacion: "no_confirmado" }
 
       orientacion:
@@ -543,8 +549,12 @@ Definición completa en la sección 7 de `contexto-sistema-maia`.
 
 28. Cada campaña tiene `orientacion` con los siete campos no vacios. Cada campo es una frase: si supera las 40 palabras, se flaggea como `orientacion_demasiado_larga` con severidad baja.
 29. Cada `orientacion.idea_dominante` es propia del territorio. Ninguna promesa se repite como idea dominante en mas de un tercio de los territorios del ciclo.
-30. Cada campaña tiene `decision_produccion` con `decision`, `racional` y `necesita_validacion_inventario`. `activo_referencia` es null unicamente cuando `decision` es CREATE.
-31. Ningun `decision_produccion.racional` afirma estar basado en datos de rendimiento mientras no exista inventario de activos.
+30. Cada campaña tiene `decision_produccion` con `decision`, `racional`, `modo` y `necesita_validacion_inventario`. `activo_referencia` es null unicamente cuando `decision` es CREATE.
+31. Coherencia del modo de decision:
+    - `modo: con_dato` exige `evidencia_rendimiento` completo (metrica, valor, creatividad, semana), `necesita_validacion_inventario: false`, y que la metrica sea de respuesta: CTR, leads, CPL, VTR, clics o interaccion. Nunca impactos, impresiones, frecuencia ni ventas.
+    - `modo: cualitativo` exige `evidencia_rendimiento: null`, `necesita_validacion_inventario: true`, y que el racional NO afirme estar basado en datos de rendimiento.
+    - Si `brief.cobertura_informes.nivel_confianza` es `bajo`, ninguna decision del ciclo puede estar en `modo: con_dato`.
+    - `procedencia` es `nivel: propuesta` y `validacion: no_confirmado` en los dos modos, sin excepcion (regla transversal de la seccion 7.2 de `contexto-sistema-maia`).
 32. Cada `soportes_activos[]` referencia un soporte existente en `matriz-soportes-movistar` y tiene `mision_en_territorio` no vacia.
 33. Ningun soporte con `Produccion MAIA = No` tiene entradas en `copy_prototype`, `bajada_por_canal` ni `scoring_comunicacion`.
 34. Cada `verbalizaciones_ilustrativas[]` es una frase de territorio. Como maximo 3 por campaña. Ninguna contiene estructura de pieza (titular mas body mas CTA).
@@ -564,7 +574,8 @@ Definición completa en la sección 7 de `contexto-sistema-maia`.
 - ❌ Reglas de presion, prelacion o contact policy presentadas como decididas en lugar de como propuesta.
 - ❌ Una cifra elegida en silencio entre dos valores contradictorios del original, sin flag `dato_a_validar`.
 - ❌ Verbalizaciones ilustrativas con estructura de pieza cerrada (titular, body y CTA) presentadas como direccion.
-- ❌ Decision REUSE/ADAPT/REFRESH/CREATE presentada como basada en datos sin inventario de activos.
+- ❌ Decision REUSE/ADAPT/REFRESH/CREATE en modo cualitativo cuyo racional afirma estar basado en datos de rendimiento.
+- ❌ Decision en modo con_dato apoyada en impactos, impresiones o ventas en lugar de en una metrica de respuesta de la pieza.
 - ❌ KPIs ambiguos ("engagement", "branding") sin métrica concreta.
 
 ---
