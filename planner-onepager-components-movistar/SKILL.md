@@ -1,8 +1,8 @@
 ---
 name: Componentes One-Pager del Planner - Movistar
 key: planner-onepager-components-movistar
-description: CSS verificado para los one-pagers HTML del Maia Planner. Cubre base compartida, calendario Gantt y carga por soporte. Brief Canales aun no verificado (pendiente fixture). Corrige bugs C1 y C3 del diagnostico. No define colores propios (fuente unica en 02-planner.md).
-version: 0.1.0
+description: CSS verificado para los one-pagers HTML del Maia Planner. Cubre base compartida, calendario Gantt y carga por soporte. Brief Canales aun no verificado (pendiente fixture). Corrige bugs C1, C3 y C4 del diagnostico. No define colores propios (fuente unica en 02-planner.md).
+version: 0.2.0
 owner: client
 status: active
 depends_on: []
@@ -39,12 +39,41 @@ Idéntica en todos los one-pagers verificados -- header, subtítulo, leyenda, ba
 {{SCOPE}} .legend-item { display: flex; align-items: center; gap: 10px; }
 {{SCOPE}} .legend-icon { width: 34px; height: 34px; border-radius: 50%; background: #F5F7FA; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 {{SCOPE}} .legend-text b { display: block; font-size: 13px; color: #262423; }
-{{SCOPE}} .legend-text span { font-size: 12px; color: #6F7176; }
+{{SCOPE}} .legend-text .legend-label { font-size: 12px; color: #6F7176; }
 {{SCOPE}} .stream-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; color: #FFFFFF; margin-right: 6px; }
 {{SCOPE}} .chip { display: inline-block; background: #F5F7FA; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #262423; margin: 2px 4px 0 0; }
 {{SCOPE}} .foot { margin-top: 28px; padding-top: 14px; border-top: 1px solid #EEEEEE; font-size: 12px; color: #6F7176; display: flex; justify-content: space-between; align-items: center; }
 {{SCOPE}} .footnote { font-size: 12px; color: #6F7176; margin-top: 18px; }
 ```
+
+**Corrección respecto al output verificado (C4 del diagnóstico -- rótulo de la pastilla de stream en gris sobre fondo saturado):**
+
+La regla de la v0.1.0 era `{{SCOPE}} .legend-text span { color: #6F7176 }`, un selector genérico "cualquier `span` dentro de `.legend-text`". Como la pastilla de stream es un `<span class="stream-badge">` que vive **dentro** de ese contenedor, ese selector la alcanzaba sin querer:
+
+| Selector | Especificidad con el prefijo de scope | Resultado |
+|---|---|---|
+| `{{SCOPE}} .legend-text span` | 3 clases + 1 elemento | Gana |
+| `{{SCOPE}} .stream-badge` | 3 clases | Pierde |
+
+El `color: #FFFFFF` declarado en `.stream-badge` nunca llegaba a aplicarse y el rótulo salía en `rgb(111,113,118)` sobre azul, morado o verde. Verificado con `getComputedStyle` en Chromium sobre el deck ejecutivo de octubre (2026-09-14), no por inspección visual.
+
+**La corrección es dar clase propia al texto secundario en vez de apuntar al tipo de elemento.** Nada de `!important`: el problema era el selector, no el peso.
+
+**Regla general que se deriva de esto y que aplica a toda la skill:** dentro de un contenedor que pueda alojar una pastilla, un badge o cualquier elemento con fondo de color, **nunca se declara color sobre un tipo de elemento** (`span`, `div`, `b`). El color va siempre sobre una clase propia. Un selector de tipo alcanza descendientes que no estabas mirando y gana por especificidad al selector de clase del componente.
+
+**Marcado HTML de la leyenda** (explícito, porque la clase nueva lo hace obligatorio):
+
+```html
+<div class="legend-item">
+  <div class="legend-icon"><!-- icono --></div>
+  <div class="legend-text">
+    <b><span class="stream-badge" style="background:#0066FF;">Growth</span></b>
+    <span class="legend-label">12 territorios</span>
+  </div>
+</div>
+```
+
+**Lo que NO se resuelve aquí.** El contraste del blanco sobre algunos fondos de pastilla sigue siendo bajo aunque el color ya se aplique: blanco sobre `#00C48C` da 2,3:1 y sobre `#8B5CF6` da 3,9:1, por debajo del 4,5:1 exigible. La corrección es oscurecer esos fondos dentro del mismo tono, pero **los colores de stream viven solo en `02-planner.md`** y esta skill no crea una segunda fuente de verdad sobre ellos. Queda registrado aquí como dato para que se decida allí.
 
 ### Responsive (nuevo -- ninguno de los one-pagers verificados lo traía)
 
@@ -179,4 +208,14 @@ Implementa `02-planner.md` líneas 402-431.
 
 - **Brief Canales por sub-corriente** (`brief_canales_territorio_<subcorriente>_v<N>.html`): no verificado contra ningún output real todavía -- no tengo un fixture de este fichero. La prosa de `02-planner.md` líneas 342-386 sigue siendo la única referencia hasta que se verifique un output real y se añada aquí.
 - **Colores por territorio y por stream**: intencionadamente no repetidos aquí -- viven solo en `02-planner.md` para no crear una segunda fuente de verdad.
-- Activada como `status: active` en v0.1.0. El Maia Planner la carga con fallback graceful (si no esta disponible, usa la prosa de `02-planner.md` como antes).
+- **Contraste de los fondos de pastilla de stream**: diagnosticado aquí (sección 1, corrección C4) pero no corregido aquí. Los valores hex son decisión de `02-planner.md`.
+- Activada como `status: active`. El Maia Planner la carga con fallback graceful (si no esta disponible, usa la prosa de `02-planner.md` como antes).
+
+---
+
+## 5. Historial
+
+| Version | Fecha | Cambio |
+|---|---|---|
+| 0.1.0 | 2026-09-03 | Version inicial. Base compartida, Gantt y carga por soporte. Corrige C1 y C3 |
+| 0.2.0 | 2026-09-15 | Corrige C4: el selector `.legend-text span` alcanzaba la pastilla de stream y le ganaba por especificidad, dejando el rotulo en gris sobre fondo saturado. Se sustituye por `.legend-text .legend-label` y se documenta la regla general de no declarar color sobre tipos de elemento. Se deja registrado el contraste insuficiente de dos fondos de stream, cuya correccion corresponde a `02-planner.md` |
