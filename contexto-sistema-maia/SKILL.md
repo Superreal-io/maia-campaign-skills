@@ -2,7 +2,7 @@
 name: Contexto del Sistema MAIA Campaign
 key: contexto-sistema-maia
 description: Contexto compartido que todos los agentes cargan. Describe el ecosistema multi-agente, la cadena de trabajo, las gates, las convenciones y las reglas transversales.
-version: 5.4.0
+version: 5.5.0
 owner: system
 status: active
 loaded_by: todos los agentes (Maia Strategist, Maia Planner, Maia Copywriter, Maia Art Director, Maia Campaign Manager, Maia Storyteller)
@@ -232,7 +232,7 @@ Toda afirmación con valor informativo lleva un bloque `procedencia`. Una afirma
 ```
 
 - **`nivel`**: uno de los tres de la tabla 7.1. Obligatorio.
-- **`fuente`**: de dónde sale, con precisión suficiente para que un humano lo verifique. "PPT Growth octubre, slide 12", "Trend Flash Fútbol 2026-10", "Xataka Móvil, 2026-09-02", "Recomendación Maia Planner". Nunca "el brief" a secas ni "análisis interno".
+- **`fuente`**: de dónde sale, con precisión suficiente para que un humano lo verifique. "PPT Growth octubre, slide 12", "Trend Flash Fútbol 2026-10", "Xataka Móvil, 2026-09-02", "Recomendación Maia Planner". Nunca "el brief" a secas ni "análisis interno". Un resumen del plan (resumen ejecutivo, documento Copilot) no es la fuente de un dato: es un índice, y el dato se busca y se cita en la página del documento del área.
 - **`validacion`**: `confirmado` si la fuente es firme y no hay contradicción conocida; `a_validar` si hay discrepancia entre fuentes o el propio original se contradice (ver 7.3); `no_confirmado` si es una propuesta que nadie ha aprobado todavía. Toda afirmación de nivel `propuesta` es `no_confirmado` hasta que un gate humano la apruebe.
 
 ### 7.3 Flag `dato_a_validar`
@@ -266,6 +266,10 @@ La procedencia nace en el Maia Strategist, que es el punto de entrada de los dat
 | Maia Art Director | Todo lo suyo es `propuesta` por definición: produce hipótesis visuales, nunca decisiones. |
 | Maia Campaign Manager | Audita. Ninguna afirmación con valor informativo puede llegar al cierre sin `procedencia`. Ver criterios V19 y V20 de `validacion-maia-checklist`. |
 | Maia Storyteller | Renderiza los badges y los flags. No reclasifica: si un dato llega con `nivel: propuesta`, se presenta como propuesta aunque parezca sólido. |
+
+**[BLOQUEANTE] Regla de fuente literal:** cuando un agente hereda un dato, hereda también su `fuente` tal cual, con el documento original y la página. Ningún documento producido por el propio sistema (Golden Briefing, Media Strategy, estrategia creativa, one-pagers) es una fuente válida. Citar "Golden Briefing, corrientes de demanda" como fuente de un Plan área rompe la trazabilidad: el nivel sobrevive pero ya nadie puede comprobar de dónde salió el dato, y un insight mal etiquetado aguas arriba llega a la versión final como si lo hubiera declarado el área.
+
+**[BLOQUEANTE] Regla de afirmación, no de bloque:** la procedencia se asigna a cada afirmación. Una frase de `insight_estrategia` escrita dentro de un bloque `plan_area` no se convierte en plan del área por estar ahí. Si un agente encuentra un bloque de plan con una frase que no está en la fuente citada, la trata con el nivel más bajo que le corresponda y lo señala.
 
 **Regla de no degradación:** ningún agente puede subir el nivel de una afirmación. Una `propuesta` no se convierte en `plan_area` porque el agente siguiente la dé por buena. Solo un gate humano puede promocionarla, y cuando lo hace queda registrado en el `review_log.json`.
 
