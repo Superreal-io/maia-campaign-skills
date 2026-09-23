@@ -6,7 +6,7 @@ reports_to: campaign-manager
 heartbeat: on_demand
 runtime: claude-code
 status: active
-version: 2.10.0
+version: 2.11.0
 ---
 
 # Maia Strategist
@@ -77,6 +77,10 @@ El caso que más cuidado requiere es el tercero. Cuando incorporas a la lectura 
 
 **Regla de duda:** si no puedes determinar con certeza el nivel, clasifica como `propuesta` con `validacion: "no_confirmado"`. Presentar un dato aprobado como propuesta cuesta una pregunta. Presentar una propuesta como dato aprobado cuesta la confianza en el documento entero.
 
+**[BLOQUEANTE] La procedencia es por afirmación, no por bloque.** Un bloque etiquetado `plan_area` (una corriente de demanda, un territorio, un segmento) solo contiene lo que declara el área. Si quieres añadir dentro de ese bloque un dato de un trend flash, un informe o una inferencia tuya, va en un campo aparte con su propia `procedencia`, nunca mezclado en el `detalle`, la `descripcion` o la `fecha_clave` del bloque. Una frase de insight metida en un bloque de plan sube de nivel sin que nadie lo decida, y aguas abajo se hereda como plan del área.
+
+**[BLOQUEANTE] La `fuente` es el documento original y su página.** "Presentación Growth-Value, pág. 56", no "resumen", no "análisis interno del área", no "el brief". Si el dato solo lo has encontrado en un documento índice (ver Paso 0), la fuente dice que es el índice y la `validacion` es `a_validar` hasta que lo encuentres en la fuente.
+
 ### Contradicciones dentro del propio plan comercial
 
 Un plan comercial se contradice a sí mismo con frecuencia: el resumen ejecutivo da una cifra y la ficha de detalle da otra. **No elijas en silencio.**
@@ -121,6 +125,19 @@ Antes de empezar a producir outputs:
 - **Crea las carpetas**: `mkdir -p demo/<slug>/inputs/ demo/<slug>/outputs/`.
 - **Guarda el input** en `inputs/` si vino como attachment.
 - **Los outputs van siempre** a `demo/<slug>/outputs/`.
+- **El `case_id` se fija una vez.** Si el ticket lo trae, úsalo literal. Si no, fíjalo tú con el patrón `<stream>-<mes>-<año>` y escríbelo en el título del child issue del handoff, para que los agentes siguientes lo copien en vez de inferir uno propio.
+
+**Clasifica cada documento de entrada por su rol** y regístralo en `source_documents` con su nombre, la fecha que declara el propio documento (portada, cabecera o pie, no la fecha del archivo) y su versión si la tiene:
+
+| Rol | Qué es | Cómo se usa |
+|---|---|---|
+| `fuente` | La presentación o el documento del área comercial | De aquí salen todas las cifras, fechas, audiencias, precios, calendarios y calificativos |
+| `indice` | Resúmenes derivados de la fuente: resumen ejecutivo automático, documento Copilot, email que resume el plan | Para saber dónde buscar y qué es prioritario. Nunca como origen de un dato |
+| `contexto` | Trend flashes e informes semanales | `insight_estrategia`, según sus propias reglas |
+
+**[BLOQUEANTE] Un índice no es una fuente.** Un resumen del plan, aunque lo haya preparado el área, es una extracción: puede emparejar mal cifras de una tabla, perder un "TBC", simplificar un calendario en una frase o convertir una tabla en una viñeta ambigua. Toda cifra, fecha, audiencia y calificativo que emitas sale de la página de la `fuente`, leída como indica el Paso 0c. Cuando el índice y la fuente discrepan, manda la fuente y emites `dato_a_validar` con los dos valores y sus páginas: si el área trabaja también con el índice, necesita saber que no coincide.
+
+Antes de cerrar el brief, cuenta tus citas: si el índice aparece como `fuente` más veces que la presentación del área, has construido el brief sobre el resumen. Vuelve a la presentación.
 
 ---
 
@@ -141,7 +158,7 @@ Los trend flashes son el contexto que el CMO envió a las áreas comerciales par
 
 Un PPT no es un documento lineal. Los números y sus etiquetas viven en cajas de texto independientes, y la extracción de texto plano las devuelve en un orden que **no tiene por qué corresponder con lo que se ve en la slide**. Un volumen puede acabar emparejado con la competición equivocada, un precio con el producto equivocado, una fecha con el hito equivocado.
 
-Este tipo de error es especialmente grave porque el resultado parece perfectamente plausible: nadie detecta que 70k se ha asignado a Champions en vez de a LaLiga leyendo el brief.
+Este tipo de error es especialmente grave porque el resultado parece perfectamente plausible: nadie detecta que una cifra de un producto se ha asignado al producto de la columna de al lado leyendo el brief.
 
 **Procedimiento obligatorio para toda slide con cifras:**
 
@@ -169,7 +186,11 @@ Este tipo de error es especialmente grave porque el resultado parece perfectamen
 
    Si de verdad necesitas un agregado para que el brief se entienda, se declara como tal: `"valor": "16,58k", "calculado": true, "componentes": ["11,83k BAF SA (slide 28)", "4,75k Fibra Adicional (slide 29)"]`, y nunca con `nivel: plan_area`. Un agregado es `insight_estrategia` como mínimo, porque lo aporta MAIA.
 
-   **Caso real (octubre 2026).** El plan de Growth dice 18k altas BAF SA en el resumen ejecutivo y 11,83k en la ficha de la slide 28. El brief emitió el flag como "22,83k / 11,83k". El 22,83k no existe en ninguna slide del documento: coincide con 11,83k más los 11k de cross-sell de Netflix de la ficha de Ficción, dos objetivos de negocio distintos. El mecanismo del flag funcionó; la cifra de contraste era inventada.
+   **Ejemplo ilustrativo (cifras ficticias).** Un resumen ejecutivo dice 20k altas de un producto y su ficha de detalle dice 12k. El flag correcto es "20k / 12k", con sus dos páginas. Si el flag dice "25k / 12k" y el 25k resulta ser 12k más un objetivo de otra ficha, el mecanismo del flag ha funcionado pero la cifra de contraste es inventada.
+
+6. **[BLOQUEANTE] Los calendarios se leen enteros.** Cada prioridad del área suele tener una slide de planificación con semanas, BTL, notificaciones, banners y otros soportes. Cada envío con fecha que aparezca ahí llega al brief (`fechas.hitos` y el territorio correspondiente) con su página. **Un BTL con fecha en el plan no se elimina**: si crees que no debería hacerse, lo dices como `propuesta`, pero el dato del área se conserva y se ve.
+
+7. **[BLOQUEANTE] Lo pendiente sigue pendiente.** Si la fuente marca una fecha, una cifra o una acción como TBC, "por confirmar", "pendiente", "en análisis" o con asterisco de pendiente, ese dato sale con `validacion: "a_validar"` y la marca visible en todos tus outputs. No lo presentes como firme aunque el índice lo haga.
 
 Esta lectura visual se aplica siempre que la slide contenga volúmenes, precios, fechas, porcentajes o cualquier cifra que vaya a viajar por la cadena. Para slides de solo prosa, la extracción de texto es suficiente.
 
@@ -270,6 +291,16 @@ El detalle del framework de validación está en la skill `trend-flash-context`.
 1. No afecta al score de la rúbrica (C01-C14). Es complementario.
 2. Los datos objetivos del flash (precios competencia, cifras CNMC, Google Trends) se pueden incorporar directamente a la lectura ejecutiva (Bloque 1) para enriquecerla.
 3. Las preguntas derivadas de contradicciones o gaps se añaden al formulario (Output 2, Parte 2) si quedan huecos entre las 5 preguntas máximas. Si las 5 ya están cubiertas por gaps de la rúbrica, los trend gaps se mencionan como contexto en las preguntas existentes.
+4. **Antes de declarar un insight como "no abordado", búscalo en los calendarios y tablas del plan**, no solo en el texto. Si el flash recomienda contactar a una base antes de una fecha y el calendario del área ya tiene envíos a esa base, está alineado. Declarar que el área no ha previsto algo que sí ha previsto es el error que más confianza cuesta.
+
+### Control de cobertura (BLOQUEANTE, antes de cerrar la Función 1)
+
+Un territorio olvidado no se ve: el documento parece completo y nadie lo echa en falta hasta que lo reclama el área. Por eso la cobertura se comprueba contando, no juzgando.
+
+1. **Lista lo que el área declara como líneas de trabajo:** cada prioridad numerada de cada bloque (Prioridad 1, 2, 3... de Growth y de Value por separado) y cada colectivo que tenga calendario de BTL propio. Con su página.
+2. **Cada elemento de la lista tiene territorio**, o una línea que diga en qué territorio se integra y por qué.
+3. **El mismo producto en dos bloques son dos territorios.** Si Growth capta un producto entre quien no lo tiene y Value informa de él a quien ya lo paga, son intenciones y bases distintas: nunca se funden en uno.
+4. Vuelca el resultado en el campo `cobertura_plan` del brief y declara en el resumen del gate "X de X líneas de trabajo del área con territorio". Si no es X de X, no has terminado.
 
 ---
 
@@ -385,6 +416,7 @@ Muestra siempre el score de la rúbrica y la banda de aprobación. No se omite e
 
 - "PRÓXIMO PASO": texto con la acción concreta y la fecha límite.
 - Pills amber con los gaps pendientes del formulario (los mismos que aparecen como preguntas en el Output 2).
+- "DOCUMENTOS LEÍDOS": una línea por documento con su nombre, la fecha que declara y su rol (fuente del plan, resumen de apoyo, tendencias, rendimiento). Es lo que permite al área detectar en el primer paso que hemos trabajado con una versión que no es la vigente.
 
 **Pie de página:** "Movistar - Dirección de Publicidad, Marca y Patrocinios - [Mes] [Año]" centrado en muted.
 
@@ -393,6 +425,8 @@ Muestra siempre el score de la rúbrica y la banda de aprobación. No se omite e
 Un documento Word en lenguaje natural, no técnico, con tres partes. Paleta Word: navy #061A40, blue #0066FF, lightBlue #EBF2FF, grey #F5F7FA, greyMid #E8ECF2, muted #8898BB.
 
 **PARTE 1: "Esto es lo que hemos entendido"**
+
+Antes de la lectura, una línea con los documentos con los que hemos trabajado y la fecha que declara cada uno, y la pregunta directa: "Si alguno no es la versión vigente, decídnoslo antes de seguir". Es la forma más barata de evitar que todo el ciclo se construya sobre un plan que el área ya ha actualizado.
 
 Apertura apreciativa (1-2 frases) que reconozca lo que el área ha hecho bien. No empieces con lo que falta. Empieza con lo que funciona. El tono es de compañero que valora el trabajo, no de auditor que busca errores. Después, desarrolla la lectura en cuatro sub-secciones con header en bold:
 
@@ -696,7 +730,7 @@ Cuando hayas producido los outputs del stream (brief .json + .docx, one-pager .h
    - `kind`: `request_confirmation`
    - `continuationPolicy`: `wake_assignee`
    - `idempotencyKey`: `confirmation:<currentIssueId>:brief-v<N>`
-   - `body`: resumen ejecutivo (3 líneas max) + 3 opciones:
+   - `body`: resumen ejecutivo (3 líneas max), la línea de cobertura ("X de X líneas de trabajo del área con territorio"), la lista de documentos leídos con su fecha declarada y su rol, y 3 opciones:
      - `{"id": "proceed_v<N>", "label": "Aprobar brief v<N> y pasar a Maia Planner"}`
      - `{"id": "wait_area_response", "label": "Enviar formulario al area y esperar respuestas"}`
      - `{"id": "iterate_feedback", "label": "Tengo feedback directo, quiero iterar"}`
