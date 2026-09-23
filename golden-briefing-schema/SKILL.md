@@ -2,7 +2,7 @@
 name: Golden Briefing Schema
 key: golden-briefing-schema
 description: Schema canonico del Golden Briefing. Artefacto que el Strategist produce y que los Agentes B, C y D consumen como ground truth. Versionado, JSON-parseable, trazable. Un Golden Briefing por stream.
-version: 3.1.0
+version: 3.2.0
 owner: agente-a
 status: active
 ---
@@ -39,8 +39,23 @@ brief:
   source_documents:
     - filename: "string"
       format: "pptx|xlsx|docx|pdf|md|email"
+      rol: "fuente|indice|contexto"          # fuente = documento del área; indice = resumen derivado; contexto = flashes e informes
+      fecha_documento: "string|null"         # la que declara el propio documento (portada, cabecera), no la del archivo
+      version: "string|null"                 # si el documento la declara
       pages_referenced: "string"            # ej. "1-12" o "todo"
+      citas_como_fuente: 0                   # cuántas afirmaciones del brief lo citan como fuente
       hash: "sha256:..."
+
+  # Control de cobertura: cada línea de trabajo declarada por el área tiene territorio
+  cobertura_plan:
+    lineas_declaradas:
+      - bloque: "growth|value|dispositivos"
+        linea: "string"                      # ej. "Prioridad 5" o "colectivo X con calendario de BTL propio"
+        fuente: "string"                     # documento y página
+        territorio: "string|null"            # territorio que la cubre
+        integrada_en: "string|null"          # si no tiene territorio propio, en cuál se integra
+        motivo_integracion: "string|null"
+    resumen: "string"                        # ej. "14 de 14 líneas de trabajo con territorio"
 
   # ── Bloque 1: Lectura estratégica ──
 
@@ -275,10 +290,12 @@ Antes de publicar un Golden Briefing, valida:
 8. `jerarquia_territorios` tiene al menos 1 entrada con prioridad "alta".
 9. `rol_canales` tiene al menos 2 entradas con `mision` no vacia.
 10. Si `decisiones_pendientes` tiene entradas `bloqueante: true`, el `approval.status` no puede ser `approved` sin nota explicita del humano.
-11. `source_documents` tiene al menos 1 entrada.
+11. `source_documents` tiene al menos 1 entrada, y al menos una con `rol: fuente`.
 12. Si `versión > 1`, `previous_version` apunta a un Brief valido y hay entrada en `change_log`.
 13. `linked_outputs.estrategia_one_pager` y `linked_outputs.formulario_area` apuntan a archivos existentes.
 14. Todas las `evidence` referencian el documento fuente de forma trazable.
+15. Ninguna afirmación de nivel `plan_area` tiene como `fuente` un documento de `rol: indice` con `validacion: confirmado`. Si solo está en el índice, es `a_validar`.
+16. `cobertura_plan.lineas_declaradas`: toda entrada tiene `territorio` o `integrada_en`. Una línea sin ninguno de los dos invalida el brief.
 
 ## Mantenimiento
 
