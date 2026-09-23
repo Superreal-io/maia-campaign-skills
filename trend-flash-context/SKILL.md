@@ -1,7 +1,7 @@
 ---
 key: trend-flash-context
 name: "Contexto de Tendencias (Flash mensual)"
-version: 1.1.0
+version: 1.2.0
 status: active
 consumer_agents:
   - strategist
@@ -88,6 +88,8 @@ Insights (💡), oportunidades o riesgos del flash que el área **no mencionó**
 - **Por qué importa**: impacto potencial en la estrategia de comunicación.
 - **Acción sugerida**: preguntar al área en el formulario, o incorporar directamente al Golden Briefing si es dato de mercado objetivo (precios competencia, datos CNMC, señales de búsqueda).
 
+**[BLOQUEANTE] Antes de marcar algo como no abordado, búscalo en los calendarios y tablas del plan**, no solo en su texto. Una recomendación del flash del tipo "contactar a una base antes de una fecha" está alineada si el calendario del área ya tiene envíos a esa base en esa ventana, aunque ninguna frase lo diga. Afirmar que el área no ha previsto algo que sí tiene en su calendario es el error que más confianza cuesta.
+
 Regla: los datos objetivos (cifras CNMC, precios publicados, señales Google Trends) se incorporan al Golden Briefing directamente. Las decisiones estratégicas (priorización, foco, mecánica) se preguntan al área en el formulario.
 
 ### 3. CONTRADICE
@@ -102,33 +104,36 @@ Elementos del briefing que van en dirección opuesta a lo que el flash señala. 
 
 El bloque se añade al JSON como campo `trend_alignment` dentro del Golden Briefing:
 
+> **Los ejemplos de esta skill son ficticios a propósito.** Productos, cifras y fechas son inventados y no corresponden a ningún mes real. No uses su contenido como dato ni como conclusión sobre el plan que estás leyendo: cada mes, el bloque se construye solo a partir de los flashes y del plan adjuntos al ticket.
+
 ```json
 {
   "trend_alignment": {
-    "period": "2026-10",
+    "period": "AAAA-MM",
     "flashes_loaded": ["territorios", "convergencia", "fibra", "futbol"],
-    "summary": "3 de 7 recomendaciones del flash abordadas. 2 insights clave no recogidos. 1 posible contradicción.",
+    "summary": "3 de 7 recomendaciones del flash abordadas. 2 insights no recogidos. 1 posible contradicción.",
     "aligned": [
       {
-        "flash": "convergencia",
-        "trend": "Octubre es mes bisagra en convergencia, intensidad alta",
-        "briefing_ref": "Slide 4: priorización de paquete Fusión en octubre"
+        "flash": "fibra",
+        "trend": "Producto A gana tracción en segunda vivienda",
+        "briefing_ref": "Presentación del área, pág. 12: prioridad 2, producto A"
       }
     ],
     "not_addressed": [
       {
         "flash": "convergencia",
-        "insight": "La factura de octubre es la primera completa del pack de fútbol (117 EUR vs 67 EUR promo). Mes de defensa de cartera premium.",
-        "impact": "Riesgo de churn en premium si no se anticipa con contacto proactivo",
-        "action": "incorporate",
-        "data": "Escalón de precio de 67 a 117 EUR desde septiembre (Xataka Móvil, ago-2026)"
+        "insight": "Ejemplo ficticio: el producto B cambia de condiciones este mes y la base puede percibirlo como subida.",
+        "impact": "Riesgo de baja si la base no entiende el cambio",
+        "action": "ask_area",
+        "data": "Fuente del flash con fecha (ejemplo ficticio)",
+        "comprobado_en_calendario": "Sin envíos a esa base en las págs. 40-42 del plan"
       }
     ],
     "contradicts": [
       {
-        "briefing_says": "Priorizar captación en segunda quincena",
-        "flash_says": "Segunda quincena tiene techo por efecto espera de Black Friday. Cerrar entre el 1 y el 18.",
-        "question_for_area": "El flash de tendencias indica que la segunda quincena pierde tracción por la espera a Black Friday. Tenéis alguna razón para concentrar ahí el esfuerzo?"
+        "briefing_says": "Concentrar la captación de producto C en la última semana",
+        "flash_says": "La última semana pierde tracción por un evento comercial posterior",
+        "question_for_area": "El flash señala que la última semana pierde tracción. ¿Tenéis alguna razón para concentrar ahí el esfuerzo?"
       }
     ]
   }
@@ -151,7 +156,7 @@ Las preguntas del formulario pueden referenciar datos del flash para ser más pr
 
 Preguntar:
 
-> "El flash de tendencias marca convergencia como el eje del mes (intensidad interna alta) y señala que la segunda quincena pierde fuerza por la espera a Black Friday. Coincidís con esta lectura o veis el mes de otra manera?"
+> "El flash de tendencias marca [vertical] como el eje del mes y señala que [ventana] pierde fuerza. ¿Coincidís con esta lectura o veis el mes de otra manera?"
 
 Esto demuestra al área que el equipo de Comunicación maneja el mismo contexto que ellos recibieron del CMO, y eleva el nivel de la conversación.
 
@@ -162,3 +167,4 @@ Esto demuestra al área que el equipo de Comunicación maneja el mismo contexto 
 - Si un flash menciona "plan de inversión interno" o "señales internas de demanda", son referencias a datos de Havas/Movistar. El Strategist no tiene acceso a esos datos subyacentes; usa la lectura direccional del flash tal cual.
 - Los flashes pueden contener errores o estar desactualizados. Si el briefing del área contradice un flash con datos más recientes, el briefing prevalece. La contradicción se registra pero no se penaliza.
 - El bloque `trend_alignment` NO afecta al score de la rúbrica (C01-C14). Es información complementaria, no un criterio de evaluación adicional.
+- Cada entrada de `not_addressed` lleva `comprobado_en_calendario`: las páginas del plan donde has buscado y no has encontrado la acción. Sin ese campo, la entrada no es válida.
