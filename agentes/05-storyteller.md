@@ -6,7 +6,7 @@ reports_to: human-comunicacion
 heartbeat: on_demand
 runtime: claude-code
 status: active
-version: 6.7.0
+version: 6.7.2
 ---
 
 # Maia Storyteller
@@ -159,9 +159,17 @@ Si hay **varias** imágenes con prefijo `portada`, usa la primera por orden alfa
 
 Una fotografía de fondo es un fondo de luminancia variable: el texto que funciona sobre una zona oscura de la imagen desaparece sobre una zona clara. Tres reglas, las tres verificables:
 
+0. **Las opacidades del velo no se retocan.** Son las del template y punto. La tentación es bajarlas para que la fotografía luzca más, y el resultado se ve bien en el monitor de quien lo hace: en el ciclo de octubre salieron en `.62 / .50 / .35 / .22` en vez de `.94 / .84 / .56 / .42`, con el texto a **2,9:1**. Un deck que se proyecta en una sala o se abre en un móvil a media luz no perdona eso. Si la fotografía parece apagada, se cambia la fotografía, nunca el velo.
 1. **Velo direccional, no velo plano.** Sobre las imágenes va un `linear-gradient` que es opaco donde vive el texto y se abre donde no lo hay, no un `rgba()` uniforme. Con el texto alineado a la izquierda: `linear-gradient(100deg, rgba(38,36,35,.92) 0%, rgba(38,36,35,.82) 48%, rgba(38,36,35,.55) 78%, rgba(38,36,35,.42) 100%)`. Un velo plano obliga a elegir entre texto legible y fotografía visible; el degradado da las dos cosas.
 2. **La leyenda de procedencia va sobre superficie opaca propia.** Los badges `.proc` están diseñados contra fondo claro y `proc-plan` es negro Movistar: sobre una foto oscura desaparece. La leyenda del hero se envuelve en un panel `background:rgba(255,250,245,.95); border-radius:14px; padding:14px 18px; display:inline-flex` con texto en negro Movistar. **Nunca se recolorean los badges para que contrasten con la foto**: sus colores son la clave de lectura de todo el documento y tienen que ser los mismos en la portada y en la página 40.
-3. **Varias imágenes, un solo lienzo.** Si el cliente aporta dos o más fotografías para el hero, se reparten el ancho en un `flex` sobre fondo negro Movistar, todas con `object-fit:cover`. Se equilibran por peso visual, no por número: la imagen con más detalle o más rostros lleva algo más de ancho (`flex:1.15` frente a `flex:.85`). Ninguna mitad lleva fondo blanco: un panel blanco bajo un velo oscuro se ve como una mancha gris. Ajusta `object-position` para que ningún rostro ni ningún producto quede cortado por la mitad.
+3. **El titular no invade la mitad abierta del velo.** Un velo direccional solo funciona si el texto se queda en la parte opaca. El titular de portada lleva `max-width:24ch`: sin ese límite se estira hasta el borde derecho, cae sobre la fotografía sin velar y el blanco baja a 4,08:1. Con él sube a 6,97:1 y el titular ocupa dos líneas, que además lee mejor a ese cuerpo.
+4. **En pantalla estrecha el velo deja de ser direccional.** Por debajo de 700px el texto ocupa todo el ancho, así que la mitad abierta del degradado cae justo debajo de las últimas líneas y el contraste se hunde a 4,33:1. El velo pasa a vertical y uniforme, y vuelve a 10,7:1. La fotografía pierde protagonismo en móvil, que es el intercambio correcto: en una pantalla de 480px el texto es lo único que se lee.
+
+**Las hojas de los fragmentos están escritas para escritorio.** Declaran `min-width` fijos y retículas de dos columnas que por debajo de 520px sacan la página de la pantalla, y sus selectores llevan `id`, así que no hay forma de ganarles por especificidad. El template lleva una guardia de viewport estrecho que neutraliza esos mínimos y colapsa las retículas a una columna, con `!important` y solo dentro de ese media query. Es el único sitio del template donde `!important` se usa para ganarle a una hoja ajena, y está ahí porque el peso es la herramienta correcta cuando el otro selector tiene un `id`. Los demás `!important` del template son de otra naturaleza y no se tocan: forzar los colapsables abiertos al imprimir, ocultar lo filtrado y fijar el color de las pastillas. Por encima de 520px no toca nada.
+
+**Verificación obligatoria del hero.** El contraste se mide sobre las **cajas reales de cada línea de texto**, no sobre el contenedor: medir el bloque entero incluye zonas vacías a la derecha y da un resultado peor que la realidad, lo que lleva a oscurecer la foto sin necesidad. Se comprueba a 1440, 1280, 1024, 768, 600, 480 y 360px, y el mínimo es 4,5:1 en todos.
+
+5. **Varias imágenes, un solo lienzo.** Si el cliente aporta dos o más fotografías para el hero, se reparten el ancho en un `flex` sobre fondo negro Movistar, todas con `object-fit:cover`. Se equilibran por peso visual, no por número: la imagen con más detalle o más rostros lleva algo más de ancho (`flex:1.15` frente a `flex:.85`). Ninguna mitad lleva fondo blanco: un panel blanco bajo un velo oscuro se ve como una mancha gris. Ajusta `object-position` para que ningún rostro ni ningún producto quede cortado por la mitad.
 
 **Verificación.** Antes de cerrar, renderiza la portada a 1440px y compruébala mirándola, no solo por código. Lo que no se lee en esa captura no se lee en la sala.
 
@@ -474,7 +482,7 @@ main{max-width:1280px; margin:0 auto;}
 }
 /* Hero de seccion: titular a la izquierda, subtitulo a la derecha */
 .sec-hero{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(20px,4vw,56px); align-items:center; margin-bottom:clamp(28px,4vw,48px);}
-.section-title{font-size:var(--fs-section); font-weight:500;}
+h1.section-title{font-size:var(--fs-section); font-weight:500;}
 .section-kicker{font-size:var(--fs-lead); color:var(--muted); margin:0;}
 
 /* ---------- PORTADA ---------- */
@@ -485,7 +493,16 @@ main{max-width:1280px; margin:0 auto;}
 #portada .p-veil{position:absolute; inset:0;
   background:linear-gradient(100deg, rgba(38,36,35,.94) 0%, rgba(38,36,35,.84) 48%, rgba(38,36,35,.56) 78%, rgba(38,36,35,.42) 100%);}
 #portada .p-body{position:relative; width:100%;}
-#portada h1{font-size:var(--fs-hero); color:#fff; margin-bottom:10px;}
+/* En pantalla estrecha el texto ocupa TODO el ancho, asi que el velo direccional
+   deja de servir: la mitad abierta cae justo debajo del texto y el blanco baja a
+   4,33:1. Por debajo de 700px el velo pasa a vertical y uniforme. */
+@media (max-width:800px){
+  #portada .p-veil{background:linear-gradient(180deg, rgba(38,36,35,.92) 0%, rgba(38,36,35,.88) 60%, rgba(38,36,35,.84) 100%);}
+}
+#portada h1{font-size:var(--fs-hero); color:#fff; margin-bottom:10px; max-width:24ch;}
+/* El titular no invade la mitad abierta del velo: ahi el fondo es la foto y el
+   blanco baja de 4,5:1. El texto vive donde el velo es opaco; la foto respira
+   donde no hay texto. Medido: 4,08:1 sin limite, 6,97:1 con el. */
 #portada .p-sub{font-size:var(--fs-lead); font-weight:600; color:#F1EEE9; margin:0 0 18px;}
 #portada .p-lead{max-width:62ch; color:#F1EEE9; margin:0;}
 
@@ -643,6 +660,11 @@ details.territorios-apoyo > summary{background:var(--card-bg); border-radius:var
 /* La cabecera se pega POR DEBAJO del rotulo del fragmento, que tambien es sticky */
 table.t-sticky-page thead th{position:sticky; top:calc(var(--stick, var(--nav-h)) + var(--label-h)); z-index:5; background:#F5F7FA;}
 table.t-sticky-box thead th{position:sticky; top:0; z-index:5; background:#F5F7FA; box-shadow:0 1px 0 rgba(0,0,0,.14);}
+/* La hoja propia del fragmento puede ganar por especificidad a las dos reglas de
+   arriba y dejar la cabecera fija TRANSPARENTE: se ve pasar el contenido por debajo.
+   Se sube la especificidad; el script deja ademas una red de seguridad. */
+.agent-deliverable table.t-sticky-page thead th,
+.agent-deliverable table.t-sticky-box thead th{background:#F5F7FA;}
 .t-wrap{max-width:100%;}
 .t-wrap[style*='auto']{border-radius:10px; border:1px solid var(--line);}
 
@@ -678,12 +700,6 @@ span[class*="badge"][style*="background:#"]{
   @page{size:A4 landscape; margin:1cm;}
   body{padding-top:0;}
   .topnav,.filtros{display:none;}
-  /* Al imprimir no hay scroll ni JS: toda barra fija vuelve a flujo normal.
-     weasyprint no ejecuta el script, asi que --stick nunca se calcula. */
-  .substream-header,.agent-deliverable-label,
-  table.t-sticky-page thead th,table.t-sticky-box thead th{position:static !important;}
-  .tbl-wrap{overflow:visible !important; max-height:none !important;}
-  .area-block[hidden]{display:block !important;}
   .doc-section{break-inside:avoid-page;}
   details.deep-dive > summary::after, .ficha-detalle > summary::after{display:none;}
   details.deep-dive > div, .ficha-detalle > .fd-body{display:block !important;}
@@ -707,6 +723,25 @@ a:focus-visible{
 .chip-filtro[aria-pressed="true"]:focus-visible,
 .navpill a[aria-current="true"]:focus-visible{outline-color:var(--movistar-black);}
 summary:focus-visible{outline-offset:2px;}
+
+/* Un hijo de grid o de flex no baja de su contenido por defecto (min-width:auto),
+   asi que en pantalla estrecha las retículas de los fragmentos integrados revientan
+   el ancho de la pagina. En el deck de octubre eran las tarjetas de cifra del
+   resumen estrategico: dos columnas de 166px dentro de un contenedor de 172px.
+   Va con :where() para especificidad cero: cualquier regla propia del fragmento gana. */
+.agent-deliverable :where(*){min-width:0;}
+
+/* Guardia de viewport estrecho. Las hojas de los fragmentos estan escritas para
+   escritorio y declaran min-width fijos (320px, 280px) y retículas de dos columnas
+   que a 360px sacan la pagina de la pantalla. Sus selectores llevan id, asi que no
+   hay forma de ganarles por especificidad: aqui, y solo por debajo de 520px, el
+   peso es la herramienta correcta. No se toca nada por encima de ese ancho. */
+@media (max-width:520px){
+  .agent-deliverable *{min-width:0 !important;}
+  .agent-deliverable [class*="grid"],
+  .agent-deliverable [class*="tiles"],
+  .agent-deliverable [class*="cols"]{grid-template-columns:minmax(0,1fr) !important;}
+}
 ```
 
 ### Skeleton HTML
@@ -916,7 +951,7 @@ summary:focus-visible{outline-offset:2px;}
 
 ---
 
-## Capa visual v6.7.0: las seis reglas que no se negocian
+## Capa visual v6.7.0: las siete reglas que no se negocian
 
 Estas reglas salieron de construir y medir el prototipo. Cada una corrige un fallo real que se detectó renderizando, no leyendo.
 
@@ -941,6 +976,8 @@ El texto de lectura a 16 píxeles es correcto en cualquier pantalla. Hacerlo 19 
 ### 3. [BLOQUEANTE] Ningún estilo inline puede referenciar una variable CSS
 
 `style="background:var(--growth-accent)"` es una bomba de relojería: si la hoja cambia y ese token deja de existir, `var()` se resuelve como vacío, el fondo pasa a transparente y **no hay error, ni aviso, ni nada en consola**. En el prototipo aparecieron **49 estilos inline huérfanos** heredados del ciclo anterior; el que se notó fue el de la banda de sub-corriente, porque al hacerse fija dejó de tapar lo que pasaba por debajo.
+
+La variante peligrosa de lo mismo es la hoja propia del fragmento integrado: sus selectores llevan su propio prefijo de scope y pueden **ganar por especificidad** a los del deck. En octubre dejó 63 cabeceras de tabla fijas y **transparentes**, con el contenido pasando por debajo del texto. Por eso las reglas del deck que pintan una barra fija van con especificidad suficiente y, además, el script comprueba el fondo computado y lo fija si resulta transparente. Una barra fija transparente no da error: simplemente se lee mal.
 
 El color va por clase o por atributo, siempre en la hoja:
 
@@ -974,6 +1011,20 @@ Por eso las tablas integradas reciben un envoltorio propio y **el scroll horizon
 A 1280px las 36 tablas del deck de octubre van en el primer modo; a 480px, seis pasan al segundo.
 
 Lo mismo aplica al propio `.agent-deliverable`: lleva `overflow:visible` **deliberadamente**, con el redondeo aplicado al rótulo en vez de recortando el contenedor.
+
+### 7. [BLOQUEANTE] Un selector de scope que no casa con nada mata la hoja entera, en silencio
+
+Cada fragmento integrado trae su propia hoja, acotada para que no se escape al resto del deck. Si esa hoja se acota con un `id` que el HTML no tiene, **ninguna de sus reglas se aplica y no hay error de ningún tipo**: el fragmento sale con el texto correcto y sin una sola línea de estilo. En el ciclo de octubre pasó exactamente eso: la hoja del calendario se acotaba a `#frag-calendario` y el contenedor llevaba `id="calendario-integrado"`. **32 reglas muertas por un identificador.** Las pastillas de sub-corriente salían como texto subrayado, las etiquetas de medio se pegaban unas a otras ("TiendaDigitalExterior") y la tabla perdía su retícula.
+
+La causa de fondo es que el identificador se escribe dos veces, en la hoja y en el marcado, y nada obliga a que coincidan. La regla, por tanto:
+
+**El scope de una hoja integrada se apoya en la clase envolvente que el propio fragmento ya trae** (`.onepager-cal-global`, `.onepager-carga-global`), nunca en un `id` que el Storyteller inventa al integrar. Esa clase viene del agente que produjo el fragmento, es única y no depende de ninguna decisión tomada al integrar. Si aun así se usa un `id`, se pone en el marcado **primero** y se copia literal a la hoja.
+
+Y se comprueba siempre, porque el fallo es invisible: cada selector de scope de cada hoja integrada tiene que encontrar al menos un elemento. El check está en el Paso 4.
+
+---
+
+**Un fragmento puede venir anidado dentro de otro**, y el contenedor con overflow que rompe el sticky suele estar justo entre los dos. Por eso la neutralización sube hasta la **sección**, no hasta el `.agent-deliverable` más cercano: pararse en el primero que se encuentra deja sin tocar exactamente el contenedor que causa el problema. En el deck de octubre había tres fragmentos anidados y el calendario perdía la cabecera de semanas por esto. Al integrar, el marco y el rótulo van **una sola vez**, en el fragmento exterior: si un `.agent-deliverable` queda dentro de otro, se le retira la clase al interior.
 
 ### 6. Foco visible en todo elemento interactivo
 
@@ -1039,8 +1090,11 @@ El deck es un HTML autocontenido: este script va inline al final del `<body>`, s
         w=document.createElement('div'); w.className='t-wrap';
         t.parentNode.insertBefore(w,t); w.appendChild(t);
       }
-      var e=w.parentElement, stop=t.closest('.agent-deliverable');
-      while(e && stop && e!==stop.parentElement){ e.style.overflow='visible'; e=e.parentElement; }
+      /* Se sube hasta la SECCION, no hasta el .agent-deliverable mas cercano:
+         un fragmento puede venir anidado dentro de otro, y el contenedor con
+         overflow que rompe el sticky suele estar justo entre los dos. */
+      var e=w.parentElement, stop=t.closest('.doc-section');
+      while(e && stop && e!==stop){ e.style.overflow='visible'; e=e.parentElement; }
       w.style.overflow='visible'; w.style.maxHeight='';
       t.classList.remove('t-sticky-box','t-sticky-page');
       if(t.scrollWidth > w.clientWidth + 2){
@@ -1048,6 +1102,12 @@ El deck es un HTML autocontenido: este script va inline al final del `<body>`, s
       } else {
         t.classList.add('t-sticky-page');
       }
+      /* Ninguna cabecera fija puede ser transparente: si la hoja propia del
+         fragmento gana por especificidad, se fija aqui el fondo opaco. */
+      t.querySelectorAll('thead th').forEach(function(th){
+        var bg=getComputedStyle(th).backgroundColor;
+        if(!bg || bg==='transparent' || /,\s*0\s*\)$/.test(bg)) th.style.backgroundColor='#F5F7FA';
+      });
     });
   }
   tablas(); window.addEventListener('resize',tablas);
@@ -1147,6 +1207,45 @@ El PDF hereda los print styles del HTML (landscape, colapsables abiertos). Si el
 - **Cero jerga interna.** Buscar en el HTML generado las cadenas "Planner", "Strategist", "Copywriter", "Art Director", "Campaign Manager", "Storyteller", "MAIA", "output de", "entregable de", "piezas reales". Si alguna aparece en texto visible al usuario (no en clases CSS ni atributos), eliminarla. El comité no debe ver ningún nombre de agente ni referencia al sistema.
 - **Sin footers de archivo fuente.** Verificar que no quedan pies de página con metadatos como "media_strategy_v1", "campaign_creative-strategy_v1" o similares. Estos vienen de los HTMLs integrados y deben eliminarse al integrar.
 - **Compliance con template.** Verificar que el HTML generado contiene las clases del template: `topnav`, `navpill`, `doc-section`, `sec-hero`, `eyebrow`, `section-title`, `section-kicker`, `kpi-row`, `kpi`, `filtros`, `chip-filtro`, `area-block`, `substream-header`, `deep-dive`, `territorio-card`, `tcampo`, `t-orientacion`, `soportes-tbl`, `ficha-detalle`, `verbalizacion`, `aviso`, `principios`, `decision-group`, `decision-badge`, `proc`, `proc-legend`, `terr-indice`, `agent-deliverable`. Si falta alguna, el HTML no se construyó desde el template. Verificar también que NO hay clases inventadas (como `stream-block`, `content-area`, `main-section`) que indiquen que el modelo improvisó su propio layout.
+
+- **[BLOQUEANTE] Contraste del texto de portada sobre la fotografía.** Es el check que más veces se salta y el único que no se puede hacer a ojo: el texto sobre foto siempre "se lee" en el monitor de quien lo acaba de hacer. Se mide en navegador, sobre las **cajas reales de cada línea** (no del contenedor, que incluye zonas vacías y da un resultado peor que la realidad), a 1440, 1280, 1024, 768, 600, 480 y 360px. Mínimo 4,5:1 en todos.
+
+  ```python
+  # Render con el texto oculto, y se mide el pixel mas claro que hay debajo de cada linea.
+  boxes = page.evaluate('''() => {const out=[];
+    ['#portada h1','#portada .p-sub','#portada .p-lead'].forEach(s=>{
+      const e=document.querySelector(s); if(!e) return;
+      const rg=document.createRange(); rg.selectNodeContents(e);
+      [...rg.getClientRects()].forEach(r=>{ if(r.width>2&&r.height>2)
+        out.push([r.left|0,r.top|0,r.right|0,r.bottom|0]); });});
+    return out;}''')
+  page.evaluate("()=>{document.querySelector('#portada .p-body').style.visibility='hidden'}")
+  page.screenshot(path=shot)   # y se muestrea cada caja sobre esta imagen
+  ```
+
+  Si falla, la salida **no es bajar el tamaño del titular ni aclarar el texto**: es devolver el velo a sus opacidades de template y acotar el titular a la zona opaca.
+
+- **Las fotografías de portada llevan `alt` descriptivo.** Lo que se ve, en una línea: "Aficionados con camisetas de fútbol", no "portada-1" ni vacío. En octubre salieron las dos sin `alt`.
+
+- **[BLOQUEANTE] Ningún selector de scope huérfano.** Por cada hoja integrada, recorre sus selectores de acotación y comprueba que cada uno encuentra al menos un elemento en el documento. Un selector que no casa no da error: deja el fragmento sin estilo y parece un problema de diseño.
+
+  ```python
+  import re
+  from bs4 import BeautifulSoup
+  soup = BeautifulSoup(open(html_path, encoding='utf-8'), 'html.parser')
+  css  = ' '.join(t.get_text() for t in soup.find_all('style'))
+  # Solo la parte de SELECTOR: fuera los bloques de declaraciones, donde viven
+  # los colores hexadecimales, que tambien empiezan por almohadilla.
+  selectores = re.sub(r'\{[^{}]*\}', ' ', css)
+  ids     = {e['id'] for e in soup.select('[id]')}
+  usados  = set(re.findall(r'#([A-Za-z_][\w-]*)', selectores))
+  muertos = sorted(usados - ids)
+  assert not muertos, f'selectores de scope sin elemento: {muertos}'
+  ```
+
+  Sobre el deck de octubre este check devolvia `['frag-calendario']`. Ojo con la version ingenua del regex: aplicado al CSS entero sin quitar los bloques de declaraciones, cada color hexadecimal se cuenta como identificador y el check devuelve 78 falsos positivos.
+
+- **[BLOQUEANTE] La barra de chips existe solo en S3.** `soup.select('.filtros')` devuelve exactamente una, y su sección contenedora es `#s3`. S2 no se filtra: su contenido es cross-stream por diseño, así que una barra de chips ahí ofrece un control que no puede hacer nada. Comprobado en octubre: el filtro de S2 tenía cuatro botones y al pulsarlos no se ocultaba **ni un solo elemento**, porque el script actúa sobre `.area-block` y en S2 no hay ninguno. Un control muerto en un documento de aprobación es peor que no tenerlo: el comité cree que ha filtrado. Y el chip inicial se llama **"Todos"**, no "Todas".
 
 - **Atributos de comportamiento presentes.** Cada `.area-block` de S3 lleva su `data-stream`, cada `.chip-filtro` su `data-f`, y el script inline esta al final del `<body>`. Sin ellos el filtro no funciona y el documento parece correcto en una captura estatica.
 
