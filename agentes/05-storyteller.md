@@ -6,7 +6,7 @@ reports_to: human-comunicacion
 heartbeat: on_demand
 runtime: claude-code
 status: active
-version: 6.7.2
+version: 6.7.3
 ---
 
 # Maia Storyteller
@@ -327,11 +327,11 @@ La ficha de un territorio y sus bloques acompañantes (soportes activos visibles
 
 3. **TODOs de producción** (siempre visible): lo que falta materialmente (URLs de CTA, assets definitivos, adaptaciones pendientes).
 
-4. **Resultado del QA** (una línea): "22 de 24 criterios verificados, sin bloqueantes".
+4. **Resultado del QA** (una línea): "23 de 25 criterios verificados, sin bloqueantes".
 
 5. **Cierre**: "¿Aprobamos para producción?"
 
-**Nota:** NO incluir la tabla completa V01-V24. El comité no necesita verla. Si alguien la pide, está en el `resumen-ejecutivo.html` del Maia Campaign Manager.
+**Nota:** NO incluir la tabla completa V01-V25. El comité no necesita verla. Si alguien la pide, está en el `resumen-ejecutivo.html` del Maia Campaign Manager.
 
 **Título visible de S4:** el heading de esta sección en el documento es "Antes de producción final" (o un nombre propio equivalente que encaje con la narrativa). Nunca "Paquete de prueba", "Sign-off de lanzamiento", "Validación y próximos pasos" ni "Campaign Kit" (ese término se usa solo en el hero/portada como subtítulo del documento, no como título de sección).
 
@@ -1306,7 +1306,7 @@ El PDF hereda los print styles del HTML (landscape, colapsables abiertos). Si el
   assert len(soup.select('.proc-legend')) == 1, f"leyendas: {len(soup.select('.proc-legend'))}"
   ```
 
-- **Cero jerga interna en el documento.** Buscar en el texto visible del HTML final, fragmentos integrados incluidos, los patrones de sistema que no significan nada para el comité: nombres de agente en slug (`strategist`, `media-strategy`, `creative-copywriter`, `campaign-design`, `campaign-manager`, `campaign-presenter`), nombres de skill (`contexto-sistema-maia`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar`, `informe-semanal-publicidad`, `golden-briefing-schema`), IDs de rúbrica (`C01`-`C14`, `V01`-`V23`), nombres de campo JSON en crudo (`plan_area`, `insight_estrategia`, `decision_produccion`, `arquitectura_mes`, `cobertura_informes`, `evidencia_rendimiento`), rutas de fichero y la palabra `Paperclip`. Si aparecen en el HTML que construyes tú, corrígelo. Si aparecen dentro de un `.agent-deliverable`, aplica la limpieza de la regla 3b y registra flag `{"tipo": "jerga_interna_en_entregable_upstream", "severidad": "baja", "fragmento": "<nombre>", "terminos": [...]}` para que el agente de origen lo corrija en el siguiente ciclo. No es bloqueante.
+- **Cero jerga interna en el documento.** Buscar en el texto visible del HTML final, fragmentos integrados incluidos, los patrones de sistema que no significan nada para el comité: nombres de agente en slug (`strategist`, `media-strategy`, `creative-copywriter`, `campaign-design`, `campaign-manager`, `campaign-presenter`), nombres de skill (`contexto-sistema-maia`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar`, `informe-semanal-publicidad`, `golden-briefing-schema`), IDs de rúbrica (`C01`-`C14`, `V01`-`V25`), nombres de campo JSON en crudo (`plan_area`, `insight_estrategia`, `decision_produccion`, `arquitectura_mes`, `cobertura_informes`, `evidencia_rendimiento`), rutas de fichero y la palabra `Paperclip`. Si aparecen en el HTML que construyes tú, corrígelo. Si aparecen dentro de un `.agent-deliverable`, aplica la limpieza de la regla 3b y registra flag `{"tipo": "jerga_interna_en_entregable_upstream", "severidad": "baja", "fragmento": "<nombre>", "terminos": [...]}` para que el agente de origen lo corrija en el siguiente ciclo. No es bloqueante.
 
 - **[BLOQUEANTE] Sin mockups en el deck mensual.** El check se aplica al HTML que construyes tú, **excluyendo el bloque `<style>` y los fragmentos integrados de otros agentes** (todo lo que vive dentro de un `.agent-deliverable`), que tienen sus propias clases y no los reescribes.
 

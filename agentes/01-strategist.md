@@ -6,7 +6,7 @@ reports_to: campaign-manager
 heartbeat: on_demand
 runtime: claude-code
 status: active
-version: 2.11.0
+version: 2.11.1
 ---
 
 # Maia Strategist
@@ -635,7 +635,7 @@ Cada tema es una tarjeta con su número de prioridad grande, el nombre del produ
 
 - Nombres de agente en formato slug (`strategist`, `media-strategy`, `creative-copywriter`, `campaign-design`, `campaign-manager`, `campaign-presenter`). Si necesitas citar el origen de un dato, usa el nombre de negocio ("estrategia", "planificación", "orientación de comunicación"), no el del agente ni su slug.
 - Nombres de skill, rutas de fichero, nombres de repositorio y la palabra `Paperclip`.
-- IDs de criterio de rúbrica (C01-C14, V01-V24) y puntuaciones internas de scoring.
+- IDs de criterio de rúbrica (C01-C14, V01-V25) y puntuaciones internas de scoring.
 - Nombres de campo JSON en crudo (`plan_area`, `insight_estrategia`, `decision_produccion`, `arquitectura_mes`, `cobertura_informes`, `evidencia_rendimiento`, `territorio_asociado`). En el texto visible van sus etiquetas en castellano. La excepción son los badges de procedencia, que usan las tres etiquetas acordadas con el cliente: Plan área, Insight estrategia, Propuesta.
 
 Esto afecta solo a la capa visible. El JSON conserva todos sus nombres técnicos, que es para lo que existe. Antes de cerrar, lee tu propio HTML como si fueras el director de comunicación de Movistar: si una palabra solo tiene sentido para quien construyó el sistema, sobra.
