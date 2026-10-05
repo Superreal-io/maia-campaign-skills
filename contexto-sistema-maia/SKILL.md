@@ -2,7 +2,7 @@
 name: Contexto del Sistema MAIA Campaign
 key: contexto-sistema-maia
 description: Contexto compartido que todos los agentes cargan. Describe el ecosistema multi-agente, la cadena de trabajo, las gates, las convenciones y las reglas transversales.
-version: 5.5.0
+version: 5.5.1
 owner: system
 status: active
 loaded_by: todos los agentes (Maia Strategist, Maia Planner, Maia Copywriter, Maia Art Director, Maia Campaign Manager, Maia Storyteller)
@@ -32,7 +32,7 @@ El cliente es el equipo de Comunicación de Movistar (Telefónica). El operador 
 | media-strategy | Maia Planner | Recibe ambos briefs, desglosa en 3 sub-corrientes (Growth, Value, Dispositivos). Priorización territorial, tier, canales, comentarios expertos, tablas Movistar, etiquetado de inferencias | `media_strategy_v<N>.json` + `.docx` + 6 HTML por sub-corriente (`calendario_<sub>_v<N>.html`, `brief_canales_territorio_<sub>_v<N>.html`) + 2 globales (`calendario_canales_global_v<N>.html`, `carga_soporte_global_v<N>.html`) | `rol-medios-movistar` |
 | creative-copywriter | Maia Copywriter | Recibe output combinado del Maia Planner, separa por sub-corriente (Growth, Value, Dispositivos). Orientación de comunicación por territorio (objetivo, idea dominante, tensión, tono, principio, por dónde explorar, qué evitar), decisión REUSE/ADAPT/REFRESH/CREATE, soportes activos, y copy prototype más scoring como material interno de producción | `campaign_creative-strategy_v<N>.json` + `.docx` + 1 HTML por sub-corriente (`campaign_creative-strategy_<sub>_v<N>.html`) | (ninguna exclusiva) |
 | campaign-design | Maia Art Director | Selecciona piezas representativas por canal y sub-corriente, produce piezas presentables a cliente (HTML con slots + render PNG) con fotografía real generada y verificación visual | HTML ensamblados + PNG verificados organizados por sub-corriente + `design_rationale_<sub>.docx` por stream | `movistar-visual-production`, `html-component-library`, `brand-visual-composition-movistar` |
-| campaign-manager | Maia Campaign Manager | Cierre: checklist V01-V24, resumen ejecutivo, Campaign Assets, escalado al Maia Storyteller | `resumen-ejecutivo.html` + Campaign Assets (carpeta `creative-proposal/` con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
+| campaign-manager | Maia Campaign Manager | Cierre: checklist V01-V25, resumen ejecutivo, Campaign Assets, escalado al Maia Storyteller | `resumen-ejecutivo.html` + Campaign Assets (carpeta `creative-proposal/` con outputs presentables a cliente) | `validación-maia-checklist`, `journey-canales-movistar` |
 | campaign-presenter | Maia Storyteller | Convierte los Campaign Assets en presentación ejecutiva HTML navegable para aprobación C-level. Integra los entregables HTML de Maia Strategist, Maia Planner y Maia Copywriter en un documento autocontenido apaisado, con fichas de orientación por territorio y plan de producción. No presenta mockups en el deck mensual. Produce PDF como leave-behind. | `presentacion_ejecutiva_<case_id>_v<N>.html` + `leave_behind_<case_id>_v<N>.pdf` | `movistar-brand-guidelines`, `matriz-soportes-movistar`, `eficiencia-creativa-movistar` |
 
 ---
@@ -62,7 +62,7 @@ Hay un gate humano después de cada agente. El humano puede aprobar, pedir itera
 - **Maia Strategist produce, humano aprueba o itera** (Gate Strategist). El back-and-forth con el área es la norma. Un brief puede pasar a v3 o v4 antes de aprobarse.
 - **Maia Planner produce, humano aprueba o itera** (Gate Planner). El Planner incluye un campo `tier_justificación` por canal que el humano audita.
 - **Maia Copywriter produce, humano aprueba o itera** (Gate Copywriter). El Copywriter incluye copy prototype por canal y scoring de principios de comunicacion por pieza. El humano aprueba y Copywriter pasa directamente a Art Director.
-- **Maia Art Director produce, humano aprueba** (Gate Art Director), y luego escala a **Cierre (Maia Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V24 sobre el paquete completo, genera el resumen ejecutivo, ensambla los Campaign Assets (carpeta con los outputs presentables a cliente) y escala al Maia Storyteller.
+- **Maia Art Director produce, humano aprueba** (Gate Art Director), y luego escala a **Cierre (Maia Campaign Manager)**. El Campaign Manager ejecuta la checklist V01-V25 sobre el paquete completo, genera el resumen ejecutivo, ensambla los Campaign Assets (carpeta con los outputs presentables a cliente) y escala al Maia Storyteller.
 - **Maia Storyteller produce, humano aprueba o itera** (Gate Storyteller). El Storyteller presenta la presentación ejecutiva HTML. El humano revisa que la integración de entregables, la cobertura de campañas y el lenguaje sean adecuados para el comité. Aprobada la presentación, el ciclo se cierra.
 
 En todos los gates, el humano tiene tres opciones: aprobar y pasar al siguiente, iterar con feedback, o devolver al agente anterior.
@@ -144,7 +144,7 @@ Las skills son archivos .md de conocimiento de dominio que los agentes cargan se
 
 | Key | Nombre | Cargada por | Status |
 |---|---|---|---|
-| `validación-maia-checklist` | Checklist V01-V24 de validación transversal | Maia Campaign Manager | active |
+| `validación-maia-checklist` | Checklist V01-V25 de validación transversal | Maia Campaign Manager | active |
 
 #### Journey (1)
 
