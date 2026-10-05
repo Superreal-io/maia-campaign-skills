@@ -1,15 +1,15 @@
 ---
 name: Checklist de Validación MAIA
 key: validacion-maia-checklist
-description: 24 criterios de validación del sistema MAIA. Los usa el Campaign Manager en Cierre como capa de control de calidad transversal.
-version: 3.2.0
+description: 25 criterios de validación del sistema MAIA. Los usa el Campaign Manager en Cierre como capa de control de calidad transversal.
+version: 3.3.0
 owner: system
 status: active
 ---
 
 # Checklist de Validación MAIA
 
-Cargada por el Campaign Manager. Define los 24 criterios de validación que el Campaign Manager ejecuta en Cierre (post-Art Director) sobre el paquete completo de la campaña.
+Cargada por el Campaign Manager. Define los 25 criterios de validación que el Campaign Manager ejecuta en Cierre (post-Art Director) sobre el paquete completo de la campaña.
 
 Esta skill formaliza la "Validación MAIA": una capa de control transversal que cruza todos los outputs de todos los agentes en un único paso final.
 
@@ -19,7 +19,7 @@ Esta skill formaliza la "Validación MAIA": una capa de control transversal que 
 
 ### Cierre (post-Art Director, sobre el paquete completo)
 
-El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia creativa + mockups) contra estos 24 criterios:
+El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia creativa + mockups) contra estos 25 criterios:
 
 | # | Criterio | Que verificar | Fuente |
 |---|---|---|---|
@@ -41,12 +41,13 @@ El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia
 | V16 | Arquitectura del mes | La `arquitectura_mes` de C hereda los movimientos del brief y todos los territorios estan asignados a un movimiento. Ningun territorio queda huerfano y ningun movimiento queda vacio. Si C reasigno algun territorio, hay flag `ajuste_propuesto` con justificacion. | campaign-output-format, golden-briefing-schema |
 | V17 | Copy prototype y scoring de comunicacion | Cada campana tiene `copy_prototype` por canal activo con `notas_para_d` no vacias. Cada pieza tiene `scoring_comunicacion` con score calculado correctamente (base_60 + modulacion_40 = score). Scores < 70 tienen flag correspondiente con severidad media. El `tema_a_vigilar` es especifico de la pieza, no generico. Cada `scoring_comunicacion` tiene `principios_decisivos` con 1-3 entradas (principio + justificacion no vacios). | campaign-output-format |
 | V18 | Piezas no producidas | El design rationale de D incluye seccion `piezas_no_producidas` con toda pieza de `copy_prototype[]` no seleccionada para produccion. Cada entrada tiene formato, canal, campana y motivo_exclusion no vacio. Si todas las piezas fueron producidas, la seccion lo indica explicitamente. | design_rationale |
-| V19 | Procedencia completa | Toda afirmacion con valor informativo (dato, cifra, volumen, fecha, prioridad, restriccion, regla) lleva bloque `procedencia` con `nivel`, `fuente` y `validacion` no vacios. Cero afirmaciones sin procedencia. La `fuente` es concreta y verificable, nunca "el brief" a secas ni "analisis interno". | contexto-sistema-maia seccion 7 |
+| V19 | Procedencia completa | Toda afirmacion con valor informativo (dato, cifra, volumen, fecha, prioridad, restriccion, regla) lleva bloque `procedencia` con `nivel`, `fuente` y `validacion` no vacios. Cero afirmaciones sin procedencia. La `fuente` es concreta y verificable, nunca "el brief" a secas ni "analisis interno". Ningún documento del propio sistema (Golden Briefing, Media Strategy, estrategia creativa, resumen de cierre) vale como `fuente`: la fuente es el documento del área o el documento externo de origen, con su página. Un resumen o índice del plan tampoco sostiene un `plan_area` confirmado. | contexto-sistema-maia seccion 7 |
 | V20 | Integridad de la herencia de procedencia | Ningun agente ha subido el nivel de una afirmacion respecto al agente anterior. Una `propuesta` de B sigue siendo `propuesta` en C y en E. Las reglas de presion, prelacion, contact policy y cascada de ofertas llevan `nivel: propuesta` y `validacion: no_confirmado`, y en ningun documento visible se presentan como decididas. Toda discrepancia conocida del original tiene su flag `dato_a_validar` y la cifra afectada esta marcada `a_validar`. | contexto-sistema-maia seccion 7 |
 | V21 | Ausencia de claim paraguas transversal | No existe en el paquete una frase, promesa o idea verbal unica presentada como paraguas de todos los territorios. Control operativo: ninguna promesa se repite como idea dominante en mas de un tercio de los territorios del ciclo. Cada territorio tiene su propia `idea_dominante`. | 03-copywriter, golden-briefing-schema |
 | V22 | Orientacion de comunicacion y decision de produccion | Cada territorio tiene los siete campos de la ficha de orientacion (objetivo, idea dominante, tension, tono, principio, por donde explorar, que evitar), todos no vacios y de extension breve. Cada territorio tiene su `decision_produccion` REUSE/ADAPT/REFRESH/CREATE con racional, `modo` declarado y `necesita_validacion_inventario`. Las verbalizaciones ilustrativas estan etiquetadas como direccion, nunca como copy final. Ningun soporte con Produccion MAIA = No lleva copy ni pieza. | 03-copywriter, eficiencia-creativa-movistar, matriz-soportes-movistar |
 | V23 | Uso correcto del rendimiento | Toda `decision_produccion` en `modo: con_dato` trae `evidencia_rendimiento` completa con una de las seis metricas de RESPUESTA (CTR, leads, CPL, VTR, clics, interaccion) y su semana. **Ninguna decision SOBRE UN ACTIVO se apoya en impactos, impresiones, frecuencia ni ventas** (el Planner si puede usar esas metricas para calibrar presion y mix: la prohibicion es sobre juzgar creatividades, no sobre planificar). Toda decision en `modo: cualitativo` tiene `evidencia_rendimiento: null`, `necesita_validacion_inventario: true` y un racional que no afirma estar basado en datos. Si `cobertura_informes.nivel_confianza` es bajo, ninguna decision esta en modo con_dato. El brief trae `cobertura_informes` y, si hay semanas disponibles, `rendimiento_periodo_anterior` no vacio. | informe-semanal-publicidad, eficiencia-creativa-movistar |
 | V24 | Paridad de version JSON-HTML | **[BLOQUEANTE]** Para cada agente upstream (Strategist, Planner, Copywriter), el sufijo de version del JSON coincide con el de su .docx y con el de todos sus .html. Un JSON parcheado cuyo HTML no se regenero no pasa: se devuelve al agente de origen. El Storyteller integra los HTML tal cual y no los reescribe, asi que un HTML desfasado llega intacto al comite. | 01-strategist, 02-planner, 03-copywriter |
+| V25 | Cobertura del plan hasta el final | **[BLOQUEANTE]** Cada línea de `cobertura_plan.lineas_declaradas` del Golden Briefing llega a la estrategia creativa del Maia Copywriter de una de tres formas: como territorio propio, integrada en el territorio que indica `integrada_en`, o retirada con motivo en un flag `ajuste_propuesto` del Maia Planner o del Maia Copywriter. Una línea que desaparece entre fases sin motivo registrado no pasa y vuelve al agente en el que se perdió. Si el brief no trae `cobertura_plan`, es FLAG y vuelve al Maia Strategist. | golden-briefing-schema, 01-strategist, 02-planner, 03-copywriter |
 
 ---
 
@@ -57,7 +58,7 @@ El Campaign Manager evalúa el paquete completo (brief + estrategia + estrategia
 3. Si un criterio requiere cargar una skill que el Campaign Manager no tiene en ese momento, la carga antes de evaluar.
 4. Un flag en V01-V07 puede ser bloqueante si contradice un principio sin justificación. V08-V11 son generalmente flags de riesgo (no bloqueantes por si solos).
 5. **V19, V20 y V21 son bloqueantes sin excepción.** Un paquete con afirmaciones sin procedencia, con procedencia degradada o con un claim paraguas transversal no pasa a presentación. Son los tres criterios que protegen la credibilidad del documento ante el cliente, y su incumplimiento no se compensa con la calidad del resto.
-6. V19 y V20 se verifican por conteo, no por lectura: recorrer los JSONs contando afirmaciones con valor informativo frente a bloques `procedencia` presentes, y comparar el `nivel` de cada afirmación heredada con el que traía del agente anterior. Un check que no se puede contar no se ha hecho.
+6. V19, V20 y V25 se verifican por conteo, no por lectura: recorrer los JSONs contando afirmaciones con valor informativo frente a bloques `procedencia` presentes, y comparar el `nivel` de cada afirmación heredada con el que traía del agente anterior. Un check que no se puede contar no se ha hecho. Para V25: líneas declaradas en `cobertura_plan` frente a líneas con territorio final, integradas y retiradas con motivo; la suma de las tres tiene que dar el total.
 
 ---
 
